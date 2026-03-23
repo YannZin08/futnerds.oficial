@@ -160,7 +160,7 @@ export default function Home() {
             <div className="flex items-center justify-between mb-10">
               <div>
                 <h2 className="text-4xl font-black mb-1">Top Jogadores</h2>
-                <p className="text-muted-foreground">Os melhores do Ultimate Team</p>
+                <p className="text-muted-foreground">Os overais mais altos do modo Carreira até 23 anos</p>
               </div>
               <Button variant="outline" asChild>
                 <Link href="/jogadores">Ver todos <ArrowRight className="ml-2 h-4 w-4" /></Link>
