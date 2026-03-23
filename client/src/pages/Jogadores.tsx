@@ -251,7 +251,7 @@ export default function Jogadores() {
               <h1 className="text-4xl font-black">Análise de Jogadores</h1>
             </div>
             <p className="text-muted-foreground text-lg">
-              Estatísticas detalhadas dos melhores jogadores do Ultimate Team
+              Estatísticas detalhadas de promessas para seu modo carreira.
             </p>
           </div>
         </section>
