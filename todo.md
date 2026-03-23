@@ -55,4 +55,4 @@
 ## Jogadores
 - [x] Inserir goleiros da tabela PDF no banco de dados (59 jogadores)
 - [ ] Adicionar imagens dos jogadores quando enviadas
-- [ ] Corrigir formatação dos valores de mercado nos cards (ex: 37.5M, 925K)
+- [x] Corrigir formatação dos valores de mercado nos cards (ex: €37.5M, €925K)
