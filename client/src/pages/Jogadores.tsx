@@ -137,12 +137,12 @@ export default function Jogadores() {
   const { isAuthenticated } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPosition, setSelectedPosition] = useState("");
-  const [sortBy, setSortBy] = useState<"overall" | "price">("overall");
+  const sortBy = "overall";
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
 
   const { data: players, isLoading } = trpc.players.list.useQuery({
     limit: 50,
-    sortBy,
+    sortBy: "overall",
   });
 
   const { data: favorites, refetch: refetchFavorites } = trpc.players.favorites.useQuery(
@@ -229,24 +229,7 @@ export default function Jogadores() {
                 </button>
               ))}
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setSortBy("overall")}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  sortBy === "overall" ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Overall
-              </button>
-              <button
-                onClick={() => setSortBy("price")}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  sortBy === "price" ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Preço
-              </button>
-            </div>
+
           </div>
 
           {/* Results count */}
