@@ -95,6 +95,22 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
           <span className="text-muted-foreground">{player.league}</span>
         </div>
 
+        {/* Overall / Potential / Age */}
+        <div className="grid grid-cols-3 gap-1 text-center">
+          <div className="bg-secondary rounded-lg py-1.5">
+            <p className="text-lg font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">OVR</p>
+          </div>
+          <div className="bg-secondary rounded-lg py-1.5">
+            <p className="text-lg font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">POT</p>
+          </div>
+          <div className="bg-secondary rounded-lg py-1.5">
+            <p className="text-lg font-black text-foreground leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.age ?? '—'}</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">IDADE</p>
+          </div>
+        </div>
+
         {/* Price + Favorite */}
         <div className="flex items-center justify-between pt-2 border-t border-border/50">
           <div>

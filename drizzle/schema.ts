@@ -57,6 +57,8 @@ export const players = mysqlTable("players", {
   club: varchar("club", { length: 128 }).notNull(),
   league: varchar("league", { length: 128 }).notNull(),
   overall: int("overall").notNull(),
+  potential: int("potential"),
+  age: int("age"),
   pace: int("pace"),
   shooting: int("shooting"),
   passing: int("passing"),

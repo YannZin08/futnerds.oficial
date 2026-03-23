@@ -43,3 +43,6 @@
 ## Correções
 - [x] Corrigir 404 na rota /noticias — adicionar redirect para Home
 - [x] Corrigir 404 na rota /dashboard — adicionar redirect para Home
+
+## Melhorias de Cards
+- [ ] Adicionar overall, potencial e idade nos cards de jogadores
