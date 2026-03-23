@@ -1,0 +1,170 @@
+{
+  "query": "SELECT id, name, position, club, league, overall FROM players ORDER BY overall DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, club, league, overall FROM players ORDER BY overall DESC;",
+  "rows": [
+    {
+      "id": "2",
+      "name": "Kylian Mbappé",
+      "position": "ST",
+      "club": "Real Madrid",
+      "league": "La Liga",
+      "overall": "91"
+    },
+    {
+      "id": "4",
+      "name": "Rodri",
+      "position": "CDM",
+      "club": "Manchester City",
+      "league": "Premier League",
+      "overall": "91"
+    },
+    {
+      "id": "18",
+      "name": "Kevin De Bruyne",
+      "position": "CM",
+      "club": "Manchester City",
+      "league": "Premier League",
+      "overall": "91"
+    },
+    {
+      "id": "1",
+      "name": "Erling Haaland",
+      "position": "ST",
+      "club": "Manchester City",
+      "league": "Premier League",
+      "overall": "91"
+    },
+    {
+      "id": "9",
+      "name": "Alisson",
+      "position": "GK",
+      "club": "Liverpool",
+      "league": "Premier League",
+      "overall": "90"
+    },
+    {
+      "id": "3",
+      "name": "Vinicius Jr.",
+      "position": "LW",
+      "club": "Real Madrid",
+      "league": "La Liga",
+      "overall": "90"
+    },
+    {
+      "id": "5",
+      "name": "Jude Bellingham",
+      "position": "CAM",
+      "club": "Real Madrid",
+      "league": "La Liga",
+      "overall": "90"
+    },
+    {
+      "id": "6",
+      "name": "Lionel Messi",
+      "position": "RW",
+      "club": "Inter Miami",
+      "league": "MLS",
+      "overall": "90"
+    },
+    {
+      "id": "11",
+      "name": "Rúben Dias",
+      "position": "CB",
+      "club": "Manchester City",
+      "league": "Premier League",
+      "overall": "89"
+    },
+    {
+      "id": "10",
+      "name": "Virgil van Dijk",
+      "position": "CB",
+      "club": "Liverpool",
+      "league": "Premier League",
+      "overall": "89"
+    },
+    {
+      "id": "8",
+      "name": "Pedri",
+      "position": "CM",
+      "club": "Barcelona",
+      "league": "La Liga",
+      "overall": "87"
+    },
+    {
+      "id": "12",
+      "name": "Trent Alexander-Arnold",
+      "position": "RB",
+      "club": "Real Madrid",
+      "league": "La Liga",
+      "overall": "87"
+    },
+    {
+      "id": "13",
+      "name": "Neymar Jr.",
+      "position": "LW",
+      "club": "Al-Hilal",
+      "league": "Saudi Pro League",
+      "overall": "87"
+    },
+    {
+      "id": "17",
+      "name": "Bruno Fernandes",
+      "position": "CAM",
+      "club": "Manchester United",
+      "league": "Premier League",
+      "overall": "87"
+    },
+    {
+      "id": "19",
+      "name": "Bukayo Saka",
+      "position": "RW",
+      "club": "Arsenal",
+      "league": "Premier League",
+      "overall": "87"
+    },
+    {
+      "id": "20",
+      "name": "Florian Wirtz",
+      "position": "CAM",
+      "club": "Bayer Leverkusen",
+      "league": "Bundesliga",
+      "overall": "86"
+    },
+    {
+      "id": "15",
+      "name": "Rodrygo",
+      "position": "RW",
+      "club": "Real Madrid",
+      "league": "La Liga",
+      "overall": "85"
+    },
+    {
+      "id": "16",
+      "name": "Raphinha",
+      "position": "RW",
+      "club": "Barcelona",
+      "league": "La Liga",
+      "overall": "85"
+    },
+    {
+      "id": "7",
+      "name": "Lamine Yamal",
+      "position": "RW",
+      "club": "Barcelona",
+      "league": "La Liga",
+      "overall": "82"
+    },
+    {
+      "id": "14",
+      "name": "Endrick",
+      "position": "ST",
+      "club": "Real Madrid",
+      "league": "La Liga",
+      "overall": "77"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\tclub\tleague\toverall\n2\tKylian Mbappé\tST\tReal Madrid\tLa Liga\t91\n4\tRodri\tCDM\tManchester City\tPremier League\t91\n18\tKevin De Bruyne\tCM\tManchester City\tPremier League\t91\n1\tErling Haaland\tST\tManchester City\tPremier League\t91\n9\tAlisson\tGK\tLiverpool\tPremier League\t90\n3\tVinicius Jr.\tLW\tReal Madrid\tLa Liga\t90\n5\tJude Bellingham\tCAM\tReal Madrid\tLa Liga\t90\n6\tLionel Messi\tRW\tInter Miami\tMLS\t90\n11\tRúben Dias\tCB\tManchester City\tPremier League\t89\n10\tVirgil van Dijk\tCB\tLiverpool\tPremier League\t89\n8\tPedri\tCM\tBarcelona\tLa Liga\t87\n12\tTrent Alexander-Arnold\tRB\tReal Madrid\tLa Liga\t87\n13\tNeymar Jr.\tLW\tAl-Hilal\tSaudi Pro League\t87\n17\tBruno Fernandes\tCAM\tManchester United\tPremier League\t87\n19\tBukayo Saka\tRW\tArsenal\tPremier League\t87\n20\tFlorian Wirtz\tCAM\tBayer Leverkusen\tBundesliga\t86\n15\tRodrygo\tRW\tReal Madrid\tLa Liga\t85\n16\tRaphinha\tRW\tBarcelona\tLa Liga\t85\n7\tLamine Yamal\tRW\tBarcelona\tLa Liga\t82\n14\tEndrick\tST\tReal Madrid\tLa Liga\t77\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

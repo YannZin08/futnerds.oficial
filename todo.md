@@ -51,3 +51,7 @@
 - [x] Adicionar coluna altPositions (JSON) no schema e migrar banco
 - [x] Popular dados seed com posições alternativas realistas
 - [x] Exibir posições secundárias no card ao lado da posição principal
+
+## Jogadores
+- [x] Inserir goleiros da tabela PDF no banco de dados (59 jogadores)
+- [ ] Adicionar imagens dos jogadores quando enviadas
