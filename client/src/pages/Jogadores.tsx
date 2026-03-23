@@ -85,26 +85,23 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
             style={{ fontFamily: "'Rajdhani', sans-serif" }}>
             {player.overall}
           </span>
-          {/* Posição principal */}
-          <span className="text-xs font-bold text-white/90 bg-black/20 px-1.5 py-0.5 rounded">
-            {positionPtMap[player.position] ?? player.position}
-          </span>
-          {/* Posições alternativas */}
-          {(() => {
-            try {
-              const alts: string[] = player.altPositions ? JSON.parse(player.altPositions) : [];
-              const uniqueAlts = alts.filter(p => p !== player.position);
-              return uniqueAlts.length > 0 ? (
-                <div className="flex flex-col items-end gap-0.5">
-                  {uniqueAlts.map((pos: string) => (
-                    <span key={pos} className="text-[10px] font-semibold text-white/70 bg-black/20 px-1.5 py-0.5 rounded">
-                      {positionPtMap[pos] ?? pos}
-                    </span>
-                  ))}
-                </div>
-              ) : null;
-            } catch { return null; }
-          })()}
+          {/* Posições: principal + alternativas lado a lado */}
+          <div className="flex flex-row flex-wrap justify-end gap-0.5">
+            <span className="text-xs font-bold text-white/90 bg-black/20 px-1.5 py-0.5 rounded">
+              {positionPtMap[player.position] ?? player.position}
+            </span>
+            {(() => {
+              try {
+                const alts: string[] = player.altPositions ? JSON.parse(player.altPositions) : [];
+                const uniqueAlts = alts.filter(p => p !== player.position);
+                return uniqueAlts.map((pos: string) => (
+                  <span key={pos} className="text-[10px] font-semibold text-white/70 bg-black/20 px-1.5 py-0.5 rounded">
+                    {positionPtMap[pos] ?? pos}
+                  </span>
+                ));
+              } catch { return null; }
+            })()}
+          </div>
         </div>
         <div className="flex items-end gap-3">
           <div className="w-14 h-14 rounded-full bg-black/20 flex items-center justify-center">
