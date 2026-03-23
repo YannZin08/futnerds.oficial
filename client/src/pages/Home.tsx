@@ -109,11 +109,7 @@ export default function Home() {
                   </a>
                 </Button>
               )}
-              <Button size="lg" variant="outline" className="px-8 h-12 text-base border-border hover:border-primary/50" asChild>
-                <Link href="/jogadores">
-                  Explorar Jogadores
-                </Link>
-              </Button>
+
             </div>
           </div>
         </div>
