@@ -116,6 +116,16 @@ export async function getNewsById(id: number) {
 
 // ─── Players ─────────────────────────────────────────────────────────────────
 
+/**
+ * Calcula o tipo do card com base no overall do jogador.
+ * gold: 80+, silver: 70-79, bronze: abaixo de 70
+ */
+export function getCardType(overall: number): 'gold' | 'silver' | 'bronze' {
+  if (overall >= 80) return 'gold';
+  if (overall >= 70) return 'silver';
+  return 'bronze';
+}
+
 export async function getPlayersList(opts: { limit?: number; position?: string; nationality?: string; sortBy?: string } = {}) {
   const db = await getDb();
   if (!db) return [];

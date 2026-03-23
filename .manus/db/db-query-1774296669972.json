@@ -1,0 +1,22 @@
+{
+  "query": "SELECT cardType, COUNT(*) as total FROM players WHERE position = 'ATA' GROUP BY cardType ORDER BY cardType;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT cardType, COUNT(*) as total FROM players WHERE position = 'ATA' GROUP BY cardType ORDER BY cardType;",
+  "rows": [
+    {
+      "cardType": "gold",
+      "total": "4"
+    },
+    {
+      "cardType": "silver",
+      "total": "29"
+    },
+    {
+      "cardType": "bronze",
+      "total": "11"
+    }
+  ],
+  "messages": [],
+  "stdout": "cardType\ttotal\ngold\t4\nsilver\t29\nbronze\t11\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}

@@ -1,0 +1,8 @@
+{
+  "query": "SELECT position, overall, cardType, COUNT(*) as total FROM players GROUP BY position, cardType ORDER BY position, overall DESC LIMIT 30;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT position, overall, cardType, COUNT(*) as total FROM players GROUP BY position, cardType ORDER BY position, overall DESC LIMIT 30;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1055 (42000) at line 1: Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'hhB4oykfDQM9yCvhQGaX3n.players.overall' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by"
+  ]
+}
