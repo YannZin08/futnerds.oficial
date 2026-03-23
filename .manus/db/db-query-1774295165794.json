@@ -1,0 +1,46 @@
+{
+  "query": "SELECT COUNT(*) as total_com_foto FROM players WHERE position = 'ATA' AND imageUrl IS NOT NULL AND imageUrl != 'NULL';\nSELECT name, imageUrl FROM players WHERE position = 'ATA' ORDER BY name LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT COUNT(*) as total_com_foto FROM players WHERE position = 'ATA' AND imageUrl IS NOT NULL AND imageUrl != 'NULL';\nSELECT name, imageUrl FROM players WHERE position = 'ATA' ORDER BY name LIMIT 10;",
+  "rows": [
+    {
+      "total_com_foto": "43"
+    },
+    {
+      "total_com_foto": "name\timageUrl"
+    },
+    {
+      "total_com_foto": "A. Staff\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Staff_1dde0355.webp"
+    },
+    {
+      "total_com_foto": "A. Thomas\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Thomas_df6d32aa.webp"
+    },
+    {
+      "total_com_foto": "Adrián Liso\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Adrián_Liso_6344920c.webp"
+    },
+    {
+      "total_com_foto": "Anísio\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Anísio_b1368e0a.webp"
+    },
+    {
+      "total_com_foto": "B. Šeško\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/B._Šeškas_32728b48.webp"
+    },
+    {
+      "total_com_foto": "C. Harder\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Harder_7daf4070.webp"
+    },
+    {
+      "total_com_foto": "C. Kofane\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Kofane_d172fdb0.webp"
+    },
+    {
+      "total_com_foto": "C. Kostoulas\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Kostoulas_92796d9d.webp"
+    },
+    {
+      "total_com_foto": "C. Obi\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Obi_be28b18d.webp"
+    },
+    {
+      "total_com_foto": "E. Kroupi\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/E._Croupy_b4c9fa19.webp"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_com_foto\n43\nname\timageUrl\nA. Staff\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Staff_1dde0355.webp\nA. Thomas\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Thomas_df6d32aa.webp\nAdrián Liso\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Adrián_Liso_6344920c.webp\nAnísio\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Anísio_b1368e0a.webp\nB. Šeško\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/B._Šeškas_32728b48.webp\nC. Harder\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Harder_7daf4070.webp\nC. Kofane\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Kofane_d172fdb0.webp\nC. Kostoulas\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Kostoulas_92796d9d.webp\nC. Obi\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Obi_be28b18d.webp\nE. Kroupi\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/E._Croupy_b4c9fa19.webp\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}

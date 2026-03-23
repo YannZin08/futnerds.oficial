@@ -1,0 +1,82 @@
+{
+  "query": "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'players' ORDER BY ORDINAL_POSITION;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'players' ORDER BY ORDINAL_POSITION;",
+  "rows": [
+    {
+      "COLUMN_NAME": "id"
+    },
+    {
+      "COLUMN_NAME": "name"
+    },
+    {
+      "COLUMN_NAME": "position"
+    },
+    {
+      "COLUMN_NAME": "nationality"
+    },
+    {
+      "COLUMN_NAME": "club"
+    },
+    {
+      "COLUMN_NAME": "league"
+    },
+    {
+      "COLUMN_NAME": "overall"
+    },
+    {
+      "COLUMN_NAME": "pace"
+    },
+    {
+      "COLUMN_NAME": "shooting"
+    },
+    {
+      "COLUMN_NAME": "passing"
+    },
+    {
+      "COLUMN_NAME": "dribbling"
+    },
+    {
+      "COLUMN_NAME": "defending"
+    },
+    {
+      "COLUMN_NAME": "physical"
+    },
+    {
+      "COLUMN_NAME": "cardType"
+    },
+    {
+      "COLUMN_NAME": "rating"
+    },
+    {
+      "COLUMN_NAME": "imageUrl"
+    },
+    {
+      "COLUMN_NAME": "flagUrl"
+    },
+    {
+      "COLUMN_NAME": "clubLogoUrl"
+    },
+    {
+      "COLUMN_NAME": "price"
+    },
+    {
+      "COLUMN_NAME": "createdAt"
+    },
+    {
+      "COLUMN_NAME": "updatedAt"
+    },
+    {
+      "COLUMN_NAME": "potential"
+    },
+    {
+      "COLUMN_NAME": "age"
+    },
+    {
+      "COLUMN_NAME": "altPositions"
+    }
+  ],
+  "messages": [],
+  "stdout": "COLUMN_NAME\nid\nname\nposition\nnationality\nclub\nleague\noverall\npace\nshooting\npassing\ndribbling\ndefending\nphysical\ncardType\nrating\nimageUrl\nflagUrl\nclubLogoUrl\nprice\ncreatedAt\nupdatedAt\npotential\nage\naltPositions\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

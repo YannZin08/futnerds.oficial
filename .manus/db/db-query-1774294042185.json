@@ -1,0 +1,26 @@
+{
+  "query": "SELECT COLUMN_NAME, ORDINAL_POSITION FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'players' AND TABLE_SCHEMA = DATABASE() AND ORDINAL_POSITION > 20 ORDER BY ORDINAL_POSITION;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT COLUMN_NAME, ORDINAL_POSITION FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'players' AND TABLE_SCHEMA = DATABASE() AND ORDINAL_POSITION > 20 ORDER BY ORDINAL_POSITION;",
+  "rows": [
+    {
+      "COLUMN_NAME": "updatedAt",
+      "ORDINAL_POSITION": "21"
+    },
+    {
+      "COLUMN_NAME": "potential",
+      "ORDINAL_POSITION": "22"
+    },
+    {
+      "COLUMN_NAME": "age",
+      "ORDINAL_POSITION": "23"
+    },
+    {
+      "COLUMN_NAME": "altPositions",
+      "ORDINAL_POSITION": "24"
+    }
+  ],
+  "messages": [],
+  "stdout": "COLUMN_NAME\tORDINAL_POSITION\nupdatedAt\t21\npotential\t22\nage\t23\naltPositions\t24\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

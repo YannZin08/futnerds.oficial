@@ -1,0 +1,230 @@
+{
+  "query": "SELECT id, name, imageUrl FROM players WHERE position = 'ATA' ORDER BY name LIMIT 50;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, imageUrl FROM players WHERE position = 'ATA' ORDER BY name LIMIT 50;",
+  "rows": [
+    {
+      "id": "118",
+      "name": "A. Staff",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "117",
+      "name": "A. Thomas",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "123",
+      "name": "Adrián Liso",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "100",
+      "name": "Anísio",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "85",
+      "name": "B. Šeško",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "94",
+      "name": "C. Harder",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "101",
+      "name": "C. Kofane",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "102",
+      "name": "C. Kostoulas",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "120",
+      "name": "C. Obi",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "87",
+      "name": "E. Kroupi",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "81",
+      "name": "Endrick",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "83",
+      "name": "F. Camarda",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "106",
+      "name": "F. Esposito",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "103",
+      "name": "F. Onyeka",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "99",
+      "name": "Fábio Silva",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "121",
+      "name": "Gonzalo",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "82",
+      "name": "H. Ekitiké",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "124",
+      "name": "I. Ansah",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "113",
+      "name": "J. Enciso",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "105",
+      "name": "J. Kusi-Asare",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "95",
+      "name": "J. Panichelli",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "98",
+      "name": "João Pedro",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "108",
+      "name": "K. Etta Eyong",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "112",
+      "name": "L. Delap",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "114",
+      "name": "M. Beier",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "109",
+      "name": "M. Biereth",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "119",
+      "name": "M. Cvetković",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "96",
+      "name": "M. Tel",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "104",
+      "name": "Marc Guiu",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "93",
+      "name": "Marcos Leonardo",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "111",
+      "name": "N. Irankunda",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "88",
+      "name": "N. Tresoldi",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "97",
+      "name": "N. Woltemade",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "115",
+      "name": "R. Pepi",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "90",
+      "name": "R. Vaz",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "86",
+      "name": "Rayan",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "110",
+      "name": "S. Castro",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "122",
+      "name": "S. Chérif",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "116",
+      "name": "S. Inacio",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "91",
+      "name": "S. Mayulu",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "84",
+      "name": "Samu",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "107",
+      "name": "T. Barry",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "92",
+      "name": "T. Gomis",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "89",
+      "name": "Y. Bonny",
+      "imageUrl": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\timageUrl\n118\tA. Staff\tNULL\n117\tA. Thomas\tNULL\n123\tAdrián Liso\tNULL\n100\tAnísio\tNULL\n85\tB. Šeško\tNULL\n94\tC. Harder\tNULL\n101\tC. Kofane\tNULL\n102\tC. Kostoulas\tNULL\n120\tC. Obi\tNULL\n87\tE. Kroupi\tNULL\n81\tEndrick\tNULL\n83\tF. Camarda\tNULL\n106\tF. Esposito\tNULL\n103\tF. Onyeka\tNULL\n99\tFábio Silva\tNULL\n121\tGonzalo\tNULL\n82\tH. Ekitiké\tNULL\n124\tI. Ansah\tNULL\n113\tJ. Enciso\tNULL\n105\tJ. Kusi-Asare\tNULL\n95\tJ. Panichelli\tNULL\n98\tJoão Pedro\tNULL\n108\tK. Etta Eyong\tNULL\n112\tL. Delap\tNULL\n114\tM. Beier\tNULL\n109\tM. Biereth\tNULL\n119\tM. Cvetković\tNULL\n96\tM. Tel\tNULL\n104\tMarc Guiu\tNULL\n93\tMarcos Leonardo\tNULL\n111\tN. Irankunda\tNULL\n88\tN. Tresoldi\tNULL\n97\tN. Woltemade\tNULL\n115\tR. Pepi\tNULL\n90\tR. Vaz\tNULL\n86\tRayan\tNULL\n110\tS. Castro\tNULL\n122\tS. Chérif\tNULL\n116\tS. Inacio\tNULL\n91\tS. Mayulu\tNULL\n84\tSamu\tNULL\n107\tT. Barry\tNULL\n92\tT. Gomis\tNULL\n89\tY. Bonny\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 64
+}
