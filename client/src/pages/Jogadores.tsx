@@ -19,6 +19,16 @@ const positionLabels: Record<string, string> = {
   GK: "Goleiro",
 };
 
+// Tradução das posições para português
+const positionPtMap: Record<string, string> = {
+  ST: "ATA", CF: "ATA", RF: "ATA", LF: "ATA",
+  LW: "PNT", RW: "PNT",
+  CAM: "MEI", CM: "MEI", CDM: "VOL",
+  LB: "LAT", RB: "LAT", LWB: "LAT", RWB: "LAT",
+  CB: "ZAG",
+  GK: "GOL",
+};
+
 // Mapeamento de posição real para grupo de filtro
 const positionGroupMap: Record<string, string> = {
   ST: "ST", CF: "ST", RF: "ST", LF: "ST",
@@ -75,7 +85,7 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
             style={{ fontFamily: "'Rajdhani', sans-serif" }}>
             {player.overall}
           </span>
-          <span className="text-xs font-bold text-white/80">{player.position}</span>
+          <span className="text-xs font-bold text-white/80">{positionPtMap[player.position] ?? player.position}</span>
         </div>
         <div className="flex items-end gap-3">
           <div className="w-14 h-14 rounded-full bg-black/20 flex items-center justify-center">
