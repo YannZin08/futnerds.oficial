@@ -46,3 +46,8 @@
 
 ## Melhorias de Cards
 - [x] Adicionar overall, potencial e idade nos cards de jogadores
+
+## Posições Secundárias
+- [x] Adicionar coluna altPositions (JSON) no schema e migrar banco
+- [x] Popular dados seed com posições alternativas realistas
+- [x] Exibir posições secundárias no card ao lado da posição principal

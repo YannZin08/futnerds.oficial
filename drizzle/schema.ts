@@ -59,6 +59,7 @@ export const players = mysqlTable("players", {
   overall: int("overall").notNull(),
   potential: int("potential"),
   age: int("age"),
+  altPositions: text("altPositions"), // JSON array de posições alternativas ex: '["CDM","CM"]'
   pace: int("pace"),
   shooting: int("shooting"),
   passing: int("passing"),
