@@ -112,7 +112,7 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
         {/* Price + Favorite */}
         <div className="flex items-center justify-between pt-2 border-t border-border/50">
           <div>
-            <span className="text-xs text-muted-foreground">Preço FUT</span>
+            <span className="text-xs text-muted-foreground">Preço</span>
             <p className="text-sm font-bold text-primary">
               {player.price ? `${(player.price / 1000).toFixed(0)}K` : "—"}
             </p>
