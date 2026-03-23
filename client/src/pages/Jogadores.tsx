@@ -8,12 +8,25 @@ import { Input } from "@/components/ui/input";
 import { Users, Search, SlidersHorizontal, Star, TrendingUp, Zap, Target, Shield, Dumbbell } from "lucide-react";
 import { toast } from "sonner";
 
-const positions = ["", "ST", "CF", "LW", "RW", "CAM", "CM", "CDM", "LB", "RB", "CB", "GK"];
+const positions = ["", "ST", "LW", "CM", "LB", "CB", "GK"];
 const positionLabels: Record<string, string> = {
   "": "Todas",
-  ST: "Atacante", CF: "Centroavante", LW: "Ponta Esq.", RW: "Ponta Dir.",
-  CAM: "Meia Atac.", CM: "Meia", CDM: "Vol.", LB: "Lateral Esq.",
-  RB: "Lateral Dir.", CB: "Zagueiro", GK: "Goleiro",
+  ST: "Atacantes",
+  LW: "Pontas",
+  CM: "Meio-Campo",
+  LB: "Laterais",
+  CB: "Zagueiros",
+  GK: "Goleiro",
+};
+
+// Mapeamento de posição real para grupo de filtro
+const positionGroupMap: Record<string, string> = {
+  ST: "ST", CF: "ST", RF: "ST", LF: "ST",
+  LW: "LW", RW: "LW",
+  CAM: "CM", CM: "CM", CDM: "CM",
+  LB: "LB", RB: "LB", LWB: "LB", RWB: "LB",
+  CB: "CB",
+  GK: "GK",
 };
 
 const statIcons: Record<string, any> = {
@@ -129,7 +142,6 @@ export default function Jogadores() {
 
   const { data: players, isLoading } = trpc.players.list.useQuery({
     limit: 50,
-    position: selectedPosition || undefined,
     sortBy,
   });
 
@@ -145,13 +157,19 @@ export default function Jogadores() {
 
   const filteredPlayers = useMemo(() => {
     if (!players) return [];
-    if (!searchQuery) return players;
-    return players.filter((p: any) =>
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.club.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.nationality.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [players, searchQuery]);
+    let result = players;
+    if (selectedPosition) {
+      result = result.filter((p: any) => positionGroupMap[p.position] === selectedPosition);
+    }
+    if (searchQuery) {
+      result = result.filter((p: any) =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.club.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.nationality.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    return result;
+  }, [players, searchQuery, selectedPosition]);
 
   const handleFavorite = (player: any) => {
     if (!isAuthenticated) {
@@ -197,7 +215,7 @@ export default function Jogadores() {
               />
             </div>
             <div className="flex gap-2 flex-wrap">
-              {positions.slice(0, 7).map((pos) => (
+              {positions.map((pos) => (
                 <button
                   key={pos}
                   onClick={() => setSelectedPosition(pos)}
