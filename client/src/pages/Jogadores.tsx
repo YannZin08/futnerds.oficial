@@ -95,20 +95,6 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
           <span className="text-muted-foreground">{player.league}</span>
         </div>
 
-        {/* Stats */}
-        <div className="space-y-1.5">
-          {["pace", "shooting", "passing", "dribbling", "defending", "physical"].map((stat) => (
-            player[stat] != null && (
-              <StatBar
-                key={stat}
-                value={player[stat]}
-                label={statLabels[stat]}
-                icon={statIcons[stat]}
-              />
-            )
-          ))}
-        </div>
-
         {/* Price + Favorite */}
         <div className="flex items-center justify-between pt-2 border-t border-border/50">
           <div>
