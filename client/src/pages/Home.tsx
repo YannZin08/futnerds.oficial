@@ -63,6 +63,12 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
+        {/* Grid background */}
+        <div className="absolute inset-0 pointer-events-none opacity-5"
+          style={{
+            backgroundImage: "linear-gradient(oklch(0.65 0.20 145) 1px, transparent 1px), linear-gradient(90deg, oklch(0.65 0.20 145) 1px, transparent 1px)",
+            backgroundSize: "60px 60px"
+          }} />
 
         <div className="container relative">
           <div className="max-w-4xl mx-auto text-center">
