@@ -21,22 +21,34 @@ const positionLabels: Record<string, string> = {
 
 // Tradução das posições para português
 const positionPtMap: Record<string, string> = {
+  // Posições padrão FIFA
   ST: "ATA", CF: "ATA", RF: "ATA", LF: "ATA",
   LW: "PNT", RW: "PNT",
   CAM: "MEI", CM: "MEI", CDM: "VOL",
   LB: "LAT", RB: "LAT", LWB: "LAT", RWB: "LAT",
   CB: "ZAG",
   GK: "GOL",
+  // Posições já em português (banco)
+  ATA: "ATA", PNT: "PNT", MEI: "MEI", VOL: "VOL",
+  LAT: "LAT", ZAG: "ZAG", GOL: "GOL",
 };
 
 // Mapeamento de posição real para grupo de filtro
 const positionGroupMap: Record<string, string> = {
+  // Posições padrão FIFA
   ST: "ST", CF: "ST", RF: "ST", LF: "ST",
   LW: "LW", RW: "LW",
   CAM: "CM", CM: "CM", CDM: "CM",
   LB: "LB", RB: "LB", LWB: "LB", RWB: "LB",
   CB: "CB",
   GK: "GK",
+  // Posições em português (usadas no banco)
+  ATA: "ST",
+  PNT: "LW",
+  MEI: "CM", VOL: "CM",
+  LAT: "LB",
+  ZAG: "CB",
+  GOL: "GK",
 };
 
 const statIcons: Record<string, any> = {
