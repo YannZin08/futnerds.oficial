@@ -140,7 +140,15 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
           <div>
             <span className="text-xs text-muted-foreground">Preço</span>
             <p className="text-sm font-bold text-primary">
-              {player.price ? `${(player.price / 1000).toFixed(0)}K` : "—"}
+              {player.price ? (() => {
+                if (player.price >= 1000000) {
+                  const m = player.price / 1000000;
+                  return `€${Number.isInteger(m) ? m : m.toFixed(1)}M`;
+                } else {
+                  const k = player.price / 1000;
+                  return `€${Number.isInteger(k) ? k : k.toFixed(1)}K`;
+                }
+              })() : "—"}
             </p>
           </div>
           {onFavorite && (
