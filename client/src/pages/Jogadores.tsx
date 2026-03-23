@@ -215,9 +215,17 @@ export default function Jogadores() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background relative">
+      {/* Grid quadriculado de fundo */}
+      <div
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{
+          backgroundImage: `linear-gradient(rgba(34,197,94,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.12) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
+      />
       <Navbar />
-      <main className="flex-1 pt-20">
+      <main className="flex-1 pt-20 relative z-10">
         {/* Header */}
         <section className="py-12 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
           <div className="container">
