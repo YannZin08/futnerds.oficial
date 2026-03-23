@@ -30,7 +30,7 @@ export const appRouter = router({
   players: router({
     list: publicProcedure
       .input(z.object({
-        limit: z.number().min(1).max(100).optional().default(50),
+        limit: z.number().min(1).max(500).optional().default(500),
         position: z.string().optional(),
         nationality: z.string().optional(),
         sortBy: z.enum(["overall", "price"]).optional().default("overall"),

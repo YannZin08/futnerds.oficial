@@ -199,7 +199,7 @@ export default function Jogadores() {
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
 
   const { data: players, isLoading } = trpc.players.list.useQuery({
-    limit: 50,
+    limit: 500,
     sortBy: "overall",
   });
 
