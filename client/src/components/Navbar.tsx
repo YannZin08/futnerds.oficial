@@ -11,13 +11,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Menu, X, ChevronDown, User, LogOut, LayoutDashboard, Newspaper, Users } from "lucide-react";
+import { Menu, X, ChevronDown, User, LogOut } from "lucide-react";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/logo-futnerds_8f14a724.png";
 
 const navLinks = [
   { href: "/", label: "Início" },
-  { href: "/noticias", label: "Notícias" },
   { href: "/jogadores", label: "Jogadores" },
 ];
 
@@ -61,18 +60,6 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            {isAuthenticated && (
-              <Link
-                href="/dashboard"
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  isActive("/dashboard")
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
-                }`}
-              >
-                Dashboard
-              </Link>
-            )}
           </div>
 
           {/* Auth Section */}
@@ -94,12 +81,6 @@ export default function Navbar() {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
-                  <DropdownMenuItem asChild>
-                    <Link href="/dashboard" className="flex items-center gap-2">
-                      <LayoutDashboard className="h-4 w-4" />
-                      Dashboard
-                    </Link>
-                  </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link href="/perfil" className="flex items-center gap-2">
                       <User className="h-4 w-4" />
@@ -156,11 +137,11 @@ export default function Navbar() {
             ))}
             {isAuthenticated && (
               <Link
-                href="/dashboard"
+                href="/perfil"
                 className="block px-4 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary"
                 onClick={() => setMobileOpen(false)}
               >
-                Dashboard
+                Meu Perfil
               </Link>
             )}
             <div className="pt-2 border-t border-border/50 flex gap-2 px-4">

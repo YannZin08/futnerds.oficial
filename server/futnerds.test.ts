@@ -65,43 +65,6 @@ describe("auth.logout", () => {
   });
 });
 
-// ─── News Router Tests ────────────────────────────────────────────────────────
-
-describe("news.list", () => {
-  it("accepts valid list input with limit", async () => {
-    const ctx = createPublicContext();
-    const caller = appRouter.createCaller(ctx);
-    // This will attempt a DB call; we just verify the procedure accepts valid input
-    // and doesn't throw a validation error
-    const result = await caller.news.list({ limit: 5 }).catch((err) => {
-      // DB might not be available in test env, but input validation should pass
-      if (err.code === "INTERNAL_SERVER_ERROR") return [];
-      throw err;
-    });
-    expect(Array.isArray(result)).toBe(true);
-  });
-
-  it("accepts category filter", async () => {
-    const ctx = createPublicContext();
-    const caller = appRouter.createCaller(ctx);
-    const result = await caller.news.list({ category: "ultimate_team" }).catch((err) => {
-      if (err.code === "INTERNAL_SERVER_ERROR") return [];
-      throw err;
-    });
-    expect(Array.isArray(result)).toBe(true);
-  });
-
-  it("accepts featured filter", async () => {
-    const ctx = createPublicContext();
-    const caller = appRouter.createCaller(ctx);
-    const result = await caller.news.list({ featured: true }).catch((err) => {
-      if (err.code === "INTERNAL_SERVER_ERROR") return [];
-      throw err;
-    });
-    expect(Array.isArray(result)).toBe(true);
-  });
-});
-
 // ─── Players Router Tests ─────────────────────────────────────────────────────
 
 describe("players.list", () => {
@@ -139,6 +102,18 @@ describe("players.list", () => {
     const ctx = createPublicContext();
     const caller = appRouter.createCaller(ctx);
     const result = await caller.players.list({ sortBy: "price" }).catch((err) => {
+      if (err.code === "INTERNAL_SERVER_ERROR") return [];
+      throw err;
+    });
+    expect(Array.isArray(result)).toBe(true);
+  });
+});
+
+describe("players.search", () => {
+  it("accepts search query", async () => {
+    const ctx = createPublicContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.players.search({ query: "Messi" }).catch((err) => {
       if (err.code === "INTERNAL_SERVER_ERROR") return [];
       throw err;
     });

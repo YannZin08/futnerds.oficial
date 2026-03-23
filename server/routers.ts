@@ -4,9 +4,6 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import {
-  getNewsList,
-  getNewsBySlug,
-  getNewsById,
   getPlayersList,
   getPlayerById,
   searchPlayers,
@@ -27,31 +24,6 @@ export const appRouter = router({
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
       return { success: true } as const;
     }),
-  }),
-
-  // ─── News ──────────────────────────────────────────────────────────────────
-  news: router({
-    list: publicProcedure
-      .input(z.object({
-        limit: z.number().min(1).max(50).optional().default(20),
-        category: z.string().optional(),
-        featured: z.boolean().optional(),
-      }))
-      .query(async ({ input }) => {
-        return await getNewsList(input);
-      }),
-
-    bySlug: publicProcedure
-      .input(z.object({ slug: z.string() }))
-      .query(async ({ input }) => {
-        return await getNewsBySlug(input.slug);
-      }),
-
-    byId: publicProcedure
-      .input(z.object({ id: z.number() }))
-      .query(async ({ input }) => {
-        return await getNewsById(input.id);
-      }),
   }),
 
   // ─── Players ───────────────────────────────────────────────────────────────

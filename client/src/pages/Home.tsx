@@ -2,7 +2,6 @@ import { Link } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
@@ -12,36 +11,15 @@ import {
   Trophy,
   Users,
   BarChart3,
-  Newspaper,
-  Star,
-  TrendingUp,
-  Shield,
-  Target,
 } from "lucide-react";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/logo-futnerds_8f14a724.png";
 
-const categoryLabels: Record<string, string> = {
-  ultimate_team: "Ultimate Team",
-  career_mode: "Modo Carreira",
-  pro_clubs: "Pro Clubs",
-  volta: "Volta",
-  patch: "Patch",
-  general: "Geral",
-};
-
 const features = [
-  {
-    icon: Newspaper,
-    title: "Notícias em Tempo Real",
-    desc: "Fique por dentro das últimas atualizações, patches e eventos do FIFA.",
-    color: "text-yellow-400",
-    bg: "bg-yellow-400/10",
-  },
   {
     icon: BarChart3,
     title: "Análise de Jogadores",
-    desc: "Estatísticas detalhadas e comparações para montar o time perfeito.",
+    desc: "Estatísticas detalhadas e comparações para montar o time perfeito no Ultimate Team.",
     color: "text-primary",
     bg: "bg-primary/10",
   },
@@ -59,18 +37,24 @@ const features = [
     color: "text-blue-400",
     bg: "bg-blue-400/10",
   },
+  {
+    icon: Zap,
+    title: "Atualizações Constantes",
+    desc: "Conteúdo sempre atualizado para acompanhar as mudanças do jogo.",
+    color: "text-yellow-400",
+    bg: "bg-yellow-400/10",
+  },
 ];
 
 const stats = [
-  { label: "Jogadores Analisados", value: "20+", icon: Users },
-  { label: "Notícias Publicadas", value: "6+", icon: Newspaper },
-  { label: "Modos de Jogo", value: "4", icon: Trophy },
-  { label: "Atualizações", value: "Diárias", icon: Zap },
+  { label: "Jogadores Analisados", value: "20+" },
+  { label: "Modos de Jogo", value: "4" },
+  { label: "Membros", value: "Crescendo" },
+  { label: "Atualizações", value: "Diárias" },
 ];
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
-  const { data: newsData } = trpc.news.list.useQuery({ limit: 3, featured: true });
   const { data: topPlayers } = trpc.players.list.useQuery({ limit: 4, sortBy: "overall" });
 
   return (
@@ -85,7 +69,6 @@ export default function Home() {
             style={{ background: "radial-gradient(circle, oklch(0.65 0.20 145), transparent)" }} />
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full opacity-5"
             style={{ background: "radial-gradient(circle, oklch(0.65 0.20 145), transparent)" }} />
-          {/* Grid pattern */}
           <div className="absolute inset-0 opacity-5"
             style={{
               backgroundImage: "linear-gradient(oklch(0.65 0.20 145) 1px, transparent 1px), linear-gradient(90deg, oklch(0.65 0.20 145) 1px, transparent 1px)",
@@ -111,7 +94,7 @@ export default function Home() {
             </div>
 
             <p className="text-xl md:text-2xl text-muted-foreground mb-4 font-light">
-              Análises, notícias e estratégias para
+              Análises e estratégias para
             </p>
             <p className="text-xl md:text-2xl font-semibold text-foreground mb-10">
               elevar seu jogo ao próximo nível
@@ -121,8 +104,8 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               {isAuthenticated ? (
                 <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-12 text-base font-semibold" asChild>
-                  <Link href="/dashboard">
-                    Ir para o Dashboard <ArrowRight className="ml-2 h-5 w-5" />
+                  <Link href="/jogadores">
+                    Ver Jogadores <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
               ) : (
@@ -133,8 +116,8 @@ export default function Home() {
                 </Button>
               )}
               <Button size="lg" variant="outline" className="px-8 h-12 text-base border-border hover:border-primary/50" asChild>
-                <Link href="/noticias">
-                  Ver Notícias
+                <Link href="/jogadores">
+                  Explorar Jogadores
                 </Link>
               </Button>
             </div>
@@ -180,42 +163,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest News */}
-      {newsData && newsData.length > 0 && (
-        <section className="py-20" style={{ background: "oklch(0.12 0.01 240)" }}>
-          <div className="container">
-            <div className="flex items-center justify-between mb-10">
-              <div>
-                <h2 className="text-4xl font-black mb-1">Últimas Notícias</h2>
-                <p className="text-muted-foreground">Fique por dentro do mundo FIFA</p>
-              </div>
-              <Button variant="outline" asChild>
-                <Link href="/noticias">Ver todas <ArrowRight className="ml-2 h-4 w-4" /></Link>
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {newsData.map((item: any) => (
-                <div key={item.id} className="fut-card fut-card-hover p-6 flex flex-col gap-3">
-                  <span className={`badge-${item.category} w-fit`}>
-                    {categoryLabels[item.category] ?? item.category}
-                  </span>
-                  <h3 className="text-lg font-bold leading-tight line-clamp-2">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 flex-1">
-                    {item.summary}
-                  </p>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground mt-auto pt-2 border-t border-border/50">
-                    <span>{new Date(item.publishedAt).toLocaleDateString("pt-BR")}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Top Players Preview */}
       {topPlayers && topPlayers.length > 0 && (
-        <section className="py-20">
+        <section className="py-20" style={{ background: "oklch(0.12 0.01 240)" }}>
           <div className="container">
             <div className="flex items-center justify-between mb-10">
               <div>
@@ -229,7 +179,6 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {topPlayers.map((player: any) => (
                 <div key={player.id} className="fut-card fut-card-hover p-5 text-center">
-                  {/* Overall badge */}
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/20 border-2 border-primary/40 mb-3 mx-auto">
                     <span className="text-xl font-black text-primary"
                       style={{ fontFamily: "'Rajdhani', sans-serif" }}>
@@ -253,13 +202,14 @@ export default function Home() {
       {/* CTA Section */}
       {!isAuthenticated && (
         <section className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0 fut-gradient opacity-50" />
+          <div className="absolute inset-0 opacity-50"
+            style={{ background: "radial-gradient(ellipse at center, oklch(0.25 0.08 145), transparent 70%)" }} />
           <div className="container relative text-center">
             <div className="max-w-2xl mx-auto">
               <img src={LOGO_URL} alt="FUTNERDS" className="h-16 w-16 mx-auto mb-6 object-contain" />
               <h2 className="text-4xl font-black mb-4">Pronto para entrar no jogo?</h2>
               <p className="text-muted-foreground text-lg mb-8">
-                Junte-se à comunidade FUTNERDS e tenha acesso a conteúdo exclusivo, análises detalhadas e muito mais.
+                Junte-se à comunidade FUTNERDS e tenha acesso a análises detalhadas, jogadores favoritos e muito mais.
               </p>
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-10 h-12 text-base font-semibold" asChild>
                 <a href={getLoginUrl()}>

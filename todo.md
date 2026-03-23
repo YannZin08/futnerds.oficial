@@ -27,5 +27,15 @@
 
 ## Fase 5: Testes e Entrega
 - [x] Testes Vitest para routers principais (14 testes passando)
-- [ ] Checkpoint final
-- [ ] Entrega ao usuário
+- [x] Checkpoint final
+- [x] Entrega ao usuário
+
+## Simplificação (solicitado pelo usuário)
+- [x] Remover página de Notícias e rota /noticias
+- [x] Remover página de Dashboard e rota /dashboard
+- [x] Remover links de Notícias e Dashboard da Navbar
+- [x] Remover links de Notícias e Dashboard do Footer
+- [x] Remover seção de Notícias da Home
+- [x] Remover seção de preview de jogadores da Home (manter foco no CTA)
+- [x] Remover routers de news do servidor (manter no banco para uso futuro)
+- [x] Ajustar App.tsx removendo rotas desnecessárias
