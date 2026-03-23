@@ -19,14 +19,14 @@ const features = [
   {
     icon: BarChart3,
     title: "Análise de Jogadores",
-    desc: "Estatísticas detalhadas e comparações para montar o time perfeito no Ultimate Team.",
+    desc: "Estatísticas detalhadas e comparações para montar o time perfeito no modo carreira.",
     color: "text-primary",
     bg: "bg-primary/10",
   },
   {
     icon: Trophy,
     title: "Estratégias FUT",
-    desc: "Guias e dicas para dominar o Ultimate Team e escalar divisões.",
+    desc: "Guias e dicas para dominar o modo carreira e escalar divisões.",
     color: "text-orange-400",
     bg: "bg-orange-400/10",
   },
