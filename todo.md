@@ -56,3 +56,6 @@
 - [x] Inserir goleiros da tabela PDF no banco de dados (59 jogadores)
 - [ ] Adicionar imagens dos jogadores quando enviadas
 - [x] Corrigir formatação dos valores de mercado nos cards (ex: €37.5M, €925K)
+
+## Ajustes Visuais
+- [x] Corrigir fundo do rodapé para preto sólido igual à página inicial

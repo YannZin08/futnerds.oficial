@@ -5,7 +5,7 @@ const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4o
 export default function Footer() {
   return (
     <footer className="border-t border-border/50 mt-auto"
-      style={{ background: "oklch(0.08 0.01 240)" }}>
+      style={{ background: "#000000" }}>
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
