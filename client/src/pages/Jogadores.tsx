@@ -83,7 +83,9 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
           </div>
           <div>
             <h3 className="font-black text-white text-base leading-tight">{player.name}</h3>
-            <p className="text-white/70 text-xs">{player.nationality}</p>
+            <p className="text-white/70 text-xs">
+              {player.nationality}{player.age ? ` · ${player.age} anos` : ''}
+            </p>
           </div>
         </div>
       </div>
@@ -95,19 +97,15 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
           <span className="text-muted-foreground">{player.league}</span>
         </div>
 
-        {/* Overall / Potential / Age */}
-        <div className="grid grid-cols-3 gap-1 text-center">
+        {/* Overall / Potential */}
+        <div className="grid grid-cols-2 gap-2 text-center">
           <div className="bg-secondary rounded-lg py-1.5">
             <p className="text-lg font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">OVR</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Overall</p>
           </div>
           <div className="bg-secondary rounded-lg py-1.5">
             <p className="text-lg font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">POT</p>
-          </div>
-          <div className="bg-secondary rounded-lg py-1.5">
-            <p className="text-lg font-black text-foreground leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.age ?? '—'}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">IDADE</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Potencial</p>
           </div>
         </div>
 

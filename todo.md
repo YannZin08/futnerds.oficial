@@ -45,4 +45,4 @@
 - [x] Corrigir 404 na rota /dashboard — adicionar redirect para Home
 
 ## Melhorias de Cards
-- [ ] Adicionar overall, potencial e idade nos cards de jogadores
+- [x] Adicionar overall, potencial e idade nos cards de jogadores
