@@ -5,8 +5,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Users, Search, SlidersHorizontal, Star, TrendingUp, Zap, Target, Shield, Dumbbell } from "lucide-react";
+import { Users, Search, SlidersHorizontal, Star, TrendingUp, Zap, Target, Shield, Dumbbell, ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
+
+const PLAYERS_PER_PAGE = 60;
 
 const positions = ["", "ST", "LW", "CM", "LB", "CB", "GK"];
 const positionLabels: Record<string, string> = {
@@ -71,19 +73,6 @@ const cardTypeColors: Record<string, string> = {
   hero: "from-red-800 to-red-500",
   special: "from-purple-600 to-pink-500",
 };
-
-function StatBar({ value, label, icon: Icon }: { value: number; label: string; icon: any }) {
-  return (
-    <div className="flex items-center gap-2">
-      <Icon className="h-3 w-3 text-muted-foreground shrink-0" />
-      <span className="text-xs text-muted-foreground w-16 shrink-0">{label}</span>
-      <div className="fut-stat-bar flex-1">
-        <div className="fut-stat-fill" style={{ width: `${value}%` }} />
-      </div>
-      <span className="text-xs font-bold text-foreground w-6 text-right">{value}</span>
-    </div>
-  );
-}
 
 function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: () => void; isFav?: boolean }) {
   const gradientClass = cardTypeColors[player.cardType] || cardTypeColors.gold;
@@ -191,15 +180,88 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
   );
 }
 
+function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
+  if (totalPages <= 1) return null;
+
+  // Gera os números de página a exibir (máx 7 botões)
+  const getPageNumbers = () => {
+    const pages: (number | "...")[] = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      pages.push(1);
+      if (currentPage > 3) pages.push("...");
+      const start = Math.max(2, currentPage - 1);
+      const end = Math.min(totalPages - 1, currentPage + 1);
+      for (let i = start; i <= end; i++) pages.push(i);
+      if (currentPage < totalPages - 2) pages.push("...");
+      pages.push(totalPages);
+    }
+    return pages;
+  };
+
+  return (
+    <div className="flex items-center justify-center gap-1 mt-10 flex-wrap">
+      {/* Anterior */}
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+      >
+        <ChevronLeft className="h-4 w-4" />
+        Anterior
+      </button>
+
+      {/* Números */}
+      {getPageNumbers().map((page, idx) =>
+        page === "..." ? (
+          <span key={`ellipsis-${idx}`} className="px-2 py-2 text-muted-foreground text-sm select-none">
+            ...
+          </span>
+        ) : (
+          <button
+            key={page}
+            onClick={() => onPageChange(page as number)}
+            className={`w-9 h-9 rounded-lg text-sm font-bold transition-all ${
+              currentPage === page
+                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
+                : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+            }`}
+          >
+            {page}
+          </button>
+        )
+      )}
+
+      {/* Próximo */}
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+      >
+        Próximo
+        <ChevronRight className="h-4 w-4" />
+      </button>
+    </div>
+  );
+}
+
 export default function Jogadores() {
   const { isAuthenticated } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPosition, setSelectedPosition] = useState("");
-  const sortBy = "overall";
-  const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { data: players, isLoading } = trpc.players.list.useQuery({
-    limit: 500,
+    limit: 9999,
     sortBy: "overall",
   });
 
@@ -228,6 +290,29 @@ export default function Jogadores() {
     }
     return result;
   }, [players, searchQuery, selectedPosition]);
+
+  const totalPages = Math.ceil(filteredPlayers.length / PLAYERS_PER_PAGE);
+
+  const paginatedPlayers = useMemo(() => {
+    const start = (currentPage - 1) * PLAYERS_PER_PAGE;
+    return filteredPlayers.slice(start, start + PLAYERS_PER_PAGE);
+  }, [filteredPlayers, currentPage]);
+
+  // Resetar para página 1 quando filtro ou busca mudar
+  const handlePositionChange = (pos: string) => {
+    setSelectedPosition(pos);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleFavorite = (player: any) => {
     if (!isAuthenticated) {
@@ -276,7 +361,7 @@ export default function Jogadores() {
               <Input
                 placeholder="Buscar jogador, clube ou nacionalidade..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 className="pl-10 bg-secondary border-border"
               />
             </div>
@@ -284,7 +369,7 @@ export default function Jogadores() {
               {positions.map((pos) => (
                 <button
                   key={pos}
-                  onClick={() => setSelectedPosition(pos)}
+                  onClick={() => handlePositionChange(pos)}
                   className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                     selectedPosition === pos
                       ? "bg-primary text-primary-foreground"
@@ -295,15 +380,21 @@ export default function Jogadores() {
                 </button>
               ))}
             </div>
-
           </div>
 
           {/* Results count */}
-          <div className="flex items-center gap-2 mb-6">
-            <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground">
-              {filteredPlayers.length} jogadores encontrados
-            </span>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm text-muted-foreground">
+                {filteredPlayers.length} jogadores encontrados
+              </span>
+            </div>
+            {totalPages > 1 && (
+              <span className="text-sm text-muted-foreground">
+                Página {currentPage} de {totalPages}
+              </span>
+            )}
           </div>
 
           {/* Players Grid */}
@@ -325,16 +416,25 @@ export default function Jogadores() {
               ))}
             </div>
           ) : filteredPlayers.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredPlayers.map((player: any) => (
-                <PlayerCard
-                  key={player.id}
-                  player={player}
-                  onFavorite={() => handleFavorite(player)}
-                  isFav={favoriteIds.has(player.id)}
-                />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {paginatedPlayers.map((player: any) => (
+                  <PlayerCard
+                    key={player.id}
+                    player={player}
+                    onFavorite={() => handleFavorite(player)}
+                    isFav={favoriteIds.has(player.id)}
+                  />
+                ))}
+              </div>
+
+              {/* Paginação */}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </>
           ) : (
             <div className="text-center py-20">
               <Users className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />

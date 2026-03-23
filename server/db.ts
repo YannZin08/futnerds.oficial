@@ -119,7 +119,7 @@ export async function getNewsById(id: number) {
 export async function getPlayersList(opts: { limit?: number; position?: string; nationality?: string; sortBy?: string } = {}) {
   const db = await getDb();
   if (!db) return [];
-  const { limit = 500, position, nationality, sortBy = "overall" } = opts;
+  const { limit = 9999, position, nationality, sortBy = "overall" } = opts;
 
   const conditions = [];
   if (position) conditions.push(eq(players.position, position));
