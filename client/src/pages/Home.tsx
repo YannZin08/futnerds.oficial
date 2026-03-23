@@ -63,18 +63,6 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-10"
-            style={{ background: "radial-gradient(circle, oklch(0.65 0.20 145), transparent)" }} />
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full opacity-5"
-            style={{ background: "radial-gradient(circle, oklch(0.65 0.20 145), transparent)" }} />
-          <div className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage: "linear-gradient(oklch(0.65 0.20 145) 1px, transparent 1px), linear-gradient(90deg, oklch(0.65 0.20 145) 1px, transparent 1px)",
-              backgroundSize: "60px 60px"
-            }} />
-        </div>
 
         <div className="container relative">
           <div className="max-w-4xl mx-auto text-center">
