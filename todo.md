@@ -39,3 +39,7 @@
 - [x] Remover seção de preview de jogadores da Home (manter foco no CTA)
 - [x] Remover routers de news do servidor (manter no banco para uso futuro)
 - [x] Ajustar App.tsx removendo rotas desnecessárias
+
+## Correções
+- [x] Corrigir 404 na rota /noticias — adicionar redirect para Home
+- [x] Corrigir 404 na rota /dashboard — adicionar redirect para Home
