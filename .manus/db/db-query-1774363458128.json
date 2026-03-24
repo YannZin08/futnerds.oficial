@@ -1,0 +1,148 @@
+{
+  "query": "SELECT name, COUNT(*) as total, GROUP_CONCAT(id ORDER BY id) as ids, GROUP_CONCAT(position ORDER BY id) as positions\nFROM players\nGROUP BY name\nHAVING COUNT(*) > 1\nORDER BY total DESC, name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, COUNT(*) as total, GROUP_CONCAT(id ORDER BY id) as ids, GROUP_CONCAT(position ORDER BY id) as positions\nFROM players\nGROUP BY name\nHAVING COUNT(*) > 1\nORDER BY total DESC, name;",
+  "rows": [
+    {
+      "name": "A. Stanković",
+      "total": "3",
+      "ids": "30027,90078,90091",
+      "positions": "ZAG,VOL,VOL"
+    },
+    {
+      "name": "C. Harder",
+      "total": "3",
+      "ids": "94,90079,90092",
+      "positions": "ATA,ATA,ATA"
+    },
+    {
+      "name": "Alejandro Granados",
+      "total": "2",
+      "ids": "90077,90090",
+      "positions": "MC,MC"
+    },
+    {
+      "name": "Balde",
+      "total": "2",
+      "ids": "60010,90042",
+      "positions": "LE,LE"
+    },
+    {
+      "name": "C. Echeverri",
+      "total": "2",
+      "ids": "90081,90094",
+      "positions": "MEI,MEI"
+    },
+    {
+      "name": "E. Banzuzi",
+      "total": "2",
+      "ids": "90082,90095",
+      "positions": "MC,MC"
+    },
+    {
+      "name": "Endrick",
+      "total": "2",
+      "ids": "81,90028",
+      "positions": "ATA,ATA"
+    },
+    {
+      "name": "Fábio Silva",
+      "total": "2",
+      "ids": "99,90066",
+      "positions": "ATA,ATA"
+    },
+    {
+      "name": "H. Larsson",
+      "total": "2",
+      "ids": "90089,90102",
+      "positions": "MC,MC"
+    },
+    {
+      "name": "J. Bahoya",
+      "total": "2",
+      "ids": "90087,90100",
+      "positions": "ME,ME"
+    },
+    {
+      "name": "J. Bellingham",
+      "total": "2",
+      "ids": "90001,90109",
+      "positions": "MEI,MC"
+    },
+    {
+      "name": "J. Manzambi",
+      "total": "2",
+      "ids": "90080,90093",
+      "positions": "MC,MC"
+    },
+    {
+      "name": "João Pedro",
+      "total": "2",
+      "ids": "98,90065",
+      "positions": "ATA,ATA"
+    },
+    {
+      "name": "K. Mainoo",
+      "total": "2",
+      "ids": "90088,90101",
+      "positions": "VOL,VOL"
+    },
+    {
+      "name": "L. Camara",
+      "total": "2",
+      "ids": "90083,90096",
+      "positions": "MC,MC"
+    },
+    {
+      "name": "Marc Casadó",
+      "total": "2",
+      "ids": "90085,90098",
+      "positions": "VOL,VOL"
+    },
+    {
+      "name": "Mateus Fernandes",
+      "total": "2",
+      "ids": "90086,90099",
+      "positions": "MC,MC"
+    },
+    {
+      "name": "N. Woltemade",
+      "total": "2",
+      "ids": "97,90063",
+      "positions": "ATA,ATA"
+    },
+    {
+      "name": "Nuno Mendes",
+      "total": "2",
+      "ids": "60001,90041",
+      "positions": "LE,LE"
+    },
+    {
+      "name": "O. Gloukh",
+      "total": "2",
+      "ids": "90084,90097",
+      "positions": "MEI,MEI"
+    },
+    {
+      "name": "P. Hincapié",
+      "total": "2",
+      "ids": "30012,90043",
+      "positions": "ZAG,LE"
+    },
+    {
+      "name": "Pau Cubarsí",
+      "total": "2",
+      "ids": "30003,90029",
+      "positions": "ZAG,ZAG"
+    },
+    {
+      "name": "S. Mayulu",
+      "total": "2",
+      "ids": "91,90076",
+      "positions": "ATA,MC"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\ttotal\tids\tpositions\nA. Stanković\t3\t30027,90078,90091\tZAG,VOL,VOL\nC. Harder\t3\t94,90079,90092\tATA,ATA,ATA\nAlejandro Granados\t2\t90077,90090\tMC,MC\nBalde\t2\t60010,90042\tLE,LE\nC. Echeverri\t2\t90081,90094\tMEI,MEI\nE. Banzuzi\t2\t90082,90095\tMC,MC\nEndrick\t2\t81,90028\tATA,ATA\nFábio Silva\t2\t99,90066\tATA,ATA\nH. Larsson\t2\t90089,90102\tMC,MC\nJ. Bahoya\t2\t90087,90100\tME,ME\nJ. Bellingham\t2\t90001,90109\tMEI,MC\nJ. Manzambi\t2\t90080,90093\tMC,MC\nJoão Pedro\t2\t98,90065\tATA,ATA\nK. Mainoo\t2\t90088,90101\tVOL,VOL\nL. Camara\t2\t90083,90096\tMC,MC\nMarc Casadó\t2\t90085,90098\tVOL,VOL\nMateus Fernandes\t2\t90086,90099\tMC,MC\nN. Woltemade\t2\t97,90063\tATA,ATA\nNuno Mendes\t2\t60001,90041\tLE,LE\nO. Gloukh\t2\t90084,90097\tMEI,MEI\nP. Hincapié\t2\t30012,90043\tZAG,LE\nPau Cubarsí\t2\t30003,90029\tZAG,ZAG\nS. Mayulu\t2\t91,90076\tATA,MC\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

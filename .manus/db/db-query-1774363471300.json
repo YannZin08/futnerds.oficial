@@ -1,0 +1,28 @@
+{
+  "query": "SELECT name, COUNT(*) as total, GROUP_CONCAT(id ORDER BY id) as ids, GROUP_CONCAT(position ORDER BY id) as positions\nFROM players\nGROUP BY name\nHAVING COUNT(*) > 1\nORDER BY total DESC, name\nLIMIT 23 OFFSET 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, COUNT(*) as total, GROUP_CONCAT(id ORDER BY id) as ids, GROUP_CONCAT(position ORDER BY id) as positions\nFROM players\nGROUP BY name\nHAVING COUNT(*) > 1\nORDER BY total DESC, name\nLIMIT 23 OFFSET 20;",
+  "rows": [
+    {
+      "name": "P. Hincapié",
+      "total": "2",
+      "ids": "30012,90043",
+      "positions": "ZAG,LE"
+    },
+    {
+      "name": "Pau Cubarsí",
+      "total": "2",
+      "ids": "30003,90029",
+      "positions": "ZAG,ZAG"
+    },
+    {
+      "name": "S. Mayulu",
+      "total": "2",
+      "ids": "91,90076",
+      "positions": "ATA,MC"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\ttotal\tids\tpositions\nP. Hincapié\t2\t30012,90043\tZAG,LE\nPau Cubarsí\t2\t30003,90029\tZAG,ZAG\nS. Mayulu\t2\t91,90076\tATA,MC\n",
+  "stderr": "",
+  "execution_time_ms": 62
+}

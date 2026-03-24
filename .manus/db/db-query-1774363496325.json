@@ -1,0 +1,9 @@
+{
+  "query": "-- Remover duplicados: manter o menor ID para cada nome duplicado\nDELETE FROM players WHERE id IN (\n  SELECT id FROM (\n    SELECT id, name,\n      ROW_NUMBER() OVER (PARTITION BY name ORDER BY \n        CASE WHEN imageUrl IS NOT NULL AND imageUrl != '' THEN 0 ELSE 1 END,\n        id ASC\n      ) as rn\n    FROM players\n    WHERE name IN (\n      SELECT name FROM players GROUP BY name HAVING COUNT(*) > 1\n    )\n  ) ranked\n  WHERE rn > 1\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Remover duplicados: manter o menor ID para cada nome duplicado\nDELETE FROM players WHERE id IN (\n  SELECT id FROM (\n    SELECT id, name,\n      ROW_NUMBER() OVER (PARTITION BY name ORDER BY \n        CASE WHEN imageUrl IS NOT NULL AND imageUrl != '' THEN 0 ELSE 1 END,\n        id ASC\n      ) as rn\n    FROM players\n    WHERE name IN (\n      SELECT name FROM players GROUP BY name HAVING COUNT(*) > 1\n    )\n  ) ranked\n  WHERE rn > 1\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 202
+}
