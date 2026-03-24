@@ -1,0 +1,136 @@
+{
+  "query": "-- Jogadores com gold mas overall < 75 (deveriam ser silver ou bronze)\nSELECT id, name, overall, cardType FROM players WHERE cardType = 'gold' AND overall < 75 ORDER BY overall DESC LIMIT 10;\n-- Jogadores com silver mas overall >= 75 (deveriam ser gold)\nSELECT id, name, overall, cardType FROM players WHERE cardType = 'silver' AND overall >= 75 ORDER BY overall DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Jogadores com gold mas overall < 75 (deveriam ser silver ou bronze)\nSELECT id, name, overall, cardType FROM players WHERE cardType = 'gold' AND overall < 75 ORDER BY overall DESC LIMIT 10;\n-- Jogadores com silver mas overall >= 75 (deveriam ser gold)\nSELECT id, name, overall, cardType FROM players WHERE cardType = 'silver' AND overall >= 75 ORDER BY overall DESC LIMIT 10;",
+  "rows": [
+    {
+      "id": "90075",
+      "name": "K. Karetsas",
+      "overall": "74",
+      "cardType": "gold"
+    },
+    {
+      "id": "90056",
+      "name": "George Ilenikhena",
+      "overall": "74",
+      "cardType": "gold"
+    },
+    {
+      "id": "90081",
+      "name": "C. Echeverri",
+      "overall": "73",
+      "cardType": "gold"
+    },
+    {
+      "id": "90072",
+      "name": "C. Mouzakitis",
+      "overall": "73",
+      "cardType": "gold"
+    },
+    {
+      "id": "90068",
+      "name": "A. Jagušić",
+      "overall": "73",
+      "cardType": "gold"
+    },
+    {
+      "id": "90116",
+      "name": "M. Delorge",
+      "overall": "73",
+      "cardType": "gold"
+    },
+    {
+      "id": "90052",
+      "name": "Julien Duranville",
+      "overall": "73",
+      "cardType": "gold"
+    },
+    {
+      "id": "90105",
+      "name": "V. Carboni",
+      "overall": "73",
+      "cardType": "gold"
+    },
+    {
+      "id": "90049",
+      "name": "Finn Jeltsch",
+      "overall": "72",
+      "cardType": "gold"
+    },
+    {
+      "id": "90082",
+      "name": "E. Banzuzi",
+      "overall": "72",
+      "cardType": "gold"
+    },
+    {
+      "id": "id",
+      "name": "name",
+      "overall": "overall",
+      "cardType": "cardType"
+    },
+    {
+      "id": "60031",
+      "name": "N. Brown",
+      "overall": "79",
+      "cardType": "silver"
+    },
+    {
+      "id": "99",
+      "name": "Fábio Silva",
+      "overall": "79",
+      "cardType": "silver"
+    },
+    {
+      "id": "30037",
+      "name": "J. Branthwaite",
+      "overall": "79",
+      "cardType": "silver"
+    },
+    {
+      "id": "30015",
+      "name": "A. Khusanov",
+      "overall": "79",
+      "cardType": "silver"
+    },
+    {
+      "id": "30",
+      "name": "R. Roefs",
+      "overall": "79",
+      "cardType": "silver"
+    },
+    {
+      "id": "93",
+      "name": "Marcos Leonardo",
+      "overall": "79",
+      "cardType": "silver"
+    },
+    {
+      "id": "26",
+      "name": "K. Tzolakis",
+      "overall": "79",
+      "cardType": "silver"
+    },
+    {
+      "id": "84",
+      "name": "Samu",
+      "overall": "79",
+      "cardType": "silver"
+    },
+    {
+      "id": "114",
+      "name": "M. Beier",
+      "overall": "79",
+      "cardType": "silver"
+    },
+    {
+      "id": "60052",
+      "name": "C. Bradley",
+      "overall": "79",
+      "cardType": "silver"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\toverall\tcardType\n90075\tK. Karetsas\t74\tgold\n90056\tGeorge Ilenikhena\t74\tgold\n90081\tC. Echeverri\t73\tgold\n90072\tC. Mouzakitis\t73\tgold\n90068\tA. Jagušić\t73\tgold\n90116\tM. Delorge\t73\tgold\n90052\tJulien Duranville\t73\tgold\n90105\tV. Carboni\t73\tgold\n90049\tFinn Jeltsch\t72\tgold\n90082\tE. Banzuzi\t72\tgold\nid\tname\toverall\tcardType\n60031\tN. Brown\t79\tsilver\n99\tFábio Silva\t79\tsilver\n30037\tJ. Branthwaite\t79\tsilver\n30015\tA. Khusanov\t79\tsilver\n30\tR. Roefs\t79\tsilver\n93\tMarcos Leonardo\t79\tsilver\n26\tK. Tzolakis\t79\tsilver\n84\tSamu\t79\tsilver\n114\tM. Beier\t79\tsilver\n60052\tC. Bradley\t79\tsilver\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

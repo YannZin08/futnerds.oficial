@@ -70,3 +70,6 @@
   - [x] Remover Givairo Read (manter G. Read com imagem)
   - [x] Remover Kobbie Mainoo duplicado (manter K. Mainoo com imagem, atualizar dados)
 - [x] Atualizar contador de jogadores na Home para valor dinâmico do banco
+
+## Bug - Cor do Overall nos Cards
+- [x] Corrigir lógica de cores do overall nos cards de jogadores (cor calculada dinamicamente pelo overall: gold 75+, silver 65-74, bronze <65)

@@ -68,19 +68,15 @@ const statLabels: Record<string, string> = {
   dribbling: "Drible", defending: "Defesa", physical: "Físico",
 };
 
-const cardTypeColors: Record<string, string> = {
-  gold: "from-yellow-600 to-yellow-400",
-  silver: "from-gray-500 to-gray-300",
-  bronze: "from-orange-800 to-orange-500",
-  toty: "from-blue-900 to-blue-600",
-  tots: "from-purple-800 to-purple-500",
-  icon: "from-gray-800 to-gray-600",
-  hero: "from-red-800 to-red-500",
-  special: "from-purple-600 to-pink-500",
-};
+// Calcula a cor do card baseado no overall (ignora cardType do banco que pode estar errado)
+function getCardGradient(overall: number): string {
+  if (overall >= 75) return "from-yellow-600 to-yellow-400";       // Gold
+  if (overall >= 65) return "from-gray-500 to-gray-300";           // Silver
+  return "from-orange-800 to-orange-500";                          // Bronze
+}
 
 function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: () => void; isFav?: boolean }) {
-  const gradientClass = cardTypeColors[player.cardType] || cardTypeColors.gold;
+  const gradientClass = getCardGradient(Number(player.overall));
 
   // Extrai posições alternativas únicas
   const getAltPositions = () => {
