@@ -1,0 +1,13 @@
+{
+  "query": "\nSELECT DISTINCT position FROM players ORDER BY position;\nSELECT DISTINCT alt_positions FROM players WHERE alt_positions IS NOT NULL AND alt_positions != '' ORDER BY alt_positions LIMIT 50;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute \nSELECT DISTINCT position FROM players ORDER BY position;\nSELECT DISTINCT alt_positions FROM players WHERE alt_positions IS NOT NULL AND alt_positions != '' ORDER BY alt_positions LIMIT 50;\n",
+  "returncode": 1,
+  "logs": [
+    "position",
+    "ATA",
+    "GK",
+    "LAT",
+    "ZAG",
+    "ERROR 1054 (42S22) at line 3: Unknown column 'alt_positions' in 'where clause'"
+  ]
+}

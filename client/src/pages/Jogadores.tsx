@@ -27,12 +27,16 @@ const positionPtMap: Record<string, string> = {
   ST: "ATA", CF: "ATA", RF: "ATA", LF: "ATA",
   LW: "PNT", RW: "PNT",
   CAM: "MEI", CM: "MEI", CDM: "VOL",
-  LB: "LAT", RB: "LAT", LWB: "LAT", RWB: "LAT",
+  LB: "LD", RB: "LD", LWB: "LE", RWB: "LD",
   CB: "ZAG",
   GK: "GOL",
   // Posições já em português (banco)
   ATA: "ATA", PNT: "PNT", MEI: "MEI", VOL: "VOL",
-  LAT: "LAT", ZAG: "ZAG", GOL: "GOL",
+  LAT: "LAT", LD: "LD", LE: "LE", MD: "MD", ME: "ME",
+  PD: "PD", PE: "PE",
+  ZAG: "ZAG", GOL: "GOL",
+  // Meio-campo
+  MC: "MC", MCD: "VOL",
 };
 
 // Mapeamento de posição real para grupo de filtro
@@ -46,9 +50,10 @@ const positionGroupMap: Record<string, string> = {
   GK: "GK",
   // Posições em português (usadas no banco)
   ATA: "ST",
-  PNT: "LW",
-  MEI: "CM", VOL: "CM",
-  LAT: "LB",
+  PNT: "LW", PE: "LW", PD: "LW",
+  MEI: "CM", VOL: "CM", MC: "CM", MCD: "CM", MD: "CM", ME: "CM",
+  // Laterais: LAT (genérico), LD (lateral direito), LE (lateral esquerdo)
+  LAT: "LB", LD: "LB", LE: "LB",
   ZAG: "CB",
   GOL: "GK",
 };

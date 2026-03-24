@@ -1,0 +1,110 @@
+{
+  "query": "SELECT name, position, altPositions FROM players WHERE position = 'LAT' AND altPositions IS NOT NULL AND altPositions != '' LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, position, altPositions FROM players WHERE position = 'LAT' AND altPositions IS NOT NULL AND altPositions != '' LIMIT 20;",
+  "rows": [
+    {
+      "name": "Nuno Mendes",
+      "position": "LAT",
+      "altPositions": "ME"
+    },
+    {
+      "name": "G. Read",
+      "position": "LAT",
+      "altPositions": "LD,MD"
+    },
+    {
+      "name": "W. Zaïre-Emery",
+      "position": "LAT",
+      "altPositions": "MC,VOL,LD,MEI"
+    },
+    {
+      "name": "Á. Carreras",
+      "position": "LAT",
+      "altPositions": "LE,ZAG,ME"
+    },
+    {
+      "name": "C. Lukeba",
+      "position": "LAT",
+      "altPositions": "ZAG,LE,MC"
+    },
+    {
+      "name": "J. Mokio",
+      "position": "LAT",
+      "altPositions": "VOL,MC,LE"
+    },
+    {
+      "name": "M. Lewis-Skelly",
+      "position": "LAT",
+      "altPositions": "LE,MC"
+    },
+    {
+      "name": "J. Hato",
+      "position": "LAT",
+      "altPositions": "LE,ZAG,VOL"
+    },
+    {
+      "name": "Balde",
+      "position": "LAT",
+      "altPositions": "LE,ME"
+    },
+    {
+      "name": "J. Seys",
+      "position": "LAT",
+      "altPositions": "LE,LD,ME"
+    },
+    {
+      "name": "João Costa",
+      "position": "LAT",
+      "altPositions": "MD,ME,LE,LD"
+    },
+    {
+      "name": "N. O'Reilly",
+      "position": "LAT",
+      "altPositions": "LE,MC,ME"
+    },
+    {
+      "name": "L. Miley",
+      "position": "LAT",
+      "altPositions": "MC,LD,VOL"
+    },
+    {
+      "name": "A. Gray",
+      "position": "LAT",
+      "altPositions": "VOL,ZAG,LD,MC"
+    },
+    {
+      "name": "L. Hall",
+      "position": "LAT",
+      "altPositions": "LE,ME"
+    },
+    {
+      "name": "Pubill",
+      "position": "LAT",
+      "altPositions": "ZAG,LD,MD"
+    },
+    {
+      "name": "T. Livramento",
+      "position": "LAT",
+      "altPositions": "LD,LE,MD"
+    },
+    {
+      "name": "E. Camavinga",
+      "position": "LAT",
+      "altPositions": "MC,VOL,LE"
+    },
+    {
+      "name": "Martim Fernandes",
+      "position": "LAT",
+      "altPositions": "LD,MD"
+    },
+    {
+      "name": "A. Khalaili",
+      "position": "LAT",
+      "altPositions": "MD,LD,PD"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\tposition\taltPositions\nNuno Mendes\tLAT\tME\nG. Read\tLAT\tLD,MD\nW. Zaïre-Emery\tLAT\tMC,VOL,LD,MEI\nÁ. Carreras\tLAT\tLE,ZAG,ME\nC. Lukeba\tLAT\tZAG,LE,MC\nJ. Mokio\tLAT\tVOL,MC,LE\nM. Lewis-Skelly\tLAT\tLE,MC\nJ. Hato\tLAT\tLE,ZAG,VOL\nBalde\tLAT\tLE,ME\nJ. Seys\tLAT\tLE,LD,ME\nJoão Costa\tLAT\tMD,ME,LE,LD\nN. O'Reilly\tLAT\tLE,MC,ME\nL. Miley\tLAT\tMC,LD,VOL\nA. Gray\tLAT\tVOL,ZAG,LD,MC\nL. Hall\tLAT\tLE,ME\nPubill\tLAT\tZAG,LD,MD\nT. Livramento\tLAT\tLD,LE,MD\nE. Camavinga\tLAT\tMC,VOL,LE\nMartim Fernandes\tLAT\tLD,MD\nA. Khalaili\tLAT\tMD,LD,PD\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}

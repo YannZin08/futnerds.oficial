@@ -1,0 +1,65 @@
+{
+  "query": "SELECT name, position, altPositions FROM players WHERE position = 'ZAG' AND altPositions IS NOT NULL AND altPositions != '' LIMIT 15;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, position, altPositions FROM players WHERE position = 'ZAG' AND altPositions IS NOT NULL AND altPositions != '' LIMIT 15;",
+  "rows": [
+    {
+      "name": "J. Gvardiol",
+      "position": "ZAG",
+      "altPositions": "LE,ME,LAT"
+    },
+    {
+      "name": "P. Hincapié",
+      "position": "ZAG",
+      "altPositions": "LE,LAT"
+    },
+    {
+      "name": "Tomás Araújo",
+      "position": "ZAG",
+      "altPositions": "LAT,LD"
+    },
+    {
+      "name": "R. Calafiori",
+      "position": "ZAG",
+      "altPositions": "LE,MC,LAT"
+    },
+    {
+      "name": "Z. Debast",
+      "position": "ZAG",
+      "altPositions": "VOL,MC"
+    },
+    {
+      "name": "Yarek",
+      "position": "ZAG",
+      "altPositions": "LE,LAT"
+    },
+    {
+      "name": "A. Stanković",
+      "position": "ZAG",
+      "altPositions": "VOL,MC"
+    },
+    {
+      "name": "Z. Van Den Bosch",
+      "position": "ZAG",
+      "altPositions": "LE"
+    },
+    {
+      "name": "A. Anselmino",
+      "position": "ZAG",
+      "altPositions": "LD,VOL"
+    },
+    {
+      "name": "M. Perrone",
+      "position": "ZAG",
+      "altPositions": "VOL,MC"
+    },
+    {
+      "name": "Y. Baas",
+      "position": "ZAG",
+      "altPositions": "LE,MC,LAT"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\tposition\taltPositions\nJ. Gvardiol\tZAG\tLE,ME,LAT\nP. Hincapié\tZAG\tLE,LAT\nTomás Araújo\tZAG\tLAT,LD\nR. Calafiori\tZAG\tLE,MC,LAT\nZ. Debast\tZAG\tVOL,MC\nYarek\tZAG\tLE,LAT\nA. Stanković\tZAG\tVOL,MC\nZ. Van Den Bosch\tZAG\tLE\nA. Anselmino\tZAG\tLD,VOL\nM. Perrone\tZAG\tVOL,MC\nY. Baas\tZAG\tLE,MC,LAT\n",
+  "stderr": "",
+  "execution_time_ms": 65
+}
