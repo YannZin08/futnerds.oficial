@@ -1,0 +1,8 @@
+{
+  "query": "UPDATE players SET cardType = 'diamond' WHERE overall >= 90;\nUPDATE players SET cardType = 'gold' WHERE overall >= 75 AND overall < 90;\nUPDATE players SET cardType = 'bronze' WHERE overall < 75;\n\n-- Verificar distribuição\nSELECT cardType, COUNT(*) as total, MIN(overall) as min_overall, MAX(overall) as max_overall\nFROM players GROUP BY cardType ORDER BY max_overall DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute UPDATE players SET cardType = 'diamond' WHERE overall >= 90;\nUPDATE players SET cardType = 'gold' WHERE overall >= 75 AND overall < 90;\nUPDATE players SET cardType = 'bronze' WHERE overall < 75;\n\n-- Verificar distribuição\nSELECT cardType, COUNT(*) as total, MIN(overall) as min_overall, MAX(overall) as max_overall\nFROM players GROUP BY cardType ORDER BY max_overall DESC;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1265 (01000) at line 1: Data truncated for column '%s' at row %d"
+  ]
+}

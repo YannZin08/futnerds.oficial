@@ -1,0 +1,34 @@
+{
+  "query": "UPDATE players SET cardType = 'diamond' WHERE overall >= 90;\nUPDATE players SET cardType = 'gold'    WHERE overall >= 80 AND overall < 90;\nUPDATE players SET cardType = 'silver'  WHERE overall >= 70 AND overall < 80;\nUPDATE players SET cardType = 'bronze'  WHERE overall < 70;\n\nSELECT cardType, COUNT(*) as total, MIN(overall) as min_ov, MAX(overall) as max_ov\nFROM players GROUP BY cardType ORDER BY max_ov DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute UPDATE players SET cardType = 'diamond' WHERE overall >= 90;\nUPDATE players SET cardType = 'gold'    WHERE overall >= 80 AND overall < 90;\nUPDATE players SET cardType = 'silver'  WHERE overall >= 70 AND overall < 80;\nUPDATE players SET cardType = 'bronze'  WHERE overall < 70;\n\nSELECT cardType, COUNT(*) as total, MIN(overall) as min_ov, MAX(overall) as max_ov\nFROM players GROUP BY cardType ORDER BY max_ov DESC;",
+  "rows": [
+    {
+      "cardType": "diamond",
+      "total": "1",
+      "min_ov": "90",
+      "max_ov": "90"
+    },
+    {
+      "cardType": "gold",
+      "total": "65",
+      "min_ov": "80",
+      "max_ov": "89"
+    },
+    {
+      "cardType": "silver",
+      "total": "274",
+      "min_ov": "70",
+      "max_ov": "79"
+    },
+    {
+      "cardType": "bronze",
+      "total": "59",
+      "min_ov": "59",
+      "max_ov": "69"
+    }
+  ],
+  "messages": [],
+  "stdout": "cardType\ttotal\tmin_ov\tmax_ov\ndiamond\t1\t90\t90\ngold\t65\t80\t89\nsilver\t274\t70\t79\nbronze\t59\t59\t69\n",
+  "stderr": "",
+  "execution_time_ms": 94
+}

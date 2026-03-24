@@ -1,0 +1,1 @@
+ALTER TABLE `players` MODIFY COLUMN `cardType` enum('gold','silver','bronze','diamond','toty','tots','icon','hero','special') NOT NULL DEFAULT 'gold';

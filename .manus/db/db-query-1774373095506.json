@@ -1,0 +1,28 @@
+{
+  "query": "ALTER TABLE `players` MODIFY COLUMN `cardType` enum('gold','silver','bronze','diamond','toty','tots','icon','hero','special') NOT NULL DEFAULT 'gold';\n\nUPDATE players SET cardType = 'diamond' WHERE overall >= 90;\nUPDATE players SET cardType = 'gold' WHERE overall >= 75 AND overall < 90;\nUPDATE players SET cardType = 'bronze' WHERE overall < 75;\n\nSELECT cardType, COUNT(*) as total, MIN(overall) as min_overall, MAX(overall) as max_overall\nFROM players GROUP BY cardType ORDER BY max_overall DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute ALTER TABLE `players` MODIFY COLUMN `cardType` enum('gold','silver','bronze','diamond','toty','tots','icon','hero','special') NOT NULL DEFAULT 'gold';\n\nUPDATE players SET cardType = 'diamond' WHERE overall >= 90;\nUPDATE players SET cardType = 'gold' WHERE overall >= 75 AND overall < 90;\nUPDATE players SET cardType = 'bronze' WHERE overall < 75;\n\nSELECT cardType, COUNT(*) as total, MIN(overall) as min_overall, MAX(overall) as max_overall\nFROM players GROUP BY cardType ORDER BY max_overall DESC;",
+  "rows": [
+    {
+      "cardType": "diamond",
+      "total": "1",
+      "min_overall": "90",
+      "max_overall": "90"
+    },
+    {
+      "cardType": "gold",
+      "total": "226",
+      "min_overall": "75",
+      "max_overall": "89"
+    },
+    {
+      "cardType": "bronze",
+      "total": "172",
+      "min_overall": "59",
+      "max_overall": "74"
+    }
+  ],
+  "messages": [],
+  "stdout": "cardType\ttotal\tmin_overall\tmax_overall\ndiamond\t1\t90\t90\ngold\t226\t75\t89\nbronze\t172\t59\t74\n",
+  "stderr": "",
+  "execution_time_ms": 806
+}

@@ -81,3 +81,9 @@
 ## Inserção de Jogadores Faltantes
 - [x] Inserir ~71 jogadores com imagem mas sem registro no banco (total: 399 jogadores)
 - [x] Corrigir ligas incorretas (Hamburg SV → Bundesliga 2, e outros)
+
+## Ajuste de Cores dos Cards
+- [x] Ajustar faixas: bronze (<75), ouro (75-89), diamante (90+) com gradiente ciano-azul-roxo e brilho especial
+
+## Correção de Faixas de Cor dos Cards
+- [x] Ajustar faixas: bronze (50-69), prata (70-79), ouro (80-89), diamante (90+)

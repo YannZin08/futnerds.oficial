@@ -69,14 +69,15 @@ const statLabels: Record<string, string> = {
 };
 
 // Calcula a cor do card baseado no overall (ignora cardType do banco que pode estar errado)
-function getCardGradient(overall: number): string {
-  if (overall >= 75) return "from-yellow-600 to-yellow-400";       // Gold
-  if (overall >= 65) return "from-gray-500 to-gray-300";           // Silver
-  return "from-orange-800 to-orange-500";                          // Bronze
+function getCardGradient(overall: number): { gradient: string; isDiamond: boolean } {
+  if (overall >= 90) return { gradient: "from-cyan-400 via-blue-300 to-purple-400", isDiamond: true };  // Diamond
+  if (overall >= 80) return { gradient: "from-yellow-600 to-yellow-400", isDiamond: false };             // Gold
+  if (overall >= 70) return { gradient: "from-gray-500 to-gray-300", isDiamond: false };                 // Silver
+  return { gradient: "from-orange-800 to-orange-500", isDiamond: false };                               // Bronze
 }
 
 function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: () => void; isFav?: boolean }) {
-  const gradientClass = getCardGradient(Number(player.overall));
+  const { gradient: gradientClass, isDiamond } = getCardGradient(Number(player.overall));
 
   // Extrai posições alternativas únicas
   const getAltPositions = () => {
@@ -95,7 +96,7 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
   return (
     <div className="fut-card fut-card-hover overflow-hidden">
       {/* Card Header */}
-      <div className={`bg-gradient-to-br ${gradientClass} p-4 relative`}>
+      <div className={`bg-gradient-to-br ${gradientClass} p-4 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
         {/* Canto superior direito: todas as posições lado a lado */}
         <div className="absolute top-2 right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
           <span className="text-xs font-bold text-white bg-black/25 px-1.5 py-0.5 rounded whitespace-nowrap">
@@ -125,7 +126,7 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
             )}
           </div>
           <div className="min-w-0 flex-1 pr-14">
-            <h3 className="font-black text-white text-base leading-tight truncate">{player.name}</h3>
+            <h3 className={`font-black text-base leading-tight truncate ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>{player.name}</h3>
             <p className="text-white/70 text-xs truncate">
               {player.nationality}{player.age ? ` · ${player.age} anos` : ''}
             </p>

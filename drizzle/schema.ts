@@ -66,7 +66,7 @@ export const players = mysqlTable("players", {
   dribbling: int("dribbling"),
   defending: int("defending"),
   physical: int("physical"),
-  cardType: mysqlEnum("cardType", ["gold", "silver", "bronze", "toty", "tots", "icon", "hero", "special"]).default("gold").notNull(),
+  cardType: mysqlEnum("cardType", ["gold", "silver", "bronze", "diamond", "toty", "tots", "icon", "hero", "special"]).default("gold").notNull(),
   rating: float("rating"),
   imageUrl: text("imageUrl"),
   flagUrl: text("flagUrl"),

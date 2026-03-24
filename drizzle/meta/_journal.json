@@ -36,6 +36,13 @@
       "when": 1774311942631,
       "tag": "0004_romantic_makkari",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1774373077054,
+      "tag": "0005_little_nomad",
+      "breakpoints": true
     }
   ]
 }
