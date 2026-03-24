@@ -150,17 +150,17 @@ export default function Times() {
                   <button
                     key={country.id}
                     onClick={() => goToLeagues(country)}
-                    className="group relative overflow-hidden rounded-xl border border-border/50 bg-card hover:border-primary/50 hover:bg-card/80 transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/10 p-6 text-center"
+                    className="group relative overflow-hidden rounded-xl border border-border/50 bg-card hover:border-primary/50 hover:bg-card/80 transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/10 p-4 text-center"
                   >
                     {/* Placeholder for country image - will be replaced when user sends images */}
                     {country.imageUrl ? (
                       <img
                         src={country.imageUrl}
                         alt={country.name}
-                        className="w-full h-24 object-cover rounded-lg mb-3"
+                        className="w-full h-36 object-contain rounded-lg mb-3"
                       />
                     ) : (
-                      <div className="w-full h-24 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-3 group-hover:from-primary/30 transition-all">
+                      <div className="w-full h-36 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-3 group-hover:from-primary/30 transition-all">
                         <span className="text-5xl">{countryFlags[country.name] ?? "🌍"}</span>
                       </div>
                     )}
