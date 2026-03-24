@@ -1,0 +1,18 @@
+{
+  "query": "UPDATE players SET imageUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Amad_681a8b7a.webp' WHERE name = 'Amad' AND position IN ('LD','LE');\nUPDATE players SET imageUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/T. Dibling_ffc8a8db.webp' WHERE name = 'T. Dibling' AND position IN ('LD','LE');\nSELECT name, imageUrl FROM players WHERE name IN ('Amad','T. Dibling') AND position IN ('LD','LE');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute UPDATE players SET imageUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Amad_681a8b7a.webp' WHERE name = 'Amad' AND position IN ('LD','LE');\nUPDATE players SET imageUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/T. Dibling_ffc8a8db.webp' WHERE name = 'T. Dibling' AND position IN ('LD','LE');\nSELECT name, imageUrl FROM players WHERE name IN ('Amad','T. Dibling') AND position IN ('LD','LE');",
+  "rows": [
+    {
+      "name": "Amad",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Amad_681a8b7a.webp"
+    },
+    {
+      "name": "T. Dibling",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/T. Dibling_ffc8a8db.webp"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\timageUrl\nAmad\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Amad_681a8b7a.webp\nT. Dibling\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/T. Dibling_ffc8a8db.webp\n",
+  "stderr": "",
+  "execution_time_ms": 137
+}
