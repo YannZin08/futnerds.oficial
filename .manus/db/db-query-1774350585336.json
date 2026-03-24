@@ -1,0 +1,9 @@
+{
+  "query": "SELECT id, name, club, league FROM players WHERE position IN ('LD','LE') AND (league IS NULL OR league = '') ORDER BY name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, club, league FROM players WHERE position IN ('LD','LE') AND (league IS NULL OR league = '') ORDER BY name;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 56
+}

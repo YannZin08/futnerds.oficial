@@ -1,0 +1,50 @@
+{
+  "query": "SELECT position, COUNT(*) as total,\n  SUM(CASE WHEN league IS NULL OR league = '' THEN 1 ELSE 0 END) as sem_liga,\n  SUM(CASE WHEN price IS NULL OR price = 0 THEN 1 ELSE 0 END) as sem_preco,\n  SUM(CASE WHEN age IS NULL OR age = 0 THEN 1 ELSE 0 END) as sem_idade,\n  SUM(CASE WHEN imageUrl IS NULL OR imageUrl = '' THEN 1 ELSE 0 END) as sem_imagem\nFROM players GROUP BY position ORDER BY position;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT position, COUNT(*) as total,\n  SUM(CASE WHEN league IS NULL OR league = '' THEN 1 ELSE 0 END) as sem_liga,\n  SUM(CASE WHEN price IS NULL OR price = 0 THEN 1 ELSE 0 END) as sem_preco,\n  SUM(CASE WHEN age IS NULL OR age = 0 THEN 1 ELSE 0 END) as sem_idade,\n  SUM(CASE WHEN imageUrl IS NULL OR imageUrl = '' THEN 1 ELSE 0 END) as sem_imagem\nFROM players GROUP BY position ORDER BY position;",
+  "rows": [
+    {
+      "position": "ATA",
+      "total": "44",
+      "sem_liga": "0",
+      "sem_preco": "0",
+      "sem_idade": "0",
+      "sem_imagem": "1"
+    },
+    {
+      "position": "GK",
+      "total": "60",
+      "sem_liga": "0",
+      "sem_preco": "0",
+      "sem_idade": "0",
+      "sem_imagem": "7"
+    },
+    {
+      "position": "LD",
+      "total": "29",
+      "sem_liga": "29",
+      "sem_preco": "0",
+      "sem_idade": "0",
+      "sem_imagem": "0"
+    },
+    {
+      "position": "LE",
+      "total": "25",
+      "sem_liga": "25",
+      "sem_preco": "0",
+      "sem_idade": "0",
+      "sem_imagem": "0"
+    },
+    {
+      "position": "ZAG",
+      "total": "49",
+      "sem_liga": "0",
+      "sem_preco": "0",
+      "sem_idade": "0",
+      "sem_imagem": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "position\ttotal\tsem_liga\tsem_preco\tsem_idade\tsem_imagem\nATA\t44\t0\t0\t0\t1\nGK\t60\t0\t0\t0\t7\nLD\t29\t29\t0\t0\t0\nLE\t25\t25\t0\t0\t0\nZAG\t49\t0\t0\t0\t0\n",
+  "stderr": "",
+  "execution_time_ms": 173
+}
