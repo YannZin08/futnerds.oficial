@@ -1,0 +1,106 @@
+{
+  "query": "SELECT COUNT(*) as total FROM players;\n\n-- Verificar jogadores inseridos com ligas que podem ser problemáticas\nSELECT name, club, league, overall FROM players \nWHERE league IN ('Ukrainian Premier League', 'Saudi Pro League', 'Liga Profesional', 'Brasileirão', 'Bundesliga Austria', 'Allsvenskan', 'Serie B', 'Championship', 'Süper Lig')\nORDER BY league, overall DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT COUNT(*) as total FROM players;\n\n-- Verificar jogadores inseridos com ligas que podem ser problemáticas\nSELECT name, club, league, overall FROM players \nWHERE league IN ('Ukrainian Premier League', 'Saudi Pro League', 'Liga Profesional', 'Brasileirão', 'Bundesliga Austria', 'Allsvenskan', 'Serie B', 'Championship', 'Süper Lig')\nORDER BY league, overall DESC;",
+  "rows": [
+    {
+      "total": "402"
+    },
+    {
+      "total": "name\tclub\tleague\toverall"
+    },
+    {
+      "total": "N. Törnqvist\tMalmö FF\tAllsvenskan\t68"
+    },
+    {
+      "total": "E. Anderson\tFluminense\tBrasileirão\t73"
+    },
+    {
+      "total": "Kauã Santos\tFluminense\tBrasileirão\t68"
+    },
+    {
+      "total": "A. Tóth\tRed Bull Salzburg\tBundesliga Austria\t70"
+    },
+    {
+      "total": "J. Gadou\tFC Red Bull Salzburg\tBundesliga Austria\t66"
+    },
+    {
+      "total": "R. Roefs\tSunderland\tChampionship\t79"
+    },
+    {
+      "total": "H. Diarra\tSunderland\tChampionship\t77"
+    },
+    {
+      "total": "C. Rushworth\tCoventry City\tChampionship\t74"
+    },
+    {
+      "total": "C. Rushworth\tWest Bromwich Albion\tChampionship\t72"
+    },
+    {
+      "total": "J. Beadle\tBirmingham City\tChampionship\t70"
+    },
+    {
+      "total": "H. Armstrong\tStoke City\tChampionship\t70"
+    },
+    {
+      "total": "N. Irankunda\tWatford\tChampionship\t69"
+    },
+    {
+      "total": "M. Weiß\tBurnley\tChampionship\t69"
+    },
+    {
+      "total": "F. Mastantuono\tRiver Plate\tLiga Profesional\t74"
+    },
+    {
+      "total": "Marcos Leonardo\tAl Hilal\tSaudi Pro League\t79"
+    },
+    {
+      "total": "Gabri Veiga\tAl-Qadsiah\tSaudi Pro League\t77"
+    },
+    {
+      "total": "M. Al Juwair\tAl Qadsiah FC\tSaudi Pro League\t76"
+    },
+    {
+      "total": "João Costa\tAl Ettifaq\tSaudi Pro League\t71"
+    },
+    {
+      "total": "J. Simić\tAl Ittihad\tSaudi Pro League\t69"
+    },
+    {
+      "total": "F. Stanković\tSampdoria\tSerie B\t73"
+    },
+    {
+      "total": "S. Desplanches\tPalermo\tSerie B\t72"
+    },
+    {
+      "total": "S. Despianchés\tPescara\tSerie B\t71"
+    },
+    {
+      "total": "C. Comotto\tSpezia\tSerie B\t63"
+    },
+    {
+      "total": "S. Chérif\tFenerbahçe SK\tSüper Lig\t72"
+    },
+    {
+      "total": "K. Kozłowski\tGaziantep FK\tSüper Lig\t72"
+    },
+    {
+      "total": "Y. Özcan\tBeşiktaş JK\tSüper Lig\t69"
+    },
+    {
+      "total": "D. Dönmezer\tTrabzonspor\tSüper Lig\t68"
+    },
+    {
+      "total": "C. Güner\tGalatasaray SK\tSüper Lig\t63"
+    },
+    {
+      "total": "D. Dönmezer\tKayserispor\tSüper Lig\t59"
+    },
+    {
+      "total": "G. Sudakov\tShakhtar Donetsk\tUkrainian Premier League\t79"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\n402\nname\tclub\tleague\toverall\nN. Törnqvist\tMalmö FF\tAllsvenskan\t68\nE. Anderson\tFluminense\tBrasileirão\t73\nKauã Santos\tFluminense\tBrasileirão\t68\nA. Tóth\tRed Bull Salzburg\tBundesliga Austria\t70\nJ. Gadou\tFC Red Bull Salzburg\tBundesliga Austria\t66\nR. Roefs\tSunderland\tChampionship\t79\nH. Diarra\tSunderland\tChampionship\t77\nC. Rushworth\tCoventry City\tChampionship\t74\nC. Rushworth\tWest Bromwich Albion\tChampionship\t72\nJ. Beadle\tBirmingham City\tChampionship\t70\nH. Armstrong\tStoke City\tChampionship\t70\nN. Irankunda\tWatford\tChampionship\t69\nM. Weiß\tBurnley\tChampionship\t69\nF. Mastantuono\tRiver Plate\tLiga Profesional\t74\nMarcos Leonardo\tAl Hilal\tSaudi Pro League\t79\nGabri Veiga\tAl-Qadsiah\tSaudi Pro League\t77\nM. Al Juwair\tAl Qadsiah FC\tSaudi Pro League\t76\nJoão Costa\tAl Ettifaq\tSaudi Pro League\t71\nJ. Simić\tAl Ittihad\tSaudi Pro League\t69\nF. Stanković\tSampdoria\tSerie B\t73\nS. Desplanches\tPalermo\tSerie B\t72\nS. Despianchés\tPescara\tSerie B\t71\nC. Comotto\tSpezia\tSerie B\t63\nS. Chérif\tFenerbahçe SK\tSüper Lig\t72\nK. Kozłowski\tGaziantep FK\tSüper Lig\t72\nY. Özcan\tBeşiktaş JK\tSüper Lig\t69\nD. Dönmezer\tTrabzonspor\tSüper Lig\t68\nC. Güner\tGalatasaray SK\tSüper Lig\t63\nD. Dönmezer\tKayserispor\tSüper Lig\t59\nG. Sudakov\tShakhtar Donetsk\tUkrainian Premier League\t79\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}

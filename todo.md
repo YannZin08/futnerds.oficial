@@ -77,3 +77,7 @@
 ## Limpeza e Correção de Dados
 - [x] Remover 10 jogadores não fornecidos pelo usuário (ligas incomuns: Ucrânia, Noruega, Coreia, Polônia, Argentina, Equador, MLS, Escócia)
 - [x] Remover A. Cambiaso, P. Schick e N. Nkunku (não fornecidos pelo usuário, inseridos automaticamente)
+
+## Inserção de Jogadores Faltantes
+- [x] Inserir ~71 jogadores com imagem mas sem registro no banco (total: 399 jogadores)
+- [x] Corrigir ligas incorretas (Hamburg SV → Bundesliga 2, e outros)
