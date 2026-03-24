@@ -113,7 +113,7 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
           </div>
         </div>
         <div className="flex items-end gap-3">
-          <div className="w-14 h-14 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
+          <div className="w-14 h-14 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
             {player.imageUrl ? (
               <img
                 src={player.imageUrl}
@@ -128,9 +128,9 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
               <Users className="h-7 w-7 text-white/60" />
             )}
           </div>
-          <div>
-            <h3 className="font-black text-white text-base leading-tight">{player.name}</h3>
-            <p className="text-white/70 text-xs">
+          <div className="min-w-0 flex-1 pr-16">
+            <h3 className="font-black text-white text-base leading-tight truncate">{player.name}</h3>
+            <p className="text-white/70 text-xs truncate">
               {player.nationality}{player.age ? ` · ${player.age} anos` : ''}
             </p>
           </div>
