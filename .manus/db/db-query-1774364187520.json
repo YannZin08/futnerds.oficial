@@ -1,0 +1,13 @@
+{
+  "query": "-- Remover Dean Huijsen (duplicata de D. Huijsen)\nDELETE FROM players WHERE id = 90048;\n-- Remover Álvaro Carreras (duplicata de Á. Carreras)\nDELETE FROM players WHERE id = 90040;\n-- Remover M. Zaire-Emery (duplicata de W. Zaïre-Emery)\nDELETE FROM players WHERE id = 90020;\n-- Remover Savinho (duplicata de Sávio)\nDELETE FROM players WHERE id = 90023;\n-- Verificar total\nSELECT COUNT(*) as total FROM players;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Remover Dean Huijsen (duplicata de D. Huijsen)\nDELETE FROM players WHERE id = 90048;\n-- Remover Álvaro Carreras (duplicata de Á. Carreras)\nDELETE FROM players WHERE id = 90040;\n-- Remover M. Zaire-Emery (duplicata de W. Zaïre-Emery)\nDELETE FROM players WHERE id = 90020;\n-- Remover Savinho (duplicata de Sávio)\nDELETE FROM players WHERE id = 90023;\n-- Verificar total\nSELECT COUNT(*) as total FROM players;",
+  "rows": [
+    {
+      "total": "319"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\n319\n",
+  "stderr": "",
+  "execution_time_ms": 103
+}

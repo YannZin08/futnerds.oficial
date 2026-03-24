@@ -1,0 +1,30 @@
+{
+  "query": "SELECT id, name, position, altPositions, club, overall, potential, imageUrl FROM players WHERE name LIKE '%Livramento%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, altPositions, club, overall, potential, imageUrl FROM players WHERE name LIKE '%Livramento%';",
+  "rows": [
+    {
+      "id": "60020",
+      "name": "T. Livramento",
+      "position": "LD",
+      "altPositions": "LD,LE,MD",
+      "club": "Newcastle United",
+      "overall": "80",
+      "potential": "86",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/T. Livramento_b17cc917.webp"
+    },
+    {
+      "id": "90035",
+      "name": "Tino Livramento",
+      "position": "LD",
+      "altPositions": "LE,MD",
+      "club": "Newcastle United",
+      "overall": "80",
+      "potential": "89",
+      "imageUrl": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\taltPositions\tclub\toverall\tpotential\timageUrl\n60020\tT. Livramento\tLD\tLD,LE,MD\tNewcastle United\t80\t86\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/T. Livramento_b17cc917.webp\n90035\tTino Livramento\tLD\tLE,MD\tNewcastle United\t80\t89\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}

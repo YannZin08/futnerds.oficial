@@ -1,0 +1,280 @@
+{
+  "query": "SELECT p1.id as id1, p1.name as name1, p2.id as id2, p2.name as name2, p1.club, p1.position, p1.overall as overall1, p2.overall as overall2\nFROM players p1\nJOIN players p2 ON p1.club = p2.club AND p1.position = p2.position AND p1.id < p2.id AND ABS(p1.overall - p2.overall) <= 3\nORDER BY p1.club, p1.position\nLIMIT 30;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT p1.id as id1, p1.name as name1, p2.id as id2, p2.name as name2, p1.club, p1.position, p1.overall as overall1, p2.overall as overall2\nFROM players p1\nJOIN players p2 ON p1.club = p2.club AND p1.position = p2.position AND p1.id < p2.id AND ABS(p1.overall - p2.overall) <= 3\nORDER BY p1.club, p1.position\nLIMIT 30;",
+  "rows": [
+    {
+      "id1": "86",
+      "name1": "Rayan",
+      "id2": "87",
+      "name2": "E. Kroupi",
+      "club": "AFC Bournemouth",
+      "position": "ATA",
+      "overall1": "77",
+      "overall2": "78"
+    },
+    {
+      "id1": "30012",
+      "name1": "P. Hincapié",
+      "id2": "30022",
+      "name2": "R. Calafiori",
+      "club": "Arsenal",
+      "position": "ZAG",
+      "overall1": "83",
+      "overall2": "82"
+    },
+    {
+      "id1": "109",
+      "name1": "M. Biereth",
+      "id2": "90056",
+      "name2": "George Ilenikhena",
+      "club": "AS Monaco",
+      "position": "ATA",
+      "overall1": "77",
+      "overall2": "74"
+    },
+    {
+      "id1": "90037",
+      "name1": "Arthur Vermeeren",
+      "id2": "90057",
+      "name2": "Johnny Cardoso",
+      "club": "Atlético Madrid",
+      "position": "VOL",
+      "overall1": "78",
+      "overall2": "80"
+    },
+    {
+      "id1": "99",
+      "name1": "Fábio Silva",
+      "id2": "114",
+      "name2": "M. Beier",
+      "club": "Borussia Dortmund",
+      "position": "ATA",
+      "overall1": "79",
+      "overall2": "79"
+    },
+    {
+      "id1": "90060",
+      "name1": "Y. Ayari",
+      "id2": "90112",
+      "name2": "D. Gómez",
+      "club": "Brighton & Hove Albion",
+      "position": "VOL",
+      "overall1": "79",
+      "overall2": "76"
+    },
+    {
+      "id1": "90038",
+      "name1": "Carlos Baleba",
+      "id2": "90060",
+      "name2": "Y. Ayari",
+      "club": "Brighton & Hove Albion",
+      "position": "VOL",
+      "overall1": "79",
+      "overall2": "79"
+    },
+    {
+      "id1": "90038",
+      "name1": "Carlos Baleba",
+      "id2": "90112",
+      "name2": "D. Gómez",
+      "club": "Brighton & Hove Albion",
+      "position": "VOL",
+      "overall1": "79",
+      "overall2": "76"
+    },
+    {
+      "id1": "98",
+      "name1": "João Pedro",
+      "id2": "112",
+      "name2": "L. Delap",
+      "club": "Chelsea",
+      "position": "ATA",
+      "overall1": "81",
+      "overall2": "78"
+    },
+    {
+      "id1": "98",
+      "name1": "João Pedro",
+      "id2": "90044",
+      "name2": "N. Nkunku",
+      "club": "Chelsea",
+      "position": "ATA",
+      "overall1": "81",
+      "overall2": "82"
+    },
+    {
+      "id1": "30047",
+      "name1": "M. Sarr",
+      "id2": "30059",
+      "name2": "L. Colwill",
+      "club": "Chelsea",
+      "position": "ZAG",
+      "overall1": "77",
+      "overall2": "80"
+    },
+    {
+      "id1": "90071",
+      "name1": "Marc Bernal",
+      "id2": "90085",
+      "name2": "Marc Casadó",
+      "club": "FC Barcelona",
+      "position": "VOL",
+      "overall1": "75",
+      "overall2": "78"
+    },
+    {
+      "id1": "90004",
+      "name1": "J. Musiala",
+      "id2": "90006",
+      "name2": "F. Wirtz",
+      "club": "FC Bayern München",
+      "position": "MEI",
+      "overall1": "88",
+      "overall2": "88"
+    },
+    {
+      "id1": "60023",
+      "name1": "Martim Fernandes",
+      "id2": "60030",
+      "name2": "Alberto Costa",
+      "club": "FC Porto",
+      "position": "LD",
+      "overall1": "76",
+      "overall2": "76"
+    },
+    {
+      "id1": "60002",
+      "name1": "G. Read",
+      "id2": "90033",
+      "name2": "Givairo Read",
+      "club": "Feyenoord",
+      "position": "LD",
+      "overall1": "76",
+      "overall2": "76"
+    },
+    {
+      "id1": "89",
+      "name1": "Y. Bonny",
+      "id2": "106",
+      "name2": "F. Esposito",
+      "club": "Inter",
+      "position": "ATA",
+      "overall1": "78",
+      "overall2": "76"
+    },
+    {
+      "id1": "90034",
+      "name1": "Kobbie Mainoo",
+      "id2": "90088",
+      "name2": "K. Mainoo",
+      "club": "Manchester United",
+      "position": "VOL",
+      "overall1": "80",
+      "overall2": "78"
+    },
+    {
+      "id1": "30017",
+      "name1": "L. Yoro",
+      "id2": "30040",
+      "name2": "A. Heaven",
+      "club": "Manchester United",
+      "position": "ZAG",
+      "overall1": "76",
+      "overall2": "73"
+    },
+    {
+      "id1": "95",
+      "name1": "J. Panichelli",
+      "id2": "113",
+      "name2": "J. Enciso",
+      "club": "RC Strasbourg Alsace",
+      "position": "ATA",
+      "overall1": "77",
+      "overall2": "75"
+    },
+    {
+      "id1": "30043",
+      "name1": "A. Anselmino",
+      "id2": "90130",
+      "name2": "I. Doukouré",
+      "club": "RC Strasbourg Alsace",
+      "position": "ZAG",
+      "overall1": "74",
+      "overall2": "77"
+    },
+    {
+      "id1": "60004",
+      "name1": "Á. Carreras",
+      "id2": "60022",
+      "name2": "E. Camavinga",
+      "club": "Real Madrid",
+      "position": "LE",
+      "overall1": "81",
+      "overall2": "82"
+    },
+    {
+      "id1": "30019",
+      "name1": "Tomás Araújo",
+      "id2": "30029",
+      "name2": "António Silva",
+      "club": "SL Benfica",
+      "position": "ZAG",
+      "overall1": "78",
+      "overall2": "77"
+    },
+    {
+      "id1": "30010",
+      "name1": "O. Diomande",
+      "id2": "30023",
+      "name2": "Gonçalo Inácio",
+      "club": "Sporting CP",
+      "position": "ZAG",
+      "overall1": "80",
+      "overall2": "81"
+    },
+    {
+      "id1": "30010",
+      "name1": "O. Diomande",
+      "id2": "30024",
+      "name2": "Z. Debast",
+      "club": "Sporting CP",
+      "position": "ZAG",
+      "overall1": "80",
+      "overall2": "78"
+    },
+    {
+      "id1": "30023",
+      "name1": "Gonçalo Inácio",
+      "id2": "30024",
+      "name2": "Z. Debast",
+      "club": "Sporting CP",
+      "position": "ZAG",
+      "overall1": "81",
+      "overall2": "78"
+    },
+    {
+      "id1": "37",
+      "name1": "M. Backhaus",
+      "id2": "63",
+      "name2": "K. Hein",
+      "club": "SV Werder Bremen",
+      "position": "GK",
+      "overall1": "74",
+      "overall2": "73"
+    },
+    {
+      "id1": "30048",
+      "name1": "Renato Veiga",
+      "id2": "90047",
+      "name2": "Willy Kambwala",
+      "club": "Villarreal CF",
+      "position": "ZAG",
+      "overall1": "77",
+      "overall2": "78"
+    }
+  ],
+  "messages": [],
+  "stdout": "id1\tname1\tid2\tname2\tclub\tposition\toverall1\toverall2\n86\tRayan\t87\tE. Kroupi\tAFC Bournemouth\tATA\t77\t78\n30012\tP. Hincapié\t30022\tR. Calafiori\tArsenal\tZAG\t83\t82\n109\tM. Biereth\t90056\tGeorge Ilenikhena\tAS Monaco\tATA\t77\t74\n90037\tArthur Vermeeren\t90057\tJohnny Cardoso\tAtlético Madrid\tVOL\t78\t80\n99\tFábio Silva\t114\tM. Beier\tBorussia Dortmund\tATA\t79\t79\n90060\tY. Ayari\t90112\tD. Gómez\tBrighton & Hove Albion\tVOL\t79\t76\n90038\tCarlos Baleba\t90060\tY. Ayari\tBrighton & Hove Albion\tVOL\t79\t79\n90038\tCarlos Baleba\t90112\tD. Gómez\tBrighton & Hove Albion\tVOL\t79\t76\n98\tJoão Pedro\t112\tL. Delap\tChelsea\tATA\t81\t78\n98\tJoão Pedro\t90044\tN. Nkunku\tChelsea\tATA\t81\t82\n30047\tM. Sarr\t30059\tL. Colwill\tChelsea\tZAG\t77\t80\n90071\tMarc Bernal\t90085\tMarc Casadó\tFC Barcelona\tVOL\t75\t78\n90004\tJ. Musiala\t90006\tF. Wirtz\tFC Bayern München\tMEI\t88\t88\n60023\tMartim Fernandes\t60030\tAlberto Costa\tFC Porto\tLD\t76\t76\n60002\tG. Read\t90033\tGivairo Read\tFeyenoord\tLD\t76\t76\n89\tY. Bonny\t106\tF. Esposito\tInter\tATA\t78\t76\n90034\tKobbie Mainoo\t90088\tK. Mainoo\tManchester United\tVOL\t80\t78\n30017\tL. Yoro\t30040\tA. Heaven\tManchester United\tZAG\t76\t73\n95\tJ. Panichelli\t113\tJ. Enciso\tRC Strasbourg Alsace\tATA\t77\t75\n30043\tA. Anselmino\t90130\tI. Doukouré\tRC Strasbourg Alsace\tZAG\t74\t77\n60004\tÁ. Carreras\t60022\tE. Camavinga\tReal Madrid\tLE\t81\t82\n30019\tTomás Araújo\t30029\tAntónio Silva\tSL Benfica\tZAG\t78\t77\n30010\tO. Diomande\t30023\tGonçalo Inácio\tSporting CP\tZAG\t80\t81\n30010\tO. Diomande\t30024\tZ. Debast\tSporting CP\tZAG\t80\t78\n30023\tGonçalo Inácio\t30024\tZ. Debast\tSporting CP\tZAG\t81\t78\n37\tM. Backhaus\t63\tK. Hein\tSV Werder Bremen\tGK\t74\t73\n30048\tRenato Veiga\t90047\tWilly Kambwala\tVillarreal CF\tZAG\t77\t78\n",
+  "stderr": "",
+  "execution_time_ms": 203
+}

@@ -46,16 +46,20 @@ const features = [
   },
 ];
 
-const stats = [
-  { label: "Jogadores Analisados", value: "20+" },
-  { label: "Modos de Jogo", value: "4" },
-  { label: "Membros", value: "Crescendo" },
-  { label: "Atualizações", value: "Diárias" },
-];
+// Stats são definidas dinamicamente abaixo
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
   const { data: topPlayers } = trpc.players.list.useQuery({ limit: 4, sortBy: "overall" });
+  const { data: allPlayers } = trpc.players.list.useQuery({ limit: 9999, sortBy: "overall" });
+  const totalPlayers = allPlayers?.length ?? 319;
+
+  const stats = [
+    { label: "Jogadores Analisados", value: `${totalPlayers}+` },
+    { label: "Modos de Jogo", value: "4" },
+    { label: "Membros", value: "Crescendo" },
+    { label: "Atualizações", value: "Diárias" },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-background">

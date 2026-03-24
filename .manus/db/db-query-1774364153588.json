@@ -1,0 +1,82 @@
+{
+  "query": "SELECT id, name, position, \"altPositions\", overall, club, nationality FROM players WHERE name IN ('Sávio', 'Savinho', 'W. Zaïre-Emery', 'M. Zaire-Emery', 'Álvaro Carreras', 'Á. Carreras', 'D. Huijsen', 'Dean Huijsen') ORDER BY name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, \"altPositions\", overall, club, nationality FROM players WHERE name IN ('Sávio', 'Savinho', 'W. Zaïre-Emery', 'M. Zaire-Emery', 'Álvaro Carreras', 'Á. Carreras', 'D. Huijsen', 'Dean Huijsen') ORDER BY name;",
+  "rows": [
+    {
+      "id": "60004",
+      "name": "Á. Carreras",
+      "position": "LE",
+      "altPositions": "altPositions",
+      "overall": "81",
+      "club": "Real Madrid",
+      "nationality": "Espanha"
+    },
+    {
+      "id": "90040",
+      "name": "Álvaro Carreras",
+      "position": "LE",
+      "altPositions": "altPositions",
+      "overall": "81",
+      "club": "Real Madrid",
+      "nationality": "Espanha"
+    },
+    {
+      "id": "30002",
+      "name": "D. Huijsen",
+      "position": "ZAG",
+      "altPositions": "altPositions",
+      "overall": "81",
+      "club": "Real Madrid",
+      "nationality": "Netherlands"
+    },
+    {
+      "id": "90048",
+      "name": "Dean Huijsen",
+      "position": "ZAG",
+      "altPositions": "altPositions",
+      "overall": "82",
+      "club": "Real Madrid",
+      "nationality": "Espanha"
+    },
+    {
+      "id": "90020",
+      "name": "M. Zaire-Emery",
+      "position": "MC",
+      "altPositions": "altPositions",
+      "overall": "83",
+      "club": "Paris Saint-Germain",
+      "nationality": "França"
+    },
+    {
+      "id": "90023",
+      "name": "Savinho",
+      "position": "PD",
+      "altPositions": "altPositions",
+      "overall": "83",
+      "club": "Manchester City",
+      "nationality": "Brasil"
+    },
+    {
+      "id": "90026",
+      "name": "Sávio",
+      "position": "PD",
+      "altPositions": "altPositions",
+      "overall": "83",
+      "club": "Manchester City",
+      "nationality": "Brasil"
+    },
+    {
+      "id": "60003",
+      "name": "W. Zaïre-Emery",
+      "position": "LD",
+      "altPositions": "altPositions",
+      "overall": "81",
+      "club": "Paris Saint-Germain",
+      "nationality": "França"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\taltPositions\toverall\tclub\tnationality\n60004\tÁ. Carreras\tLE\taltPositions\t81\tReal Madrid\tEspanha\n90040\tÁlvaro Carreras\tLE\taltPositions\t81\tReal Madrid\tEspanha\n30002\tD. Huijsen\tZAG\taltPositions\t81\tReal Madrid\tNetherlands\n90048\tDean Huijsen\tZAG\taltPositions\t82\tReal Madrid\tEspanha\n90020\tM. Zaire-Emery\tMC\taltPositions\t83\tParis Saint-Germain\tFrança\n90023\tSavinho\tPD\taltPositions\t83\tManchester City\tBrasil\n90026\tSávio\tPD\taltPositions\t83\tManchester City\tBrasil\n60003\tW. Zaïre-Emery\tLD\taltPositions\t81\tParis Saint-Germain\tFrança\n",
+  "stderr": "",
+  "execution_time_ms": 52
+}

@@ -59,3 +59,14 @@
 
 ## Ajustes Visuais
 - [x] Corrigir fundo do rodapé para preto sólido igual à página inicial
+
+## Correção de Duplicatas no Banco (2026-03-24)
+- [x] Identificar e remover 7 jogadores duplicados do banco de dados
+  - [x] Remover Dean Huijsen (manter D. Huijsen com imagem)
+  - [x] Remover Álvaro Carreras (manter Á. Carreras com imagem)
+  - [x] Remover M. Zaire-Emery (manter W. Zaïre-Emery com imagem)
+  - [x] Remover Savinho (manter Sávio - nome correto)
+  - [x] Remover Tino Livramento (manter T. Livramento com imagem)
+  - [x] Remover Givairo Read (manter G. Read com imagem)
+  - [x] Remover Kobbie Mainoo duplicado (manter K. Mainoo com imagem, atualizar dados)
+- [x] Atualizar contador de jogadores na Home para valor dinâmico do banco

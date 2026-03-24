@@ -1,0 +1,230 @@
+{
+  "query": "-- Verificar jogadores com mesmo clube e mesma posição (possíveis duplicatas com nomes diferentes)\nSELECT p1.id as id1, p1.name as name1, p1.position as pos1, p1.club, p1.overall as ovr1,\n       p2.id as id2, p2.name as name2, p2.position as pos2, p2.overall as ovr2\nFROM players p1\nJOIN players p2 ON p1.club = p2.club AND p1.overall = p2.overall AND p1.id < p2.id\nWHERE p1.club != '' AND p1.overall > 0\nORDER BY p1.club, p1.overall DESC\nLIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Verificar jogadores com mesmo clube e mesma posição (possíveis duplicatas com nomes diferentes)\nSELECT p1.id as id1, p1.name as name1, p1.position as pos1, p1.club, p1.overall as ovr1,\n       p2.id as id2, p2.name as name2, p2.position as pos2, p2.overall as ovr2\nFROM players p1\nJOIN players p2 ON p1.club = p2.club AND p1.overall = p2.overall AND p1.id < p2.id\nWHERE p1.club != '' AND p1.overall > 0\nORDER BY p1.club, p1.overall DESC\nLIMIT 20;",
+  "rows": [
+    {
+      "id1": "86",
+      "name1": "Rayan",
+      "pos1": "ATA",
+      "club": "AFC Bournemouth",
+      "ovr1": "77",
+      "id2": "60039",
+      "name2": "Álex Jiménez",
+      "pos2": "LD",
+      "ovr2": "77"
+    },
+    {
+      "id1": "30058",
+      "name1": "Y. Baas",
+      "pos1": "ZAG",
+      "club": "Ajax",
+      "ovr1": "77",
+      "id2": "90084",
+      "name2": "O. Gloukh",
+      "pos2": "MEI",
+      "ovr2": "77"
+    },
+    {
+      "id1": "60019",
+      "name1": "Pubill",
+      "pos1": "LD",
+      "club": "Atlético Madrid",
+      "ovr1": "78",
+      "id2": "90037",
+      "name2": "Arthur Vermeeren",
+      "pos2": "VOL",
+      "ovr2": "78"
+    },
+    {
+      "id1": "90024",
+      "name1": "M. Bah",
+      "pos1": "MC",
+      "club": "Bayer 04 Leverkusen",
+      "ovr1": "80",
+      "id2": "90061",
+      "name2": "M. Tillman",
+      "pos2": "MEI",
+      "ovr2": "80"
+    },
+    {
+      "id1": "114",
+      "name1": "M. Beier",
+      "pos1": "ATA",
+      "club": "Borussia Dortmund",
+      "ovr1": "79",
+      "id2": "90127",
+      "name2": "D. Svensson",
+      "pos2": "LE",
+      "ovr2": "79"
+    },
+    {
+      "id1": "99",
+      "name1": "Fábio Silva",
+      "pos1": "ATA",
+      "club": "Borussia Dortmund",
+      "ovr1": "79",
+      "id2": "90127",
+      "name2": "D. Svensson",
+      "pos2": "LE",
+      "ovr2": "79"
+    },
+    {
+      "id1": "90051",
+      "name1": "Jamie Gittens",
+      "pos1": "PE",
+      "club": "Borussia Dortmund",
+      "ovr1": "79",
+      "id2": "90127",
+      "name2": "D. Svensson",
+      "pos2": "LE",
+      "ovr2": "79"
+    },
+    {
+      "id1": "99",
+      "name1": "Fábio Silva",
+      "pos1": "ATA",
+      "club": "Borussia Dortmund",
+      "ovr1": "79",
+      "id2": "114",
+      "name2": "M. Beier",
+      "pos2": "ATA",
+      "ovr2": "79"
+    },
+    {
+      "id1": "114",
+      "name1": "M. Beier",
+      "pos1": "ATA",
+      "club": "Borussia Dortmund",
+      "ovr1": "79",
+      "id2": "90051",
+      "name2": "Jamie Gittens",
+      "pos2": "PE",
+      "ovr2": "79"
+    },
+    {
+      "id1": "99",
+      "name1": "Fábio Silva",
+      "pos1": "ATA",
+      "club": "Borussia Dortmund",
+      "ovr1": "79",
+      "id2": "90051",
+      "name2": "Jamie Gittens",
+      "pos2": "PE",
+      "ovr2": "79"
+    },
+    {
+      "id1": "90038",
+      "name1": "Carlos Baleba",
+      "pos1": "VOL",
+      "club": "Brighton & Hove Albion",
+      "ovr1": "79",
+      "id2": "90060",
+      "name2": "Y. Ayari",
+      "pos2": "VOL",
+      "ovr2": "79"
+    },
+    {
+      "id1": "90055",
+      "name1": "Evan Ferguson",
+      "pos1": "ATA",
+      "club": "Brighton & Hove Albion",
+      "ovr1": "77",
+      "id2": "90137",
+      "name2": "G. Rutter",
+      "pos2": "MEI",
+      "ovr2": "77"
+    },
+    {
+      "id1": "60043",
+      "name1": "J. Hinshelwood",
+      "pos1": "LD",
+      "club": "Brighton & Hove Albion",
+      "ovr1": "76",
+      "id2": "90112",
+      "name2": "D. Gómez",
+      "pos2": "VOL",
+      "ovr2": "76"
+    },
+    {
+      "id1": "90016",
+      "name1": "E. Fernández",
+      "pos1": "VOL",
+      "club": "Chelsea",
+      "ovr1": "82",
+      "id2": "90044",
+      "name2": "N. Nkunku",
+      "pos2": "ATA",
+      "ovr2": "82"
+    },
+    {
+      "id1": "112",
+      "name1": "L. Delap",
+      "pos1": "ATA",
+      "club": "Chelsea",
+      "ovr1": "78",
+      "id2": "60009",
+      "name2": "J. Hato",
+      "pos2": "LE",
+      "ovr2": "78"
+    },
+    {
+      "id1": "40",
+      "name1": "F. Jørgensen",
+      "pos1": "GK",
+      "club": "Chelsea",
+      "ovr1": "77",
+      "id2": "30047",
+      "name2": "M. Sarr",
+      "pos2": "ZAG",
+      "ovr2": "77"
+    },
+    {
+      "id1": "30027",
+      "name1": "A. Stanković",
+      "pos1": "ZAG",
+      "club": "Club Brugge KV",
+      "ovr1": "72",
+      "id2": "60029",
+      "name2": "K. Sabbe",
+      "pos2": "LD",
+      "ovr2": "72"
+    },
+    {
+      "id1": "88",
+      "name1": "N. Tresoldi",
+      "pos1": "ATA",
+      "club": "Club Brugge KV",
+      "ovr1": "72",
+      "id2": "30027",
+      "name2": "A. Stanković",
+      "pos2": "ZAG",
+      "ovr2": "72"
+    },
+    {
+      "id1": "88",
+      "name1": "N. Tresoldi",
+      "pos1": "ATA",
+      "club": "Club Brugge KV",
+      "ovr1": "72",
+      "id2": "60029",
+      "name2": "K. Sabbe",
+      "pos2": "LD",
+      "ovr2": "72"
+    },
+    {
+      "id1": "90004",
+      "name1": "J. Musiala",
+      "pos1": "MEI",
+      "club": "FC Bayern München",
+      "ovr1": "88",
+      "id2": "90006",
+      "name2": "F. Wirtz",
+      "pos2": "MEI",
+      "ovr2": "88"
+    }
+  ],
+  "messages": [],
+  "stdout": "id1\tname1\tpos1\tclub\tovr1\tid2\tname2\tpos2\tovr2\n86\tRayan\tATA\tAFC Bournemouth\t77\t60039\tÁlex Jiménez\tLD\t77\n30058\tY. Baas\tZAG\tAjax\t77\t90084\tO. Gloukh\tMEI\t77\n60019\tPubill\tLD\tAtlético Madrid\t78\t90037\tArthur Vermeeren\tVOL\t78\n90024\tM. Bah\tMC\tBayer 04 Leverkusen\t80\t90061\tM. Tillman\tMEI\t80\n114\tM. Beier\tATA\tBorussia Dortmund\t79\t90127\tD. Svensson\tLE\t79\n99\tFábio Silva\tATA\tBorussia Dortmund\t79\t90127\tD. Svensson\tLE\t79\n90051\tJamie Gittens\tPE\tBorussia Dortmund\t79\t90127\tD. Svensson\tLE\t79\n99\tFábio Silva\tATA\tBorussia Dortmund\t79\t114\tM. Beier\tATA\t79\n114\tM. Beier\tATA\tBorussia Dortmund\t79\t90051\tJamie Gittens\tPE\t79\n99\tFábio Silva\tATA\tBorussia Dortmund\t79\t90051\tJamie Gittens\tPE\t79\n90038\tCarlos Baleba\tVOL\tBrighton & Hove Albion\t79\t90060\tY. Ayari\tVOL\t79\n90055\tEvan Ferguson\tATA\tBrighton & Hove Albion\t77\t90137\tG. Rutter\tMEI\t77\n60043\tJ. Hinshelwood\tLD\tBrighton & Hove Albion\t76\t90112\tD. Gómez\tVOL\t76\n90016\tE. Fernández\tVOL\tChelsea\t82\t90044\tN. Nkunku\tATA\t82\n112\tL. Delap\tATA\tChelsea\t78\t60009\tJ. Hato\tLE\t78\n40\tF. Jørgensen\tGK\tChelsea\t77\t30047\tM. Sarr\tZAG\t77\n30027\tA. Stanković\tZAG\tClub Brugge KV\t72\t60029\tK. Sabbe\tLD\t72\n88\tN. Tresoldi\tATA\tClub Brugge KV\t72\t30027\tA. Stanković\tZAG\t72\n88\tN. Tresoldi\tATA\tClub Brugge KV\t72\t60029\tK. Sabbe\tLD\t72\n90004\tJ. Musiala\tMEI\tFC Bayern München\t88\t90006\tF. Wirtz\tMEI\t88\n",
+  "stderr": "",
+  "execution_time_ms": 64
+}

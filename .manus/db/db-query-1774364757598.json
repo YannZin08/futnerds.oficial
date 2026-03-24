@@ -1,0 +1,50 @@
+{
+  "query": "SELECT id, name, position, altPositions, club, overall, potential, imageUrl FROM players WHERE id IN (60002, 90033, 90034, 90088);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, altPositions, club, overall, potential, imageUrl FROM players WHERE id IN (60002, 90033, 90034, 90088);",
+  "rows": [
+    {
+      "id": "60002",
+      "name": "G. Read",
+      "position": "LD",
+      "altPositions": "LE,LD,MD",
+      "club": "Feyenoord",
+      "overall": "76",
+      "potential": "89",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/G. Read_3e4f5a6b.webp"
+    },
+    {
+      "id": "90033",
+      "name": "Givairo Read",
+      "position": "LD",
+      "altPositions": "MD",
+      "club": "Feyenoord",
+      "overall": "76",
+      "potential": "89",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "90034",
+      "name": "Kobbie Mainoo",
+      "position": "VOL",
+      "altPositions": "MC",
+      "club": "Manchester United",
+      "overall": "80",
+      "potential": "89",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "90088",
+      "name": "K. Mainoo",
+      "position": "VOL",
+      "altPositions": "MC",
+      "club": "Manchester United",
+      "overall": "78",
+      "potential": "85",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/K. Mainoo_9cf275d6.webp"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\taltPositions\tclub\toverall\tpotential\timageUrl\n60002\tG. Read\tLD\tLE,LD,MD\tFeyenoord\t76\t89\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/G. Read_3e4f5a6b.webp\n90033\tGivairo Read\tLD\tMD\tFeyenoord\t76\t89\tNULL\n90034\tKobbie Mainoo\tVOL\tMC\tManchester United\t80\t89\tNULL\n90088\tK. Mainoo\tVOL\tMC\tManchester United\t78\t85\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/K. Mainoo_9cf275d6.webp\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}

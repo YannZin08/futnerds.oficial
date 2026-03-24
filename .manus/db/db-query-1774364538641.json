@@ -1,0 +1,54 @@
+{
+  "query": "-- Atacantes (ATA)\nSELECT 'Atacantes' as filtro, COUNT(*) as total FROM players WHERE position IN ('ATA') OR altPositions LIKE '%ATA%';\n-- Pontas (PD, PE)\nSELECT 'Pontas' as filtro, COUNT(*) as total FROM players WHERE position IN ('PD', 'PE') OR altPositions LIKE '%PD%' OR altPositions LIKE '%PE%';\n-- Meio-Campo (MC, VOL, MEI, MD, ME)\nSELECT 'Meio-Campo' as filtro, COUNT(*) as total FROM players WHERE position IN ('MC', 'VOL', 'MEI', 'MD', 'ME') OR altPositions REGEXP '(^|,)(MC|VOL|MEI|MD|ME)(,|$)';\n-- Laterais (LD, LE)\nSELECT 'Laterais' as filtro, COUNT(*) as total FROM players WHERE position IN ('LD', 'LE') OR altPositions REGEXP '(^|,)(LD|LE)(,|$)';\n-- Zagueiros (ZAG)\nSELECT 'Zagueiros' as filtro, COUNT(*) as total FROM players WHERE position = 'ZAG' OR altPositions LIKE '%ZAG%';\n-- Goleiros (GK)\nSELECT 'Goleiros' as filtro, COUNT(*) as total FROM players WHERE position = 'GK';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Atacantes (ATA)\nSELECT 'Atacantes' as filtro, COUNT(*) as total FROM players WHERE position IN ('ATA') OR altPositions LIKE '%ATA%';\n-- Pontas (PD, PE)\nSELECT 'Pontas' as filtro, COUNT(*) as total FROM players WHERE position IN ('PD', 'PE') OR altPositions LIKE '%PD%' OR altPositions LIKE '%PE%';\n-- Meio-Campo (MC, VOL, MEI, MD, ME)\nSELECT 'Meio-Campo' as filtro, COUNT(*) as total FROM players WHERE position IN ('MC', 'VOL', 'MEI', 'MD', 'ME') OR altPositions REGEXP '(^|,)(MC|VOL|MEI|MD|ME)(,|$)';\n-- Laterais (LD, LE)\nSELECT 'Laterais' as filtro, COUNT(*) as total FROM players WHERE position IN ('LD', 'LE') OR altPositions REGEXP '(^|,)(LD|LE)(,|$)';\n-- Zagueiros (ZAG)\nSELECT 'Zagueiros' as filtro, COUNT(*) as total FROM players WHERE position = 'ZAG' OR altPositions LIKE '%ZAG%';\n-- Goleiros (GK)\nSELECT 'Goleiros' as filtro, COUNT(*) as total FROM players WHERE position = 'GK';",
+  "rows": [
+    {
+      "filtro": "Atacantes",
+      "total": "60"
+    },
+    {
+      "filtro": "filtro",
+      "total": "total"
+    },
+    {
+      "filtro": "Pontas",
+      "total": "48"
+    },
+    {
+      "filtro": "filtro",
+      "total": "total"
+    },
+    {
+      "filtro": "Meio-Campo",
+      "total": "180"
+    },
+    {
+      "filtro": "filtro",
+      "total": "total"
+    },
+    {
+      "filtro": "Laterais",
+      "total": "72"
+    },
+    {
+      "filtro": "filtro",
+      "total": "total"
+    },
+    {
+      "filtro": "Zagueiros",
+      "total": "71"
+    },
+    {
+      "filtro": "filtro",
+      "total": "total"
+    },
+    {
+      "filtro": "Goleiros",
+      "total": "60"
+    }
+  ],
+  "messages": [],
+  "stdout": "filtro\ttotal\nAtacantes\t60\nfiltro\ttotal\nPontas\t48\nfiltro\ttotal\nMeio-Campo\t180\nfiltro\ttotal\nLaterais\t72\nfiltro\ttotal\nZagueiros\t71\nfiltro\ttotal\nGoleiros\t60\n",
+  "stderr": "",
+  "execution_time_ms": 83
+}
