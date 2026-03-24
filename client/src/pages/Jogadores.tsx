@@ -95,12 +95,8 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
     <div className="fut-card fut-card-hover overflow-hidden">
       {/* Card Header */}
       <div className={`bg-gradient-to-br ${gradientClass} p-4 relative`}>
-        {/* Canto superior direito: overall + posição principal + indicador de alts */}
+        {/* Canto superior direito: posição principal + indicador de alts */}
         <div className="absolute top-2 right-2 flex flex-col items-end gap-0.5">
-          <span className="text-2xl font-black text-white drop-shadow"
-            style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-            {player.overall}
-          </span>
           <div className="flex items-center gap-0.5">
             <span className="text-xs font-bold text-white/90 bg-black/20 px-1.5 py-0.5 rounded">
               {positionPtMap[player.position] ?? player.position}
