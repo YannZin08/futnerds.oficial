@@ -88,33 +88,36 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
     } catch { return []; }
   };
   const altPositions = getAltPositions();
+  // Tooltip com posições alternativas
+  const altTooltip = altPositions.map((p: string) => positionPtMap[p] ?? p).join(' · ');
 
   return (
     <div className="fut-card fut-card-hover overflow-hidden">
       {/* Card Header */}
-      <div className={`bg-gradient-to-br ${gradientClass} p-3`}>
-        {/* Linha superior: overall + posições */}
-        <div className="flex items-start justify-between mb-2">
-          {/* Overall */}
-          <span className="text-2xl font-black text-white drop-shadow leading-none"
+      <div className={`bg-gradient-to-br ${gradientClass} p-4 relative`}>
+        {/* Canto superior direito: overall + posição principal + indicador de alts */}
+        <div className="absolute top-2 right-2 flex flex-col items-end gap-0.5">
+          <span className="text-2xl font-black text-white drop-shadow"
             style={{ fontFamily: "'Rajdhani', sans-serif" }}>
             {player.overall}
           </span>
-          {/* Badges de posição */}
-          <div className="flex flex-row flex-wrap justify-end gap-0.5 max-w-[60%]">
-            <span className="text-xs font-bold text-white bg-black/30 px-1.5 py-0.5 rounded whitespace-nowrap">
+          <div className="flex items-center gap-0.5">
+            <span className="text-xs font-bold text-white/90 bg-black/20 px-1.5 py-0.5 rounded">
               {positionPtMap[player.position] ?? player.position}
             </span>
-            {altPositions.map((pos: string) => (
-              <span key={pos} className="text-[10px] font-semibold text-white/80 bg-black/20 px-1.5 py-0.5 rounded whitespace-nowrap">
-                {positionPtMap[pos] ?? pos}
+            {altPositions.length > 0 && (
+              <span
+                title={altTooltip}
+                className="text-[9px] font-bold text-white/60 bg-black/20 px-1 py-0.5 rounded cursor-default select-none"
+              >
+                +{altPositions.length}
               </span>
-            ))}
+            )}
           </div>
         </div>
-        {/* Linha inferior: foto + nome */}
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
+        {/* Foto + nome */}
+        <div className="flex items-end gap-3">
+          <div className="w-14 h-14 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
             {player.imageUrl ? (
               <img
                 src={player.imageUrl}
@@ -122,15 +125,15 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
                 className="w-full h-full object-cover object-top"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).style.display = 'none';
-                  (e.currentTarget.parentElement as HTMLElement).innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+                  (e.currentTarget.parentElement as HTMLElement).innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
                 }}
               />
             ) : (
-              <Users className="h-6 w-6 text-white/60" />
+              <Users className="h-7 w-7 text-white/60" />
             )}
           </div>
-          <div className="min-w-0 flex-1">
-            <h3 className="font-black text-white text-sm leading-tight truncate">{player.name}</h3>
+          <div className="min-w-0 flex-1 pr-14">
+            <h3 className="font-black text-white text-base leading-tight truncate">{player.name}</h3>
             <p className="text-white/70 text-xs truncate">
               {player.nationality}{player.age ? ` · ${player.age} anos` : ''}
             </p>
