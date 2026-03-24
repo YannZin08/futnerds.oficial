@@ -95,21 +95,16 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
     <div className="fut-card fut-card-hover overflow-hidden">
       {/* Card Header */}
       <div className={`bg-gradient-to-br ${gradientClass} p-4 relative`}>
-        {/* Canto superior direito: posição principal + indicador de alts */}
-        <div className="absolute top-2 right-2 flex flex-col items-end gap-0.5">
-          <div className="flex items-center gap-0.5">
-            <span className="text-xs font-bold text-white/90 bg-black/20 px-1.5 py-0.5 rounded">
-              {positionPtMap[player.position] ?? player.position}
+        {/* Canto superior direito: todas as posições lado a lado */}
+        <div className="absolute top-2 right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
+          <span className="text-xs font-bold text-white bg-black/25 px-1.5 py-0.5 rounded whitespace-nowrap">
+            {positionPtMap[player.position] ?? player.position}
+          </span>
+          {altPositions.map((pos: string) => (
+            <span key={pos} className="text-xs font-bold text-white/80 bg-black/20 px-1.5 py-0.5 rounded whitespace-nowrap">
+              {positionPtMap[pos] ?? pos}
             </span>
-            {altPositions.length > 0 && (
-              <span
-                title={altTooltip}
-                className="text-[9px] font-bold text-white/60 bg-black/20 px-1 py-0.5 rounded cursor-default select-none"
-              >
-                +{altPositions.length}
-              </span>
-            )}
-          </div>
+          ))}
         </div>
         {/* Foto + nome */}
         <div className="flex items-end gap-3">
