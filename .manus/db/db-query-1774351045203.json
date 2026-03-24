@@ -1,0 +1,85 @@
+{
+  "query": "UPDATE players SET nationality='Espanha' WHERE name='Á. Carreras' AND position IN ('LD','LE');\n-- Verificar resultado final\nSELECT name, nationality, price FROM players WHERE position IN ('LD','LE') ORDER BY overall DESC LIMIT 15;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute UPDATE players SET nationality='Espanha' WHERE name='Á. Carreras' AND position IN ('LD','LE');\n-- Verificar resultado final\nSELECT name, nationality, price FROM players WHERE position IN ('LD','LE') ORDER BY overall DESC LIMIT 15;",
+  "rows": [
+    {
+      "name": "Nuno Mendes",
+      "nationality": "Portugal",
+      "price": "116000000"
+    },
+    {
+      "name": "Balde",
+      "nationality": "Espanha",
+      "price": "50000000"
+    },
+    {
+      "name": "E. Camavinga",
+      "nationality": "França",
+      "price": "44000000"
+    },
+    {
+      "name": "L. Hall",
+      "nationality": "Inglaterra",
+      "price": "36000000"
+    },
+    {
+      "name": "Miguel Gutiérrez",
+      "nationality": "Espanha",
+      "price": "35000000"
+    },
+    {
+      "name": "M. Kerkez",
+      "nationality": "Hungria",
+      "price": "35000000"
+    },
+    {
+      "name": "W. Zaïre-Emery",
+      "nationality": "França",
+      "price": "50000000"
+    },
+    {
+      "name": "Á. Carreras",
+      "nationality": "Espanha",
+      "price": "50000000"
+    },
+    {
+      "name": "T. Livramento",
+      "nationality": "Inglaterra",
+      "price": "32000000"
+    },
+    {
+      "name": "N. O'Reilly",
+      "nationality": "Irlanda",
+      "price": "31000000"
+    },
+    {
+      "name": "Amad",
+      "nationality": "Costa do Marfim",
+      "price": "33000000"
+    },
+    {
+      "name": "M. Kayode",
+      "nationality": "Nigéria",
+      "price": "29000000"
+    },
+    {
+      "name": "C. Lukeba",
+      "nationality": "França",
+      "price": "45000000"
+    },
+    {
+      "name": "N. Brown",
+      "nationality": "Inglaterra",
+      "price": "27000000"
+    },
+    {
+      "name": "C. Bradley",
+      "nationality": "Inglaterra",
+      "price": "25000000"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\tnationality\tprice\nNuno Mendes\tPortugal\t116000000\nBalde\tEspanha\t50000000\nE. Camavinga\tFrança\t44000000\nL. Hall\tInglaterra\t36000000\nMiguel Gutiérrez\tEspanha\t35000000\nM. Kerkez\tHungria\t35000000\nW. Zaïre-Emery\tFrança\t50000000\nÁ. Carreras\tEspanha\t50000000\nT. Livramento\tInglaterra\t32000000\nN. O'Reilly\tIrlanda\t31000000\nAmad\tCosta do Marfim\t33000000\nM. Kayode\tNigéria\t29000000\nC. Lukeba\tFrança\t45000000\nN. Brown\tInglaterra\t27000000\nC. Bradley\tInglaterra\t25000000\n",
+  "stderr": "",
+  "execution_time_ms": 68
+}

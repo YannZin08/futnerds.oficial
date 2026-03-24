@@ -1,0 +1,60 @@
+{
+  "query": "SELECT name, nationality, price FROM players WHERE position IN ('LD','LE') ORDER BY overall DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, nationality, price FROM players WHERE position IN ('LD','LE') ORDER BY overall DESC LIMIT 10;",
+  "rows": [
+    {
+      "name": "Nuno Mendes",
+      "nationality": "",
+      "price": "116"
+    },
+    {
+      "name": "Balde",
+      "nationality": "",
+      "price": "50"
+    },
+    {
+      "name": "E. Camavinga",
+      "nationality": "",
+      "price": "44"
+    },
+    {
+      "name": "W. Zaïre-Emery",
+      "nationality": "",
+      "price": "50"
+    },
+    {
+      "name": "Miguel Gutiérrez",
+      "nationality": "",
+      "price": "35"
+    },
+    {
+      "name": "Á. Carreras",
+      "nationality": "",
+      "price": "50"
+    },
+    {
+      "name": "L. Hall",
+      "nationality": "",
+      "price": "36"
+    },
+    {
+      "name": "M. Kerkez",
+      "nationality": "",
+      "price": "35"
+    },
+    {
+      "name": "C. Lukeba",
+      "nationality": "",
+      "price": "45"
+    },
+    {
+      "name": "N. O'Reilly",
+      "nationality": "",
+      "price": "31"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\tnationality\tprice\nNuno Mendes\t\t116\nBalde\t\t50\nE. Camavinga\t\t44\nW. Zaïre-Emery\t\t50\nMiguel Gutiérrez\t\t35\nÁ. Carreras\t\t50\nL. Hall\t\t36\nM. Kerkez\t\t35\nC. Lukeba\t\t45\nN. O'Reilly\t\t31\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}

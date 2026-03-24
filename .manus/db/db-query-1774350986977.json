@@ -1,0 +1,60 @@
+{
+  "query": "SELECT name, nationality, price FROM players WHERE position = 'GK' ORDER BY overall DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, nationality, price FROM players WHERE position = 'GK' ORDER BY overall DESC LIMIT 10;",
+  "rows": [
+    {
+      "name": "L. Chevalier",
+      "nationality": "França",
+      "price": "37000000"
+    },
+    {
+      "name": "B. Verbruggen",
+      "nationality": "Holanda",
+      "price": "27500000"
+    },
+    {
+      "name": "S. Lammens",
+      "nationality": "Bélgica",
+      "price": "36500000"
+    },
+    {
+      "name": "A. Trubin",
+      "nationality": "Ucrânia",
+      "price": "36000000"
+    },
+    {
+      "name": "K. Tzolakis",
+      "nationality": "Grécia",
+      "price": "30500000"
+    },
+    {
+      "name": "R. Roefs",
+      "nationality": "Holanda",
+      "price": "23000000"
+    },
+    {
+      "name": "E. Caprile",
+      "nationality": "Itália",
+      "price": "18000000"
+    },
+    {
+      "name": "R. Risser",
+      "nationality": "França",
+      "price": "23500000"
+    },
+    {
+      "name": "G. Restes",
+      "nationality": "França",
+      "price": "23500000"
+    },
+    {
+      "name": "N. Atubolu",
+      "nationality": "Alemanha",
+      "price": "17000000"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\tnationality\tprice\nL. Chevalier\tFrança\t37000000\nB. Verbruggen\tHolanda\t27500000\nS. Lammens\tBélgica\t36500000\nA. Trubin\tUcrânia\t36000000\nK. Tzolakis\tGrécia\t30500000\nR. Roefs\tHolanda\t23000000\nE. Caprile\tItália\t18000000\nR. Risser\tFrança\t23500000\nG. Restes\tFrança\t23500000\nN. Atubolu\tAlemanha\t17000000\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}

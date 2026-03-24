@@ -1,0 +1,55 @@
+{
+  "query": "SELECT name, overall, price FROM players WHERE position IN ('LD','LE') AND overall < 73 ORDER BY overall DESC, name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, overall, price FROM players WHERE position IN ('LD','LE') AND overall < 73 ORDER BY overall DESC, name;",
+  "rows": [
+    {
+      "name": "E. Baum",
+      "overall": "72",
+      "price": "6"
+    },
+    {
+      "name": "K. Sabbe",
+      "overall": "72",
+      "price": "6"
+    },
+    {
+      "name": "João Costa",
+      "overall": "71",
+      "price": "5"
+    },
+    {
+      "name": "Y. Medina",
+      "overall": "70",
+      "price": "4"
+    },
+    {
+      "name": "J. Mokio",
+      "overall": "69",
+      "price": "3"
+    },
+    {
+      "name": "C. Donovan",
+      "overall": "66",
+      "price": "2"
+    },
+    {
+      "name": "S. Mfuni",
+      "overall": "66",
+      "price": "2"
+    },
+    {
+      "name": "Ale Gomes",
+      "overall": "64",
+      "price": "2"
+    },
+    {
+      "name": "Daniel Banjaqui",
+      "overall": "62",
+      "price": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\toverall\tprice\nE. Baum\t72\t6\nK. Sabbe\t72\t6\nJoão Costa\t71\t5\nY. Medina\t70\t4\nJ. Mokio\t69\t3\nC. Donovan\t66\t2\nS. Mfuni\t66\t2\nAle Gomes\t64\t2\nDaniel Banjaqui\t62\t1\n",
+  "stderr": "",
+  "execution_time_ms": 62
+}

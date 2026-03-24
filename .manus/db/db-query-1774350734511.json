@@ -1,0 +1,155 @@
+{
+  "query": "SELECT name, overall, price FROM players WHERE position IN ('LD','LE') AND overall < 78 ORDER BY overall DESC, name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, overall, price FROM players WHERE position IN ('LD','LE') AND overall < 78 ORDER BY overall DESC, name;",
+  "rows": [
+    {
+      "name": "A. Khalaili",
+      "overall": "77",
+      "price": "23"
+    },
+    {
+      "name": "Álex Jiménez",
+      "overall": "77",
+      "price": "20"
+    },
+    {
+      "name": "Eduardo Quaresma",
+      "overall": "77",
+      "price": "20"
+    },
+    {
+      "name": "P. Dorgu",
+      "overall": "77",
+      "price": "21"
+    },
+    {
+      "name": "R. Lewis",
+      "overall": "77",
+      "price": "20"
+    },
+    {
+      "name": "A. Gray",
+      "overall": "76",
+      "price": "15"
+    },
+    {
+      "name": "Alberto Costa",
+      "overall": "76",
+      "price": "16"
+    },
+    {
+      "name": "G. Read",
+      "overall": "76",
+      "price": "17"
+    },
+    {
+      "name": "J. Hinshelwood",
+      "overall": "76",
+      "price": "16"
+    },
+    {
+      "name": "L. Miley",
+      "overall": "76",
+      "price": "16"
+    },
+    {
+      "name": "Martim Fernandes",
+      "overall": "76",
+      "price": "16"
+    },
+    {
+      "name": "V. Gómez",
+      "overall": "76",
+      "price": "16"
+    },
+    {
+      "name": "C. Mawissa",
+      "overall": "75",
+      "price": "12"
+    },
+    {
+      "name": "Álex Valle",
+      "overall": "74",
+      "price": "9"
+    },
+    {
+      "name": "J. Seys",
+      "overall": "74",
+      "price": "10"
+    },
+    {
+      "name": "M. Palestra",
+      "overall": "74",
+      "price": "9"
+    },
+    {
+      "name": "T. Dibling",
+      "overall": "74",
+      "price": "9"
+    },
+    {
+      "name": "J. Acheampong",
+      "overall": "73",
+      "price": "7"
+    },
+    {
+      "name": "M. Del Blanco",
+      "overall": "73",
+      "price": "7"
+    },
+    {
+      "name": "N. Mendy",
+      "overall": "73",
+      "price": "6"
+    },
+    {
+      "name": "E. Baum",
+      "overall": "72",
+      "price": "6"
+    },
+    {
+      "name": "K. Sabbe",
+      "overall": "72",
+      "price": "6"
+    },
+    {
+      "name": "João Costa",
+      "overall": "71",
+      "price": "5"
+    },
+    {
+      "name": "Y. Medina",
+      "overall": "70",
+      "price": "4"
+    },
+    {
+      "name": "J. Mokio",
+      "overall": "69",
+      "price": "3"
+    },
+    {
+      "name": "C. Donovan",
+      "overall": "66",
+      "price": "2"
+    },
+    {
+      "name": "S. Mfuni",
+      "overall": "66",
+      "price": "2"
+    },
+    {
+      "name": "Ale Gomes",
+      "overall": "64",
+      "price": "2"
+    },
+    {
+      "name": "Daniel Banjaqui",
+      "overall": "62",
+      "price": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\toverall\tprice\nA. Khalaili\t77\t23\nÁlex Jiménez\t77\t20\nEduardo Quaresma\t77\t20\nP. Dorgu\t77\t21\nR. Lewis\t77\t20\nA. Gray\t76\t15\nAlberto Costa\t76\t16\nG. Read\t76\t17\nJ. Hinshelwood\t76\t16\nL. Miley\t76\t16\nMartim Fernandes\t76\t16\nV. Gómez\t76\t16\nC. Mawissa\t75\t12\nÁlex Valle\t74\t9\nJ. Seys\t74\t10\nM. Palestra\t74\t9\nT. Dibling\t74\t9\nJ. Acheampong\t73\t7\nM. Del Blanco\t73\t7\nN. Mendy\t73\t6\nE. Baum\t72\t6\nK. Sabbe\t72\t6\nJoão Costa\t71\t5\nY. Medina\t70\t4\nJ. Mokio\t69\t3\nC. Donovan\t66\t2\nS. Mfuni\t66\t2\nAle Gomes\t64\t2\nDaniel Banjaqui\t62\t1\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}
