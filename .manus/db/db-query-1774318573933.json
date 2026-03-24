@@ -1,0 +1,129 @@
+{
+  "query": "SELECT name, COUNT(*) as total, GROUP_CONCAT(id ORDER BY id) as ids, GROUP_CONCAT(position ORDER BY id) as positions, GROUP_CONCAT(altPositions ORDER BY id SEPARATOR ' | ') as altPos\nFROM players\nGROUP BY name\nHAVING COUNT(*) > 1\nORDER BY name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, COUNT(*) as total, GROUP_CONCAT(id ORDER BY id) as ids, GROUP_CONCAT(position ORDER BY id) as positions, GROUP_CONCAT(altPositions ORDER BY id SEPARATOR ' | ') as altPos\nFROM players\nGROUP BY name\nHAVING COUNT(*) > 1\nORDER BY name;",
+  "rows": [
+    {
+      "name": "Á. Carreras",
+      "total": "2",
+      "ids": "30005,60004",
+      "positions": "ZAG,LAT",
+      "altPos": "ME | LE,ZAG,ME"
+    },
+    {
+      "name": "A. Gray",
+      "total": "2",
+      "ids": "30016,60016",
+      "positions": "ZAG,LAT",
+      "altPos": "VOL,LAT,MEI | VOL,ZAG,LD,MC"
+    },
+    {
+      "name": "C. Donovan",
+      "total": "2",
+      "ids": "30039,60036",
+      "positions": "ZAG,LAT",
+      "altPos": "LAT | LD,ZAG"
+    },
+    {
+      "name": "C. Lukeba",
+      "total": "2",
+      "ids": "30006,60005",
+      "positions": "ZAG,LAT",
+      "altPos": "MC | ZAG,LE,MC"
+    },
+    {
+      "name": "C. Mawissa",
+      "total": "2",
+      "ids": "30051,60047",
+      "positions": "ZAG,LAT",
+      "altPos": "LE,VOL | ZAG,LE,VOL"
+    },
+    {
+      "name": "J. Acheampong",
+      "total": "2",
+      "ids": "30041,60037",
+      "positions": "ZAG,LAT",
+      "altPos": "LD,VOL | ZAG,LD,VOL"
+    },
+    {
+      "name": "J. Gvardiol",
+      "total": "2",
+      "ids": "30007,60006",
+      "positions": "ZAG,LAT",
+      "altPos": "ME | ZAG,LE,ME"
+    },
+    {
+      "name": "J. Hato",
+      "total": "2",
+      "ids": "30009,60009",
+      "positions": "ZAG,LAT",
+      "altPos": "LE,VOL | LE,ZAG,VOL"
+    },
+    {
+      "name": "N. Mendy",
+      "total": "2",
+      "ids": "30046,60044",
+      "positions": "ZAG,LAT",
+      "altPos": "LAT | ZAG,LE"
+    },
+    {
+      "name": "P. Hincapié",
+      "total": "2",
+      "ids": "30012,60011",
+      "positions": "ZAG,LAT",
+      "altPos": "LE | ZAG,LE"
+    },
+    {
+      "name": "Pubill",
+      "total": "2",
+      "ids": "30020,60019",
+      "positions": "ZAG,LAT",
+      "altPos": "LD,MD | ZAG,LD,MD"
+    },
+    {
+      "name": "R. Calafiori",
+      "total": "2",
+      "ids": "30022,60021",
+      "positions": "ZAG,LAT",
+      "altPos": "LE,MC | LE,ZAG,MC"
+    },
+    {
+      "name": "S. Mouriño",
+      "total": "2",
+      "ids": "30028,60027",
+      "positions": "ZAG,LAT",
+      "altPos": "LD,VOL | LD,ZAG,VOL"
+    },
+    {
+      "name": "Tomás Araújo",
+      "total": "2",
+      "ids": "30019,60018",
+      "positions": "ZAG,LAT",
+      "altPos": "LAT | ZAG,LD"
+    },
+    {
+      "name": "V. Gómez",
+      "total": "2",
+      "ids": "30055,60051",
+      "positions": "ZAG,LAT",
+      "altPos": "LE,VOL | ZAG,LE,VOL"
+    },
+    {
+      "name": "Y. Baas",
+      "total": "2",
+      "ids": "30058,60053",
+      "positions": "ZAG,LAT",
+      "altPos": "LE,MC | ZAG,LE,MC"
+    },
+    {
+      "name": "Yarek",
+      "total": "2",
+      "ids": "30026,60025",
+      "positions": "ZAG,LAT",
+      "altPos": "LE | ZAG,LE"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\ttotal\tids\tpositions\taltPos\nÁ. Carreras\t2\t30005,60004\tZAG,LAT\tME | LE,ZAG,ME\nA. Gray\t2\t30016,60016\tZAG,LAT\tVOL,LAT,MEI | VOL,ZAG,LD,MC\nC. Donovan\t2\t30039,60036\tZAG,LAT\tLAT | LD,ZAG\nC. Lukeba\t2\t30006,60005\tZAG,LAT\tMC | ZAG,LE,MC\nC. Mawissa\t2\t30051,60047\tZAG,LAT\tLE,VOL | ZAG,LE,VOL\nJ. Acheampong\t2\t30041,60037\tZAG,LAT\tLD,VOL | ZAG,LD,VOL\nJ. Gvardiol\t2\t30007,60006\tZAG,LAT\tME | ZAG,LE,ME\nJ. Hato\t2\t30009,60009\tZAG,LAT\tLE,VOL | LE,ZAG,VOL\nN. Mendy\t2\t30046,60044\tZAG,LAT\tLAT | ZAG,LE\nP. Hincapié\t2\t30012,60011\tZAG,LAT\tLE | ZAG,LE\nPubill\t2\t30020,60019\tZAG,LAT\tLD,MD | ZAG,LD,MD\nR. Calafiori\t2\t30022,60021\tZAG,LAT\tLE,MC | LE,ZAG,MC\nS. Mouriño\t2\t30028,60027\tZAG,LAT\tLD,VOL | LD,ZAG,VOL\nTomás Araújo\t2\t30019,60018\tZAG,LAT\tLAT | ZAG,LD\nV. Gómez\t2\t30055,60051\tZAG,LAT\tLE,VOL | ZAG,LE,VOL\nY. Baas\t2\t30058,60053\tZAG,LAT\tLE,MC | ZAG,LE,MC\nYarek\t2\t30026,60025\tZAG,LAT\tLE | ZAG,LE\n",
+  "stderr": "",
+  "execution_time_ms": 112
+}
