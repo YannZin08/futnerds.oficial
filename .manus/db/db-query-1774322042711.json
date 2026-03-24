@@ -1,0 +1,106 @@
+{
+  "query": "SELECT id, name, price, imageUrl FROM players WHERE position IN ('LD','LE') AND id >= 60044 ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, price, imageUrl FROM players WHERE position IN ('LD','LE') AND id >= 60044 ORDER BY id;",
+  "rows": [
+    {
+      "id": "60044",
+      "name": "N. Mendy",
+      "price": "6",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/N. Mendy_c2c8881f.webp"
+    },
+    {
+      "id": "60045",
+      "name": "Álex Valle",
+      "price": "9",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Álex Valle_b9cfe590.png"
+    },
+    {
+      "id": "60046",
+      "name": "M. Del Blanco",
+      "price": "7",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M. Del Blanco_0e7f0740.webp"
+    },
+    {
+      "id": "60047",
+      "name": "C. Mawissa",
+      "price": "12",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C. Mawissa_5f6a7b8c.webp"
+    },
+    {
+      "id": "60048",
+      "name": "R. Lewis",
+      "price": "20",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/R. Lewis_f50efd9f.webp"
+    },
+    {
+      "id": "60049",
+      "name": "Y. Medina",
+      "price": "4",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Y. Medina_22ce297c.png"
+    },
+    {
+      "id": "60050",
+      "name": "Diego Moreira",
+      "price": "22",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Diego Moreira_9d0e1f2a.webp"
+    },
+    {
+      "id": "60051",
+      "name": "V. Gómez",
+      "price": "16",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/V. Gómez_782a25b5.webp"
+    },
+    {
+      "id": "60052",
+      "name": "C. Bradley",
+      "price": "25",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C. Bradley_3b4c5d6e.webp"
+    },
+    {
+      "id": "60054",
+      "name": "M. Gusto",
+      "price": "25",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M. Gusto_448d8f84.webp"
+    },
+    {
+      "id": "60055",
+      "name": "Eduardo Quaresma",
+      "price": "20",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Eduardo Quaresma_7f8a9b0c.webp"
+    },
+    {
+      "id": "60056",
+      "name": "I. Maatsen",
+      "price": "25",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/I. Maatsen_9b0c1d2e.webp"
+    },
+    {
+      "id": "60057",
+      "name": "Daniel Banjaqui",
+      "price": "1",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Daniel Banjaqui_1d2e3f4a.webp"
+    },
+    {
+      "id": "60058",
+      "name": "S. Mfuni",
+      "price": "2",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/S. Mfuni_a91be64e.webp"
+    },
+    {
+      "id": "60059",
+      "name": "Ale Gomes",
+      "price": "2",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Ale Gomes_5b6c7d8e.webp"
+    },
+    {
+      "id": "60060",
+      "name": "Asencio",
+      "price": "21",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Asencio_9f0a1b2c.webp"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tprice\timageUrl\n60044\tN. Mendy\t6\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/N. Mendy_c2c8881f.webp\n60045\tÁlex Valle\t9\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Álex Valle_b9cfe590.png\n60046\tM. Del Blanco\t7\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M. Del Blanco_0e7f0740.webp\n60047\tC. Mawissa\t12\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C. Mawissa_5f6a7b8c.webp\n60048\tR. Lewis\t20\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/R. Lewis_f50efd9f.webp\n60049\tY. Medina\t4\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Y. Medina_22ce297c.png\n60050\tDiego Moreira\t22\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Diego Moreira_9d0e1f2a.webp\n60051\tV. Gómez\t16\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/V. Gómez_782a25b5.webp\n60052\tC. Bradley\t25\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C. Bradley_3b4c5d6e.webp\n60054\tM. Gusto\t25\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M. Gusto_448d8f84.webp\n60055\tEduardo Quaresma\t20\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Eduardo Quaresma_7f8a9b0c.webp\n60056\tI. Maatsen\t25\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/I. Maatsen_9b0c1d2e.webp\n60057\tDaniel Banjaqui\t1\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Daniel Banjaqui_1d2e3f4a.webp\n60058\tS. Mfuni\t2\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/S. Mfuni_a91be64e.webp\n60059\tAle Gomes\t2\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Ale Gomes_5b6c7d8e.webp\n60060\tAsencio\t21\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Asencio_9f0a1b2c.webp\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}
