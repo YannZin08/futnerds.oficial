@@ -1,0 +1,18 @@
+{
+  "query": "SELECT name, altPositions FROM players WHERE position = 'ZAG' AND altPositions IS NOT NULL AND altPositions != '' ORDER BY name LIMIT 20 OFFSET 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, altPositions FROM players WHERE position = 'ZAG' AND altPositions IS NOT NULL AND altPositions != '' ORDER BY name LIMIT 20 OFFSET 20;",
+  "rows": [
+    {
+      "name": "Z. Debast",
+      "altPositions": "VOL,MC"
+    },
+    {
+      "name": "Z. Van Den Bosch",
+      "altPositions": "LE"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\taltPositions\nZ. Debast\tVOL,MC\nZ. Van Den Bosch\tLE\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

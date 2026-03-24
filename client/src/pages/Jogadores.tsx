@@ -93,8 +93,16 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
             </span>
             {(() => {
               try {
-                const alts: string[] = player.altPositions ? JSON.parse(player.altPositions) : [];
-                const uniqueAlts = alts.filter(p => p !== player.position);
+                let alts: string[] = [];
+                if (player.altPositions) {
+                  // Suporta JSON array ou string separada por vírgula
+                  if (player.altPositions.startsWith('[')) {
+                    alts = JSON.parse(player.altPositions);
+                  } else {
+                    alts = player.altPositions.split(',').map((s: string) => s.trim()).filter(Boolean);
+                  }
+                }
+                const uniqueAlts = alts.filter((p: string) => p !== player.position);
                 return uniqueAlts.map((pos: string) => (
                   <span key={pos} className="text-[10px] font-semibold text-white/70 bg-black/20 px-1.5 py-0.5 rounded">
                     {positionPtMap[pos] ?? pos}

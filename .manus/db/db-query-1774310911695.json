@@ -1,0 +1,110 @@
+{
+  "query": "SELECT name, position, altPositions FROM players WHERE position = 'ZAG' AND altPositions IS NOT NULL AND altPositions != '' ORDER BY name LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, position, altPositions FROM players WHERE position = 'ZAG' AND altPositions IS NOT NULL AND altPositions != '' ORDER BY name LIMIT 20;",
+  "rows": [
+    {
+      "name": "A. Anselmino",
+      "position": "ZAG",
+      "altPositions": "LD,VOL"
+    },
+    {
+      "name": "Á. Carreras",
+      "position": "ZAG",
+      "altPositions": "ME"
+    },
+    {
+      "name": "A. Gray",
+      "position": "ZAG",
+      "altPositions": "VOL,LAT,MEI"
+    },
+    {
+      "name": "A. Stanković",
+      "position": "ZAG",
+      "altPositions": "VOL,MC"
+    },
+    {
+      "name": "C. Donovan",
+      "position": "ZAG",
+      "altPositions": "LAT"
+    },
+    {
+      "name": "C. Lukeba",
+      "position": "ZAG",
+      "altPositions": "MC"
+    },
+    {
+      "name": "C. Mawissa",
+      "position": "ZAG",
+      "altPositions": "LE,VOL"
+    },
+    {
+      "name": "J. Acheampong",
+      "position": "ZAG",
+      "altPositions": "LD,VOL"
+    },
+    {
+      "name": "J. Gvardiol",
+      "position": "ZAG",
+      "altPositions": "ME"
+    },
+    {
+      "name": "J. Hato",
+      "position": "ZAG",
+      "altPositions": "LE,VOL"
+    },
+    {
+      "name": "M. Perrone",
+      "position": "ZAG",
+      "altPositions": "VOL,MC"
+    },
+    {
+      "name": "N. Mendy",
+      "position": "ZAG",
+      "altPositions": "LAT"
+    },
+    {
+      "name": "P. Hincapié",
+      "position": "ZAG",
+      "altPositions": "LE"
+    },
+    {
+      "name": "Pubill",
+      "position": "ZAG",
+      "altPositions": "LD,MD"
+    },
+    {
+      "name": "R. Calafiori",
+      "position": "ZAG",
+      "altPositions": "LE,MC"
+    },
+    {
+      "name": "S. Mouriño",
+      "position": "ZAG",
+      "altPositions": "LD,VOL"
+    },
+    {
+      "name": "Tomás Araújo",
+      "position": "ZAG",
+      "altPositions": "LAT"
+    },
+    {
+      "name": "V. Gómez",
+      "position": "ZAG",
+      "altPositions": "LE,VOL"
+    },
+    {
+      "name": "Y. Baas",
+      "position": "ZAG",
+      "altPositions": "LE,MC"
+    },
+    {
+      "name": "Yarek",
+      "position": "ZAG",
+      "altPositions": "LE"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\tposition\taltPositions\nA. Anselmino\tZAG\tLD,VOL\nÁ. Carreras\tZAG\tME\nA. Gray\tZAG\tVOL,LAT,MEI\nA. Stanković\tZAG\tVOL,MC\nC. Donovan\tZAG\tLAT\nC. Lukeba\tZAG\tMC\nC. Mawissa\tZAG\tLE,VOL\nJ. Acheampong\tZAG\tLD,VOL\nJ. Gvardiol\tZAG\tME\nJ. Hato\tZAG\tLE,VOL\nM. Perrone\tZAG\tVOL,MC\nN. Mendy\tZAG\tLAT\nP. Hincapié\tZAG\tLE\nPubill\tZAG\tLD,MD\nR. Calafiori\tZAG\tLE,MC\nS. Mouriño\tZAG\tLD,VOL\nTomás Araújo\tZAG\tLAT\nV. Gómez\tZAG\tLE,VOL\nY. Baas\tZAG\tLE,MC\nYarek\tZAG\tLE\n",
+  "stderr": "",
+  "execution_time_ms": 65
+}
