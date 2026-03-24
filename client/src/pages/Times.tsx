@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, Trophy, MapPin, Wallet, Star } from "lucide-react";
+import { useLocation } from "wouter";
 
 // Country flag emojis map
 const countryFlags: Record<string, string> = {
@@ -43,6 +44,7 @@ export default function Times() {
   const [view, setView] = useState<View>("countries");
   const [selectedCountry, setSelectedCountry] = useState<{ id: number; name: string } | null>(null);
   const [selectedLeague, setSelectedLeague] = useState<{ id: number; name: string; division: number } | null>(null);
+  const [, navigate] = useLocation();
 
   const { data: countries, isLoading: loadingCountries } = trpc.countries.list.useQuery();
   const { data: leagues, isLoading: loadingLeagues } = trpc.leagues.byCountry.useQuery(
@@ -77,16 +79,21 @@ export default function Times() {
       <div className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="container py-4">
           <div className="flex items-center gap-3">
-            {view !== "countries" && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={view === "leagues" ? goToCountries : () => setView("leagues")}
-                className="shrink-0"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </Button>
-            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={
+                view === "countries"
+                  ? () => navigate("/")
+                  : view === "leagues"
+                  ? goToCountries
+                  : () => setView("leagues")
+              }
+              className="shrink-0"
+              title="Voltar"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
             <div>
               <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
                 <Trophy className="w-6 h-6 text-primary" />
