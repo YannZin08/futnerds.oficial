@@ -283,11 +283,21 @@ export default function Jogadores() {
 
   const favoriteIds = useMemo(() => new Set((favorites ?? []).map((f: any) => f.playerId)), [favorites]);
 
+  // Verifica se um jogador pertence a um grupo de posição (posição principal OU alternativas)
+  const playerMatchesPositionGroup = (p: any, group: string): boolean => {
+    if (positionGroupMap[p.position] === group) return true;
+    if (!p.altPositions) return false;
+    const alts = typeof p.altPositions === 'string'
+      ? p.altPositions.split(',').map((s: string) => s.trim()).filter(Boolean)
+      : (Array.isArray(p.altPositions) ? p.altPositions : []);
+    return alts.some((alt: string) => positionGroupMap[alt] === group);
+  };
+
   const filteredPlayers = useMemo(() => {
     if (!players) return [];
     let result = players;
     if (selectedPosition) {
-      result = result.filter((p: any) => positionGroupMap[p.position] === selectedPosition);
+      result = result.filter((p: any) => playerMatchesPositionGroup(p, selectedPosition));
     }
     if (searchQuery) {
       result = result.filter((p: any) =>
