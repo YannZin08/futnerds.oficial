@@ -1,0 +1,310 @@
+{
+  "query": "SELECT id, name, position, club FROM players WHERE nationality = '' OR nationality IS NULL ORDER BY name LIMIT 50 OFFSET 50;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, club FROM players WHERE nationality = '' OR nationality IS NULL ORDER BY name LIMIT 50 OFFSET 50;",
+  "rows": [
+    {
+      "id": "90056",
+      "name": "George Ilenikhena",
+      "position": "ATA",
+      "club": "AS Monaco"
+    },
+    {
+      "id": "90031",
+      "name": "Geovany Quenda",
+      "position": "PD",
+      "club": "Sporting CP"
+    },
+    {
+      "id": "90033",
+      "name": "Givairo Read",
+      "position": "LD",
+      "club": "Feyenoord"
+    },
+    {
+      "id": "90118",
+      "name": "H. Diarra",
+      "position": "MC",
+      "club": "Sunderland"
+    },
+    {
+      "id": "90136",
+      "name": "H. Elliott",
+      "position": "MEI",
+      "club": "Aston Villa"
+    },
+    {
+      "id": "90123",
+      "name": "H. Haraldsson",
+      "position": "MEI",
+      "club": "Lille OSC"
+    },
+    {
+      "id": "90089",
+      "name": "H. Larsson",
+      "position": "MC",
+      "club": "Eintracht Frankfurt"
+    },
+    {
+      "id": "90102",
+      "name": "H. Larsson",
+      "position": "MC",
+      "club": "Eintracht Frankfurt"
+    },
+    {
+      "id": "90130",
+      "name": "I. Doukouré",
+      "position": "ZAG",
+      "club": "RC Strasbourg Alsace"
+    },
+    {
+      "id": "90128",
+      "name": "I. Moriba",
+      "position": "MC",
+      "club": "RC Celta"
+    },
+    {
+      "id": "90058",
+      "name": "I. Saibari",
+      "position": "MEI",
+      "club": "PSV"
+    },
+    {
+      "id": "90139",
+      "name": "Izan González",
+      "position": "MC",
+      "club": "Granada CF"
+    },
+    {
+      "id": "90087",
+      "name": "J. Bahoya",
+      "position": "ME",
+      "club": "Eintracht Frankfurt"
+    },
+    {
+      "id": "90100",
+      "name": "J. Bahoya",
+      "position": "ME",
+      "club": "Eintracht Frankfurt"
+    },
+    {
+      "id": "90109",
+      "name": "J. Bellingham",
+      "position": "MC",
+      "club": "Borussia Dortmund"
+    },
+    {
+      "id": "90001",
+      "name": "J. Bellingham",
+      "position": "MEI",
+      "club": "Real Madrid"
+    },
+    {
+      "id": "90080",
+      "name": "J. Manzambi",
+      "position": "MC",
+      "club": "SC Freiburg"
+    },
+    {
+      "id": "90093",
+      "name": "J. Manzambi",
+      "position": "MC",
+      "club": "SC Freiburg"
+    },
+    {
+      "id": "90004",
+      "name": "J. Musiala",
+      "position": "MEI",
+      "club": "FC Bayern München"
+    },
+    {
+      "id": "90051",
+      "name": "Jamie Gittens",
+      "position": "PE",
+      "club": "Borussia Dortmund"
+    },
+    {
+      "id": "90003",
+      "name": "João Neves",
+      "position": "MC",
+      "club": "Paris Saint-Germain"
+    },
+    {
+      "id": "90065",
+      "name": "João Pedro",
+      "position": "ATA",
+      "club": "Chelsea"
+    },
+    {
+      "id": "90057",
+      "name": "Johnny Cardoso",
+      "position": "VOL",
+      "club": "Atlético Madrid"
+    },
+    {
+      "id": "90052",
+      "name": "Julien Duranville",
+      "position": "PD",
+      "club": "Borussia Dortmund"
+    },
+    {
+      "id": "90104",
+      "name": "K. Danois",
+      "position": "MC",
+      "club": "AJ Auxerre"
+    },
+    {
+      "id": "90075",
+      "name": "K. Karetsas",
+      "position": "MEI",
+      "club": "KRC Genk"
+    },
+    {
+      "id": "90134",
+      "name": "K. Kozłowski",
+      "position": "MEI",
+      "club": "Gaziantep FK"
+    },
+    {
+      "id": "90088",
+      "name": "K. Mainoo",
+      "position": "VOL",
+      "club": "Manchester United"
+    },
+    {
+      "id": "90101",
+      "name": "K. Mainoo",
+      "position": "VOL",
+      "club": "Manchester United"
+    },
+    {
+      "id": "90133",
+      "name": "K. Taylor",
+      "position": "MC",
+      "club": "Lazio"
+    },
+    {
+      "id": "90114",
+      "name": "Kang Sang Yoon",
+      "position": "MC",
+      "club": "Jeonbuk Hyundai Motors"
+    },
+    {
+      "id": "90034",
+      "name": "Kobbie Mainoo",
+      "position": "VOL",
+      "club": "Manchester United"
+    },
+    {
+      "id": "90083",
+      "name": "L. Camara",
+      "position": "MC",
+      "club": "AS Monaco"
+    },
+    {
+      "id": "90096",
+      "name": "L. Camara",
+      "position": "MC",
+      "club": "AS Monaco"
+    },
+    {
+      "id": "90122",
+      "name": "L. Stassin",
+      "position": "ATA",
+      "club": "AS Saint-Étienne"
+    },
+    {
+      "id": "90022",
+      "name": "Lamine Yamal",
+      "position": "PD",
+      "club": "FC Barcelona"
+    },
+    {
+      "id": "90030",
+      "name": "Leny Yoro",
+      "position": "ZAG",
+      "club": "Manchester United"
+    },
+    {
+      "id": "90039",
+      "name": "Lewis Miley",
+      "position": "MC",
+      "club": "Newcastle United"
+    },
+    {
+      "id": "90045",
+      "name": "Luka Sucic",
+      "position": "MEI",
+      "club": "RB Leipzig"
+    },
+    {
+      "id": "90120",
+      "name": "M. Al Juwair",
+      "position": "MC",
+      "club": "Al Qadsiah FC"
+    },
+    {
+      "id": "90024",
+      "name": "M. Bah",
+      "position": "MC",
+      "club": "Bayer 04 Leverkusen"
+    },
+    {
+      "id": "90007",
+      "name": "M. Caicedo",
+      "position": "VOL",
+      "club": "Chelsea"
+    },
+    {
+      "id": "90116",
+      "name": "M. Delorge",
+      "position": "MC",
+      "club": "KAA Gent"
+    },
+    {
+      "id": "90012",
+      "name": "M. Guendouzi",
+      "position": "VOL",
+      "club": "Lazio"
+    },
+    {
+      "id": "90113",
+      "name": "M. Krattenmacher",
+      "position": "MEI",
+      "club": "Hertha BSC"
+    },
+    {
+      "id": "90008",
+      "name": "M. Olise",
+      "position": "PD",
+      "club": "FC Bayern München"
+    },
+    {
+      "id": "90059",
+      "name": "M. Sangaré",
+      "position": "MC",
+      "club": "RC Lens"
+    },
+    {
+      "id": "90061",
+      "name": "M. Tillman",
+      "position": "MEI",
+      "club": "Bayer 04 Leverkusen"
+    },
+    {
+      "id": "90020",
+      "name": "M. Zaire-Emery",
+      "position": "MC",
+      "club": "Paris Saint-Germain"
+    },
+    {
+      "id": "90071",
+      "name": "Marc Bernal",
+      "position": "VOL",
+      "club": "FC Barcelona"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\tclub\n90056\tGeorge Ilenikhena\tATA\tAS Monaco\n90031\tGeovany Quenda\tPD\tSporting CP\n90033\tGivairo Read\tLD\tFeyenoord\n90118\tH. Diarra\tMC\tSunderland\n90136\tH. Elliott\tMEI\tAston Villa\n90123\tH. Haraldsson\tMEI\tLille OSC\n90089\tH. Larsson\tMC\tEintracht Frankfurt\n90102\tH. Larsson\tMC\tEintracht Frankfurt\n90130\tI. Doukouré\tZAG\tRC Strasbourg Alsace\n90128\tI. Moriba\tMC\tRC Celta\n90058\tI. Saibari\tMEI\tPSV\n90139\tIzan González\tMC\tGranada CF\n90087\tJ. Bahoya\tME\tEintracht Frankfurt\n90100\tJ. Bahoya\tME\tEintracht Frankfurt\n90109\tJ. Bellingham\tMC\tBorussia Dortmund\n90001\tJ. Bellingham\tMEI\tReal Madrid\n90080\tJ. Manzambi\tMC\tSC Freiburg\n90093\tJ. Manzambi\tMC\tSC Freiburg\n90004\tJ. Musiala\tMEI\tFC Bayern München\n90051\tJamie Gittens\tPE\tBorussia Dortmund\n90003\tJoão Neves\tMC\tParis Saint-Germain\n90065\tJoão Pedro\tATA\tChelsea\n90057\tJohnny Cardoso\tVOL\tAtlético Madrid\n90052\tJulien Duranville\tPD\tBorussia Dortmund\n90104\tK. Danois\tMC\tAJ Auxerre\n90075\tK. Karetsas\tMEI\tKRC Genk\n90134\tK. Kozłowski\tMEI\tGaziantep FK\n90088\tK. Mainoo\tVOL\tManchester United\n90101\tK. Mainoo\tVOL\tManchester United\n90133\tK. Taylor\tMC\tLazio\n90114\tKang Sang Yoon\tMC\tJeonbuk Hyundai Motors\n90034\tKobbie Mainoo\tVOL\tManchester United\n90083\tL. Camara\tMC\tAS Monaco\n90096\tL. Camara\tMC\tAS Monaco\n90122\tL. Stassin\tATA\tAS Saint-Étienne\n90022\tLamine Yamal\tPD\tFC Barcelona\n90030\tLeny Yoro\tZAG\tManchester United\n90039\tLewis Miley\tMC\tNewcastle United\n90045\tLuka Sucic\tMEI\tRB Leipzig\n90120\tM. Al Juwair\tMC\tAl Qadsiah FC\n90024\tM. Bah\tMC\tBayer 04 Leverkusen\n90007\tM. Caicedo\tVOL\tChelsea\n90116\tM. Delorge\tMC\tKAA Gent\n90012\tM. Guendouzi\tVOL\tLazio\n90113\tM. Krattenmacher\tMEI\tHertha BSC\n90008\tM. Olise\tPD\tFC Bayern München\n90059\tM. Sangaré\tMC\tRC Lens\n90061\tM. Tillman\tMEI\tBayer 04 Leverkusen\n90020\tM. Zaire-Emery\tMC\tParis Saint-Germain\n90071\tMarc Bernal\tVOL\tFC Barcelona\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

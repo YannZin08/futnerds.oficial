@@ -1,0 +1,76 @@
+{
+  "query": "SELECT COUNT(*) as sem_pais FROM players WHERE nationality = '' OR nationality IS NULL;\nSELECT name, position, club FROM players WHERE nationality = '' OR nationality IS NULL LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT COUNT(*) as sem_pais FROM players WHERE nationality = '' OR nationality IS NULL;\nSELECT name, position, club FROM players WHERE nationality = '' OR nationality IS NULL LIMIT 20;",
+  "rows": [
+    {
+      "sem_pais": "28"
+    },
+    {
+      "sem_pais": "name\tposition\tclub"
+    },
+    {
+      "sem_pais": "João Neves\tMC\tParis Saint-Germain"
+    },
+    {
+      "sem_pais": "D. Doué\tPD\tParis Saint-Germain"
+    },
+    {
+      "sem_pais": "F. Wirtz\tMEI\tFC Bayern München"
+    },
+    {
+      "sem_pais": "M. Caicedo\tVOL\tChelsea"
+    },
+    {
+      "sem_pais": "M. Olise\tPD\tFC Bayern München"
+    },
+    {
+      "sem_pais": "C. Palmer\tMEI\tChelsea"
+    },
+    {
+      "sem_pais": "Gavi\tMC\tFC Barcelona"
+    },
+    {
+      "sem_pais": "M. Guendouzi\tVOL\tLazio"
+    },
+    {
+      "sem_pais": "E. Fernández\tVOL\tChelsea"
+    },
+    {
+      "sem_pais": "M. Zaire-Emery\tMC\tParis Saint-Germain"
+    },
+    {
+      "sem_pais": "Lamine Yamal\tPD\tFC Barcelona"
+    },
+    {
+      "sem_pais": "M. Bah\tMC\tBayer 04 Leverkusen"
+    },
+    {
+      "sem_pais": "Leny Yoro\tZAG\tManchester United"
+    },
+    {
+      "sem_pais": "Kobbie Mainoo\tVOL\tManchester United"
+    },
+    {
+      "sem_pais": "Carlos Baleba\tVOL\tBrighton & Hove Albion"
+    },
+    {
+      "sem_pais": "Lewis Miley\tMC\tNewcastle United"
+    },
+    {
+      "sem_pais": "Luka Sucic\tMEI\tRB Leipzig"
+    },
+    {
+      "sem_pais": "Dean Huijsen\tZAG\tReal Madrid"
+    },
+    {
+      "sem_pais": "Finn Jeltsch\tZAG\tStuttgart"
+    },
+    {
+      "sem_pais": "Julien Duranville\tPD\tBorussia Dortmund"
+    }
+  ],
+  "messages": [],
+  "stdout": "sem_pais\n28\nname\tposition\tclub\nJoão Neves\tMC\tParis Saint-Germain\nD. Doué\tPD\tParis Saint-Germain\nF. Wirtz\tMEI\tFC Bayern München\nM. Caicedo\tVOL\tChelsea\nM. Olise\tPD\tFC Bayern München\nC. Palmer\tMEI\tChelsea\nGavi\tMC\tFC Barcelona\nM. Guendouzi\tVOL\tLazio\nE. Fernández\tVOL\tChelsea\nM. Zaire-Emery\tMC\tParis Saint-Germain\nLamine Yamal\tPD\tFC Barcelona\nM. Bah\tMC\tBayer 04 Leverkusen\nLeny Yoro\tZAG\tManchester United\nKobbie Mainoo\tVOL\tManchester United\nCarlos Baleba\tVOL\tBrighton & Hove Albion\nLewis Miley\tMC\tNewcastle United\nLuka Sucic\tMEI\tRB Leipzig\nDean Huijsen\tZAG\tReal Madrid\nFinn Jeltsch\tZAG\tStuttgart\nJulien Duranville\tPD\tBorussia Dortmund\n",
+  "stderr": "",
+  "execution_time_ms": 61
+}

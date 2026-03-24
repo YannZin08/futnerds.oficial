@@ -1,0 +1,58 @@
+{
+  "query": "SELECT id, name, position, club FROM players WHERE nationality = '' OR nationality IS NULL ORDER BY name LIMIT 10 OFFSET 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, club FROM players WHERE nationality = '' OR nationality IS NULL ORDER BY name LIMIT 10 OFFSET 20;",
+  "rows": [
+    {
+      "id": "90024",
+      "name": "M. Bah",
+      "position": "MC",
+      "club": "Bayer 04 Leverkusen"
+    },
+    {
+      "id": "90007",
+      "name": "M. Caicedo",
+      "position": "VOL",
+      "club": "Chelsea"
+    },
+    {
+      "id": "90012",
+      "name": "M. Guendouzi",
+      "position": "VOL",
+      "club": "Lazio"
+    },
+    {
+      "id": "90008",
+      "name": "M. Olise",
+      "position": "PD",
+      "club": "FC Bayern München"
+    },
+    {
+      "id": "90059",
+      "name": "M. Sangaré",
+      "position": "MC",
+      "club": "RC Lens"
+    },
+    {
+      "id": "90061",
+      "name": "M. Tillman",
+      "position": "MEI",
+      "club": "Bayer 04 Leverkusen"
+    },
+    {
+      "id": "90020",
+      "name": "M. Zaire-Emery",
+      "position": "MC",
+      "club": "Paris Saint-Germain"
+    },
+    {
+      "id": "90071",
+      "name": "Marc Bernal",
+      "position": "VOL",
+      "club": "FC Barcelona"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\tclub\n90024\tM. Bah\tMC\tBayer 04 Leverkusen\n90007\tM. Caicedo\tVOL\tChelsea\n90012\tM. Guendouzi\tVOL\tLazio\n90008\tM. Olise\tPD\tFC Bayern München\n90059\tM. Sangaré\tMC\tRC Lens\n90061\tM. Tillman\tMEI\tBayer 04 Leverkusen\n90020\tM. Zaire-Emery\tMC\tParis Saint-Germain\n90071\tMarc Bernal\tVOL\tFC Barcelona\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}

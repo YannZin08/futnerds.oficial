@@ -1,0 +1,136 @@
+{
+  "query": "SELECT id, name, position, club FROM players WHERE nationality = '' OR nationality IS NULL ORDER BY name LIMIT 50 OFFSET 120;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, club FROM players WHERE nationality = '' OR nationality IS NULL ORDER BY name LIMIT 50 OFFSET 120;",
+  "rows": [
+    {
+      "id": "90029",
+      "name": "Pau Cubarsí",
+      "position": "ZAG",
+      "club": "FC Barcelona"
+    },
+    {
+      "id": "90002",
+      "name": "Pedri",
+      "position": "MC",
+      "club": "FC Barcelona"
+    },
+    {
+      "id": "90010",
+      "name": "R. Gravenberch",
+      "position": "VOL",
+      "club": "Liverpool"
+    },
+    {
+      "id": "90129",
+      "name": "R. Reitz",
+      "position": "MC",
+      "club": "Borussia Mönchengladbach"
+    },
+    {
+      "id": "90074",
+      "name": "S. El Mala",
+      "position": "ME",
+      "club": "1. FC Köln"
+    },
+    {
+      "id": "90132",
+      "name": "S. Hezze",
+      "position": "VOL",
+      "club": "Olympiacos FC"
+    },
+    {
+      "id": "90076",
+      "name": "S. Mayulu",
+      "position": "MC",
+      "club": "Paris Saint-Germain"
+    },
+    {
+      "id": "90064",
+      "name": "S. Ricci",
+      "position": "VOL",
+      "club": "AC Milan"
+    },
+    {
+      "id": "90023",
+      "name": "Savinho",
+      "position": "PD",
+      "club": "Manchester City"
+    },
+    {
+      "id": "90026",
+      "name": "Sávio",
+      "position": "PD",
+      "club": "Manchester City"
+    },
+    {
+      "id": "90032",
+      "name": "Sverre Nypan",
+      "position": "MEI",
+      "club": "Rosenborg BK"
+    },
+    {
+      "id": "90035",
+      "name": "Tino Livramento",
+      "position": "LD",
+      "club": "Newcastle United"
+    },
+    {
+      "id": "90105",
+      "name": "V. Carboni",
+      "position": "MEI",
+      "club": "Racing Club"
+    },
+    {
+      "id": "90013",
+      "name": "W. Odobert",
+      "position": "PE",
+      "club": "Tottenham Hotspur"
+    },
+    {
+      "id": "90047",
+      "name": "Willy Kambwala",
+      "position": "ZAG",
+      "club": "Villarreal CF"
+    },
+    {
+      "id": "90067",
+      "name": "X. Simons",
+      "position": "MEI",
+      "club": "Tottenham Hotspur"
+    },
+    {
+      "id": "90060",
+      "name": "Y. Ayari",
+      "position": "VOL",
+      "club": "Brighton & Hove Albion"
+    },
+    {
+      "id": "90108",
+      "name": "Y. Özcan",
+      "position": "ZAG",
+      "club": "Beşiktaş JK"
+    },
+    {
+      "id": "90111",
+      "name": "Y. Yarmoliuk",
+      "position": "VOL",
+      "club": "Brentford"
+    },
+    {
+      "id": "90025",
+      "name": "Yeremy Pino",
+      "position": "PD",
+      "club": "Villarreal CF"
+    },
+    {
+      "id": "90018",
+      "name": "Yerlan Orazov",
+      "position": "MC",
+      "club": "Shakhtar Donetsk"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\tclub\n90029\tPau Cubarsí\tZAG\tFC Barcelona\n90002\tPedri\tMC\tFC Barcelona\n90010\tR. Gravenberch\tVOL\tLiverpool\n90129\tR. Reitz\tMC\tBorussia Mönchengladbach\n90074\tS. El Mala\tME\t1. FC Köln\n90132\tS. Hezze\tVOL\tOlympiacos FC\n90076\tS. Mayulu\tMC\tParis Saint-Germain\n90064\tS. Ricci\tVOL\tAC Milan\n90023\tSavinho\tPD\tManchester City\n90026\tSávio\tPD\tManchester City\n90032\tSverre Nypan\tMEI\tRosenborg BK\n90035\tTino Livramento\tLD\tNewcastle United\n90105\tV. Carboni\tMEI\tRacing Club\n90013\tW. Odobert\tPE\tTottenham Hotspur\n90047\tWilly Kambwala\tZAG\tVillarreal CF\n90067\tX. Simons\tMEI\tTottenham Hotspur\n90060\tY. Ayari\tVOL\tBrighton & Hove Albion\n90108\tY. Özcan\tZAG\tBeşiktaş JK\n90111\tY. Yarmoliuk\tVOL\tBrentford\n90025\tYeremy Pino\tPD\tVillarreal CF\n90018\tYerlan Orazov\tMC\tShakhtar Donetsk\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}
