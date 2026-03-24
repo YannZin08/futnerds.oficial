@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Navbar from "@/components/Navbar";
 import { trpc } from "@/lib/trpc";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -75,8 +76,9 @@ export default function Times() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       {/* Header */}
-      <div className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+      <div className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-16 z-10">
         <div className="container py-4">
           <div className="flex items-center gap-3">
             <Button
