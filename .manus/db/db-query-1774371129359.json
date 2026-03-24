@@ -1,0 +1,49 @@
+{
+  "query": "-- Remover os 10 jogadores não fornecidos (mantendo J. Gadou id:30042)\nDELETE FROM players WHERE id IN (\n  90018, -- Yerlan Orazov (Ukrainian Premier League)\n  90032, -- Sverre Nypan (Eliteserien)\n  69,    -- M. Ndiaye (Eliteserien)\n  90114, -- Kang Sang Yoon (K League 1)\n  90125, -- A. Kozubal (Ekstraklasa)\n  90105, -- V. Carboni (Liga Profesional)\n  60046, -- M. Del Blanco (Liga Argentina)\n  90107, -- P. Mercado (Liga Pro)\n  76,    -- C. Brady (MLS)\n  60036  -- C. Donovan (Scottish Premiership)\n);\n\n-- Verificar dados de Cambiaso, Schick e Nkunku\nSELECT id, name, position, altPositions, club, league, nationality, overall, potential, age, imageUrl\nFROM players\nWHERE name LIKE '%Cambia%' OR name LIKE '%Schick%' OR name LIKE '%Nkunku%'\nORDER BY name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Remover os 10 jogadores não fornecidos (mantendo J. Gadou id:30042)\nDELETE FROM players WHERE id IN (\n  90018, -- Yerlan Orazov (Ukrainian Premier League)\n  90032, -- Sverre Nypan (Eliteserien)\n  69,    -- M. Ndiaye (Eliteserien)\n  90114, -- Kang Sang Yoon (K League 1)\n  90125, -- A. Kozubal (Ekstraklasa)\n  90105, -- V. Carboni (Liga Profesional)\n  60046, -- M. Del Blanco (Liga Argentina)\n  90107, -- P. Mercado (Liga Pro)\n  76,    -- C. Brady (MLS)\n  60036  -- C. Donovan (Scottish Premiership)\n);\n\n-- Verificar dados de Cambiaso, Schick e Nkunku\nSELECT id, name, position, altPositions, club, league, nationality, overall, potential, age, imageUrl\nFROM players\nWHERE name LIKE '%Cambia%' OR name LIKE '%Schick%' OR name LIKE '%Nkunku%'\nORDER BY name;",
+  "rows": [
+    {
+      "id": "90027",
+      "name": "A. Cambiaso",
+      "position": "LD",
+      "altPositions": "LE,MC,VOL",
+      "club": "Juventus",
+      "league": "Serie A",
+      "nationality": "Itália",
+      "overall": "85",
+      "potential": "90",
+      "age": "23",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "90044",
+      "name": "N. Nkunku",
+      "position": "ATA",
+      "altPositions": "MEI,PE",
+      "club": "Chelsea",
+      "league": "Premier League",
+      "nationality": "França",
+      "overall": "82",
+      "potential": "89",
+      "age": "23",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "90015",
+      "name": "P. Schick",
+      "position": "ATA",
+      "altPositions": "MEI",
+      "club": "Bayer 04 Leverkusen",
+      "league": "Bundesliga",
+      "nationality": "República Tcheca",
+      "overall": "82",
+      "potential": "90",
+      "age": "23",
+      "imageUrl": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\taltPositions\tclub\tleague\tnationality\toverall\tpotential\tage\timageUrl\n90027\tA. Cambiaso\tLD\tLE,MC,VOL\tJuventus\tSerie A\tItália\t85\t90\t23\tNULL\n90044\tN. Nkunku\tATA\tMEI,PE\tChelsea\tPremier League\tFrança\t82\t89\t23\tNULL\n90015\tP. Schick\tATA\tMEI\tBayer 04 Leverkusen\tBundesliga\tRepública Tcheca\t82\t90\t23\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 68
+}

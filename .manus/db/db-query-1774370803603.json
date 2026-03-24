@@ -1,0 +1,90 @@
+{
+  "query": "SELECT league, COUNT(*) as total\nFROM players\nGROUP BY league\nORDER BY total ASC\nLIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT league, COUNT(*) as total\nFROM players\nGROUP BY league\nORDER BY total ASC\nLIMIT 20;",
+  "rows": [
+    {
+      "league": "Bundesliga Austria",
+      "total": "1"
+    },
+    {
+      "league": "Liga Argentina",
+      "total": "1"
+    },
+    {
+      "league": "LaLiga 2",
+      "total": "1"
+    },
+    {
+      "league": "EFL Championship",
+      "total": "1"
+    },
+    {
+      "league": "Ukrainian Premier League",
+      "total": "1"
+    },
+    {
+      "league": "MLS",
+      "total": "1"
+    },
+    {
+      "league": "Scottish Premiership",
+      "total": "1"
+    },
+    {
+      "league": "K League 1",
+      "total": "1"
+    },
+    {
+      "league": "Liga Profesional",
+      "total": "1"
+    },
+    {
+      "league": "Liga Pro",
+      "total": "1"
+    },
+    {
+      "league": "Ekstraklasa",
+      "total": "1"
+    },
+    {
+      "league": "Serie B",
+      "total": "2"
+    },
+    {
+      "league": "Eliteserien",
+      "total": "2"
+    },
+    {
+      "league": "La Liga 2",
+      "total": "2"
+    },
+    {
+      "league": "Ligue 2",
+      "total": "2"
+    },
+    {
+      "league": "Super League",
+      "total": "3"
+    },
+    {
+      "league": "2. Bundesliga",
+      "total": "3"
+    },
+    {
+      "league": "Saudi Pro League",
+      "total": "4"
+    },
+    {
+      "league": "Super League Greece",
+      "total": "4"
+    },
+    {
+      "league": "Bundesliga 2",
+      "total": "4"
+    }
+  ],
+  "messages": [],
+  "stdout": "league\ttotal\nBundesliga Austria\t1\nLiga Argentina\t1\nLaLiga 2\t1\nEFL Championship\t1\nUkrainian Premier League\t1\nMLS\t1\nScottish Premiership\t1\nK League 1\t1\nLiga Profesional\t1\nLiga Pro\t1\nEkstraklasa\t1\nSerie B\t2\nEliteserien\t2\nLa Liga 2\t2\nLigue 2\t2\nSuper League\t3\n2. Bundesliga\t3\nSaudi Pro League\t4\nSuper League Greece\t4\nBundesliga 2\t4\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}

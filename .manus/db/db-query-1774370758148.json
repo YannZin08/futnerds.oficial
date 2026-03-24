@@ -1,0 +1,40 @@
+{
+  "query": "-- Verificar distribuição de IDs para entender os lotes de inserção\nSELECT \n  CASE \n    WHEN id < 100 THEN 'IDs 1-99 (seed inicial)'\n    WHEN id >= 100 AND id < 200 THEN 'IDs 100-199'\n    WHEN id >= 200 AND id < 1000 THEN 'IDs 200-999'\n    WHEN id >= 1000 AND id < 10000 THEN 'IDs 1000-9999'\n    WHEN id >= 10000 AND id < 30000 THEN 'IDs 10000-29999'\n    WHEN id >= 30000 AND id < 60000 THEN 'IDs 30000-59999'\n    WHEN id >= 60000 AND id < 90000 THEN 'IDs 60000-89999'\n    WHEN id >= 90000 THEN 'IDs 90000+ (último lote)'\n  END as faixa_id,\n  COUNT(*) as total,\n  MIN(overall) as min_overall,\n  MAX(overall) as max_overall\nFROM players\nGROUP BY faixa_id\nORDER BY MIN(id);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Verificar distribuição de IDs para entender os lotes de inserção\nSELECT \n  CASE \n    WHEN id < 100 THEN 'IDs 1-99 (seed inicial)'\n    WHEN id >= 100 AND id < 200 THEN 'IDs 100-199'\n    WHEN id >= 200 AND id < 1000 THEN 'IDs 200-999'\n    WHEN id >= 1000 AND id < 10000 THEN 'IDs 1000-9999'\n    WHEN id >= 10000 AND id < 30000 THEN 'IDs 10000-29999'\n    WHEN id >= 30000 AND id < 60000 THEN 'IDs 30000-59999'\n    WHEN id >= 60000 AND id < 90000 THEN 'IDs 60000-89999'\n    WHEN id >= 90000 THEN 'IDs 90000+ (último lote)'\n  END as faixa_id,\n  COUNT(*) as total,\n  MIN(overall) as min_overall,\n  MAX(overall) as max_overall\nFROM players\nGROUP BY faixa_id\nORDER BY MIN(id);",
+  "rows": [
+    {
+      "faixa_id": "IDs 1-99 (seed inicial)",
+      "total": "79",
+      "min_overall": "59",
+      "max_overall": "85"
+    },
+    {
+      "faixa_id": "IDs 100-199",
+      "total": "25",
+      "min_overall": "61",
+      "max_overall": "79"
+    },
+    {
+      "faixa_id": "IDs 30000-59999",
+      "total": "49",
+      "min_overall": "66",
+      "max_overall": "87"
+    },
+    {
+      "faixa_id": "IDs 60000-89999",
+      "total": "54",
+      "min_overall": "62",
+      "max_overall": "88"
+    },
+    {
+      "faixa_id": "IDs 90000+ (último lote)",
+      "total": "109",
+      "min_overall": "61",
+      "max_overall": "90"
+    }
+  ],
+  "messages": [],
+  "stdout": "faixa_id\ttotal\tmin_overall\tmax_overall\nIDs 1-99 (seed inicial)\t79\t59\t85\nIDs 100-199\t25\t61\t79\nIDs 30000-59999\t49\t66\t87\nIDs 60000-89999\t54\t62\t88\nIDs 90000+ (último lote)\t109\t61\t90\n",
+  "stderr": "",
+  "execution_time_ms": 148
+}

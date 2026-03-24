@@ -73,3 +73,7 @@
 
 ## Bug - Cor do Overall nos Cards
 - [x] Corrigir lógica de cores do overall nos cards de jogadores (cor calculada dinamicamente pelo overall: gold 75+, silver 65-74, bronze <65)
+
+## Limpeza e Correção de Dados
+- [x] Remover 10 jogadores não fornecidos pelo usuário (ligas incomuns: Ucrânia, Noruega, Coreia, Polônia, Argentina, Equador, MLS, Escócia)
+- [x] Remover A. Cambiaso, P. Schick e N. Nkunku (não fornecidos pelo usuário, inseridos automaticamente)

@@ -1,0 +1,202 @@
+{
+  "query": "SELECT league, COUNT(*) as total, MIN(overall) as min_ov, MAX(overall) as max_ov\nFROM players\nGROUP BY league\nORDER BY total DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT league, COUNT(*) as total, MIN(overall) as min_ov, MAX(overall) as max_ov\nFROM players\nGROUP BY league\nORDER BY total DESC;",
+  "rows": [
+    {
+      "league": "Premier League",
+      "total": "77",
+      "min_ov": "62",
+      "max_ov": "88"
+    },
+    {
+      "league": "Bundesliga",
+      "total": "50",
+      "min_ov": "61",
+      "max_ov": "88"
+    },
+    {
+      "league": "La Liga",
+      "total": "37",
+      "min_ov": "64",
+      "max_ov": "90"
+    },
+    {
+      "league": "Ligue 1",
+      "total": "29",
+      "min_ov": "68",
+      "max_ov": "88"
+    },
+    {
+      "league": "Serie A",
+      "total": "25",
+      "min_ov": "65",
+      "max_ov": "85"
+    },
+    {
+      "league": "Primeira Liga",
+      "total": "19",
+      "min_ov": "62",
+      "max_ov": "81"
+    },
+    {
+      "league": "Eredivisie",
+      "total": "13",
+      "min_ov": "61",
+      "max_ov": "80"
+    },
+    {
+      "league": "First Division A",
+      "total": "8",
+      "min_ov": "61",
+      "max_ov": "76"
+    },
+    {
+      "league": "Championship",
+      "total": "6",
+      "min_ov": "69",
+      "max_ov": "79"
+    },
+    {
+      "league": "Jupiler Pro League",
+      "total": "5",
+      "min_ov": "70",
+      "max_ov": "78"
+    },
+    {
+      "league": "Pro League",
+      "total": "5",
+      "min_ov": "65",
+      "max_ov": "74"
+    },
+    {
+      "league": "Süper Lig",
+      "total": "5",
+      "min_ov": "59",
+      "max_ov": "72"
+    },
+    {
+      "league": "Super League Greece",
+      "total": "4",
+      "min_ov": "73",
+      "max_ov": "79"
+    },
+    {
+      "league": "Saudi Pro League",
+      "total": "4",
+      "min_ov": "69",
+      "max_ov": "79"
+    },
+    {
+      "league": "Bundesliga 2",
+      "total": "4",
+      "min_ov": "61",
+      "max_ov": "71"
+    },
+    {
+      "league": "2. Bundesliga",
+      "total": "3",
+      "min_ov": "69",
+      "max_ov": "76"
+    },
+    {
+      "league": "Super League",
+      "total": "3",
+      "min_ov": "72",
+      "max_ov": "79"
+    },
+    {
+      "league": "La Liga 2",
+      "total": "2",
+      "min_ov": "69",
+      "max_ov": "75"
+    },
+    {
+      "league": "Serie B",
+      "total": "2",
+      "min_ov": "63",
+      "max_ov": "71"
+    },
+    {
+      "league": "Ligue 2",
+      "total": "2",
+      "min_ov": "65",
+      "max_ov": "74"
+    },
+    {
+      "league": "Eliteserien",
+      "total": "2",
+      "min_ov": "67",
+      "max_ov": "70"
+    },
+    {
+      "league": "EFL Championship",
+      "total": "1",
+      "min_ov": "66",
+      "max_ov": "66"
+    },
+    {
+      "league": "LaLiga 2",
+      "total": "1",
+      "min_ov": "70",
+      "max_ov": "70"
+    },
+    {
+      "league": "MLS",
+      "total": "1",
+      "min_ov": "69",
+      "max_ov": "69"
+    },
+    {
+      "league": "Liga Argentina",
+      "total": "1",
+      "min_ov": "73",
+      "max_ov": "73"
+    },
+    {
+      "league": "Liga Pro",
+      "total": "1",
+      "min_ov": "72",
+      "max_ov": "72"
+    },
+    {
+      "league": "Ekstraklasa",
+      "total": "1",
+      "min_ov": "70",
+      "max_ov": "70"
+    },
+    {
+      "league": "Bundesliga Austria",
+      "total": "1",
+      "min_ov": "66",
+      "max_ov": "66"
+    },
+    {
+      "league": "Scottish Premiership",
+      "total": "1",
+      "min_ov": "66",
+      "max_ov": "66"
+    },
+    {
+      "league": "Liga Profesional",
+      "total": "1",
+      "min_ov": "73",
+      "max_ov": "73"
+    },
+    {
+      "league": "K League 1",
+      "total": "1",
+      "min_ov": "70",
+      "max_ov": "70"
+    },
+    {
+      "league": "Ukrainian Premier League",
+      "total": "1",
+      "min_ov": "70",
+      "max_ov": "70"
+    }
+  ],
+  "messages": [],
+  "stdout": "league\ttotal\tmin_ov\tmax_ov\nPremier League\t77\t62\t88\nBundesliga\t50\t61\t88\nLa Liga\t37\t64\t90\nLigue 1\t29\t68\t88\nSerie A\t25\t65\t85\nPrimeira Liga\t19\t62\t81\nEredivisie\t13\t61\t80\nFirst Division A\t8\t61\t76\nChampionship\t6\t69\t79\nJupiler Pro League\t5\t70\t78\nPro League\t5\t65\t74\nSüper Lig\t5\t59\t72\nSuper League Greece\t4\t73\t79\nSaudi Pro League\t4\t69\t79\nBundesliga 2\t4\t61\t71\n2. Bundesliga\t3\t69\t76\nSuper League\t3\t72\t79\nLa Liga 2\t2\t69\t75\nSerie B\t2\t63\t71\nLigue 2\t2\t65\t74\nEliteserien\t2\t67\t70\nEFL Championship\t1\t66\t66\nLaLiga 2\t1\t70\t70\nMLS\t1\t69\t69\nLiga Argentina\t1\t73\t73\nLiga Pro\t1\t72\t72\nEkstraklasa\t1\t70\t70\nBundesliga Austria\t1\t66\t66\nScottish Premiership\t1\t66\t66\nLiga Profesional\t1\t73\t73\nK League 1\t1\t70\t70\nUkrainian Premier League\t1\t70\t70\n",
+  "stderr": "",
+  "execution_time_ms": 52
+}

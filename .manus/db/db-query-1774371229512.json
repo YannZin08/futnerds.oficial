@@ -1,0 +1,42 @@
+{
+  "query": "SELECT age, COUNT(*) as total\nFROM players\nGROUP BY age\nORDER BY CAST(age AS UNSIGNED) DESC\nLIMIT 15;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT age, COUNT(*) as total\nFROM players\nGROUP BY age\nORDER BY CAST(age AS UNSIGNED) DESC\nLIMIT 15;",
+  "rows": [
+    {
+      "age": "23",
+      "total": "59"
+    },
+    {
+      "age": "22",
+      "total": "61"
+    },
+    {
+      "age": "21",
+      "total": "45"
+    },
+    {
+      "age": "20",
+      "total": "53"
+    },
+    {
+      "age": "19",
+      "total": "39"
+    },
+    {
+      "age": "18",
+      "total": "24"
+    },
+    {
+      "age": "17",
+      "total": "20"
+    },
+    {
+      "age": "16",
+      "total": "2"
+    }
+  ],
+  "messages": [],
+  "stdout": "age\ttotal\n23\t59\n22\t61\n21\t45\n20\t53\n19\t39\n18\t24\n17\t20\n16\t2\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

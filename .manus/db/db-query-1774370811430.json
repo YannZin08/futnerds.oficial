@@ -1,0 +1,142 @@
+{
+  "query": "SELECT id, name, position, club, league, nationality, overall, potential, age,\n  CASE WHEN imageUrl IS NULL OR imageUrl = 'NULL' THEN 'SEM IMAGEM' ELSE 'COM IMAGEM' END as tem_imagem\nFROM players\nWHERE league NOT IN (\n  'Premier League', 'Bundesliga', 'La Liga', 'Ligue 1', 'Serie A',\n  'Primeira Liga', 'Eredivisie', 'First Division A', 'Championship',\n  'Jupiler Pro League', 'Pro League', 'Süper Lig', 'Super League Greece',\n  'Saudi Pro League', 'Bundesliga 2', '2. Bundesliga', 'Super League',\n  'La Liga 2', 'Serie B', 'Ligue 2', 'LaLiga 2', 'EFL Championship'\n)\nORDER BY league, overall DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, club, league, nationality, overall, potential, age,\n  CASE WHEN imageUrl IS NULL OR imageUrl = 'NULL' THEN 'SEM IMAGEM' ELSE 'COM IMAGEM' END as tem_imagem\nFROM players\nWHERE league NOT IN (\n  'Premier League', 'Bundesliga', 'La Liga', 'Ligue 1', 'Serie A',\n  'Primeira Liga', 'Eredivisie', 'First Division A', 'Championship',\n  'Jupiler Pro League', 'Pro League', 'Süper Lig', 'Super League Greece',\n  'Saudi Pro League', 'Bundesliga 2', '2. Bundesliga', 'Super League',\n  'La Liga 2', 'Serie B', 'Ligue 2', 'LaLiga 2', 'EFL Championship'\n)\nORDER BY league, overall DESC;",
+  "rows": [
+    {
+      "id": "30042",
+      "name": "J. Gadou",
+      "position": "ZAG",
+      "club": "FC Red Bull Salzburg",
+      "league": "Bundesliga Austria",
+      "nationality": "France",
+      "overall": "66",
+      "potential": "85",
+      "age": "18",
+      "tem_imagem": "COM IMAGEM"
+    },
+    {
+      "id": "90125",
+      "name": "A. Kozubal",
+      "position": "MC",
+      "club": "Lech Poznań",
+      "league": "Ekstraklasa",
+      "nationality": "Polônia",
+      "overall": "70",
+      "potential": "83",
+      "age": "20",
+      "tem_imagem": "SEM IMAGEM"
+    },
+    {
+      "id": "90032",
+      "name": "Sverre Nypan",
+      "position": "MEI",
+      "club": "Rosenborg BK",
+      "league": "Eliteserien",
+      "nationality": "Noruega",
+      "overall": "70",
+      "potential": "90",
+      "age": "17",
+      "tem_imagem": "SEM IMAGEM"
+    },
+    {
+      "id": "69",
+      "name": "M. Ndiaye",
+      "position": "GK",
+      "club": "Sarpsborg 08 FF",
+      "league": "Eliteserien",
+      "nationality": "Senegal",
+      "overall": "67",
+      "potential": "81",
+      "age": "19",
+      "tem_imagem": "COM IMAGEM"
+    },
+    {
+      "id": "90114",
+      "name": "Kang Sang Yoon",
+      "position": "MC",
+      "club": "Jeonbuk Hyundai Motors",
+      "league": "K League 1",
+      "nationality": "Bélgica",
+      "overall": "70",
+      "potential": "83",
+      "age": "21",
+      "tem_imagem": "SEM IMAGEM"
+    },
+    {
+      "id": "60046",
+      "name": "M. Del Blanco",
+      "position": "LE",
+      "club": "Club Atlético Unión",
+      "league": "Liga Argentina",
+      "nationality": "Espanha",
+      "overall": "73",
+      "potential": "84",
+      "age": "21",
+      "tem_imagem": "COM IMAGEM"
+    },
+    {
+      "id": "90107",
+      "name": "P. Mercado",
+      "position": "MC",
+      "club": "Independiente del Valle",
+      "league": "Liga Pro",
+      "nationality": "Equador",
+      "overall": "72",
+      "potential": "83",
+      "age": "21",
+      "tem_imagem": "SEM IMAGEM"
+    },
+    {
+      "id": "90105",
+      "name": "V. Carboni",
+      "position": "MEI",
+      "club": "Racing Club",
+      "league": "Liga Profesional",
+      "nationality": "Argentina",
+      "overall": "73",
+      "potential": "83",
+      "age": "20",
+      "tem_imagem": "SEM IMAGEM"
+    },
+    {
+      "id": "76",
+      "name": "C. Brady",
+      "position": "GK",
+      "club": "Chicago Fire",
+      "league": "MLS",
+      "nationality": "EUA",
+      "overall": "69",
+      "potential": "80",
+      "age": "21",
+      "tem_imagem": "COM IMAGEM"
+    },
+    {
+      "id": "60036",
+      "name": "C. Donovan",
+      "position": "LD",
+      "club": "Celtic",
+      "league": "Scottish Premiership",
+      "nationality": "Inglaterra",
+      "overall": "66",
+      "potential": "85",
+      "age": "18",
+      "tem_imagem": "COM IMAGEM"
+    },
+    {
+      "id": "90018",
+      "name": "Yerlan Orazov",
+      "position": "MC",
+      "club": "Shakhtar Donetsk",
+      "league": "Ukrainian Premier League",
+      "nationality": "Cazaquistão",
+      "overall": "70",
+      "potential": "90",
+      "age": "19",
+      "tem_imagem": "SEM IMAGEM"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\tclub\tleague\tnationality\toverall\tpotential\tage\ttem_imagem\n30042\tJ. Gadou\tZAG\tFC Red Bull Salzburg\tBundesliga Austria\tFrance\t66\t85\t18\tCOM IMAGEM\n90125\tA. Kozubal\tMC\tLech Poznań\tEkstraklasa\tPolônia\t70\t83\t20\tSEM IMAGEM\n90032\tSverre Nypan\tMEI\tRosenborg BK\tEliteserien\tNoruega\t70\t90\t17\tSEM IMAGEM\n69\tM. Ndiaye\tGK\tSarpsborg 08 FF\tEliteserien\tSenegal\t67\t81\t19\tCOM IMAGEM\n90114\tKang Sang Yoon\tMC\tJeonbuk Hyundai Motors\tK League 1\tBélgica\t70\t83\t21\tSEM IMAGEM\n60046\tM. Del Blanco\tLE\tClub Atlético Unión\tLiga Argentina\tEspanha\t73\t84\t21\tCOM IMAGEM\n90107\tP. Mercado\tMC\tIndependiente del Valle\tLiga Pro\tEquador\t72\t83\t21\tSEM IMAGEM\n90105\tV. Carboni\tMEI\tRacing Club\tLiga Profesional\tArgentina\t73\t83\t20\tSEM IMAGEM\n76\tC. Brady\tGK\tChicago Fire\tMLS\tEUA\t69\t80\t21\tCOM IMAGEM\n60036\tC. Donovan\tLD\tCeltic\tScottish Premiership\tInglaterra\t66\t85\t18\tCOM IMAGEM\n90018\tYerlan Orazov\tMC\tShakhtar Donetsk\tUkrainian Premier League\tCazaquistão\t70\t90\t19\tSEM IMAGEM\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}
