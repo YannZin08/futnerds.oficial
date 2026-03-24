@@ -245,8 +245,8 @@ export default function Times() {
                               <span className="text-lg font-bold text-primary">{team.shortName?.slice(0, 2)}</span>
                             </div>
                           )}
-                          <div>
-                            <p className="font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
+                          <div className="min-w-0">
+                            <p className="font-bold text-foreground group-hover:text-primary transition-colors leading-tight truncate">
                               {team.name}
                             </p>
                             <Badge variant="outline" className="text-xs mt-0.5 border-primary/30 text-primary">
