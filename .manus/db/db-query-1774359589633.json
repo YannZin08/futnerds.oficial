@@ -1,0 +1,36 @@
+{
+  "query": "SELECT * FROM players LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT * FROM players LIMIT 1;",
+  "rows": [
+    {
+      "id": "21",
+      "name": "S. Lammens",
+      "position": "GK",
+      "nationality": "Bélgica",
+      "club": "Manchester United",
+      "league": "Premier League",
+      "overall": "80",
+      "pace": "NULL",
+      "shooting": "NULL",
+      "passing": "NULL",
+      "dribbling": "NULL",
+      "defending": "NULL",
+      "physical": "NULL",
+      "cardType": "gold",
+      "rating": "NULL",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/S. Lammens_ebb19926.webp",
+      "flagUrl": "NULL",
+      "clubLogoUrl": "NULL",
+      "price": "36500000",
+      "createdAt": "2026-03-23 18:32:01",
+      "updatedAt": "2026-03-23 18:52:08",
+      "potential": "87",
+      "age": "22",
+      "altPositions": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\tnationality\tclub\tleague\toverall\tpace\tshooting\tpassing\tdribbling\tdefending\tphysical\tcardType\trating\timageUrl\tflagUrl\tclubLogoUrl\tprice\tcreatedAt\tupdatedAt\tpotential\tage\taltPositions\n21\tS. Lammens\tGK\tBélgica\tManchester United\tPremier League\t80\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tgold\tNULL\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/S. Lammens_ebb19926.webp\tNULL\tNULL\t36500000\t2026-03-23 18:32:01\t2026-03-23 18:52:08\t87\t22\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}

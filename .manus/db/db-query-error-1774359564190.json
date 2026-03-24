@@ -1,0 +1,33 @@
+{
+  "query": "DESCRIBE players; SELECT id, name, position, altPositions, team, league, nationality, age, overall, potential, price, imageUrl FROM players LIMIT 3;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute DESCRIBE players; SELECT id, name, position, altPositions, team, league, nationality, age, overall, potential, price, imageUrl FROM players LIMIT 3;",
+  "returncode": 1,
+  "logs": [
+    "Field\tType\tNull\tKey\tDefault\tExtra",
+    "id\tint\tNO\tPRI\tNULL\tauto_increment",
+    "name\tvarchar(128)\tNO\t\tNULL\t",
+    "position\tvarchar(16)\tNO\t\tNULL\t",
+    "nationality\tvarchar(64)\tNO\t\tNULL\t",
+    "club\tvarchar(128)\tNO\t\tNULL\t",
+    "league\tvarchar(128)\tNO\t\tNULL\t",
+    "overall\tint\tNO\t\tNULL\t",
+    "pace\tint\tYES\t\tNULL\t",
+    "shooting\tint\tYES\t\tNULL\t",
+    "passing\tint\tYES\t\tNULL\t",
+    "dribbling\tint\tYES\t\tNULL\t",
+    "defending\tint\tYES\t\tNULL\t",
+    "physical\tint\tYES\t\tNULL\t",
+    "cardType\tenum('gold','silver','bronze','toty','tots','icon','hero','special')\tNO\t\tgold\t",
+    "rating\tfloat\tYES\t\tNULL\t",
+    "imageUrl\ttext\tYES\t\tNULL\t",
+    "flagUrl\ttext\tYES\t\tNULL\t",
+    "clubLogoUrl\ttext\tYES\t\tNULL\t",
+    "price\tint\tYES\t\tNULL\t",
+    "createdAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t",
+    "updatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\tDEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+    "potential\tint\tYES\t\tNULL\t",
+    "age\tint\tYES\t\tNULL\t",
+    "altPositions\ttext\tYES\t\tNULL",
+    "ERROR 1054 (42S22) at line 1: Unknown column 'team' in 'field list'"
+  ]
+}

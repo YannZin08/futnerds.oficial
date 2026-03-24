@@ -1,0 +1,49 @@
+{
+  "query": "SELECT COUNT(*) as total FROM players; SELECT position, COUNT(*) as qtd FROM players GROUP BY position ORDER BY qtd DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT COUNT(*) as total FROM players; SELECT position, COUNT(*) as qtd FROM players GROUP BY position ORDER BY qtd DESC;",
+  "rows": [
+    {
+      "total": "348"
+    },
+    {
+      "total": "position\tqtd"
+    },
+    {
+      "total": "GK\t60"
+    },
+    {
+      "total": "ATA\t58"
+    },
+    {
+      "total": "ZAG\t56"
+    },
+    {
+      "total": "MC\t37"
+    },
+    {
+      "total": "LD\t34"
+    },
+    {
+      "total": "LE\t31"
+    },
+    {
+      "total": "MEI\t27"
+    },
+    {
+      "total": "VOL\t24"
+    },
+    {
+      "total": "PD\t12"
+    },
+    {
+      "total": "PE\t5"
+    },
+    {
+      "total": "ME\t4"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\n348\nposition\tqtd\nGK\t60\nATA\t58\nZAG\t56\nMC\t37\nLD\t34\nLE\t31\nMEI\t27\nVOL\t24\nPD\t12\nPE\t5\nME\t4\n",
+  "stderr": "",
+  "execution_time_ms": 155
+}

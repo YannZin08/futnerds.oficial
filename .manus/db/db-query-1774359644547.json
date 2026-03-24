@@ -1,0 +1,90 @@
+{
+  "query": "SELECT name, position FROM players WHERE name IN ('J. Bellingham','Pedri','João Neves','J. Musiala','F. Wirtz','M. Caicedo','M. Olise','C. Palmer','R. Gravenberch','Gavi','E. Camavinga','R. Calafiori','W. Zaïre-Emery','C. Lukeba','N. O\\'Reilly','L. Miley','A. Gray','J. Acheampong','J. Hato','M. Lewis-Skelly','T. Livramento','Á. Carreras','T. Dibling','J. Hinshelwood','Asencio','V. Gómez','Y. Baas','C. Mawissa','S. Mouriño','R. Lewis') ORDER BY name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, position FROM players WHERE name IN ('J. Bellingham','Pedri','João Neves','J. Musiala','F. Wirtz','M. Caicedo','M. Olise','C. Palmer','R. Gravenberch','Gavi','E. Camavinga','R. Calafiori','W. Zaïre-Emery','C. Lukeba','N. O\\'Reilly','L. Miley','A. Gray','J. Acheampong','J. Hato','M. Lewis-Skelly','T. Livramento','Á. Carreras','T. Dibling','J. Hinshelwood','Asencio','V. Gómez','Y. Baas','C. Mawissa','S. Mouriño','R. Lewis') ORDER BY name;",
+  "rows": [
+    {
+      "name": "Á. Carreras",
+      "position": "LE"
+    },
+    {
+      "name": "A. Gray",
+      "position": "LD"
+    },
+    {
+      "name": "Asencio",
+      "position": "LD"
+    },
+    {
+      "name": "C. Lukeba",
+      "position": "LE"
+    },
+    {
+      "name": "C. Mawissa",
+      "position": "LE"
+    },
+    {
+      "name": "E. Camavinga",
+      "position": "LE"
+    },
+    {
+      "name": "J. Acheampong",
+      "position": "LD"
+    },
+    {
+      "name": "J. Hato",
+      "position": "LE"
+    },
+    {
+      "name": "J. Hinshelwood",
+      "position": "LD"
+    },
+    {
+      "name": "L. Miley",
+      "position": "LD"
+    },
+    {
+      "name": "M. Lewis-Skelly",
+      "position": "LE"
+    },
+    {
+      "name": "N. O'Reilly",
+      "position": "LE"
+    },
+    {
+      "name": "R. Calafiori",
+      "position": "ZAG"
+    },
+    {
+      "name": "R. Lewis",
+      "position": "LD"
+    },
+    {
+      "name": "S. Mouriño",
+      "position": "LD"
+    },
+    {
+      "name": "T. Dibling",
+      "position": "LD"
+    },
+    {
+      "name": "T. Livramento",
+      "position": "LD"
+    },
+    {
+      "name": "V. Gómez",
+      "position": "LE"
+    },
+    {
+      "name": "W. Zaïre-Emery",
+      "position": "LD"
+    },
+    {
+      "name": "Y. Baas",
+      "position": "ZAG"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\tposition\nÁ. Carreras\tLE\nA. Gray\tLD\nAsencio\tLD\nC. Lukeba\tLE\nC. Mawissa\tLE\nE. Camavinga\tLE\nJ. Acheampong\tLD\nJ. Hato\tLE\nJ. Hinshelwood\tLD\nL. Miley\tLD\nM. Lewis-Skelly\tLE\nN. O'Reilly\tLE\nR. Calafiori\tZAG\nR. Lewis\tLD\nS. Mouriño\tLD\nT. Dibling\tLD\nT. Livramento\tLD\nV. Gómez\tLE\nW. Zaïre-Emery\tLD\nY. Baas\tZAG\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}
