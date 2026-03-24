@@ -12,6 +12,10 @@ import {
   removeFavoritePlayer,
   updateUserProfile,
   getUserByOpenId,
+  getCountriesList,
+  getLeaguesByCountry,
+  getTeamsByLeague,
+  getTeamById,
 } from "./db";
 
 export const appRouter = router({
@@ -68,6 +72,35 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         await removeFavoritePlayer(ctx.user.id, input.playerId);
         return { success: true };
+      }),
+  }),
+
+  // ─── Countries / Leagues / Teams ────────────────────────────────────────────
+  countries: router({
+    list: publicProcedure.query(async () => {
+      return await getCountriesList();
+    }),
+  }),
+
+  leagues: router({
+    byCountry: publicProcedure
+      .input(z.object({ countryId: z.number() }))
+      .query(async ({ input }) => {
+        return await getLeaguesByCountry(input.countryId);
+      }),
+  }),
+
+  teams: router({
+    byLeague: publicProcedure
+      .input(z.object({ leagueId: z.number() }))
+      .query(async ({ input }) => {
+        return await getTeamsByLeague(input.leagueId);
+      }),
+
+    byId: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        return await getTeamById(input.id);
       }),
   }),
 

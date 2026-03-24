@@ -88,3 +88,47 @@ export const userFavoritePlayers = mysqlTable("userFavoritePlayers", {
 });
 
 export type UserFavoritePlayer = typeof userFavoritePlayers.$inferSelect;
+
+// Países
+export const countries = mysqlTable("countries", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 128 }).notNull(),
+  slug: varchar("slug", { length: 64 }).notNull().unique(),
+  imageUrl: text("imageUrl"),
+  flagUrl: text("flagUrl"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Country = typeof countries.$inferSelect;
+export type InsertCountry = typeof countries.$inferInsert;
+
+// Ligas / Divisões
+export const leagues = mysqlTable("leagues", {
+  id: int("id").autoincrement().primaryKey(),
+  countryId: int("countryId").notNull(),
+  name: varchar("name", { length: 128 }).notNull(),
+  slug: varchar("slug", { length: 64 }).notNull(),
+  division: int("division").default(1).notNull(), // 1 = primeira divisão, 2 = segunda, etc.
+  logoUrl: text("logoUrl"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type League = typeof leagues.$inferSelect;
+export type InsertLeague = typeof leagues.$inferInsert;
+
+// Times
+export const teams = mysqlTable("teams", {
+  id: int("id").autoincrement().primaryKey(),
+  leagueId: int("leagueId").notNull(),
+  countryId: int("countryId").notNull(),
+  name: varchar("name", { length: 128 }).notNull(),
+  shortName: varchar("shortName", { length: 32 }),
+  logoUrl: text("logoUrl"),
+  stadiumName: varchar("stadiumName", { length: 128 }),
+  budget: int("budget"), // em milhões de euros
+  prestige: int("prestige"), // 1-10
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Team = typeof teams.$inferSelect;
+export type InsertTeam = typeof teams.$inferInsert;

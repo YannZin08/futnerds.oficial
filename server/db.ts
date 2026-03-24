@@ -190,3 +190,42 @@ export async function removeFavoritePlayer(userId: number, playerId: number) {
   await db.delete(userFavoritePlayers)
     .where(and(eq(userFavoritePlayers.userId, userId), eq(userFavoritePlayers.playerId, playerId)));
 }
+
+// ─── Countries ───────────────────────────────────────────────────────────────
+
+export async function getCountriesList() {
+  const db = await getDb();
+  if (!db) return [];
+  const { countries } = await import("../drizzle/schema");
+  return await db.select().from(countries).orderBy(countries.name);
+}
+
+// ─── Leagues ─────────────────────────────────────────────────────────────────
+
+export async function getLeaguesByCountry(countryId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  const { leagues } = await import("../drizzle/schema");
+  return await db.select().from(leagues)
+    .where(eq(leagues.countryId, countryId))
+    .orderBy(leagues.division);
+}
+
+// ─── Teams ───────────────────────────────────────────────────────────────────
+
+export async function getTeamsByLeague(leagueId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  const { teams } = await import("../drizzle/schema");
+  return await db.select().from(teams)
+    .where(eq(teams.leagueId, leagueId))
+    .orderBy(teams.name);
+}
+
+export async function getTeamById(id: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const { teams } = await import("../drizzle/schema");
+  const result = await db.select().from(teams).where(eq(teams.id, id)).limit(1);
+  return result[0] ?? null;
+}

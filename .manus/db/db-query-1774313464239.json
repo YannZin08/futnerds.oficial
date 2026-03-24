@@ -1,0 +1,85 @@
+{
+  "query": "SELECT l.name as liga, c.name as pais, COUNT(t.id) as total_times FROM teams t JOIN leagues l ON t.leagueId = l.id JOIN countries c ON t.countryId = c.id GROUP BY l.id, l.name, c.name ORDER BY c.name, l.division;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT l.name as liga, c.name as pais, COUNT(t.id) as total_times FROM teams t JOIN leagues l ON t.leagueId = l.id JOIN countries c ON t.countryId = c.id GROUP BY l.id, l.name, c.name ORDER BY c.name, l.division;",
+  "rows": [
+    {
+      "liga": "Bundesliga",
+      "pais": "Alemanha",
+      "total_times": "18"
+    },
+    {
+      "liga": "2. Bundesliga",
+      "pais": "Alemanha",
+      "total_times": "18"
+    },
+    {
+      "liga": "Saudi Pro League",
+      "pais": "Arábia Saudita",
+      "total_times": "18"
+    },
+    {
+      "liga": "La Liga",
+      "pais": "Espanha",
+      "total_times": "20"
+    },
+    {
+      "liga": "La Liga 2",
+      "pais": "Espanha",
+      "total_times": "20"
+    },
+    {
+      "liga": "Ligue 1",
+      "pais": "França",
+      "total_times": "20"
+    },
+    {
+      "liga": "Ligue 2",
+      "pais": "França",
+      "total_times": "20"
+    },
+    {
+      "liga": "Eredivisie",
+      "pais": "Holanda",
+      "total_times": "18"
+    },
+    {
+      "liga": "Eerste Divisie",
+      "pais": "Holanda",
+      "total_times": "18"
+    },
+    {
+      "liga": "Premier League",
+      "pais": "Inglaterra",
+      "total_times": "20"
+    },
+    {
+      "liga": "Championship",
+      "pais": "Inglaterra",
+      "total_times": "24"
+    },
+    {
+      "liga": "Serie A",
+      "pais": "Itália",
+      "total_times": "20"
+    },
+    {
+      "liga": "Serie B",
+      "pais": "Itália",
+      "total_times": "20"
+    },
+    {
+      "liga": "Primeira Liga",
+      "pais": "Portugal",
+      "total_times": "18"
+    },
+    {
+      "liga": "Liga Portugal 2",
+      "pais": "Portugal",
+      "total_times": "10"
+    }
+  ],
+  "messages": [],
+  "stdout": "liga\tpais\ttotal_times\nBundesliga\tAlemanha\t18\n2. Bundesliga\tAlemanha\t18\nSaudi Pro League\tArábia Saudita\t18\nLa Liga\tEspanha\t20\nLa Liga 2\tEspanha\t20\nLigue 1\tFrança\t20\nLigue 2\tFrança\t20\nEredivisie\tHolanda\t18\nEerste Divisie\tHolanda\t18\nPremier League\tInglaterra\t20\nChampionship\tInglaterra\t24\nSerie A\tItália\t20\nSerie B\tItália\t20\nPrimeira Liga\tPortugal\t18\nLiga Portugal 2\tPortugal\t10\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

@@ -18,6 +18,7 @@ const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4o
 const navLinks = [
   { href: "/", label: "Início" },
   { href: "/jogadores", label: "Jogadores" },
+  { href: "/times", label: "Times" },
 ];
 
 export default function Navbar() {

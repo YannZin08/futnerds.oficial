@@ -1,0 +1,9 @@
+{
+  "query": "\nINSERT INTO leagues (countryId, name, slug, division) VALUES\n-- Espanha (id=1)\n(1, 'La Liga', 'la-liga', 1),\n(1, 'La Liga 2', 'la-liga-2', 2),\n\n-- Inglaterra (id=2)\n(2, 'Premier League', 'premier-league', 1),\n(2, 'Championship', 'championship', 2),\n\n-- Itália (id=3)\n(3, 'Serie A', 'serie-a', 1),\n(3, 'Serie B', 'serie-b', 2),\n\n-- Alemanha (id=4)\n(4, 'Bundesliga', 'bundesliga', 1),\n(4, '2. Bundesliga', '2-bundesliga', 2),\n\n-- França (id=5)\n(5, 'Ligue 1', 'ligue-1', 1),\n(5, 'Ligue 2', 'ligue-2', 2),\n\n-- Portugal (id=6)\n(6, 'Primeira Liga', 'primeira-liga', 1),\n(6, 'Liga Portugal 2', 'liga-portugal-2', 2),\n\n-- Arábia Saudita (id=7)\n(7, 'Saudi Pro League', 'saudi-pro-league', 1),\n\n-- Holanda (id=8)\n(8, 'Eredivisie', 'eredivisie', 1),\n(8, 'Eerste Divisie', 'eerste-divisie', 2);\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute \nINSERT INTO leagues (countryId, name, slug, division) VALUES\n-- Espanha (id=1)\n(1, 'La Liga', 'la-liga', 1),\n(1, 'La Liga 2', 'la-liga-2', 2),\n\n-- Inglaterra (id=2)\n(2, 'Premier League', 'premier-league', 1),\n(2, 'Championship', 'championship', 2),\n\n-- Itália (id=3)\n(3, 'Serie A', 'serie-a', 1),\n(3, 'Serie B', 'serie-b', 2),\n\n-- Alemanha (id=4)\n(4, 'Bundesliga', 'bundesliga', 1),\n(4, '2. Bundesliga', '2-bundesliga', 2),\n\n-- França (id=5)\n(5, 'Ligue 1', 'ligue-1', 1),\n(5, 'Ligue 2', 'ligue-2', 2),\n\n-- Portugal (id=6)\n(6, 'Primeira Liga', 'primeira-liga', 1),\n(6, 'Liga Portugal 2', 'liga-portugal-2', 2),\n\n-- Arábia Saudita (id=7)\n(7, 'Saudi Pro League', 'saudi-pro-league', 1),\n\n-- Holanda (id=8)\n(8, 'Eredivisie', 'eredivisie', 1),\n(8, 'Eerste Divisie', 'eerste-divisie', 2);\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 64
+}

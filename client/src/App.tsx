@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Jogadores from "./pages/Jogadores";
 import Perfil from "./pages/Perfil";
+import Times from "./pages/Times";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/jogadores" component={Jogadores} />
       <Route path="/perfil" component={Perfil} />
+      <Route path="/times" component={Times} />
       <Route path="/noticias"><Redirect to="/" /></Route>
       <Route path="/dashboard"><Redirect to="/" /></Route>
       <Route path="/404" component={NotFound} />
