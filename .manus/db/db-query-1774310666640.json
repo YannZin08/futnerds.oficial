@@ -1,0 +1,310 @@
+{
+  "query": "SELECT name, overall, imageUrl FROM players WHERE position = 'ZAG' ORDER BY overall DESC LIMIT 60;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, overall, imageUrl FROM players WHERE position = 'ZAG' ORDER BY overall DESC LIMIT 60;",
+  "rows": [
+    {
+      "name": "W. Pacho",
+      "overall": "87",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/W._Pacho_325d9d6d.webp"
+    },
+    {
+      "name": "J. Gvardiol",
+      "overall": "85",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Gvardiol_59ab2c9a.webp"
+    },
+    {
+      "name": "P. Hincapié",
+      "overall": "83",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/P._Hincapie_aa5a85bf.webp"
+    },
+    {
+      "name": "Pau Cubarsí",
+      "overall": "82",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Pau_Cubarsi_696932af.webp"
+    },
+    {
+      "name": "R. Calafiori",
+      "overall": "82",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/R._Calafiori_00255398.webp"
+    },
+    {
+      "name": "Murillo",
+      "overall": "82",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Murillo_f39207d1.webp"
+    },
+    {
+      "name": "M. Thiaw",
+      "overall": "81",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M._Thiaw_76f582f8.webp"
+    },
+    {
+      "name": "D. Huijsen",
+      "overall": "81",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/D._Huijsen_f2e1d0c9.webp"
+    },
+    {
+      "name": "Á. Carreras",
+      "overall": "81",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Alvaro_Carreras_b7c3d2e1.webp"
+    },
+    {
+      "name": "Gonçalo Inácio",
+      "overall": "81",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Goncalo_Inacio_a9b8c7d6.webp"
+    },
+    {
+      "name": "L. Colwill",
+      "overall": "80",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L._Colwill_d16e3e4d.webp"
+    },
+    {
+      "name": "I. Zabarnyi",
+      "overall": "80",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/I._Zabarnyi_f5e4d3c2.webp"
+    },
+    {
+      "name": "O. Diomande",
+      "overall": "80",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/O._Diomande_5c83fc3a.webp"
+    },
+    {
+      "name": "C. Lukeba",
+      "overall": "80",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Lukeba_e5f4a3b2.webp"
+    },
+    {
+      "name": "A. Khusanov",
+      "overall": "79",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Khusanov_2b8e9f1a.webp"
+    },
+    {
+      "name": "J. Branthwaite",
+      "overall": "79",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Branthwaite_d7c6b5a4.webp"
+    },
+    {
+      "name": "S. Mouriño",
+      "overall": "78",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/S._Mouriño_42363ae7.webp"
+    },
+    {
+      "name": "G. Scalvini",
+      "overall": "78",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/G._Scalvini_c3d2e1f0.webp"
+    },
+    {
+      "name": "Pubill",
+      "overall": "78",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Pubill_d3c703bd.webp"
+    },
+    {
+      "name": "Tomás Araújo",
+      "overall": "78",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Tomas_Araujo_388cc593.webp"
+    },
+    {
+      "name": "F. Boyorno",
+      "overall": "78",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/F._Boyomo_b1a0c9d8.webp"
+    },
+    {
+      "name": "Z. Debast",
+      "overall": "78",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Z._Debast_c37463a6.webp"
+    },
+    {
+      "name": "C. Matsima",
+      "overall": "77",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Matsima_c1d2e3f4.webp"
+    },
+    {
+      "name": "M. Sarr",
+      "overall": "77",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M._Sarr_f64fffb3.webp"
+    },
+    {
+      "name": "António Silva",
+      "overall": "77",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Antonio_Silva_f1e2d3c4.webp"
+    },
+    {
+      "name": "Y. Baas",
+      "overall": "77",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Y._Baas_fe9cb23d.webp"
+    },
+    {
+      "name": "L. Querfeld",
+      "overall": "77",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L._Querfeld_fafffbf3.webp"
+    },
+    {
+      "name": "Renato Veiga",
+      "overall": "77",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Renato_Veiga_083f1582.webp"
+    },
+    {
+      "name": "C. Mosquera",
+      "overall": "77",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Cristhian_Mosquera_d8e7f6a5.webp"
+    },
+    {
+      "name": "K. Koulierakis",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/K._Koulierakis_35c1cd8f.webp"
+    },
+    {
+      "name": "M. Smets",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M._Smets_1bba15ca.webp"
+    },
+    {
+      "name": "J. Hato",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Hato_e21aa187.webp"
+    },
+    {
+      "name": "J. Ordoñez",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Ordoñez_f8ae2a66.webp"
+    },
+    {
+      "name": "J. Jacquet",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Jacquet_c2627945.webp"
+    },
+    {
+      "name": "Yarek",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Yarek_06594ea7.webp"
+    },
+    {
+      "name": "W. Goes",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/W._Goes_8202c5ee.webp"
+    },
+    {
+      "name": "L. Vušković",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L._Vušković_abad500e.webp"
+    },
+    {
+      "name": "A. Gray",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Gray_e4e7d2c4.webp"
+    },
+    {
+      "name": "V. Gómez",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/V._Gomez_be8e1c34.webp"
+    },
+    {
+      "name": "L. Yoro",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L._Yoro_b36a0518.webp"
+    },
+    {
+      "name": "J. Quansah",
+      "overall": "76",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Quansah_24c73103.webp"
+    },
+    {
+      "name": "C. Mawissa",
+      "overall": "75",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Mawissa_b5a4c3d2.webp"
+    },
+    {
+      "name": "E. Bitshiabu",
+      "overall": "75",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/E._Bitshiabu_c5d4e3f2.webp"
+    },
+    {
+      "name": "Z. Van Den Bosch",
+      "overall": "75",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Z._Van_Den_Bosch_f89f1f88.webp"
+    },
+    {
+      "name": "Jon Martín",
+      "overall": "75",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Jon_Martin_d622c53d.webp"
+    },
+    {
+      "name": "Vítor Reis",
+      "overall": "75",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Vitor_Reis_f4240e64.webp"
+    },
+    {
+      "name": "M. Perrone",
+      "overall": "75",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M._Perrone_061badaa.webp"
+    },
+    {
+      "name": "P. Comuzzo",
+      "overall": "75",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/P._Comuzzo_735811e5.webp"
+    },
+    {
+      "name": "A. Anselmino",
+      "overall": "74",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Anselmino_e2d6e7b0.webp"
+    },
+    {
+      "name": "K. De Winter",
+      "overall": "74",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/K._De_Winter_40ba8a60.webp"
+    },
+    {
+      "name": "F. Jeltsch",
+      "overall": "73",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/F._Jeltsch_e7f6a5b4.webp"
+    },
+    {
+      "name": "D. Prpić",
+      "overall": "73",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/D._Prpić_a3b2c1d0.webp"
+    },
+    {
+      "name": "J. Acheampong",
+      "overall": "73",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Acheampong_b1a0f9e8.webp"
+    },
+    {
+      "name": "N. Mendy",
+      "overall": "73",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/N._Mendy_ca1196cf.webp"
+    },
+    {
+      "name": "E. Bayram",
+      "overall": "73",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/E._Bayram_e9f8a7b6.webp"
+    },
+    {
+      "name": "A. Heaven",
+      "overall": "73",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Heaven_c3e8d0b3.webp"
+    },
+    {
+      "name": "A. Stanković",
+      "overall": "72",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Stanković_d4f2a1e9.webp"
+    },
+    {
+      "name": "J. Simić",
+      "overall": "69",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Simić_f1ee957a.webp"
+    },
+    {
+      "name": "C. Donovan",
+      "overall": "66",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Donovan_a9b8c7d6.webp"
+    },
+    {
+      "name": "J. Gadou",
+      "overall": "66",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Gadou_ed5945ca.webp"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\toverall\timageUrl\nW. Pacho\t87\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/W._Pacho_325d9d6d.webp\nJ. Gvardiol\t85\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Gvardiol_59ab2c9a.webp\nP. Hincapié\t83\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/P._Hincapie_aa5a85bf.webp\nPau Cubarsí\t82\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Pau_Cubarsi_696932af.webp\nR. Calafiori\t82\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/R._Calafiori_00255398.webp\nMurillo\t82\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Murillo_f39207d1.webp\nM. Thiaw\t81\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M._Thiaw_76f582f8.webp\nD. Huijsen\t81\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/D._Huijsen_f2e1d0c9.webp\nÁ. Carreras\t81\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Alvaro_Carreras_b7c3d2e1.webp\nGonçalo Inácio\t81\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Goncalo_Inacio_a9b8c7d6.webp\nL. Colwill\t80\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L._Colwill_d16e3e4d.webp\nI. Zabarnyi\t80\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/I._Zabarnyi_f5e4d3c2.webp\nO. Diomande\t80\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/O._Diomande_5c83fc3a.webp\nC. Lukeba\t80\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Lukeba_e5f4a3b2.webp\nA. Khusanov\t79\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Khusanov_2b8e9f1a.webp\nJ. Branthwaite\t79\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Branthwaite_d7c6b5a4.webp\nS. Mouriño\t78\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/S._Mouriño_42363ae7.webp\nG. Scalvini\t78\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/G._Scalvini_c3d2e1f0.webp\nPubill\t78\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Pubill_d3c703bd.webp\nTomás Araújo\t78\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Tomas_Araujo_388cc593.webp\nF. Boyorno\t78\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/F._Boyomo_b1a0c9d8.webp\nZ. Debast\t78\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Z._Debast_c37463a6.webp\nC. Matsima\t77\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Matsima_c1d2e3f4.webp\nM. Sarr\t77\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M._Sarr_f64fffb3.webp\nAntónio Silva\t77\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Antonio_Silva_f1e2d3c4.webp\nY. Baas\t77\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Y._Baas_fe9cb23d.webp\nL. Querfeld\t77\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L._Querfeld_fafffbf3.webp\nRenato Veiga\t77\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Renato_Veiga_083f1582.webp\nC. Mosquera\t77\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Cristhian_Mosquera_d8e7f6a5.webp\nK. Koulierakis\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/K._Koulierakis_35c1cd8f.webp\nM. Smets\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M._Smets_1bba15ca.webp\nJ. Hato\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Hato_e21aa187.webp\nJ. Ordoñez\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Ordoñez_f8ae2a66.webp\nJ. Jacquet\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Jacquet_c2627945.webp\nYarek\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Yarek_06594ea7.webp\nW. Goes\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/W._Goes_8202c5ee.webp\nL. Vušković\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L._Vušković_abad500e.webp\nA. Gray\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Gray_e4e7d2c4.webp\nV. Gómez\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/V._Gomez_be8e1c34.webp\nL. Yoro\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L._Yoro_b36a0518.webp\nJ. Quansah\t76\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Quansah_24c73103.webp\nC. Mawissa\t75\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Mawissa_b5a4c3d2.webp\nE. Bitshiabu\t75\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/E._Bitshiabu_c5d4e3f2.webp\nZ. Van Den Bosch\t75\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Z._Van_Den_Bosch_f89f1f88.webp\nJon Martín\t75\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Jon_Martin_d622c53d.webp\nVítor Reis\t75\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/Vitor_Reis_f4240e64.webp\nM. Perrone\t75\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M._Perrone_061badaa.webp\nP. Comuzzo\t75\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/P._Comuzzo_735811e5.webp\nA. Anselmino\t74\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Anselmino_e2d6e7b0.webp\nK. De Winter\t74\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/K._De_Winter_40ba8a60.webp\nF. Jeltsch\t73\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/F._Jeltsch_e7f6a5b4.webp\nD. Prpić\t73\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/D._Prpić_a3b2c1d0.webp\nJ. Acheampong\t73\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Acheampong_b1a0f9e8.webp\nN. Mendy\t73\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/N._Mendy_ca1196cf.webp\nE. Bayram\t73\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/E._Bayram_e9f8a7b6.webp\nA. Heaven\t73\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Heaven_c3e8d0b3.webp\nA. Stanković\t72\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A._Stanković_d4f2a1e9.webp\nJ. Simić\t69\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Simić_f1ee957a.webp\nC. Donovan\t66\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/C._Donovan_a9b8c7d6.webp\nJ. Gadou\t66\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/J._Gadou_ed5945ca.webp\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}
