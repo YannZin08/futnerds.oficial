@@ -1,0 +1,280 @@
+{
+  "query": "SELECT id, name, altPositions FROM players WHERE position = 'LAT' ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, altPositions FROM players WHERE position = 'LAT' ORDER BY id;",
+  "rows": [
+    {
+      "id": "60001",
+      "name": "Nuno Mendes",
+      "altPositions": "ME"
+    },
+    {
+      "id": "60002",
+      "name": "G. Read",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60003",
+      "name": "W. Zaïre-Emery",
+      "altPositions": "MC,VOL,LD,MEI"
+    },
+    {
+      "id": "60004",
+      "name": "Á. Carreras",
+      "altPositions": "LE,ZAG,ME"
+    },
+    {
+      "id": "60005",
+      "name": "C. Lukeba",
+      "altPositions": "ZAG,LE,MC"
+    },
+    {
+      "id": "60007",
+      "name": "J. Mokio",
+      "altPositions": "VOL,MC,LE"
+    },
+    {
+      "id": "60008",
+      "name": "M. Lewis-Skelly",
+      "altPositions": "LE,MC"
+    },
+    {
+      "id": "60009",
+      "name": "J. Hato",
+      "altPositions": "LE,ZAG,VOL"
+    },
+    {
+      "id": "60010",
+      "name": "Balde",
+      "altPositions": "LE,ME"
+    },
+    {
+      "id": "60012",
+      "name": "J. Seys",
+      "altPositions": "LE,LD,ME"
+    },
+    {
+      "id": "60013",
+      "name": "João Costa",
+      "altPositions": "MD,ME,LE,LD"
+    },
+    {
+      "id": "60014",
+      "name": "N. O'Reilly",
+      "altPositions": "LE,MC,ME"
+    },
+    {
+      "id": "60015",
+      "name": "L. Miley",
+      "altPositions": "MC,LD,VOL"
+    },
+    {
+      "id": "60016",
+      "name": "A. Gray",
+      "altPositions": "VOL,ZAG,LD,MC"
+    },
+    {
+      "id": "60017",
+      "name": "L. Hall",
+      "altPositions": "LE,ME"
+    },
+    {
+      "id": "60019",
+      "name": "Pubill",
+      "altPositions": "ZAG,LD,MD"
+    },
+    {
+      "id": "60020",
+      "name": "T. Livramento",
+      "altPositions": "LD,LE,MD"
+    },
+    {
+      "id": "60022",
+      "name": "E. Camavinga",
+      "altPositions": "MC,VOL,LE"
+    },
+    {
+      "id": "60023",
+      "name": "Martim Fernandes",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60024",
+      "name": "A. Khalaili",
+      "altPositions": "MD,LD,PD"
+    },
+    {
+      "id": "60026",
+      "name": "M. Kayode",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60027",
+      "name": "S. Mouriño",
+      "altPositions": "LD,ZAG,VOL"
+    },
+    {
+      "id": "60028",
+      "name": "Z. El Ouahdi",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60029",
+      "name": "K. Sabbe",
+      "altPositions": "LD,LE,MD"
+    },
+    {
+      "id": "60030",
+      "name": "Alberto Costa",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60031",
+      "name": "N. Brown",
+      "altPositions": "LE,ME"
+    },
+    {
+      "id": "60032",
+      "name": "Miguel Gutiérrez",
+      "altPositions": "LE,ME"
+    },
+    {
+      "id": "60033",
+      "name": "M. Kerkez",
+      "altPositions": "LE,ME"
+    },
+    {
+      "id": "60034",
+      "name": "Amad",
+      "altPositions": "MD,LD,PD"
+    },
+    {
+      "id": "60035",
+      "name": "Wesley",
+      "altPositions": "MD,ME,LD,PD"
+    },
+    {
+      "id": "60036",
+      "name": "C. Donovan",
+      "altPositions": "LD,ZAG"
+    },
+    {
+      "id": "60037",
+      "name": "J. Acheampong",
+      "altPositions": "ZAG,LD,VOL"
+    },
+    {
+      "id": "60038",
+      "name": "T. Dibling",
+      "altPositions": "MD,MEI,LD"
+    },
+    {
+      "id": "60039",
+      "name": "Álex Jiménez",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60040",
+      "name": "M. Palestra",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60041",
+      "name": "E. Baum",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60042",
+      "name": "P. Dorgu",
+      "altPositions": "ME,LE,MD,PE"
+    },
+    {
+      "id": "60043",
+      "name": "J. Hinshelwood",
+      "altPositions": "VOL,LD,MEI,MC"
+    },
+    {
+      "id": "60044",
+      "name": "N. Mendy",
+      "altPositions": "ZAG,LE"
+    },
+    {
+      "id": "60045",
+      "name": "Álex Valle",
+      "altPositions": "LE,ME"
+    },
+    {
+      "id": "60046",
+      "name": "M. Del Blanco",
+      "altPositions": "LE,MC,ME"
+    },
+    {
+      "id": "60047",
+      "name": "C. Mawissa",
+      "altPositions": "ZAG,LE,VOL"
+    },
+    {
+      "id": "60048",
+      "name": "R. Lewis",
+      "altPositions": "LD,LE,MC"
+    },
+    {
+      "id": "60049",
+      "name": "Y. Medina",
+      "altPositions": "LE,PE,ME"
+    },
+    {
+      "id": "60050",
+      "name": "Diego Moreira",
+      "altPositions": "MD,ME,LE,LD"
+    },
+    {
+      "id": "60051",
+      "name": "V. Gómez",
+      "altPositions": "ZAG,LE,VOL"
+    },
+    {
+      "id": "60052",
+      "name": "C. Bradley",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60054",
+      "name": "M. Gusto",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60055",
+      "name": "Eduardo Quaresma",
+      "altPositions": "ZAG,LD"
+    },
+    {
+      "id": "60056",
+      "name": "I. Maatsen",
+      "altPositions": "LE,ME"
+    },
+    {
+      "id": "60057",
+      "name": "Daniel Banjaqui",
+      "altPositions": "LD"
+    },
+    {
+      "id": "60058",
+      "name": "S. Mfuni",
+      "altPositions": "ZAG,LE"
+    },
+    {
+      "id": "60059",
+      "name": "Ale Gomes",
+      "altPositions": "ZAG,LD,LE"
+    },
+    {
+      "id": "60060",
+      "name": "Asencio",
+      "altPositions": "ZAG,LD,MC"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\taltPositions\n60001\tNuno Mendes\tME\n60002\tG. Read\tLD,MD\n60003\tW. Zaïre-Emery\tMC,VOL,LD,MEI\n60004\tÁ. Carreras\tLE,ZAG,ME\n60005\tC. Lukeba\tZAG,LE,MC\n60007\tJ. Mokio\tVOL,MC,LE\n60008\tM. Lewis-Skelly\tLE,MC\n60009\tJ. Hato\tLE,ZAG,VOL\n60010\tBalde\tLE,ME\n60012\tJ. Seys\tLE,LD,ME\n60013\tJoão Costa\tMD,ME,LE,LD\n60014\tN. O'Reilly\tLE,MC,ME\n60015\tL. Miley\tMC,LD,VOL\n60016\tA. Gray\tVOL,ZAG,LD,MC\n60017\tL. Hall\tLE,ME\n60019\tPubill\tZAG,LD,MD\n60020\tT. Livramento\tLD,LE,MD\n60022\tE. Camavinga\tMC,VOL,LE\n60023\tMartim Fernandes\tLD,MD\n60024\tA. Khalaili\tMD,LD,PD\n60026\tM. Kayode\tLD,MD\n60027\tS. Mouriño\tLD,ZAG,VOL\n60028\tZ. El Ouahdi\tLD,MD\n60029\tK. Sabbe\tLD,LE,MD\n60030\tAlberto Costa\tLD,MD\n60031\tN. Brown\tLE,ME\n60032\tMiguel Gutiérrez\tLE,ME\n60033\tM. Kerkez\tLE,ME\n60034\tAmad\tMD,LD,PD\n60035\tWesley\tMD,ME,LD,PD\n60036\tC. Donovan\tLD,ZAG\n60037\tJ. Acheampong\tZAG,LD,VOL\n60038\tT. Dibling\tMD,MEI,LD\n60039\tÁlex Jiménez\tLD,MD\n60040\tM. Palestra\tLD,MD\n60041\tE. Baum\tLD,MD\n60042\tP. Dorgu\tME,LE,MD,PE\n60043\tJ. Hinshelwood\tVOL,LD,MEI,MC\n60044\tN. Mendy\tZAG,LE\n60045\tÁlex Valle\tLE,ME\n60046\tM. Del Blanco\tLE,MC,ME\n60047\tC. Mawissa\tZAG,LE,VOL\n60048\tR. Lewis\tLD,LE,MC\n60049\tY. Medina\tLE,PE,ME\n60050\tDiego Moreira\tMD,ME,LE,LD\n60051\tV. Gómez\tZAG,LE,VOL\n60052\tC. Bradley\tLD,MD\n60054\tM. Gusto\tLD,MD\n60055\tEduardo Quaresma\tZAG,LD\n60056\tI. Maatsen\tLE,ME\n60057\tDaniel Banjaqui\tLD\n60058\tS. Mfuni\tZAG,LE\n60059\tAle Gomes\tZAG,LD,LE\n60060\tAsencio\tZAG,LD,MC\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}

@@ -32,7 +32,7 @@ const positionPtMap: Record<string, string> = {
   GK: "GOL",
   // Posições já em português (banco)
   ATA: "ATA", PNT: "PNT", MEI: "MEI", VOL: "VOL",
-  LAT: "LAT", LD: "LD", LE: "LE", MD: "MD", ME: "ME",
+  LD: "LD", LE: "LE", MD: "MD", ME: "ME",
   PD: "PD", PE: "PE",
   ZAG: "ZAG", GOL: "GOL",
   // Meio-campo
@@ -52,8 +52,8 @@ const positionGroupMap: Record<string, string> = {
   ATA: "ST",
   PNT: "LW", PE: "LW", PD: "LW",
   MEI: "CM", VOL: "CM", MC: "CM", MCD: "CM", MD: "CM", ME: "CM",
-  // Laterais: LAT (genérico), LD (lateral direito), LE (lateral esquerdo)
-  LAT: "LB", LD: "LB", LE: "LB",
+  // Laterais: LD (lateral direito), LE (lateral esquerdo)
+  LD: "LB", LE: "LB",
   ZAG: "CB",
   GOL: "GK",
 };

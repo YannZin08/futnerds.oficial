@@ -1,0 +1,80 @@
+{
+  "query": "SELECT id, name, altPositions FROM players WHERE position = 'LAT' AND id > 60045 ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, altPositions FROM players WHERE position = 'LAT' AND id > 60045 ORDER BY id;",
+  "rows": [
+    {
+      "id": "60046",
+      "name": "M. Del Blanco",
+      "altPositions": "LE,MC,ME"
+    },
+    {
+      "id": "60047",
+      "name": "C. Mawissa",
+      "altPositions": "ZAG,LE,VOL"
+    },
+    {
+      "id": "60048",
+      "name": "R. Lewis",
+      "altPositions": "LD,LE,MC"
+    },
+    {
+      "id": "60049",
+      "name": "Y. Medina",
+      "altPositions": "LE,PE,ME"
+    },
+    {
+      "id": "60050",
+      "name": "Diego Moreira",
+      "altPositions": "MD,ME,LE,LD"
+    },
+    {
+      "id": "60051",
+      "name": "V. Gómez",
+      "altPositions": "ZAG,LE,VOL"
+    },
+    {
+      "id": "60052",
+      "name": "C. Bradley",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60054",
+      "name": "M. Gusto",
+      "altPositions": "LD,MD"
+    },
+    {
+      "id": "60055",
+      "name": "Eduardo Quaresma",
+      "altPositions": "ZAG,LD"
+    },
+    {
+      "id": "60056",
+      "name": "I. Maatsen",
+      "altPositions": "LE,ME"
+    },
+    {
+      "id": "60057",
+      "name": "Daniel Banjaqui",
+      "altPositions": "LD"
+    },
+    {
+      "id": "60058",
+      "name": "S. Mfuni",
+      "altPositions": "ZAG,LE"
+    },
+    {
+      "id": "60059",
+      "name": "Ale Gomes",
+      "altPositions": "ZAG,LD,LE"
+    },
+    {
+      "id": "60060",
+      "name": "Asencio",
+      "altPositions": "ZAG,LD,MC"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\taltPositions\n60046\tM. Del Blanco\tLE,MC,ME\n60047\tC. Mawissa\tZAG,LE,VOL\n60048\tR. Lewis\tLD,LE,MC\n60049\tY. Medina\tLE,PE,ME\n60050\tDiego Moreira\tMD,ME,LE,LD\n60051\tV. Gómez\tZAG,LE,VOL\n60052\tC. Bradley\tLD,MD\n60054\tM. Gusto\tLD,MD\n60055\tEduardo Quaresma\tZAG,LD\n60056\tI. Maatsen\tLE,ME\n60057\tDaniel Banjaqui\tLD\n60058\tS. Mfuni\tZAG,LE\n60059\tAle Gomes\tZAG,LD,LE\n60060\tAsencio\tZAG,LD,MC\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}
