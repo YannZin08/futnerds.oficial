@@ -1,0 +1,50 @@
+{
+  "query": "SELECT id, name, position, club, league, overall FROM players WHERE price IS NULL;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, club, league, overall FROM players WHERE price IS NULL;",
+  "rows": [
+    {
+      "id": "120011",
+      "name": "D. Dönmezer",
+      "position": "GK",
+      "club": "Trabzonspor",
+      "league": "Süper Lig",
+      "overall": "68"
+    },
+    {
+      "id": "120024",
+      "name": "Kauã Santos",
+      "position": "GK",
+      "club": "Fluminense",
+      "league": "Brasileirão",
+      "overall": "68"
+    },
+    {
+      "id": "120030",
+      "name": "N. Törnqvist",
+      "position": "GK",
+      "club": "Malmö FF",
+      "league": "Allsvenskan",
+      "overall": "68"
+    },
+    {
+      "id": "120031",
+      "name": "O. Nkambadio",
+      "position": "GK",
+      "club": "Toulouse FC",
+      "league": "Ligue 1",
+      "overall": "68"
+    },
+    {
+      "id": "120032",
+      "name": "P. Loretz",
+      "position": "GK",
+      "club": "FC Basel",
+      "league": "Super League",
+      "overall": "70"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\tclub\tleague\toverall\n120011\tD. Dönmezer\tGK\tTrabzonspor\tSüper Lig\t68\n120024\tKauã Santos\tGK\tFluminense\tBrasileirão\t68\n120030\tN. Törnqvist\tGK\tMalmö FF\tAllsvenskan\t68\n120031\tO. Nkambadio\tGK\tToulouse FC\tLigue 1\t68\n120032\tP. Loretz\tGK\tFC Basel\tSuper League\t70\n",
+  "stderr": "",
+  "execution_time_ms": 142
+}

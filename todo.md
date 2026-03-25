@@ -87,3 +87,6 @@
 
 ## Correção de Faixas de Cor dos Cards
 - [x] Ajustar faixas: bronze (50-69), prata (70-79), ouro (80-89), diamante (90+)
+
+## Correção de Valores de Mercado
+- [x] Extrair valores de mercado do CSV original e atualizar banco de dados (399 jogadores com preço)

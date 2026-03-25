@@ -1,0 +1,362 @@
+{
+  "query": "SELECT id, name, position, club, league, overall FROM players WHERE price IS NULL ORDER BY overall DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, position, club, league, overall FROM players WHERE price IS NULL ORDER BY overall DESC;",
+  "rows": [
+    {
+      "id": "120039",
+      "name": "Cristhian Mosquera",
+      "position": "ZAG",
+      "club": "Valencia CF",
+      "league": "La Liga",
+      "overall": "76"
+    },
+    {
+      "id": "120042",
+      "name": "W. Goes",
+      "position": "ZAG",
+      "club": "Girona FC",
+      "league": "La Liga",
+      "overall": "75"
+    },
+    {
+      "id": "120008",
+      "name": "C. Mandas",
+      "position": "GK",
+      "club": "Lazio",
+      "league": "Serie A",
+      "overall": "74"
+    },
+    {
+      "id": "120048",
+      "name": "T. Barry",
+      "position": "ATA",
+      "club": "Brentford",
+      "league": "Premier League",
+      "overall": "73"
+    },
+    {
+      "id": "120017",
+      "name": "F. Stanković",
+      "position": "GK",
+      "club": "Sampdoria",
+      "league": "Serie B",
+      "overall": "73"
+    },
+    {
+      "id": "120001",
+      "name": "B. Klaverboer",
+      "position": "GK",
+      "club": "AZ Alkmaar",
+      "league": "Eredivisie",
+      "overall": "73"
+    },
+    {
+      "id": "120023",
+      "name": "K. Hein",
+      "position": "GK",
+      "club": "Arsenal",
+      "league": "Premier League",
+      "overall": "73"
+    },
+    {
+      "id": "120034",
+      "name": "R. Sava",
+      "position": "GK",
+      "club": "Nottingham Forest",
+      "league": "Premier League",
+      "overall": "73"
+    },
+    {
+      "id": "120005",
+      "name": "Á. Yaakobishvili",
+      "position": "GK",
+      "club": "Girona FC",
+      "league": "La Liga",
+      "overall": "72"
+    },
+    {
+      "id": "120040",
+      "name": "F. Boyomo",
+      "position": "ZAG",
+      "club": "Osasuna",
+      "league": "La Liga",
+      "overall": "72"
+    },
+    {
+      "id": "120004",
+      "name": "S. Desplanches",
+      "position": "GK",
+      "club": "Palermo",
+      "league": "Serie B",
+      "overall": "72"
+    },
+    {
+      "id": "120002",
+      "name": "C. Zawieschitzky",
+      "position": "GK",
+      "club": "Hamburger SV",
+      "league": "Bundesliga 2",
+      "overall": "72"
+    },
+    {
+      "id": "120018",
+      "name": "Fran González",
+      "position": "GK",
+      "club": "Villarreal CF",
+      "league": "La Liga",
+      "overall": "72"
+    },
+    {
+      "id": "120019",
+      "name": "G. Slonina",
+      "position": "GK",
+      "club": "Chelsea",
+      "league": "Premier League",
+      "overall": "72"
+    },
+    {
+      "id": "120044",
+      "name": "B. Šeškas",
+      "position": "LD",
+      "club": "RB Leipzig",
+      "league": "Bundesliga",
+      "overall": "72"
+    },
+    {
+      "id": "120028",
+      "name": "M. Keller",
+      "position": "GK",
+      "club": "Borussia Mönchengladbach",
+      "league": "Bundesliga",
+      "overall": "71"
+    },
+    {
+      "id": "120036",
+      "name": "Samuel Soares",
+      "position": "GK",
+      "club": "SL Benfica",
+      "league": "Primeira Liga",
+      "overall": "71"
+    },
+    {
+      "id": "120003",
+      "name": "M. Niflore",
+      "position": "GK",
+      "club": "Stade de Reims",
+      "league": "Ligue 1",
+      "overall": "71"
+    },
+    {
+      "id": "120016",
+      "name": "F. Hellstern",
+      "position": "GK",
+      "club": "Hamburger SV",
+      "league": "Bundesliga 2",
+      "overall": "71"
+    },
+    {
+      "id": "120009",
+      "name": "C. Miszta",
+      "position": "GK",
+      "club": "Villarreal CF",
+      "league": "La Liga",
+      "overall": "70"
+    },
+    {
+      "id": "120022",
+      "name": "J. Schenk",
+      "position": "GK",
+      "club": "VfB Stuttgart",
+      "league": "Bundesliga",
+      "overall": "70"
+    },
+    {
+      "id": "120047",
+      "name": "E. Croupy",
+      "position": "ATA",
+      "club": "Stade de Reims",
+      "league": "Ligue 1",
+      "overall": "70"
+    },
+    {
+      "id": "120014",
+      "name": "E. Jaouen",
+      "position": "GK",
+      "club": "Stade Brestois 29",
+      "league": "Ligue 1",
+      "overall": "70"
+    },
+    {
+      "id": "120026",
+      "name": "M. Backhaus",
+      "position": "GK",
+      "club": "SC Freiburg",
+      "league": "Bundesliga",
+      "overall": "70"
+    },
+    {
+      "id": "120041",
+      "name": "M. Smets",
+      "position": "ZAG",
+      "club": "KRC Genk",
+      "league": "First Division A",
+      "overall": "70"
+    },
+    {
+      "id": "120012",
+      "name": "D. Seimen",
+      "position": "GK",
+      "club": "Bayer 04 Leverkusen",
+      "league": "Bundesliga",
+      "overall": "70"
+    },
+    {
+      "id": "120069",
+      "name": "G. Mora",
+      "position": "MEI",
+      "club": "Valencia CF",
+      "league": "La Liga",
+      "overall": "70"
+    },
+    {
+      "id": "120007",
+      "name": "André Gomes",
+      "position": "GK",
+      "club": "Sporting CP",
+      "league": "Primeira Liga",
+      "overall": "70"
+    },
+    {
+      "id": "120032",
+      "name": "P. Loretz",
+      "position": "GK",
+      "club": "FC Basel",
+      "league": "Super League",
+      "overall": "70"
+    },
+    {
+      "id": "120037",
+      "name": "T. Ernst",
+      "position": "GK",
+      "club": "RB Leipzig",
+      "league": "Bundesliga",
+      "overall": "70"
+    },
+    {
+      "id": "120006",
+      "name": "A. Taho",
+      "position": "GK",
+      "club": "Stade Rennais",
+      "league": "Ligue 1",
+      "overall": "70"
+    },
+    {
+      "id": "120035",
+      "name": "Renato Marin",
+      "position": "GK",
+      "club": "FC Porto",
+      "league": "Primeira Liga",
+      "overall": "70"
+    },
+    {
+      "id": "120025",
+      "name": "L. Brughmans",
+      "position": "GK",
+      "club": "KRC Genk",
+      "league": "First Division A",
+      "overall": "69"
+    },
+    {
+      "id": "120033",
+      "name": "R. Owusu-Oduro",
+      "position": "GK",
+      "club": "Sporting CP",
+      "league": "Primeira Liga",
+      "overall": "69"
+    },
+    {
+      "id": "120027",
+      "name": "M. Delavallée",
+      "position": "GK",
+      "club": "RC Strasbourg",
+      "league": "Ligue 1",
+      "overall": "69"
+    },
+    {
+      "id": "120043",
+      "name": "Z. Van Den Bosch",
+      "position": "ZAG",
+      "club": "KRC Genk",
+      "league": "First Division A",
+      "overall": "69"
+    },
+    {
+      "id": "120021",
+      "name": "J. Heerkens",
+      "position": "GK",
+      "club": "FC Twente",
+      "league": "Eredivisie",
+      "overall": "69"
+    },
+    {
+      "id": "120015",
+      "name": "E. Kamga",
+      "position": "GK",
+      "club": "Lens",
+      "league": "Ligue 1",
+      "overall": "69"
+    },
+    {
+      "id": "120038",
+      "name": "T. Pereira Cardoso",
+      "position": "GK",
+      "club": "Vitória SC",
+      "league": "Primeira Liga",
+      "overall": "68"
+    },
+    {
+      "id": "120031",
+      "name": "O. Nkambadio",
+      "position": "GK",
+      "club": "Toulouse FC",
+      "league": "Ligue 1",
+      "overall": "68"
+    },
+    {
+      "id": "120030",
+      "name": "N. Törnqvist",
+      "position": "GK",
+      "club": "Malmö FF",
+      "league": "Allsvenskan",
+      "overall": "68"
+    },
+    {
+      "id": "120024",
+      "name": "Kauã Santos",
+      "position": "GK",
+      "club": "Fluminense",
+      "league": "Brasileirão",
+      "overall": "68"
+    },
+    {
+      "id": "120013",
+      "name": "Diego Calai",
+      "position": "GK",
+      "club": "Udinese",
+      "league": "Serie A",
+      "overall": "68"
+    },
+    {
+      "id": "120011",
+      "name": "D. Dönmezer",
+      "position": "GK",
+      "club": "Trabzonspor",
+      "league": "Süper Lig",
+      "overall": "68"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tposition\tclub\tleague\toverall\n120039\tCristhian Mosquera\tZAG\tValencia CF\tLa Liga\t76\n120042\tW. Goes\tZAG\tGirona FC\tLa Liga\t75\n120008\tC. Mandas\tGK\tLazio\tSerie A\t74\n120048\tT. Barry\tATA\tBrentford\tPremier League\t73\n120017\tF. Stanković\tGK\tSampdoria\tSerie B\t73\n120001\tB. Klaverboer\tGK\tAZ Alkmaar\tEredivisie\t73\n120023\tK. Hein\tGK\tArsenal\tPremier League\t73\n120034\tR. Sava\tGK\tNottingham Forest\tPremier League\t73\n120005\tÁ. Yaakobishvili\tGK\tGirona FC\tLa Liga\t72\n120040\tF. Boyomo\tZAG\tOsasuna\tLa Liga\t72\n120004\tS. Desplanches\tGK\tPalermo\tSerie B\t72\n120002\tC. Zawieschitzky\tGK\tHamburger SV\tBundesliga 2\t72\n120018\tFran González\tGK\tVillarreal CF\tLa Liga\t72\n120019\tG. Slonina\tGK\tChelsea\tPremier League\t72\n120044\tB. Šeškas\tLD\tRB Leipzig\tBundesliga\t72\n120028\tM. Keller\tGK\tBorussia Mönchengladbach\tBundesliga\t71\n120036\tSamuel Soares\tGK\tSL Benfica\tPrimeira Liga\t71\n120003\tM. Niflore\tGK\tStade de Reims\tLigue 1\t71\n120016\tF. Hellstern\tGK\tHamburger SV\tBundesliga 2\t71\n120009\tC. Miszta\tGK\tVillarreal CF\tLa Liga\t70\n120022\tJ. Schenk\tGK\tVfB Stuttgart\tBundesliga\t70\n120047\tE. Croupy\tATA\tStade de Reims\tLigue 1\t70\n120014\tE. Jaouen\tGK\tStade Brestois 29\tLigue 1\t70\n120026\tM. Backhaus\tGK\tSC Freiburg\tBundesliga\t70\n120041\tM. Smets\tZAG\tKRC Genk\tFirst Division A\t70\n120012\tD. Seimen\tGK\tBayer 04 Leverkusen\tBundesliga\t70\n120069\tG. Mora\tMEI\tValencia CF\tLa Liga\t70\n120007\tAndré Gomes\tGK\tSporting CP\tPrimeira Liga\t70\n120032\tP. Loretz\tGK\tFC Basel\tSuper League\t70\n120037\tT. Ernst\tGK\tRB Leipzig\tBundesliga\t70\n120006\tA. Taho\tGK\tStade Rennais\tLigue 1\t70\n120035\tRenato Marin\tGK\tFC Porto\tPrimeira Liga\t70\n120025\tL. Brughmans\tGK\tKRC Genk\tFirst Division A\t69\n120033\tR. Owusu-Oduro\tGK\tSporting CP\tPrimeira Liga\t69\n120027\tM. Delavallée\tGK\tRC Strasbourg\tLigue 1\t69\n120043\tZ. Van Den Bosch\tZAG\tKRC Genk\tFirst Division A\t69\n120021\tJ. Heerkens\tGK\tFC Twente\tEredivisie\t69\n120015\tE. Kamga\tGK\tLens\tLigue 1\t69\n120038\tT. Pereira Cardoso\tGK\tVitória SC\tPrimeira Liga\t68\n120031\tO. Nkambadio\tGK\tToulouse FC\tLigue 1\t68\n120030\tN. Törnqvist\tGK\tMalmö FF\tAllsvenskan\t68\n120024\tKauã Santos\tGK\tFluminense\tBrasileirão\t68\n120013\tDiego Calai\tGK\tUdinese\tSerie A\t68\n120011\tD. Dönmezer\tGK\tTrabzonspor\tSüper Lig\t68\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}

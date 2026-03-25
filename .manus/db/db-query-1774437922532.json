@@ -1,0 +1,19 @@
+{
+  "query": "UPDATE players SET price = 2000000 WHERE name = 'D. Dönmezer';\nUPDATE players SET price = 2500000 WHERE name = 'Kauã Santos';\nUPDATE players SET price = 2200000 WHERE name = 'N. Törnqvist';\nUPDATE players SET price = 2800000 WHERE name = 'O. Nkambadio';\nUPDATE players SET price = 2500000 WHERE name = 'P. Loretz';\n\n-- Confirmar que todos têm preço agora\nSELECT COUNT(*) as sem_preco FROM players WHERE price IS NULL;\nSELECT COUNT(*) as total FROM players;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute UPDATE players SET price = 2000000 WHERE name = 'D. Dönmezer';\nUPDATE players SET price = 2500000 WHERE name = 'Kauã Santos';\nUPDATE players SET price = 2200000 WHERE name = 'N. Törnqvist';\nUPDATE players SET price = 2800000 WHERE name = 'O. Nkambadio';\nUPDATE players SET price = 2500000 WHERE name = 'P. Loretz';\n\n-- Confirmar que todos têm preço agora\nSELECT COUNT(*) as sem_preco FROM players WHERE price IS NULL;\nSELECT COUNT(*) as total FROM players;",
+  "rows": [
+    {
+      "sem_preco": "0"
+    },
+    {
+      "sem_preco": "total"
+    },
+    {
+      "sem_preco": "399"
+    }
+  ],
+  "messages": [],
+  "stdout": "sem_preco\n0\ntotal\n399\n",
+  "stderr": "",
+  "execution_time_ms": 127
+}
