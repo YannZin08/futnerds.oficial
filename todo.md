@@ -90,3 +90,4 @@
 
 ## Correção de Valores de Mercado
 - [x] Extrair valores de mercado do CSV original e atualizar banco de dados (399 jogadores com preço)
+- [x] Atualizar todos os 399 jogadores com dados completos do CSV players_20260326_194348.csv (nome, clube, liga, overall, potencial, idade, preço, imagem, cardType, altPositions)

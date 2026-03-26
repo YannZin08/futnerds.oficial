@@ -1,0 +1,35 @@
+{
+  "query": "SELECT \n  cardType,\n  COUNT(*) as total\nFROM players \nGROUP BY cardType\nORDER BY total DESC;\n\nSELECT COUNT(*) as total_jogadores FROM players;\n\n-- Verificar alguns jogadores atualizados\nSELECT name, club, league, overall, cardType, price FROM players \nWHERE name IN ('Lamine Yamal', 'Pedri', 'J. Bellingham', 'V. Froholdt', 'S. Lammens')\nORDER BY overall DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT \n  cardType,\n  COUNT(*) as total\nFROM players \nGROUP BY cardType\nORDER BY total DESC;\n\nSELECT COUNT(*) as total_jogadores FROM players;\n\n-- Verificar alguns jogadores atualizados\nSELECT name, club, league, overall, cardType, price FROM players \nWHERE name IN ('Lamine Yamal', 'Pedri', 'J. Bellingham', 'V. Froholdt', 'S. Lammens')\nORDER BY overall DESC;",
+  "rows": [
+    {
+      "cardType": "silver",
+      "total": "274"
+    },
+    {
+      "cardType": "gold",
+      "total": "65"
+    },
+    {
+      "cardType": "bronze",
+      "total": "59"
+    },
+    {
+      "cardType": "diamond",
+      "total": "1"
+    }
+  ],
+  "messages": [
+    "total_jogadores",
+    "399",
+    "name\tclub\tleague\toverall\tcardType\tprice",
+    "Pedri\tFC Barcelona\tLa Liga\t90\tdiamond\t165000000",
+    "J. Bellingham\tReal Madrid\tLa Liga\t89\tgold\t14500000",
+    "Lamine Yamal\tFC Barcelona\tLa Liga\t87\tgold\t115500000",
+    "S. Lammens\tManchester United\tPremier League\t80\tgold\t27500000",
+    "V. Froholdt\tHamburger SV\tBundesliga 2\t70\tsilver\t30000000"
+  ],
+  "stdout": "cardType\ttotal\nsilver\t274\ngold\t65\nbronze\t59\ndiamond\t1\ntotal_jogadores\n399\nname\tclub\tleague\toverall\tcardType\tprice\nPedri\tFC Barcelona\tLa Liga\t90\tdiamond\t165000000\nJ. Bellingham\tReal Madrid\tLa Liga\t89\tgold\t14500000\nLamine Yamal\tFC Barcelona\tLa Liga\t87\tgold\t115500000\nS. Lammens\tManchester United\tPremier League\t80\tgold\t27500000\nV. Froholdt\tHamburger SV\tBundesliga 2\t70\tsilver\t30000000\n",
+  "stderr": "",
+  "execution_time_ms": 74
+}
