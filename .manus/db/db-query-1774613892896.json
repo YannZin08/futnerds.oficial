@@ -1,0 +1,15 @@
+{
+  "query": "SELECT \n  COUNT(*) as total,\n  SUM(CASE WHEN imageUrl IS NOT NULL AND imageUrl != '' THEN 1 ELSE 0 END) as com_imagem,\n  SUM(CASE WHEN imageUrl IS NULL OR imageUrl = '' THEN 1 ELSE 0 END) as sem_imagem\nFROM players;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT \n  COUNT(*) as total,\n  SUM(CASE WHEN imageUrl IS NOT NULL AND imageUrl != '' THEN 1 ELSE 0 END) as com_imagem,\n  SUM(CASE WHEN imageUrl IS NULL OR imageUrl = '' THEN 1 ELSE 0 END) as sem_imagem\nFROM players;",
+  "rows": [
+    {
+      "total": "657",
+      "com_imagem": "657",
+      "sem_imagem": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\tcom_imagem\tsem_imagem\n657\t657\t0\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}
