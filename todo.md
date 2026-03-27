@@ -104,3 +104,8 @@
 
 ## Atualização de Imagem
 - [x] Atualizar imagem do J. Bellingham com foto enviada pelo usuário
+
+## Importação de Ligas e Times
+- [x] Analisar JSON sofifa_teams_2026-03-27.json e confirmar estrutura
+- [x] Inserir 9 países e 9 ligas no banco organizadas por país
+- [ ] Inserir times dentro de suas respectivas ligas (aguardando novo arquivo JSON do usuário)

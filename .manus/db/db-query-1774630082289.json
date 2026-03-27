@@ -1,0 +1,55 @@
+{
+  "query": "\n-- Inserir países primeiro\nINSERT INTO countries (name, slug, flagUrl) VALUES\n('Inglaterra', 'inglaterra', 'https://cdn.sofifa.net/flags/gb-eng.png'),\n('Espanha', 'espanha', 'https://cdn.sofifa.net/flags/es.png'),\n('Itália', 'italia', 'https://cdn.sofifa.net/flags/it.png'),\n('Alemanha', 'alemanha', 'https://cdn.sofifa.net/flags/de.png'),\n('França', 'franca', 'https://cdn.sofifa.net/flags/fr.png'),\n('Portugal', 'portugal', 'https://cdn.sofifa.net/flags/pt.png'),\n('Holanda', 'holanda', 'https://cdn.sofifa.net/flags/nl.png'),\n('Turquia', 'turquia', 'https://cdn.sofifa.net/flags/tr.png'),\n('Arábia Saudita', 'arabia-saudita', 'https://cdn.sofifa.net/flags/sa.png');\n\n-- Inserir ligas vinculadas aos países\nINSERT INTO leagues (countryId, name, slug, division, logoUrl) VALUES\n((SELECT id FROM countries WHERE slug = 'inglaterra'), 'Premier League', 'premier-league', 1, 'https://cdn.sofifa.net/meta/league/13/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'espanha'), 'La Liga', 'la-liga', 1, 'https://cdn.sofifa.net/meta/league/53/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'italia'), 'Serie A', 'serie-a', 1, 'https://cdn.sofifa.net/meta/league/31/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'alemanha'), 'Bundesliga', 'bundesliga', 1, 'https://cdn.sofifa.net/meta/league/19/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'franca'), 'Ligue 1', 'ligue-1', 1, 'https://cdn.sofifa.net/meta/league/16/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'portugal'), 'Primeira Liga', 'primeira-liga', 1, 'https://cdn.sofifa.net/meta/league/308/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'holanda'), 'Eredivisie', 'eredivisie', 1, 'https://cdn.sofifa.net/meta/league/10/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'turquia'), 'Süper Lig', 'super-lig', 1, 'https://cdn.sofifa.net/meta/league/26/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'arabia-saudita'), 'Pro League', 'pro-league', 1, 'https://cdn.sofifa.net/meta/league/2012/light_60.png');\n\n-- Verificar resultado\nSELECT c.name AS pais, l.name AS liga, l.slug FROM leagues l JOIN countries c ON l.countryId = c.id ORDER BY c.name;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute \n-- Inserir países primeiro\nINSERT INTO countries (name, slug, flagUrl) VALUES\n('Inglaterra', 'inglaterra', 'https://cdn.sofifa.net/flags/gb-eng.png'),\n('Espanha', 'espanha', 'https://cdn.sofifa.net/flags/es.png'),\n('Itália', 'italia', 'https://cdn.sofifa.net/flags/it.png'),\n('Alemanha', 'alemanha', 'https://cdn.sofifa.net/flags/de.png'),\n('França', 'franca', 'https://cdn.sofifa.net/flags/fr.png'),\n('Portugal', 'portugal', 'https://cdn.sofifa.net/flags/pt.png'),\n('Holanda', 'holanda', 'https://cdn.sofifa.net/flags/nl.png'),\n('Turquia', 'turquia', 'https://cdn.sofifa.net/flags/tr.png'),\n('Arábia Saudita', 'arabia-saudita', 'https://cdn.sofifa.net/flags/sa.png');\n\n-- Inserir ligas vinculadas aos países\nINSERT INTO leagues (countryId, name, slug, division, logoUrl) VALUES\n((SELECT id FROM countries WHERE slug = 'inglaterra'), 'Premier League', 'premier-league', 1, 'https://cdn.sofifa.net/meta/league/13/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'espanha'), 'La Liga', 'la-liga', 1, 'https://cdn.sofifa.net/meta/league/53/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'italia'), 'Serie A', 'serie-a', 1, 'https://cdn.sofifa.net/meta/league/31/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'alemanha'), 'Bundesliga', 'bundesliga', 1, 'https://cdn.sofifa.net/meta/league/19/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'franca'), 'Ligue 1', 'ligue-1', 1, 'https://cdn.sofifa.net/meta/league/16/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'portugal'), 'Primeira Liga', 'primeira-liga', 1, 'https://cdn.sofifa.net/meta/league/308/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'holanda'), 'Eredivisie', 'eredivisie', 1, 'https://cdn.sofifa.net/meta/league/10/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'turquia'), 'Süper Lig', 'super-lig', 1, 'https://cdn.sofifa.net/meta/league/26/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'arabia-saudita'), 'Pro League', 'pro-league', 1, 'https://cdn.sofifa.net/meta/league/2012/light_60.png');\n\n-- Verificar resultado\nSELECT c.name AS pais, l.name AS liga, l.slug FROM leagues l JOIN countries c ON l.countryId = c.id ORDER BY c.name;\n",
+  "rows": [
+    {
+      "pais": "Alemanha",
+      "liga": "Bundesliga",
+      "slug": "bundesliga"
+    },
+    {
+      "pais": "Arábia Saudita",
+      "liga": "Pro League",
+      "slug": "pro-league"
+    },
+    {
+      "pais": "Espanha",
+      "liga": "La Liga",
+      "slug": "la-liga"
+    },
+    {
+      "pais": "França",
+      "liga": "Ligue 1",
+      "slug": "ligue-1"
+    },
+    {
+      "pais": "Holanda",
+      "liga": "Eredivisie",
+      "slug": "eredivisie"
+    },
+    {
+      "pais": "Inglaterra",
+      "liga": "Premier League",
+      "slug": "premier-league"
+    },
+    {
+      "pais": "Itália",
+      "liga": "Serie A",
+      "slug": "serie-a"
+    },
+    {
+      "pais": "Portugal",
+      "liga": "Primeira Liga",
+      "slug": "primeira-liga"
+    },
+    {
+      "pais": "Turquia",
+      "liga": "Süper Lig",
+      "slug": "super-lig"
+    }
+  ],
+  "messages": [],
+  "stdout": "pais\tliga\tslug\nAlemanha\tBundesliga\tbundesliga\nArábia Saudita\tPro League\tpro-league\nEspanha\tLa Liga\tla-liga\nFrança\tLigue 1\tligue-1\nHolanda\tEredivisie\teredivisie\nInglaterra\tPremier League\tpremier-league\nItália\tSerie A\tserie-a\nPortugal\tPrimeira Liga\tprimeira-liga\nTurquia\tSüper Lig\tsuper-lig\n",
+  "stderr": "",
+  "execution_time_ms": 197
+}
