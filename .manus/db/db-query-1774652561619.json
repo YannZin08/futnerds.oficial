@@ -1,0 +1,115 @@
+{
+  "query": "SELECT id, name, countryId FROM leagues ORDER BY countryId, name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, countryId FROM leagues ORDER BY countryId, name;",
+  "rows": [
+    {
+      "id": "30010",
+      "name": "Championship",
+      "countryId": "30001"
+    },
+    {
+      "id": "30011",
+      "name": "League One",
+      "countryId": "30001"
+    },
+    {
+      "id": "30012",
+      "name": "League Two",
+      "countryId": "30001"
+    },
+    {
+      "id": "30001",
+      "name": "Premier League",
+      "countryId": "30001"
+    },
+    {
+      "id": "30002",
+      "name": "La Liga",
+      "countryId": "30002"
+    },
+    {
+      "id": "30013",
+      "name": "La Liga 2",
+      "countryId": "30002"
+    },
+    {
+      "id": "30003",
+      "name": "Serie A",
+      "countryId": "30003"
+    },
+    {
+      "id": "30020",
+      "name": "Serie B",
+      "countryId": "30003"
+    },
+    {
+      "id": "30014",
+      "name": "2. Bundesliga",
+      "countryId": "30004"
+    },
+    {
+      "id": "30015",
+      "name": "3. Liga",
+      "countryId": "30004"
+    },
+    {
+      "id": "30004",
+      "name": "Bundesliga",
+      "countryId": "30004"
+    },
+    {
+      "id": "30005",
+      "name": "Ligue 1",
+      "countryId": "30005"
+    },
+    {
+      "id": "30019",
+      "name": "Ligue 2",
+      "countryId": "30005"
+    },
+    {
+      "id": "30006",
+      "name": "Primeira Liga",
+      "countryId": "30006"
+    },
+    {
+      "id": "30007",
+      "name": "Eredivisie",
+      "countryId": "30007"
+    },
+    {
+      "id": "30008",
+      "name": "Süper Lig",
+      "countryId": "30008"
+    },
+    {
+      "id": "30009",
+      "name": "Pro League",
+      "countryId": "30009"
+    },
+    {
+      "id": "30016",
+      "name": "Premiership",
+      "countryId": "30010"
+    },
+    {
+      "id": "30017",
+      "name": "Liga Profesional de Fútbol",
+      "countryId": "30011"
+    },
+    {
+      "id": "30018",
+      "name": "Major League Soccer",
+      "countryId": "30012"
+    },
+    {
+      "id": "30021",
+      "name": "Pro League Bélgica",
+      "countryId": "30013"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tcountryId\n30010\tChampionship\t30001\n30011\tLeague One\t30001\n30012\tLeague Two\t30001\n30001\tPremier League\t30001\n30002\tLa Liga\t30002\n30013\tLa Liga 2\t30002\n30003\tSerie A\t30003\n30020\tSerie B\t30003\n30014\t2. Bundesliga\t30004\n30015\t3. Liga\t30004\n30004\tBundesliga\t30004\n30005\tLigue 1\t30005\n30019\tLigue 2\t30005\n30006\tPrimeira Liga\t30006\n30007\tEredivisie\t30007\n30008\tSüper Lig\t30008\n30009\tPro League\t30009\n30016\tPremiership\t30010\n30017\tLiga Profesional de Fútbol\t30011\n30018\tMajor League Soccer\t30012\n30021\tPro League Bélgica\t30013\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}
