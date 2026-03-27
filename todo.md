@@ -96,3 +96,8 @@
 - [x] Atualizar 317 jogadores com dados do players_filtered.csv
 - [x] Remover 82 jogadores que não constavam no arquivo
 - [x] Banco sincronizado com 317 jogadores válidos
+
+## Importação via JSON (2026-03-27)
+- [x] Limpar banco e importar 657 jogadores do sofifa_players_2026-03-27.json (IDs 1-657)
+- [x] 3 jogadores ignorados por não ter clube (G. Mora, E. López, A. González)
+- [ ] Preencher campo 'liga' dos jogadores (não disponível no JSON)

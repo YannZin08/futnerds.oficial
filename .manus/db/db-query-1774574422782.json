@@ -1,0 +1,34 @@
+{
+  "query": "SHOW TABLES;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SHOW TABLES;",
+  "rows": [
+    {
+      "Tables_in_hhB4oykfDQM9yCvhQGaX3n": "__drizzle_migrations"
+    },
+    {
+      "Tables_in_hhB4oykfDQM9yCvhQGaX3n": "countries"
+    },
+    {
+      "Tables_in_hhB4oykfDQM9yCvhQGaX3n": "leagues"
+    },
+    {
+      "Tables_in_hhB4oykfDQM9yCvhQGaX3n": "news"
+    },
+    {
+      "Tables_in_hhB4oykfDQM9yCvhQGaX3n": "players"
+    },
+    {
+      "Tables_in_hhB4oykfDQM9yCvhQGaX3n": "teams"
+    },
+    {
+      "Tables_in_hhB4oykfDQM9yCvhQGaX3n": "userFavoritePlayers"
+    },
+    {
+      "Tables_in_hhB4oykfDQM9yCvhQGaX3n": "users"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_hhB4oykfDQM9yCvhQGaX3n\n__drizzle_migrations\ncountries\nleagues\nnews\nplayers\nteams\nuserFavoritePlayers\nusers\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}
