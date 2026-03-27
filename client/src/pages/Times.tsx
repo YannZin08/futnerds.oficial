@@ -78,7 +78,7 @@ export default function Times() {
     <div className="min-h-screen bg-background">
       <Navbar />
       {/* Header */}
-      <div className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-16 z-10">
+      <div className="border-b border-border bg-card sticky top-16 z-10">
         <div className="container py-4">
           <div className="flex items-center gap-3">
             <Button

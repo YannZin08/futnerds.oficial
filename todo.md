@@ -117,3 +117,6 @@
 - [x] Inserir Premiership (Escócia 1ª divisão) + país Escócia
 - [x] Inserir Liga Profesional de Fútbol (Argentina 1ª divisão) + país Argentina
 - [x] Inserir Major League Soccer (EUA 1ª divisão) + país EUA
+
+## Bug - Header Transparente na Página de Times
+- [x] Corrigir header "Escolha um País" que aparece com fundo transparente/preto em vez da cor padrão
