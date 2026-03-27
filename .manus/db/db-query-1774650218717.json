@@ -1,0 +1,160 @@
+{
+  "query": "SELECT id, name, logoUrl FROM teams WHERE countryId = 30001 ORDER BY name LIMIT 30;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, logoUrl FROM teams WHERE countryId = 30001 ORDER BY name LIMIT 30;",
+  "rows": [
+    {
+      "id": "30015",
+      "name": "AFC Bournemouth",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/52/60.png"
+    },
+    {
+      "id": "30001",
+      "name": "Arsenal",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/19/60.png"
+    },
+    {
+      "id": "30004",
+      "name": "Aston Villa",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/15/60.png"
+    },
+    {
+      "id": "30056",
+      "name": "Barnsley",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/54/60.png"
+    },
+    {
+      "id": "30025",
+      "name": "Birmingham City",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/12/60.png"
+    },
+    {
+      "id": "30040",
+      "name": "Blackburn Rovers",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/2/60.png"
+    },
+    {
+      "id": "30050",
+      "name": "Blackpool FC",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/28/60.png"
+    },
+    {
+      "id": "30047",
+      "name": "Bolton Wanderers",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/16/60.png"
+    },
+    {
+      "id": "30054",
+      "name": "Bradford City",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/137/60.png"
+    },
+    {
+      "id": "30013",
+      "name": "Brentford",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/236/60.png"
+    },
+    {
+      "id": "30012",
+      "name": "Brighton & Hove Albion",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/78/60.png"
+    },
+    {
+      "id": "30029",
+      "name": "Bristol City",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/122/60.png"
+    },
+    {
+      "id": "30019",
+      "name": "Burnley",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/27/60.png"
+    },
+    {
+      "id": "30046",
+      "name": "Cardiff City",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/69/60.png"
+    },
+    {
+      "id": "30041",
+      "name": "Charlton Athletic",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/4/60.png"
+    },
+    {
+      "id": "30005",
+      "name": "Chelsea",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/18/60.png"
+    },
+    {
+      "id": "30023",
+      "name": "Coventry City",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/117/60.png"
+    },
+    {
+      "id": "30009",
+      "name": "Crystal Palace",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/51/60.png"
+    },
+    {
+      "id": "30037",
+      "name": "Derby County",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/24/60.png"
+    },
+    {
+      "id": "30011",
+      "name": "Everton",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/13/60.png"
+    },
+    {
+      "id": "30014",
+      "name": "Fulham FC",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/11/60.png"
+    },
+    {
+      "id": "30048",
+      "name": "Huddersfield Town",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/251/60.png"
+    },
+    {
+      "id": "30031",
+      "name": "Hull City",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/22/60.png"
+    },
+    {
+      "id": "30021",
+      "name": "Ipswich Town",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/116/60.png"
+    },
+    {
+      "id": "30018",
+      "name": "Leeds United",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/71/60.png"
+    },
+    {
+      "id": "30027",
+      "name": "Leicester City",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/42/60.png"
+    },
+    {
+      "id": "30058",
+      "name": "Leyton Orient",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/294/60.png"
+    },
+    {
+      "id": "30057",
+      "name": "Lincoln City",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/305/60.png"
+    },
+    {
+      "id": "30002",
+      "name": "Liverpool",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/8/60.png"
+    },
+    {
+      "id": "30045",
+      "name": "Luton Town",
+      "logoUrl": "https://cdn.sofifa.net/meta/team/115/60.png"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tlogoUrl\n30015\tAFC Bournemouth\thttps://cdn.sofifa.net/meta/team/52/60.png\n30001\tArsenal\thttps://cdn.sofifa.net/meta/team/19/60.png\n30004\tAston Villa\thttps://cdn.sofifa.net/meta/team/15/60.png\n30056\tBarnsley\thttps://cdn.sofifa.net/meta/team/54/60.png\n30025\tBirmingham City\thttps://cdn.sofifa.net/meta/team/12/60.png\n30040\tBlackburn Rovers\thttps://cdn.sofifa.net/meta/team/2/60.png\n30050\tBlackpool FC\thttps://cdn.sofifa.net/meta/team/28/60.png\n30047\tBolton Wanderers\thttps://cdn.sofifa.net/meta/team/16/60.png\n30054\tBradford City\thttps://cdn.sofifa.net/meta/team/137/60.png\n30013\tBrentford\thttps://cdn.sofifa.net/meta/team/236/60.png\n30012\tBrighton & Hove Albion\thttps://cdn.sofifa.net/meta/team/78/60.png\n30029\tBristol City\thttps://cdn.sofifa.net/meta/team/122/60.png\n30019\tBurnley\thttps://cdn.sofifa.net/meta/team/27/60.png\n30046\tCardiff City\thttps://cdn.sofifa.net/meta/team/69/60.png\n30041\tCharlton Athletic\thttps://cdn.sofifa.net/meta/team/4/60.png\n30005\tChelsea\thttps://cdn.sofifa.net/meta/team/18/60.png\n30023\tCoventry City\thttps://cdn.sofifa.net/meta/team/117/60.png\n30009\tCrystal Palace\thttps://cdn.sofifa.net/meta/team/51/60.png\n30037\tDerby County\thttps://cdn.sofifa.net/meta/team/24/60.png\n30011\tEverton\thttps://cdn.sofifa.net/meta/team/13/60.png\n30014\tFulham FC\thttps://cdn.sofifa.net/meta/team/11/60.png\n30048\tHuddersfield Town\thttps://cdn.sofifa.net/meta/team/251/60.png\n30031\tHull City\thttps://cdn.sofifa.net/meta/team/22/60.png\n30021\tIpswich Town\thttps://cdn.sofifa.net/meta/team/116/60.png\n30018\tLeeds United\thttps://cdn.sofifa.net/meta/team/71/60.png\n30027\tLeicester City\thttps://cdn.sofifa.net/meta/team/42/60.png\n30058\tLeyton Orient\thttps://cdn.sofifa.net/meta/team/294/60.png\n30057\tLincoln City\thttps://cdn.sofifa.net/meta/team/305/60.png\n30002\tLiverpool\thttps://cdn.sofifa.net/meta/team/8/60.png\n30045\tLuton Town\thttps://cdn.sofifa.net/meta/team/115/60.png\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}
