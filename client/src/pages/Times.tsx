@@ -44,7 +44,7 @@ type View = "countries" | "leagues" | "teams";
 export default function Times() {
   const [view, setView] = useState<View>("countries");
   const [selectedCountry, setSelectedCountry] = useState<{ id: number; name: string } | null>(null);
-  const [selectedLeague, setSelectedLeague] = useState<{ id: number; name: string; division: number } | null>(null);
+  const [selectedLeague, setSelectedLeague] = useState<{ id: number; name: string; division: number; logoUrl?: string | null } | null>(null);
   const [, navigate] = useLocation();
 
   const { data: countries, isLoading: loadingCountries } = trpc.countries.list.useQuery();
@@ -69,7 +69,7 @@ export default function Times() {
     setView("leagues");
   }
 
-  function goToTeams(league: { id: number; name: string; division: number }) {
+  function goToTeams(league: { id: number; name: string; division: number; logoUrl?: string | null }) {
     setSelectedLeague(league);
     setView("teams");
   }
@@ -106,7 +106,12 @@ export default function Times() {
                   </span>
                 )}
                 {view === "teams" && (
-                  <span>{selectedLeague?.name}</span>
+                  <span className="flex items-center gap-2">
+                    {selectedLeague?.logoUrl ? (
+                      <img src={selectedLeague.logoUrl} alt={selectedLeague.name} className="w-7 h-7 object-contain" />
+                    ) : null}
+                    {selectedLeague?.name}
+                  </span>
                 )}
               </h1>
               {/* Breadcrumb */}
@@ -197,8 +202,12 @@ export default function Times() {
                     className="group flex items-center justify-between rounded-xl border border-border/50 bg-card hover:border-primary/50 hover:bg-card/80 transition-all duration-200 hover:shadow-md hover:shadow-primary/10 p-5 text-left"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center shrink-0 group-hover:from-primary/30 transition-all">
-                        <Trophy className="w-6 h-6 text-primary" />
+                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center shrink-0 group-hover:from-primary/30 transition-all overflow-hidden">
+                        {league.logoUrl ? (
+                          <img src={league.logoUrl} alt={league.name} className="w-10 h-10 object-contain" />
+                        ) : (
+                          <Trophy className="w-6 h-6 text-primary" />
+                        )}
                       </div>
                       <div>
                         <p className="font-bold text-foreground group-hover:text-primary transition-colors">

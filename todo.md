@@ -144,3 +144,6 @@
 - [ ] Importar times de Portugal (Primeira Liga)
 - [ ] Importar times da Turquia (Süper Lig)
 - [ ] Atualizar campo league dos jogadores de todos os países
+
+## Logos das Ligas no Frontend (2026-03-27)
+- [x] Exibir logos das ligas nos cabeçalhos da página de Times
