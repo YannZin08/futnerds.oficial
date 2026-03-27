@@ -1,0 +1,26 @@
+{
+  "query": "SELECT l.name as liga, COUNT(t.id) as total_times \nFROM teams t \nJOIN leagues l ON t.leagueId = l.id \nWHERE t.countryId = 30001 \nGROUP BY l.id, l.name \nORDER BY l.division;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT l.name as liga, COUNT(t.id) as total_times \nFROM teams t \nJOIN leagues l ON t.leagueId = l.id \nWHERE t.countryId = 30001 \nGROUP BY l.id, l.name \nORDER BY l.division;",
+  "rows": [
+    {
+      "liga": "Premier League",
+      "total_times": "20"
+    },
+    {
+      "liga": "Championship",
+      "total_times": "24"
+    },
+    {
+      "liga": "League One",
+      "total_times": "15"
+    },
+    {
+      "liga": "League Two",
+      "total_times": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "liga\ttotal_times\nPremier League\t20\nChampionship\t24\nLeague One\t15\nLeague Two\t1\n",
+  "stderr": "",
+  "execution_time_ms": 49
+}

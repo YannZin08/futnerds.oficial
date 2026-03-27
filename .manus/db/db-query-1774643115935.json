@@ -1,0 +1,130 @@
+{
+  "query": "SELECT DISTINCT p.club, COUNT(*) as qtd \nFROM players p \nWHERE p.club IN (\n  SELECT t.name FROM teams t WHERE t.countryId = 30001\n)\nGROUP BY p.club\nORDER BY qtd DESC\nLIMIT 30;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT DISTINCT p.club, COUNT(*) as qtd \nFROM players p \nWHERE p.club IN (\n  SELECT t.name FROM teams t WHERE t.countryId = 30001\n)\nGROUP BY p.club\nORDER BY qtd DESC\nLIMIT 30;",
+  "rows": [
+    {
+      "club": "Chelsea",
+      "qtd": "17"
+    },
+    {
+      "club": "Manchester United",
+      "qtd": "11"
+    },
+    {
+      "club": "Manchester City",
+      "qtd": "10"
+    },
+    {
+      "club": "Brighton & Hove Albion",
+      "qtd": "9"
+    },
+    {
+      "club": "Liverpool",
+      "qtd": "8"
+    },
+    {
+      "club": "AFC Bournemouth",
+      "qtd": "8"
+    },
+    {
+      "club": "Tottenham Hotspur",
+      "qtd": "8"
+    },
+    {
+      "club": "Sunderland",
+      "qtd": "7"
+    },
+    {
+      "club": "Everton",
+      "qtd": "7"
+    },
+    {
+      "club": "Brentford",
+      "qtd": "7"
+    },
+    {
+      "club": "Aston Villa",
+      "qtd": "6"
+    },
+    {
+      "club": "Newcastle United",
+      "qtd": "6"
+    },
+    {
+      "club": "Arsenal",
+      "qtd": "6"
+    },
+    {
+      "club": "Nottingham Forest",
+      "qtd": "4"
+    },
+    {
+      "club": "Wolverhampton Wanderers",
+      "qtd": "4"
+    },
+    {
+      "club": "Burnley",
+      "qtd": "4"
+    },
+    {
+      "club": "Fulham FC",
+      "qtd": "3"
+    },
+    {
+      "club": "Crystal Palace",
+      "qtd": "3"
+    },
+    {
+      "club": "Leicester City",
+      "qtd": "3"
+    },
+    {
+      "club": "West Ham United",
+      "qtd": "3"
+    },
+    {
+      "club": "Norwich City",
+      "qtd": "2"
+    },
+    {
+      "club": "Birmingham City",
+      "qtd": "2"
+    },
+    {
+      "club": "Southampton",
+      "qtd": "2"
+    },
+    {
+      "club": "Hull City",
+      "qtd": "2"
+    },
+    {
+      "club": "Coventry City",
+      "qtd": "2"
+    },
+    {
+      "club": "Watford",
+      "qtd": "2"
+    },
+    {
+      "club": "Ipswich Town",
+      "qtd": "1"
+    },
+    {
+      "club": "Sheffield United",
+      "qtd": "1"
+    },
+    {
+      "club": "Preston North End",
+      "qtd": "1"
+    },
+    {
+      "club": "Millwall FC",
+      "qtd": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "club\tqtd\nChelsea\t17\nManchester United\t11\nManchester City\t10\nBrighton & Hove Albion\t9\nLiverpool\t8\nAFC Bournemouth\t8\nTottenham Hotspur\t8\nSunderland\t7\nEverton\t7\nBrentford\t7\nAston Villa\t6\nNewcastle United\t6\nArsenal\t6\nNottingham Forest\t4\nWolverhampton Wanderers\t4\nBurnley\t4\nFulham FC\t3\nCrystal Palace\t3\nLeicester City\t3\nWest Ham United\t3\nNorwich City\t2\nBirmingham City\t2\nSouthampton\t2\nHull City\t2\nCoventry City\t2\nWatford\t2\nIpswich Town\t1\nSheffield United\t1\nPreston North End\t1\nMillwall FC\t1\n",
+  "stderr": "",
+  "execution_time_ms": 124
+}

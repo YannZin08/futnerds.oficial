@@ -120,3 +120,10 @@
 
 ## Bug - Header Transparente na Página de Times
 - [x] Corrigir header "Escolha um País" que aparece com fundo transparente/preto em vez da cor padrão
+
+## Importação de Times da Inglaterra (2026-03-27)
+- [x] Importar 20 times da Premier League
+- [x] Importar times da Championship (24 times)
+- [x] Importar times da League One (15 times)
+- [x] Importar times da League Two (1 time)
+- [x] Atualizar campo league dos jogadores ingleses: 131 Premier League + 20 Championship

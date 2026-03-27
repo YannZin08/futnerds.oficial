@@ -1,0 +1,20 @@
+{
+  "query": "SELECT c.id as country_id, c.name as country_name FROM countries c WHERE c.name = 'Inglaterra';\nSELECT l.id, l.name, l.division, l.countryId FROM leagues l WHERE l.countryId = (SELECT id FROM countries WHERE name = 'Inglaterra') ORDER BY l.division;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT c.id as country_id, c.name as country_name FROM countries c WHERE c.name = 'Inglaterra';\nSELECT l.id, l.name, l.division, l.countryId FROM leagues l WHERE l.countryId = (SELECT id FROM countries WHERE name = 'Inglaterra') ORDER BY l.division;",
+  "rows": [
+    {
+      "country_id": "30001",
+      "country_name": "Inglaterra"
+    }
+  ],
+  "messages": [
+    "id\tname\tdivision\tcountryId",
+    "30001\tPremier League\t1\t30001",
+    "30010\tChampionship\t2\t30001",
+    "30011\tLeague One\t3\t30001",
+    "30012\tLeague Two\t4\t30001"
+  ],
+  "stdout": "country_id\tcountry_name\n30001\tInglaterra\nid\tname\tdivision\tcountryId\n30001\tPremier League\t1\t30001\n30010\tChampionship\t2\t30001\n30011\tLeague One\t3\t30001\n30012\tLeague Two\t4\t30001\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}

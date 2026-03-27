@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE players p\nJOIN teams t ON p.club = t.name\nJOIN leagues l ON t.leagueId = l.id\nSET p.league = l.name\nWHERE t.countryId = 30001;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute UPDATE players p\nJOIN teams t ON p.club = t.name\nJOIN leagues l ON t.leagueId = l.id\nSET p.league = l.name\nWHERE t.countryId = 30001;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 67
+}
