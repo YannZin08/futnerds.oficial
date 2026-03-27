@@ -1,0 +1,20 @@
+{
+  "query": "UPDATE players SET imageUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/j_bellingham_e01d9d69.webp' WHERE name LIKE '%Bellingham%' OR name LIKE '%bellingham%';\nSELECT id, name, imageUrl FROM players WHERE name LIKE '%Bellingham%' OR name LIKE '%bellingham%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute UPDATE players SET imageUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/j_bellingham_e01d9d69.webp' WHERE name LIKE '%Bellingham%' OR name LIKE '%bellingham%';\nSELECT id, name, imageUrl FROM players WHERE name LIKE '%Bellingham%' OR name LIKE '%bellingham%';",
+  "rows": [
+    {
+      "id": "2",
+      "name": "Jude. Bellingham",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/j_bellingham_e01d9d69.webp"
+    },
+    {
+      "id": "388",
+      "name": "J. Bellingham",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/j_bellingham_e01d9d69.webp"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\timageUrl\n2\tJude. Bellingham\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/j_bellingham_e01d9d69.webp\n388\tJ. Bellingham\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/j_bellingham_e01d9d69.webp\n",
+  "stderr": "",
+  "execution_time_ms": 75
+}

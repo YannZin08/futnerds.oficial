@@ -101,3 +101,6 @@
 - [x] Limpar banco e importar 657 jogadores do sofifa_players_2026-03-27.json (IDs 1-657)
 - [x] 3 jogadores ignorados por não ter clube (G. Mora, E. López, A. González)
 - [ ] Preencher campo 'liga' dos jogadores (não disponível no JSON)
+
+## Atualização de Imagem
+- [x] Atualizar imagem do J. Bellingham com foto enviada pelo usuário
