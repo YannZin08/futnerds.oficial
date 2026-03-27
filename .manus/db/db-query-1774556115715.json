@@ -1,0 +1,77 @@
+{
+  "query": "SELECT \n  COUNT(*) as total,\n  SUM(CASE WHEN imageUrl IS NOT NULL AND imageUrl != '' THEN 1 ELSE 0 END) as com_imagem,\n  SUM(CASE WHEN imageUrl IS NULL OR imageUrl = '' THEN 1 ELSE 0 END) as sem_imagem\nFROM players;\n\n-- Mostrar alguns com imagem para confirmar que a URL está correta\nSELECT name, imageUrl FROM players WHERE imageUrl IS NOT NULL AND imageUrl != '' LIMIT 5;\n\n-- Mostrar alguns sem imagem\nSELECT name, club, overall FROM players WHERE imageUrl IS NULL OR imageUrl = '' ORDER BY overall DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT \n  COUNT(*) as total,\n  SUM(CASE WHEN imageUrl IS NOT NULL AND imageUrl != '' THEN 1 ELSE 0 END) as com_imagem,\n  SUM(CASE WHEN imageUrl IS NULL OR imageUrl = '' THEN 1 ELSE 0 END) as sem_imagem\nFROM players;\n\n-- Mostrar alguns com imagem para confirmar que a URL está correta\nSELECT name, imageUrl FROM players WHERE imageUrl IS NOT NULL AND imageUrl != '' LIMIT 5;\n\n-- Mostrar alguns sem imagem\nSELECT name, club, overall FROM players WHERE imageUrl IS NULL OR imageUrl = '' ORDER BY overall DESC LIMIT 10;",
+  "rows": [
+    {
+      "total": "399",
+      "com_imagem": "235",
+      "sem_imagem": "164"
+    },
+    {
+      "total": "name",
+      "com_imagem": "club",
+      "sem_imagem": "overall"
+    },
+    {
+      "total": "B. Saka",
+      "com_imagem": "Arsenal",
+      "sem_imagem": "88"
+    },
+    {
+      "total": "Lamine Yamal",
+      "com_imagem": "FC Barcelona",
+      "sem_imagem": "87"
+    },
+    {
+      "total": "Nico Williams",
+      "com_imagem": "Athletic Club",
+      "sem_imagem": "86"
+    },
+    {
+      "total": "A. Doku",
+      "com_imagem": "Manchester City",
+      "sem_imagem": "84"
+    },
+    {
+      "total": "Sávio",
+      "com_imagem": "Manchester City",
+      "sem_imagem": "83"
+    },
+    {
+      "total": "M. Guendouzi",
+      "com_imagem": "Lazio",
+      "sem_imagem": "83"
+    },
+    {
+      "total": "W. Odobert",
+      "com_imagem": "Tottenham Hotspur",
+      "sem_imagem": "82"
+    },
+    {
+      "total": "E. Fernández",
+      "com_imagem": "Chelsea",
+      "sem_imagem": "82"
+    },
+    {
+      "total": "P. Guilherme",
+      "com_imagem": "Nottingham Forest",
+      "sem_imagem": "82"
+    },
+    {
+      "total": "Luka Sucic",
+      "com_imagem": "RB Leipzig",
+      "sem_imagem": "82"
+    }
+  ],
+  "messages": [
+    "name\timageUrl",
+    "S. Lammens\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/S. Lammens_ebb19926.webp",
+    "L. Chevalier\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L. Chevalier_021c991b.webp",
+    "A. Trubin\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A. Trubin_1dbc17c6.webp",
+    "M. Penders\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M. Penders_77e2209b.webp",
+    "B. Verbruggen\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/B. Verbruggen_378c0d68.webp"
+  ],
+  "stdout": "total\tcom_imagem\tsem_imagem\n399\t235\t164\nname\timageUrl\nS. Lammens\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/S. Lammens_ebb19926.webp\nL. Chevalier\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/L. Chevalier_021c991b.webp\nA. Trubin\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/A. Trubin_1dbc17c6.webp\nM. Penders\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/M. Penders_77e2209b.webp\nB. Verbruggen\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/B. Verbruggen_378c0d68.webp\nname\tclub\toverall\nB. Saka\tArsenal\t88\nLamine Yamal\tFC Barcelona\t87\nNico Williams\tAthletic Club\t86\nA. Doku\tManchester City\t84\nSávio\tManchester City\t83\nM. Guendouzi\tLazio\t83\nW. Odobert\tTottenham Hotspur\t82\nE. Fernández\tChelsea\t82\nP. Guilherme\tNottingham Forest\t82\nLuka Sucic\tRB Leipzig\t82\n",
+  "stderr": "",
+  "execution_time_ms": 67
+}
