@@ -1,0 +1,100 @@
+{
+  "query": "SELECT l.id, l.name as liga, c.name as pais FROM leagues l JOIN countries c ON l.countryId = c.id ORDER BY c.name, l.division;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT l.id, l.name as liga, c.name as pais FROM leagues l JOIN countries c ON l.countryId = c.id ORDER BY c.name, l.division;",
+  "rows": [
+    {
+      "id": "30004",
+      "liga": "Bundesliga",
+      "pais": "Alemanha"
+    },
+    {
+      "id": "30014",
+      "liga": "2. Bundesliga",
+      "pais": "Alemanha"
+    },
+    {
+      "id": "30015",
+      "liga": "3. Liga",
+      "pais": "Alemanha"
+    },
+    {
+      "id": "30009",
+      "liga": "Pro League",
+      "pais": "Arábia Saudita"
+    },
+    {
+      "id": "30017",
+      "liga": "Liga Profesional de Fútbol",
+      "pais": "Argentina"
+    },
+    {
+      "id": "30016",
+      "liga": "Premiership",
+      "pais": "Escócia"
+    },
+    {
+      "id": "30002",
+      "liga": "La Liga",
+      "pais": "Espanha"
+    },
+    {
+      "id": "30013",
+      "liga": "La Liga 2",
+      "pais": "Espanha"
+    },
+    {
+      "id": "30018",
+      "liga": "Major League Soccer",
+      "pais": "EUA"
+    },
+    {
+      "id": "30005",
+      "liga": "Ligue 1",
+      "pais": "França"
+    },
+    {
+      "id": "30007",
+      "liga": "Eredivisie",
+      "pais": "Holanda"
+    },
+    {
+      "id": "30001",
+      "liga": "Premier League",
+      "pais": "Inglaterra"
+    },
+    {
+      "id": "30010",
+      "liga": "Championship",
+      "pais": "Inglaterra"
+    },
+    {
+      "id": "30011",
+      "liga": "League One",
+      "pais": "Inglaterra"
+    },
+    {
+      "id": "30012",
+      "liga": "League Two",
+      "pais": "Inglaterra"
+    },
+    {
+      "id": "30003",
+      "liga": "Serie A",
+      "pais": "Itália"
+    },
+    {
+      "id": "30006",
+      "liga": "Primeira Liga",
+      "pais": "Portugal"
+    },
+    {
+      "id": "30008",
+      "liga": "Süper Lig",
+      "pais": "Turquia"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tliga\tpais\n30004\tBundesliga\tAlemanha\n30014\t2. Bundesliga\tAlemanha\n30015\t3. Liga\tAlemanha\n30009\tPro League\tArábia Saudita\n30017\tLiga Profesional de Fútbol\tArgentina\n30016\tPremiership\tEscócia\n30002\tLa Liga\tEspanha\n30013\tLa Liga 2\tEspanha\n30018\tMajor League Soccer\tEUA\n30005\tLigue 1\tFrança\n30007\tEredivisie\tHolanda\n30001\tPremier League\tInglaterra\n30010\tChampionship\tInglaterra\n30011\tLeague One\tInglaterra\n30012\tLeague Two\tInglaterra\n30003\tSerie A\tItália\n30006\tPrimeira Liga\tPortugal\n30008\tSüper Lig\tTurquia\n",
+  "stderr": "",
+  "execution_time_ms": 165
+}

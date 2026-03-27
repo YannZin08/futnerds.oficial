@@ -1,0 +1,62 @@
+{
+  "query": "SELECT c.name as pais, COUNT(*) as times\nFROM teams t\nJOIN countries c ON t.countryId = c.id\nGROUP BY c.name\nORDER BY times DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT c.name as pais, COUNT(*) as times\nFROM teams t\nJOIN countries c ON t.countryId = c.id\nGROUP BY c.name\nORDER BY times DESC;",
+  "rows": [
+    {
+      "pais": "Inglaterra",
+      "times": "60"
+    },
+    {
+      "pais": "Alemanha",
+      "times": "56"
+    },
+    {
+      "pais": "Espanha",
+      "times": "42"
+    },
+    {
+      "pais": "Itália",
+      "times": "40"
+    },
+    {
+      "pais": "França",
+      "times": "36"
+    },
+    {
+      "pais": "Argentina",
+      "times": "30"
+    },
+    {
+      "pais": "EUA",
+      "times": "30"
+    },
+    {
+      "pais": "Arábia Saudita",
+      "times": "18"
+    },
+    {
+      "pais": "Portugal",
+      "times": "18"
+    },
+    {
+      "pais": "Holanda",
+      "times": "18"
+    },
+    {
+      "pais": "Turquia",
+      "times": "18"
+    },
+    {
+      "pais": "Bélgica",
+      "times": "16"
+    },
+    {
+      "pais": "Escócia",
+      "times": "12"
+    }
+  ],
+  "messages": [],
+  "stdout": "pais\ttimes\nInglaterra\t60\nAlemanha\t56\nEspanha\t42\nItália\t40\nFrança\t36\nArgentina\t30\nEUA\t30\nArábia Saudita\t18\nPortugal\t18\nHolanda\t18\nTurquia\t18\nBélgica\t16\nEscócia\t12\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

@@ -1,0 +1,75 @@
+{
+  "query": "SELECT id, name, slug FROM countries ORDER BY id DESC LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, slug FROM countries ORDER BY id DESC LIMIT 20;",
+  "rows": [
+    {
+      "id": "30013",
+      "name": "Bélgica",
+      "slug": "belgica"
+    },
+    {
+      "id": "30012",
+      "name": "EUA",
+      "slug": "eua"
+    },
+    {
+      "id": "30011",
+      "name": "Argentina",
+      "slug": "argentina"
+    },
+    {
+      "id": "30010",
+      "name": "Escócia",
+      "slug": "escocia"
+    },
+    {
+      "id": "30009",
+      "name": "Arábia Saudita",
+      "slug": "arabia-saudita"
+    },
+    {
+      "id": "30008",
+      "name": "Turquia",
+      "slug": "turquia"
+    },
+    {
+      "id": "30007",
+      "name": "Holanda",
+      "slug": "holanda"
+    },
+    {
+      "id": "30006",
+      "name": "Portugal",
+      "slug": "portugal"
+    },
+    {
+      "id": "30005",
+      "name": "França",
+      "slug": "franca"
+    },
+    {
+      "id": "30004",
+      "name": "Alemanha",
+      "slug": "alemanha"
+    },
+    {
+      "id": "30003",
+      "name": "Itália",
+      "slug": "italia"
+    },
+    {
+      "id": "30002",
+      "name": "Espanha",
+      "slug": "espanha"
+    },
+    {
+      "id": "30001",
+      "name": "Inglaterra",
+      "slug": "inglaterra"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tslug\n30013\tBélgica\tbelgica\n30012\tEUA\teua\n30011\tArgentina\targentina\n30010\tEscócia\tescocia\n30009\tArábia Saudita\tarabia-saudita\n30008\tTurquia\tturquia\n30007\tHolanda\tholanda\n30006\tPortugal\tportugal\n30005\tFrança\tfranca\n30004\tAlemanha\talemanha\n30003\tItália\titalia\n30002\tEspanha\tespanha\n30001\tInglaterra\tinglaterra\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}

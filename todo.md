@@ -127,3 +127,20 @@
 - [x] Importar times da League One (15 times)
 - [x] Importar times da League Two (1 time)
 - [x] Atualizar campo league dos jogadores ingleses: 131 Premier League + 20 Championship
+
+## Importação de Times - Todos os Países (2026-03-27)
+- [ ] Extrair e fazer upload das logos de todos os países para CDN
+- [ ] Importar times da Alemanha (Bundesliga, 2. Bundesliga, 3. Liga)
+- [ ] Importar times da Arábia Saudita (Pro League)
+- [ ] Importar times da Argentina (Liga Profesional)
+- [ ] Importar times da Bélgica (+ criar país/liga Bélgica)
+- [ ] Importar times da Escócia (Premiership)
+- [ ] Importar times da Espanha (La Liga, La Liga 2)
+- [ ] Importar times dos EUA (MLS)
+- [ ] Importar times da França (Ligue 1)
+- [ ] Importar times da Holanda (Eredivisie)
+- [ ] Atualizar times da Inglaterra com logos do CDN
+- [ ] Importar times da Itália (Serie A)
+- [ ] Importar times de Portugal (Primeira Liga)
+- [ ] Importar times da Turquia (Süper Lig)
+- [ ] Atualizar campo league dos jogadores de todos os países

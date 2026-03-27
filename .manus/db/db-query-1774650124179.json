@@ -1,0 +1,74 @@
+{
+  "query": "-- Atualizar campo league dos jogadores com base nos times recém-inseridos\nUPDATE players p\nJOIN teams t ON p.club = t.name\nJOIN leagues l ON t.leagueId = l.id\nSET p.league = l.name\nWHERE p.league IS NULL OR p.league = '';\n\n-- Verificar resultado\nSELECT l.name as liga, COUNT(*) as jogadores\nFROM players p\nJOIN teams t ON p.club = t.name\nJOIN leagues l ON t.leagueId = l.id\nWHERE l.countryId IN (30002, 30003, 30004, 30005, 30006, 30007, 30008, 30009, 30010, 30011, 30012, 30013)\nGROUP BY l.name\nORDER BY jogadores DESC\nLIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Atualizar campo league dos jogadores com base nos times recém-inseridos\nUPDATE players p\nJOIN teams t ON p.club = t.name\nJOIN leagues l ON t.leagueId = l.id\nSET p.league = l.name\nWHERE p.league IS NULL OR p.league = '';\n\n-- Verificar resultado\nSELECT l.name as liga, COUNT(*) as jogadores\nFROM players p\nJOIN teams t ON p.club = t.name\nJOIN leagues l ON t.leagueId = l.id\nWHERE l.countryId IN (30002, 30003, 30004, 30005, 30006, 30007, 30008, 30009, 30010, 30011, 30012, 30013)\nGROUP BY l.name\nORDER BY jogadores DESC\nLIMIT 20;",
+  "rows": [
+    {
+      "liga": "Bundesliga",
+      "jogadores": "87"
+    },
+    {
+      "liga": "La Liga",
+      "jogadores": "75"
+    },
+    {
+      "liga": "Ligue 1",
+      "jogadores": "70"
+    },
+    {
+      "liga": "Eredivisie",
+      "jogadores": "50"
+    },
+    {
+      "liga": "Serie A",
+      "jogadores": "48"
+    },
+    {
+      "liga": "Primeira Liga",
+      "jogadores": "36"
+    },
+    {
+      "liga": "Pro League Bélgica",
+      "jogadores": "33"
+    },
+    {
+      "liga": "La Liga 2",
+      "jogadores": "15"
+    },
+    {
+      "liga": "Pro League",
+      "jogadores": "14"
+    },
+    {
+      "liga": "Liga Profesional de Fútbol",
+      "jogadores": "8"
+    },
+    {
+      "liga": "Süper Lig",
+      "jogadores": "7"
+    },
+    {
+      "liga": "Premiership",
+      "jogadores": "6"
+    },
+    {
+      "liga": "2. Bundesliga",
+      "jogadores": "6"
+    },
+    {
+      "liga": "Serie B",
+      "jogadores": "5"
+    },
+    {
+      "liga": "Major League Soccer",
+      "jogadores": "3"
+    },
+    {
+      "liga": "Ligue 2",
+      "jogadores": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "liga\tjogadores\nBundesliga\t87\nLa Liga\t75\nLigue 1\t70\nEredivisie\t50\nSerie A\t48\nPrimeira Liga\t36\nPro League Bélgica\t33\nLa Liga 2\t15\nPro League\t14\nLiga Profesional de Fútbol\t8\nSüper Lig\t7\nPremiership\t6\n2. Bundesliga\t6\nSerie B\t5\nMajor League Soccer\t3\nLigue 2\t1\n",
+  "stderr": "",
+  "execution_time_ms": 87
+}

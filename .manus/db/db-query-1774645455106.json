@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO leagues (id, countryId, name, slug, division) VALUES\n  (30019, 30005, 'Ligue 2', 'ligue-2', 2),\n  (30020, 30003, 'Serie B', 'serie-b', 2),\n  (30021, 30013, 'Pro League Bélgica', 'pro-league-belgica', 1);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute INSERT INTO leagues (id, countryId, name, slug, division) VALUES\n  (30019, 30005, 'Ligue 2', 'ligue-2', 2),\n  (30020, 30003, 'Serie B', 'serie-b', 2),\n  (30021, 30013, 'Pro League Bélgica', 'pro-league-belgica', 1);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 64
+}
