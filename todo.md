@@ -109,3 +109,11 @@
 - [x] Analisar JSON sofifa_teams_2026-03-27.json e confirmar estrutura
 - [x] Inserir 9 países e 9 ligas no banco organizadas por país
 - [ ] Inserir times dentro de suas respectivas ligas (aguardando novo arquivo JSON do usuário)
+
+## Ligas Faltantes (imagem do usuário)
+- [x] Inserir Championship, League One, League Two (Inglaterra 2ª/3ª/4ª divisão)
+- [x] Inserir La Liga 2 (Espanha 2ª divisão)
+- [x] Inserir 2. Bundesliga e 3. Liga (Alemanha 2ª/3ª divisão)
+- [x] Inserir Premiership (Escócia 1ª divisão) + país Escócia
+- [x] Inserir Liga Profesional de Fútbol (Argentina 1ª divisão) + país Argentina
+- [x] Inserir Major League Soccer (EUA 1ª divisão) + país EUA

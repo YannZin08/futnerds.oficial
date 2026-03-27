@@ -1,0 +1,100 @@
+{
+  "query": "\n-- Inserir países faltantes\nINSERT INTO countries (name, slug, flagUrl) VALUES\n('Escócia', 'escocia', 'https://cdn.sofifa.net/flags/gb-sct.png'),\n('Argentina', 'argentina', 'https://cdn.sofifa.net/flags/ar.png'),\n('EUA', 'eua', 'https://cdn.sofifa.net/flags/us.png');\n\n-- Inserir ligas faltantes\nINSERT INTO leagues (countryId, name, slug, division, logoUrl) VALUES\n-- Inglaterra: divisões 2, 3, 4\n((SELECT id FROM countries WHERE slug = 'inglaterra'), 'Championship', 'championship', 2, 'https://cdn.sofifa.net/meta/league/14/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'inglaterra'), 'League One', 'league-one', 3, 'https://cdn.sofifa.net/meta/league/60/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'inglaterra'), 'League Two', 'league-two', 4, 'https://cdn.sofifa.net/meta/league/61/light_60.png'),\n-- Espanha: divisão 2\n((SELECT id FROM countries WHERE slug = 'espanha'), 'La Liga 2', 'la-liga-2', 2, 'https://cdn.sofifa.net/meta/league/54/light_60.png'),\n-- Alemanha: divisões 2 e 3\n((SELECT id FROM countries WHERE slug = 'alemanha'), '2. Bundesliga', '2-bundesliga', 2, 'https://cdn.sofifa.net/meta/league/20/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'alemanha'), '3. Liga', '3-liga', 3, 'https://cdn.sofifa.net/meta/league/59/light_60.png'),\n-- Escócia: divisão 1\n((SELECT id FROM countries WHERE slug = 'escocia'), 'Premiership', 'premiership', 1, 'https://cdn.sofifa.net/meta/league/50/light_60.png'),\n-- Argentina: divisão 1\n((SELECT id FROM countries WHERE slug = 'argentina'), 'Liga Profesional de Fútbol', 'liga-profesional', 1, 'https://cdn.sofifa.net/meta/league/7/light_60.png'),\n-- EUA: divisão 1\n((SELECT id FROM countries WHERE slug = 'eua'), 'Major League Soccer', 'mls', 1, 'https://cdn.sofifa.net/meta/league/39/light_60.png');\n\n-- Verificar resultado final\nSELECT c.name AS pais, l.name AS liga, l.division FROM leagues l JOIN countries c ON l.countryId = c.id ORDER BY c.name, l.division;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute \n-- Inserir países faltantes\nINSERT INTO countries (name, slug, flagUrl) VALUES\n('Escócia', 'escocia', 'https://cdn.sofifa.net/flags/gb-sct.png'),\n('Argentina', 'argentina', 'https://cdn.sofifa.net/flags/ar.png'),\n('EUA', 'eua', 'https://cdn.sofifa.net/flags/us.png');\n\n-- Inserir ligas faltantes\nINSERT INTO leagues (countryId, name, slug, division, logoUrl) VALUES\n-- Inglaterra: divisões 2, 3, 4\n((SELECT id FROM countries WHERE slug = 'inglaterra'), 'Championship', 'championship', 2, 'https://cdn.sofifa.net/meta/league/14/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'inglaterra'), 'League One', 'league-one', 3, 'https://cdn.sofifa.net/meta/league/60/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'inglaterra'), 'League Two', 'league-two', 4, 'https://cdn.sofifa.net/meta/league/61/light_60.png'),\n-- Espanha: divisão 2\n((SELECT id FROM countries WHERE slug = 'espanha'), 'La Liga 2', 'la-liga-2', 2, 'https://cdn.sofifa.net/meta/league/54/light_60.png'),\n-- Alemanha: divisões 2 e 3\n((SELECT id FROM countries WHERE slug = 'alemanha'), '2. Bundesliga', '2-bundesliga', 2, 'https://cdn.sofifa.net/meta/league/20/light_60.png'),\n((SELECT id FROM countries WHERE slug = 'alemanha'), '3. Liga', '3-liga', 3, 'https://cdn.sofifa.net/meta/league/59/light_60.png'),\n-- Escócia: divisão 1\n((SELECT id FROM countries WHERE slug = 'escocia'), 'Premiership', 'premiership', 1, 'https://cdn.sofifa.net/meta/league/50/light_60.png'),\n-- Argentina: divisão 1\n((SELECT id FROM countries WHERE slug = 'argentina'), 'Liga Profesional de Fútbol', 'liga-profesional', 1, 'https://cdn.sofifa.net/meta/league/7/light_60.png'),\n-- EUA: divisão 1\n((SELECT id FROM countries WHERE slug = 'eua'), 'Major League Soccer', 'mls', 1, 'https://cdn.sofifa.net/meta/league/39/light_60.png');\n\n-- Verificar resultado final\nSELECT c.name AS pais, l.name AS liga, l.division FROM leagues l JOIN countries c ON l.countryId = c.id ORDER BY c.name, l.division;\n",
+  "rows": [
+    {
+      "pais": "Alemanha",
+      "liga": "Bundesliga",
+      "division": "1"
+    },
+    {
+      "pais": "Alemanha",
+      "liga": "2. Bundesliga",
+      "division": "2"
+    },
+    {
+      "pais": "Alemanha",
+      "liga": "3. Liga",
+      "division": "3"
+    },
+    {
+      "pais": "Arábia Saudita",
+      "liga": "Pro League",
+      "division": "1"
+    },
+    {
+      "pais": "Argentina",
+      "liga": "Liga Profesional de Fútbol",
+      "division": "1"
+    },
+    {
+      "pais": "Escócia",
+      "liga": "Premiership",
+      "division": "1"
+    },
+    {
+      "pais": "Espanha",
+      "liga": "La Liga",
+      "division": "1"
+    },
+    {
+      "pais": "Espanha",
+      "liga": "La Liga 2",
+      "division": "2"
+    },
+    {
+      "pais": "EUA",
+      "liga": "Major League Soccer",
+      "division": "1"
+    },
+    {
+      "pais": "França",
+      "liga": "Ligue 1",
+      "division": "1"
+    },
+    {
+      "pais": "Holanda",
+      "liga": "Eredivisie",
+      "division": "1"
+    },
+    {
+      "pais": "Inglaterra",
+      "liga": "Premier League",
+      "division": "1"
+    },
+    {
+      "pais": "Inglaterra",
+      "liga": "Championship",
+      "division": "2"
+    },
+    {
+      "pais": "Inglaterra",
+      "liga": "League One",
+      "division": "3"
+    },
+    {
+      "pais": "Inglaterra",
+      "liga": "League Two",
+      "division": "4"
+    },
+    {
+      "pais": "Itália",
+      "liga": "Serie A",
+      "division": "1"
+    },
+    {
+      "pais": "Portugal",
+      "liga": "Primeira Liga",
+      "division": "1"
+    },
+    {
+      "pais": "Turquia",
+      "liga": "Süper Lig",
+      "division": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "pais\tliga\tdivision\nAlemanha\tBundesliga\t1\nAlemanha\t2. Bundesliga\t2\nAlemanha\t3. Liga\t3\nArábia Saudita\tPro League\t1\nArgentina\tLiga Profesional de Fútbol\t1\nEscócia\tPremiership\t1\nEspanha\tLa Liga\t1\nEspanha\tLa Liga 2\t2\nEUA\tMajor League Soccer\t1\nFrança\tLigue 1\t1\nHolanda\tEredivisie\t1\nInglaterra\tPremier League\t1\nInglaterra\tChampionship\t2\nInglaterra\tLeague One\t3\nInglaterra\tLeague Two\t4\nItália\tSerie A\t1\nPortugal\tPrimeira Liga\t1\nTurquia\tSüper Lig\t1\n",
+  "stderr": "",
+  "execution_time_ms": 88
+}
