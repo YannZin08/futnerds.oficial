@@ -150,3 +150,6 @@
 
 ## Imagens dos Países (2026-03-28)
 - [x] Upload e vincular imagens de 8 países (Espanha, Alemanha, Arábia Saudita, França, Holanda, Inglaterra, Portugal, Itália)
+
+## Cards dos Times (2026-03-28)
+- [x] Adicionar campo de valor do clube (budget) nos cards dos times

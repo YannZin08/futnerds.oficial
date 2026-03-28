@@ -1,4 +1,4 @@
-import { eq, desc, and, sql } from "drizzle-orm";
+import { eq, desc, and, sql, count } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertUser, users, news, players, userFavoritePlayers, InsertNews, InsertPlayer } from "../drizzle/schema";
 import { ENV } from './_core/env';
@@ -194,7 +194,7 @@ export async function removeFavoritePlayer(userId: number, playerId: number) {
 export async function getPlayersCount(): Promise<number> {
   const db = await getDb();
   if (!db) return 0;
-  const result = await db.select({ count: sql<number>`COUNT(*)` }).from(players);
+  const result = await db.select({ count: count() }).from(players);
   return Number(result[0]?.count ?? 0);
 }
 
