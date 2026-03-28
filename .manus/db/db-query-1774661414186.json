@@ -1,0 +1,88 @@
+{
+  "query": "SELECT id, name, slug, imageUrl FROM countries ORDER BY name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, slug, imageUrl FROM countries ORDER BY name;",
+  "rows": [
+    {
+      "id": "30004",
+      "name": "Alemanha",
+      "slug": "alemanha",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/alemanha_9e4c6809.png"
+    },
+    {
+      "id": "30009",
+      "name": "Arábia Saudita",
+      "slug": "arabia-saudita",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/arabia-saudita_fde319f7.png"
+    },
+    {
+      "id": "30011",
+      "name": "Argentina",
+      "slug": "argentina",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "30013",
+      "name": "Bélgica",
+      "slug": "belgica",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "30010",
+      "name": "Escócia",
+      "slug": "escocia",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "30002",
+      "name": "Espanha",
+      "slug": "espanha",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/espanha_201e5647.png"
+    },
+    {
+      "id": "30012",
+      "name": "EUA",
+      "slug": "eua",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "30005",
+      "name": "França",
+      "slug": "franca",
+      "imageUrl": "NULL"
+    },
+    {
+      "id": "30007",
+      "name": "Holanda",
+      "slug": "holanda",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/holanda_33298a35.png"
+    },
+    {
+      "id": "30001",
+      "name": "Inglaterra",
+      "slug": "inglaterra",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/inglaterra_89a17c63.png"
+    },
+    {
+      "id": "30003",
+      "name": "Itália",
+      "slug": "italia",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/italia_8f748d21.png"
+    },
+    {
+      "id": "30006",
+      "name": "Portugal",
+      "slug": "portugal",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/portugal_ebe2e667.png"
+    },
+    {
+      "id": "30008",
+      "name": "Turquia",
+      "slug": "turquia",
+      "imageUrl": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tslug\timageUrl\n30004\tAlemanha\talemanha\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/alemanha_9e4c6809.png\n30009\tArábia Saudita\tarabia-saudita\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/arabia-saudita_fde319f7.png\n30011\tArgentina\targentina\tNULL\n30013\tBélgica\tbelgica\tNULL\n30010\tEscócia\tescocia\tNULL\n30002\tEspanha\tespanha\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/espanha_201e5647.png\n30012\tEUA\teua\tNULL\n30005\tFrança\tfranca\tNULL\n30007\tHolanda\tholanda\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/holanda_33298a35.png\n30001\tInglaterra\tinglaterra\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/inglaterra_89a17c63.png\n30003\tItália\titalia\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/italia_8f748d21.png\n30006\tPortugal\tportugal\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/portugal_ebe2e667.png\n30008\tTurquia\tturquia\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 123
+}
