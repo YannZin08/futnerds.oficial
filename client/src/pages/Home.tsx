@@ -51,8 +51,8 @@ const features = [
 export default function Home() {
   const { isAuthenticated } = useAuth();
   const { data: topPlayers } = trpc.players.list.useQuery({ limit: 4, sortBy: "overall" });
-  const { data: allPlayers } = trpc.players.list.useQuery({ limit: 9999, sortBy: "overall" });
-  const totalPlayers = allPlayers?.length ?? 319;
+  const { data: playerCount } = trpc.players.count.useQuery();
+  const totalPlayers = playerCount ?? 657;
 
   const stats = [
     { label: "Jogadores Analisados", value: `${totalPlayers}+` },

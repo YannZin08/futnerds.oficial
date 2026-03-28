@@ -10,6 +10,7 @@ import {
   getUserFavoritePlayers,
   addFavoritePlayer,
   removeFavoritePlayer,
+  getPlayersCount,
   updateUserProfile,
   getUserByOpenId,
   getCountriesList,
@@ -41,6 +42,11 @@ export const appRouter = router({
       }))
       .query(async ({ input }) => {
         return await getPlayersList(input);
+      }),
+
+    count: publicProcedure
+      .query(async () => {
+        return await getPlayersCount();
       }),
 
     byId: publicProcedure

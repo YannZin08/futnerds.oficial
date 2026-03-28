@@ -191,7 +191,14 @@ export async function removeFavoritePlayer(userId: number, playerId: number) {
     .where(and(eq(userFavoritePlayers.userId, userId), eq(userFavoritePlayers.playerId, playerId)));
 }
 
-// ─── Countries ───────────────────────────────────────────────────────────────
+export async function getPlayersCount(): Promise<number> {
+  const db = await getDb();
+  if (!db) return 0;
+  const result = await db.select({ count: sql<number>`COUNT(*)` }).from(players);
+  return Number(result[0]?.count ?? 0);
+}
+
+// ─── Countries ─────────────────────────────────────────────────────────────────────────────
 
 export async function getCountriesList() {
   const db = await getDb();
