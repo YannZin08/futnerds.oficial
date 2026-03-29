@@ -243,6 +243,7 @@ export default function Times() {
                 {teams?.map((team) => (
                   <Card
                     key={team.id}
+                    onClick={() => navigate(`/times/${team.id}`)}
                     className="group border-border/50 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-200 cursor-pointer hover:scale-[1.01]"
                   >
                     <CardContent className="p-5">

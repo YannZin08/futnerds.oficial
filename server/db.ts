@@ -130,6 +130,7 @@ export async function getPlayersList(opts: { limit?: number; position?: string; 
   const db = await getDb();
   if (!db) return [];
   const { limit = 9999, position, nationality, sortBy = "overall" } = opts;
+  const { teams } = await import("../drizzle/schema");
 
   const conditions = [];
   if (position) conditions.push(eq(players.position, position));
@@ -137,13 +138,47 @@ export async function getPlayersList(opts: { limit?: number; position?: string; 
 
   const orderCol = sortBy === "price" ? desc(players.price) : desc(players.overall);
 
+  const selectFields = {
+    id: players.id,
+    name: players.name,
+    position: players.position,
+    nationality: players.nationality,
+    club: players.club,
+    league: players.league,
+    overall: players.overall,
+    potential: players.potential,
+    age: players.age,
+    altPositions: players.altPositions,
+    pace: players.pace,
+    shooting: players.shooting,
+    passing: players.passing,
+    dribbling: players.dribbling,
+    defending: players.defending,
+    physical: players.physical,
+    cardType: players.cardType,
+    rating: players.rating,
+    imageUrl: players.imageUrl,
+    flagUrl: players.flagUrl,
+    clubLogoUrl: players.clubLogoUrl,
+    price: players.price,
+    createdAt: players.createdAt,
+    updatedAt: players.updatedAt,
+    teamId: teams.id,
+    teamLogoUrl: teams.logoUrl,
+  };
+
+  const baseQuery = db
+    .select(selectFields)
+    .from(players)
+    .leftJoin(teams, sql`LOWER(${teams.name}) = LOWER(${players.club})`);
+
   if (conditions.length > 0) {
-    return await db.select().from(players)
+    return await baseQuery
       .where(and(...conditions))
       .orderBy(orderCol)
       .limit(limit);
   }
-  return await db.select().from(players).orderBy(orderCol).limit(limit);
+  return await baseQuery.orderBy(orderCol).limit(limit);
 }
 
 export async function getPlayerById(id: number) {
@@ -232,7 +267,42 @@ export async function getTeamsByLeague(leagueId: number) {
 export async function getTeamById(id: number) {
   const db = await getDb();
   if (!db) return null;
-  const { teams } = await import("../drizzle/schema");
-  const result = await db.select().from(teams).where(eq(teams.id, id)).limit(1);
+  const { teams, leagues } = await import("../drizzle/schema");
+  const result = await db
+    .select({
+      id: teams.id,
+      name: teams.name,
+      shortName: teams.shortName,
+      logoUrl: teams.logoUrl,
+      stadiumName: teams.stadiumName,
+      budget: teams.budget,
+      prestige: teams.prestige,
+      leagueId: teams.leagueId,
+      countryId: teams.countryId,
+      leagueName: leagues.name,
+      leagueLogoUrl: leagues.logoUrl,
+    })
+    .from(teams)
+    .leftJoin(leagues, eq(teams.leagueId, leagues.id))
+    .where(eq(teams.id, id))
+    .limit(1);
   return result[0] ?? null;
+}
+
+export async function getTeamByName(name: string) {
+  const db = await getDb();
+  if (!db) return null;
+  const { teams } = await import("../drizzle/schema");
+  const result = await db.select().from(teams)
+    .where(sql`LOWER(${teams.name}) = LOWER(${name})`)
+    .limit(1);
+  return result[0] ?? null;
+}
+
+export async function getPlayersByTeam(teamName: string) {
+  const db = await getDb();
+  if (!db) return [];
+  return await db.select().from(players)
+    .where(sql`LOWER(${players.club}) = LOWER(${teamName})`)
+    .orderBy(desc(players.overall));
 }

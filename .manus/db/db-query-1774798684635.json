@@ -1,0 +1,38 @@
+{
+  "query": "SELECT COUNT(*) as total, COUNT(clubLogoUrl) as com_logo FROM players; SELECT name, club, clubLogoUrl FROM players WHERE clubLogoUrl IS NOT NULL LIMIT 5; SELECT name, club FROM players WHERE clubLogoUrl IS NULL LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT COUNT(*) as total, COUNT(clubLogoUrl) as com_logo FROM players; SELECT name, club, clubLogoUrl FROM players WHERE clubLogoUrl IS NOT NULL LIMIT 5; SELECT name, club FROM players WHERE clubLogoUrl IS NULL LIMIT 5;",
+  "rows": [
+    {
+      "total": "657",
+      "com_logo": "0"
+    },
+    {
+      "total": "name",
+      "com_logo": "club"
+    },
+    {
+      "total": "Lamine Yamal",
+      "com_logo": "FC Barcelona"
+    },
+    {
+      "total": "Jude. Bellingham",
+      "com_logo": "Real Madrid"
+    },
+    {
+      "total": "Pedri",
+      "com_logo": "FC Barcelona"
+    },
+    {
+      "total": "João Neves",
+      "com_logo": "Paris Saint-Germain"
+    },
+    {
+      "total": "J. Musiala",
+      "com_logo": "FC Bayern München"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\tcom_logo\n657\t0\nname\tclub\nLamine Yamal\tFC Barcelona\nJude. Bellingham\tReal Madrid\nPedri\tFC Barcelona\nJoão Neves\tParis Saint-Germain\nJ. Musiala\tFC Bayern München\n",
+  "stderr": "",
+  "execution_time_ms": 205
+}

@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Jogadores from "./pages/Jogadores";
 import Perfil from "./pages/Perfil";
 import Times from "./pages/Times";
+import TeamDetail from "./pages/TeamDetail";
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/jogadores" component={Jogadores} />
       <Route path="/perfil" component={Perfil} />
       <Route path="/times" component={Times} />
+      <Route path="/times/:id" component={TeamDetail} />
       <Route path="/noticias"><Redirect to="/" /></Route>
       <Route path="/dashboard"><Redirect to="/" /></Route>
       <Route path="/404" component={NotFound} />

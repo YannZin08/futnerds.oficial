@@ -1,0 +1,61 @@
+{
+  "query": "SELECT COUNT(*) as jogadores_com_time FROM players p WHERE EXISTS (SELECT 1 FROM teams t WHERE t.name = p.club); SELECT p.club, t.id as teamId, t.logoUrl FROM players p JOIN teams t ON t.name = p.club GROUP BY p.club, t.id, t.logoUrl LIMIT 15;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT COUNT(*) as jogadores_com_time FROM players p WHERE EXISTS (SELECT 1 FROM teams t WHERE t.name = p.club); SELECT p.club, t.id as teamId, t.logoUrl FROM players p JOIN teams t ON t.name = p.club GROUP BY p.club, t.id, t.logoUrl LIMIT 15;",
+  "rows": [
+    {
+      "jogadores_com_time": "615"
+    },
+    {
+      "jogadores_com_time": "club\tteamId\tlogoUrl"
+    },
+    {
+      "jogadores_com_time": "West Ham United\t30016\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/west_ham_united_logo_5c699304.png"
+    },
+    {
+      "jogadores_com_time": "Stade Rennais FC\t60211\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/stade_rennais_fc_logo_36f1151d.png"
+    },
+    {
+      "jogadores_com_time": "Galatasaray SK\t60317\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/galatasaray_sk_logo_2e34c4c4.png"
+    },
+    {
+      "jogadores_com_time": "Brighton & Hove Albion\t30012\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/brighton_hove_albion_logo_f687fe9b.png"
+    },
+    {
+      "jogadores_com_time": "AFC Bournemouth\t30015\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/afc_bournemouth_logo_42c9555a.png"
+    },
+    {
+      "jogadores_com_time": "Ipswich Town\t30021\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/ipswich_town_logo_fe25c411.png"
+    },
+    {
+      "jogadores_com_time": "Villarreal CF\t60138\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/villarreal_cf_logo_58a53628.png"
+    },
+    {
+      "jogadores_com_time": "RC Lens\t60209\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/rc_lens_logo_265e150d.png"
+    },
+    {
+      "jogadores_com_time": "FC Nantes\t60218\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/fc_nantes_logo_374ed3fe.png"
+    },
+    {
+      "jogadores_com_time": "Hull City\t30031\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/hull_city_logo_e833b922.png"
+    },
+    {
+      "jogadores_com_time": "Al Nassr\t60058\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/al_nassr_logo_640f4898.png"
+    },
+    {
+      "jogadores_com_time": "AZ Alkmaar\t60244\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/az_alkmaar_logo_4b7da86f.png"
+    },
+    {
+      "jogadores_com_time": "Chelsea\t30005\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/chelsea_logo_46f923b8.png"
+    },
+    {
+      "jogadores_com_time": "1. FC Kaiserslautern\t60024\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/1_fc_kaiserslautern_logo_deaa6861.png"
+    },
+    {
+      "jogadores_com_time": "Atlético Madrid\t60135\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/atl_tico_madrid_logo_0fde6fe6.png"
+    }
+  ],
+  "messages": [],
+  "stdout": "jogadores_com_time\n615\nclub\tteamId\tlogoUrl\nWest Ham United\t30016\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/west_ham_united_logo_5c699304.png\nStade Rennais FC\t60211\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/stade_rennais_fc_logo_36f1151d.png\nGalatasaray SK\t60317\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/galatasaray_sk_logo_2e34c4c4.png\nBrighton & Hove Albion\t30012\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/brighton_hove_albion_logo_f687fe9b.png\nAFC Bournemouth\t30015\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/afc_bournemouth_logo_42c9555a.png\nIpswich Town\t30021\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/ipswich_town_logo_fe25c411.png\nVillarreal CF\t60138\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/villarreal_cf_logo_58a53628.png\nRC Lens\t60209\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/rc_lens_logo_265e150d.png\nFC Nantes\t60218\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/fc_nantes_logo_374ed3fe.png\nHull City\t30031\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/hull_city_logo_e833b922.png\nAl Nassr\t60058\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/al_nassr_logo_640f4898.png\nAZ Alkmaar\t60244\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/az_alkmaar_logo_4b7da86f.png\nChelsea\t30005\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/chelsea_logo_46f923b8.png\n1. FC Kaiserslautern\t60024\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/1_fc_kaiserslautern_logo_deaa6861.png\nAtlético Madrid\t60135\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/atl_tico_madrid_logo_0fde6fe6.png\n",
+  "stderr": "",
+  "execution_time_ms": 69
+}

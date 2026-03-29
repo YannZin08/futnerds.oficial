@@ -1,0 +1,132 @@
+{
+  "query": "SELECT t.id, t.name, t.logoUrl FROM teams t LIMIT 20; SELECT DISTINCT p.club FROM players p WHERE p.club IN (SELECT t.name FROM teams t) LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT t.id, t.name, t.logoUrl FROM teams t LIMIT 20; SELECT DISTINCT p.club FROM players p WHERE p.club IN (SELECT t.name FROM teams t) LIMIT 20;",
+  "rows": [
+    {
+      "id": "30001",
+      "name": "Arsenal",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/arsenal_logo_0cc2bfb2.png"
+    },
+    {
+      "id": "30002",
+      "name": "Liverpool",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/liverpool_logo_3665bfc1.png"
+    },
+    {
+      "id": "30003",
+      "name": "Manchester City",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/manchester_city_logo_907a8f19.png"
+    },
+    {
+      "id": "30004",
+      "name": "Aston Villa",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/aston_villa_logo_7ec24cee.png"
+    },
+    {
+      "id": "30005",
+      "name": "Chelsea",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/chelsea_logo_46f923b8.png"
+    },
+    {
+      "id": "30006",
+      "name": "Newcastle United",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/newcastle_united_logo_a41ae5e0.png"
+    },
+    {
+      "id": "30007",
+      "name": "Tottenham Hotspur",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/tottenham_hotspur_logo_cf1b4d28.png"
+    },
+    {
+      "id": "30008",
+      "name": "Manchester United",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/manchester_united_logo_23ea51ce.png"
+    },
+    {
+      "id": "30009",
+      "name": "Crystal Palace",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/crystal_palace_logo_1ba8de9c.png"
+    },
+    {
+      "id": "30010",
+      "name": "Nottingham Forest",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/nottingham_forest_logo_3d0ba59a.png"
+    },
+    {
+      "id": "30011",
+      "name": "Everton",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/everton_logo_188343e9.png"
+    },
+    {
+      "id": "30012",
+      "name": "Brighton & Hove Albion",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/brighton_hove_albion_logo_f687fe9b.png"
+    },
+    {
+      "id": "30013",
+      "name": "Brentford",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/brentford_logo_ec75231d.png"
+    },
+    {
+      "id": "30014",
+      "name": "Fulham FC",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/fulham_fc_logo_03a470ba.png"
+    },
+    {
+      "id": "30015",
+      "name": "AFC Bournemouth",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/afc_bournemouth_logo_42c9555a.png"
+    },
+    {
+      "id": "30016",
+      "name": "West Ham United",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/west_ham_united_logo_5c699304.png"
+    },
+    {
+      "id": "30017",
+      "name": "Sunderland",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/sunderland_logo_2d6d143b.png"
+    },
+    {
+      "id": "30018",
+      "name": "Leeds United",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/leeds_united_logo_31ce8320.png"
+    },
+    {
+      "id": "30019",
+      "name": "Burnley",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/burnley_logo_aad93d2f.png"
+    },
+    {
+      "id": "30020",
+      "name": "Wolverhampton Wanderers",
+      "logoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/wolverhampton_wanderers_logo_eecd6a5e.png"
+    }
+  ],
+  "messages": [
+    "club",
+    "Arsenal",
+    "Athletic Club",
+    "Manchester City",
+    "Royal Antwerp FC",
+    "OGC Nice",
+    "KV Mechelen",
+    "Chelsea",
+    "SV Werder Bremen",
+    "Hannover 96",
+    "Udinese",
+    "Parma",
+    "Olympique Lyonnais",
+    "Go Ahead Eagles",
+    "Middlesbrough",
+    "Inter",
+    "Spezia",
+    "KRC Genk",
+    "Standard de Liège",
+    "Frosinone",
+    "Club Atlético Sarmiento"
+  ],
+  "stdout": "id\tname\tlogoUrl\n30001\tArsenal\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/arsenal_logo_0cc2bfb2.png\n30002\tLiverpool\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/liverpool_logo_3665bfc1.png\n30003\tManchester City\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/manchester_city_logo_907a8f19.png\n30004\tAston Villa\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/aston_villa_logo_7ec24cee.png\n30005\tChelsea\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/chelsea_logo_46f923b8.png\n30006\tNewcastle United\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/newcastle_united_logo_a41ae5e0.png\n30007\tTottenham Hotspur\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/tottenham_hotspur_logo_cf1b4d28.png\n30008\tManchester United\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/manchester_united_logo_23ea51ce.png\n30009\tCrystal Palace\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/crystal_palace_logo_1ba8de9c.png\n30010\tNottingham Forest\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/nottingham_forest_logo_3d0ba59a.png\n30011\tEverton\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/everton_logo_188343e9.png\n30012\tBrighton & Hove Albion\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/brighton_hove_albion_logo_f687fe9b.png\n30013\tBrentford\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/brentford_logo_ec75231d.png\n30014\tFulham FC\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/fulham_fc_logo_03a470ba.png\n30015\tAFC Bournemouth\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/afc_bournemouth_logo_42c9555a.png\n30016\tWest Ham United\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/west_ham_united_logo_5c699304.png\n30017\tSunderland\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/sunderland_logo_2d6d143b.png\n30018\tLeeds United\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/leeds_united_logo_31ce8320.png\n30019\tBurnley\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/burnley_logo_aad93d2f.png\n30020\tWolverhampton Wanderers\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/wolverhampton_wanderers_logo_eecd6a5e.png\nclub\nArsenal\nAthletic Club\nManchester City\nRoyal Antwerp FC\nOGC Nice\nKV Mechelen\nChelsea\nSV Werder Bremen\nHannover 96\nUdinese\nParma\nOlympique Lyonnais\nGo Ahead Eagles\nMiddlesbrough\nInter\nSpezia\nKRC Genk\nStandard de Liège\nFrosinone\nClub Atlético Sarmiento\n",
+  "stderr": "",
+  "execution_time_ms": 209
+}

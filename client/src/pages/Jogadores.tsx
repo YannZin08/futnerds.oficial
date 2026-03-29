@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Navbar from "@/components/Navbar";
@@ -78,6 +79,7 @@ function getCardGradient(overall: number): { gradient: string; isDiamond: boolea
 
 function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: () => void; isFav?: boolean }) {
   const { gradient: gradientClass, isDiamond } = getCardGradient(Number(player.overall));
+  const [, setLocation] = useLocation();
 
   // Extrai posições alternativas únicas
   const getAltPositions = () => {
@@ -136,9 +138,30 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
 
       {/* Card Body */}
       <div className="p-4 space-y-3">
-        <div className="flex items-center justify-between text-xs">
-          <span className="text-muted-foreground">{player.club}</span>
-          <span className="text-muted-foreground">{player.league}</span>
+        <div className="flex items-center justify-between text-xs gap-2">
+          {/* Logo do clube clicável */}
+          <div className="flex items-center gap-1.5 min-w-0">
+            {player.clubLogoUrl ? (
+              <button
+                onClick={() => {
+                  if (player.teamId) setLocation(`/times/${player.teamId}`);
+                }}
+                className={`w-6 h-6 flex-shrink-0 rounded bg-white/5 flex items-center justify-center overflow-hidden transition-transform ${
+                  player.teamId ? 'hover:scale-110 cursor-pointer' : 'cursor-default'
+                }`}
+                title={player.teamId ? `Ver ${player.club}` : player.club}
+              >
+                <img
+                  src={player.clubLogoUrl}
+                  alt={player.club}
+                  className="w-full h-full object-contain"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                />
+              </button>
+            ) : null}
+            <span className="text-muted-foreground truncate">{player.club}</span>
+          </div>
+          <span className="text-muted-foreground flex-shrink-0">{player.league}</span>
         </div>
 
         {/* Overall / Potential */}

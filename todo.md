@@ -153,3 +153,8 @@
 
 ## Cards dos Times (2026-03-28)
 - [x] Adicionar campo de valor do clube (budget) nos cards dos times
+
+## Logo do Clube e Página do Time (2026-03-28)
+- [ ] Exibir logo do clube nos cards de jogadores
+- [ ] Criar página individual do time (/times/:id)
+- [ ] Ao clicar na logo do clube no card do jogador, redirecionar para a página do time

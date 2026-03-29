@@ -17,6 +17,8 @@ import {
   getLeaguesByCountry,
   getTeamsByLeague,
   getTeamById,
+  getTeamByName,
+  getPlayersByTeam,
 } from "./db";
 
 export const appRouter = router({
@@ -107,6 +109,21 @@ export const appRouter = router({
       .input(z.object({ id: z.number() }))
       .query(async ({ input }) => {
         return await getTeamById(input.id);
+      }),
+
+    byName: publicProcedure
+      .input(z.object({ name: z.string() }))
+      .query(async ({ input }) => {
+        return await getTeamByName(input.name);
+      }),
+  }),
+
+  // ─── Players by Team ──────────────────────────────────────────────────────
+  teamPlayers: router({
+    byTeam: publicProcedure
+      .input(z.object({ teamName: z.string() }))
+      .query(async ({ input }) => {
+        return await getPlayersByTeam(input.teamName);
       }),
   }),
 
