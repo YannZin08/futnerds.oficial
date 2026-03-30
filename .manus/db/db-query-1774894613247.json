@@ -1,0 +1,25 @@
+{
+  "query": "SELECT id, name, logoUrl FROM leagues WHERE name LIKE '%Argentina%' OR name LIKE '%Liga Pro%' OR name LIKE '%Portugal%' OR name LIKE '%Primeira%' OR name LIKE '%Turquia%' OR name LIKE '%Super%' OR name LIKE '%Süper%' OR name LIKE '%Trendyol%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, logoUrl FROM leagues WHERE name LIKE '%Argentina%' OR name LIKE '%Liga Pro%' OR name LIKE '%Portugal%' OR name LIKE '%Primeira%' OR name LIKE '%Turquia%' OR name LIKE '%Super%' OR name LIKE '%Süper%' OR name LIKE '%Trendyol%';",
+  "rows": [
+    {
+      "id": "30006",
+      "name": "Primeira Liga",
+      "logoUrl": "https://cdn.sofifa.net/meta/league/308/light_60.png"
+    },
+    {
+      "id": "30008",
+      "name": "Süper Lig",
+      "logoUrl": "https://cdn.sofifa.net/meta/league/26/light_60.png"
+    },
+    {
+      "id": "30017",
+      "name": "Liga Profesional de Fútbol",
+      "logoUrl": "https://cdn.sofifa.net/meta/league/7/light_60.png"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tlogoUrl\n30006\tPrimeira Liga\thttps://cdn.sofifa.net/meta/league/308/light_60.png\n30008\tSüper Lig\thttps://cdn.sofifa.net/meta/league/26/light_60.png\n30017\tLiga Profesional de Fútbol\thttps://cdn.sofifa.net/meta/league/7/light_60.png\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

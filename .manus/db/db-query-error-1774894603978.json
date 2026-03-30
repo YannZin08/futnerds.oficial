@@ -1,0 +1,8 @@
+{
+  "query": "SELECT id, name, logo_url FROM leagues WHERE name LIKE '%Argentina%' OR name LIKE '%Liga Pro%' OR name LIKE '%Portugal%' OR name LIKE '%Primeira%' OR name LIKE '%Turquia%' OR name LIKE '%Super%' OR name LIKE '%Süper%' OR name LIKE '%Trendyol%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT id, name, logo_url FROM leagues WHERE name LIKE '%Argentina%' OR name LIKE '%Liga Pro%' OR name LIKE '%Portugal%' OR name LIKE '%Primeira%' OR name LIKE '%Turquia%' OR name LIKE '%Super%' OR name LIKE '%Süper%' OR name LIKE '%Trendyol%';",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'logo_url' in 'field list'"
+  ]
+}

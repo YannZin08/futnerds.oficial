@@ -1,0 +1,9 @@
+{
+  "query": "\nUPDATE leagues SET logoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/liga-argentina_9bc4cda1.webp' WHERE id = 30017;\nUPDATE leagues SET logoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/liga-portuguesa_a2e68281.webp' WHERE id = 30006;\nUPDATE leagues SET logoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/liga-turca_467cec24.webp' WHERE id = 30008;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute \nUPDATE leagues SET logoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/liga-argentina_9bc4cda1.webp' WHERE id = 30017;\nUPDATE leagues SET logoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/liga-portuguesa_a2e68281.webp' WHERE id = 30006;\nUPDATE leagues SET logoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/liga-turca_467cec24.webp' WHERE id = 30008;\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 83
+}
