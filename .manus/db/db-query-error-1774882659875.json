@@ -1,0 +1,8 @@
+{
+  "query": "\nUPDATE countries SET image_url = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/argentina_e4e9baa2.png' WHERE name = 'Argentina';\nUPDATE countries SET image_url = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/escocia_0a9e040e.png' WHERE name = 'Escócia';\nUPDATE countries SET image_url = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/turquia_8f473f4f.png' WHERE name = 'Turquia';\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute \nUPDATE countries SET image_url = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/argentina_e4e9baa2.png' WHERE name = 'Argentina';\nUPDATE countries SET image_url = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/escocia_0a9e040e.png' WHERE name = 'Escócia';\nUPDATE countries SET image_url = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/turquia_8f473f4f.png' WHERE name = 'Turquia';\n",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 2: Unknown column 'image_url' in 'field list'"
+  ]
+}

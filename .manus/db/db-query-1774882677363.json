@@ -1,0 +1,22 @@
+{
+  "query": "SELECT name, imageUrl FROM countries WHERE name IN ('Argentina', 'Escócia', 'Turquia');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute SELECT name, imageUrl FROM countries WHERE name IN ('Argentina', 'Escócia', 'Turquia');",
+  "rows": [
+    {
+      "name": "Turquia",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/turquia_8f473f4f.png"
+    },
+    {
+      "name": "Escócia",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/escocia_0a9e040e.png"
+    },
+    {
+      "name": "Argentina",
+      "imageUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/argentina_e4e9baa2.png"
+    }
+  ],
+  "messages": [],
+  "stdout": "name\timageUrl\nTurquia\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/turquia_8f473f4f.png\nEscócia\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/escocia_0a9e040e.png\nArgentina\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/argentina_e4e9baa2.png\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}
