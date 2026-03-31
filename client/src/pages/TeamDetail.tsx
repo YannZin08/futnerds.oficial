@@ -15,6 +15,9 @@ import {
   TrendingUp,
   Shield,
   Dumbbell,
+  Swords,
+  Globe,
+  MapPin,
 } from "lucide-react";
 
 // Tradução das posições para português
@@ -291,6 +294,33 @@ export default function TeamDetail() {
                         <div>
                           <p className="text-xs text-muted-foreground">Melhor Jogador</p>
                           <p className="text-sm font-bold text-primary">{bestPlayer.name} ({bestPlayer.overall})</p>
+                        </div>
+                      </div>
+                    )}
+                    {(team as any).rivalTeam && (
+                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                        <Swords className="h-4 w-4 text-red-400" />
+                        <div>
+                          <p className="text-xs text-muted-foreground">Rival</p>
+                          <p className="text-sm font-bold text-red-400">{(team as any).rivalTeam}</p>
+                        </div>
+                      </div>
+                    )}
+                    {(team as any).prestige != null && (
+                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                        <Globe className="h-4 w-4 text-purple-400" />
+                        <div>
+                          <p className="text-xs text-muted-foreground">Prestígio Internacional</p>
+                          <p className="text-sm font-bold text-purple-400">{(team as any).prestige}/10</p>
+                        </div>
+                      </div>
+                    )}
+                    {(team as any).localPrestige != null && (
+                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                        <MapPin className="h-4 w-4 text-orange-400" />
+                        <div>
+                          <p className="text-xs text-muted-foreground">Prestígio Local</p>
+                          <p className="text-sm font-bold text-orange-400">{(team as any).localPrestige}/10</p>
                         </div>
                       </div>
                     )}

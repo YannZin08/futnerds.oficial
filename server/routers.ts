@@ -19,6 +19,7 @@ import {
   getTeamById,
   getTeamByName,
   getPlayersByTeam,
+  importTeamDetails,
 } from "./db";
 
 export const appRouter = router({
@@ -115,6 +116,21 @@ export const appRouter = router({
       .input(z.object({ name: z.string() }))
       .query(async ({ input }) => {
         return await getTeamByName(input.name);
+      }),
+
+    importDetails: protectedProcedure
+      .input(z.array(z.object({
+        nome: z.string(),
+        estadio: z.string().optional(),
+        rivalTime: z.string().optional(),
+        prestigioInternacional: z.union([z.string(), z.number()]).optional(),
+        prestigioLocal: z.union([z.string(), z.number()]).optional(),
+      })))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin') {
+          throw new Error('Acesso negado: apenas administradores podem importar dados.');
+        }
+        return await importTeamDetails(input);
       }),
   }),
 

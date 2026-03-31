@@ -281,12 +281,54 @@ export async function getTeamById(id: number) {
       countryId: teams.countryId,
       leagueName: leagues.name,
       leagueLogoUrl: leagues.logoUrl,
+      localPrestige: teams.localPrestige,
+      rivalTeam: teams.rivalTeam,
     })
     .from(teams)
     .leftJoin(leagues, eq(teams.leagueId, leagues.id))
     .where(eq(teams.id, id))
     .limit(1);
   return result[0] ?? null;
+}
+
+export async function importTeamDetails(items: Array<{
+  nome: string;
+  estadio?: string;
+  rivalTime?: string;
+  prestigioInternacional?: string | number;
+  prestigioLocal?: string | number;
+}>) {
+  const db = await getDb();
+  if (!db) return { updated: 0, notFound: [] as string[] };
+  const { teams } = await import("../drizzle/schema");
+
+  // Busca todos os times do banco
+  const allTeams = await db.select({ id: teams.id, name: teams.name }).from(teams);
+  const teamsMap = new Map(allTeams.map(t => [t.name.toLowerCase(), t.id]));
+
+  let updated = 0;
+  const notFound: string[] = [];
+
+  for (const item of items) {
+    const name = (item.nome || '').trim();
+    const teamId = teamsMap.get(name.toLowerCase());
+    if (!teamId) { notFound.push(name); continue; }
+
+    const stadium = item.estadio?.trim() || null;
+    const rival = item.rivalTime?.trim() || null;
+    const prestigeInt = item.prestigioInternacional != null ? parseInt(String(item.prestigioInternacional)) : null;
+    const prestigeLocal = item.prestigioLocal != null ? parseInt(String(item.prestigioLocal)) : null;
+
+    await db.update(teams).set({
+      stadiumName: stadium,
+      rivalTeam: rival,
+      prestige: isNaN(prestigeInt as number) ? null : prestigeInt,
+      localPrestige: isNaN(prestigeLocal as number) ? null : prestigeLocal,
+    }).where(eq(teams.id, teamId));
+    updated++;
+  }
+
+  return { updated, notFound };
 }
 
 export async function getTeamByName(name: string) {
