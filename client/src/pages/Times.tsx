@@ -229,9 +229,7 @@ export default function Times() {
         {/* ── TEAMS VIEW ── */}
         {view === "teams" && (
           <>
-            <p className="text-muted-foreground mb-6">
-              {teams?.length ?? 0} times disponíveis — clique em um time para ver detalhes e iniciar sua carreira.
-            </p>
+
             {loadingTeams ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {Array.from({ length: 6 }).map((_, i) => (
