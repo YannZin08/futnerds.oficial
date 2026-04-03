@@ -6,7 +6,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Users, Search, SlidersHorizontal, Star, TrendingUp, Zap, Target, Shield, Dumbbell, ChevronLeft, ChevronRight } from "lucide-react";
+import { Users, Search, SlidersHorizontal, Star, TrendingUp, Zap, Target, Shield, Dumbbell, ChevronLeft, ChevronRight, ArrowUpDown, ArrowUp, ArrowDown, X, Filter } from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 
 const PLAYERS_PER_PAGE = 60;
@@ -287,6 +289,9 @@ export default function Jogadores() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPosition, setSelectedPosition] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState<"overall_desc" | "overall_asc" | "potential_desc" | "potential_asc" | "price_desc" | "price_asc">("overall_desc");
+  const [filterLeague, setFilterLeague] = useState("");
+  const [filterNationality, setFilterNationality] = useState("");
 
   const { data: players, isLoading } = trpc.players.list.useQuery({
     limit: 9999,
@@ -313,6 +318,21 @@ export default function Jogadores() {
     return alts.some((alt: string) => positionGroupMap[alt] === group);
   };
 
+  // Listas únicas para filtros avançados
+  const allLeagues = useMemo(() => {
+    if (!players) return [];
+    const set = new Set<string>();
+    players.forEach((p: any) => { if (p.league) set.add(p.league); });
+    return Array.from(set).sort();
+  }, [players]);
+
+  const allNationalities = useMemo(() => {
+    if (!players) return [];
+    const set = new Set<string>();
+    players.forEach((p: any) => { if (p.nationality) set.add(p.nationality); });
+    return Array.from(set).sort();
+  }, [players]);
+
   const filteredPlayers = useMemo(() => {
     if (!players) return [];
     let result = players;
@@ -326,8 +346,26 @@ export default function Jogadores() {
         p.nationality.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
+    if (filterLeague) {
+      result = result.filter((p: any) => p.league === filterLeague);
+    }
+    if (filterNationality) {
+      result = result.filter((p: any) => p.nationality === filterNationality);
+    }
+    // Ordenação
+    result = [...result].sort((a: any, b: any) => {
+      switch (sortBy) {
+        case "overall_desc": return (b.overall ?? 0) - (a.overall ?? 0);
+        case "overall_asc":  return (a.overall ?? 0) - (b.overall ?? 0);
+        case "potential_desc": return (b.potential ?? 0) - (a.potential ?? 0);
+        case "potential_asc":  return (a.potential ?? 0) - (b.potential ?? 0);
+        case "price_desc": return (b.price ?? 0) - (a.price ?? 0);
+        case "price_asc":  return (a.price ?? 0) - (b.price ?? 0);
+        default: return 0;
+      }
+    });
     return result;
-  }, [players, searchQuery, selectedPosition]);
+  }, [players, searchQuery, selectedPosition, sortBy, filterLeague, filterNationality]);
 
   const totalPages = Math.ceil(filteredPlayers.length / PLAYERS_PER_PAGE);
 
@@ -339,6 +377,19 @@ export default function Jogadores() {
   // Resetar para página 1 quando filtro ou busca mudar
   const handlePositionChange = (pos: string) => {
     setSelectedPosition(pos);
+    setCurrentPage(1);
+  };
+
+  const handleSortChange = (value: typeof sortBy) => {
+    setSortBy(value);
+    setCurrentPage(1);
+  };
+
+  const activeFiltersCount = [filterLeague, filterNationality].filter(Boolean).length;
+
+  const clearAdvancedFilters = () => {
+    setFilterLeague("");
+    setFilterNationality("");
     setCurrentPage(1);
   };
 
@@ -393,16 +444,82 @@ export default function Jogadores() {
 
         <div className="container py-10">
           {/* Filters */}
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Buscar jogador, clube ou nacionalidade..."
-                value={searchQuery}
-                onChange={(e) => handleSearchChange(e.target.value)}
-                className="pl-10 bg-secondary border-border"
-              />
+          <div className="flex flex-col gap-4 mb-8">
+            {/* Linha 1: busca + botão filtros */}
+            <div className="flex gap-3">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar jogador, clube ou nacionalidade..."
+                  value={searchQuery}
+                  onChange={(e) => handleSearchChange(e.target.value)}
+                  className="pl-10 bg-secondary border-border"
+                />
+              </div>
+              {/* Botão Filtros Avançados */}
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline" className="gap-2 shrink-0 relative">
+                    <Filter className="h-4 w-4" />
+                    Filtros
+                    {activeFiltersCount > 0 && (
+                      <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center">
+                        {activeFiltersCount}
+                      </span>
+                    )}
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-80">
+                  <SheetHeader>
+                    <SheetTitle className="flex items-center gap-2">
+                      <Filter className="h-5 w-5 text-primary" />
+                      Filtros Avançados
+                    </SheetTitle>
+                  </SheetHeader>
+                  <div className="mt-6 flex flex-col gap-5">
+                    {/* Liga */}
+                    <div className="flex flex-col gap-2">
+                      <label className="text-sm font-medium text-foreground">Liga</label>
+                      <Select value={filterLeague} onValueChange={(v) => { setFilterLeague(v === "__all__" ? "" : v); setCurrentPage(1); }}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Todas as ligas" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="__all__">Todas as ligas</SelectItem>
+                          {allLeagues.map((l) => (
+                            <SelectItem key={l} value={l}>{l}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {/* Nacionalidade */}
+                    <div className="flex flex-col gap-2">
+                      <label className="text-sm font-medium text-foreground">Nacionalidade</label>
+                      <Select value={filterNationality} onValueChange={(v) => { setFilterNationality(v === "__all__" ? "" : v); setCurrentPage(1); }}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Todos os países" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="__all__">Todos os países</SelectItem>
+                          {allNationalities.map((n) => (
+                            <SelectItem key={n} value={n}>{n}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {/* Limpar filtros */}
+                    {activeFiltersCount > 0 && (
+                      <Button variant="outline" onClick={clearAdvancedFilters} className="gap-2 mt-2">
+                        <X className="h-4 w-4" />
+                        Limpar filtros ({activeFiltersCount})
+                      </Button>
+                    )}
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
+
+            {/* Linha 2: posições */}
             <div className="flex gap-2 flex-wrap">
               {positions.map((pos) => (
                 <button
@@ -415,6 +532,32 @@ export default function Jogadores() {
                   }`}
                 >
                   {positionLabels[pos]}
+                </button>
+              ))}
+            </div>
+
+            {/* Linha 3: chips de ordenação rápida */}
+            <div className="flex flex-wrap gap-2 items-center">
+              <span className="text-xs text-muted-foreground font-medium mr-1">Ordenar:</span>
+              {([
+                { value: "overall_desc",    label: "Overall",    icon: ArrowDown },
+                { value: "overall_asc",     label: "Overall",    icon: ArrowUp },
+                { value: "potential_desc",  label: "Potencial",  icon: ArrowDown },
+                { value: "potential_asc",   label: "Potencial",  icon: ArrowUp },
+                { value: "price_desc",      label: "Valor",      icon: ArrowDown },
+                { value: "price_asc",       label: "Valor",      icon: ArrowUp },
+              ] as { value: typeof sortBy; label: string; icon: any }[]).map(({ value, label, icon: Icon }) => (
+                <button
+                  key={value}
+                  onClick={() => handleSortChange(value)}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+                    sortBy === value
+                      ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/30"
+                      : "bg-secondary text-muted-foreground border-border hover:text-foreground hover:border-primary/40"
+                  }`}
+                >
+                  <Icon className="h-3 w-3" />
+                  {label}
                 </button>
               ))}
             </div>
