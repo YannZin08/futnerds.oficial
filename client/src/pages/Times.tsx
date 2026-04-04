@@ -229,7 +229,7 @@ export default function Times() {
         </div>
       </div>
 
-      <div className="container py-8">
+      <div className="container py-8 pt-10">
 
         {/* ── COUNTRIES VIEW ── */}
         {view === "countries" && (
