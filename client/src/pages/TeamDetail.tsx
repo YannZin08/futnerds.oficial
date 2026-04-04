@@ -210,10 +210,10 @@ export default function TeamDetail() {
     : null;
 
   return (
-    <div className="min-h-screen flex flex-col bg-background relative">
+    <div className="min-h-screen flex flex-col bg-background pt-16">
       {/* Grid quadriculado de fundo */}
       <div
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none fixed inset-0 z-0"
         style={{
           backgroundImage: `linear-gradient(rgba(34,197,94,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.12) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
@@ -222,7 +222,7 @@ export default function TeamDetail() {
       <Navbar />
 
       {/* ── Header Sticky (idêntico ao de Times) ── */}
-      <div className="border-b border-border bg-card sticky top-16 z-10">
+      <div className="border-b border-border bg-card sticky top-16 z-40">
         <div className="container py-4">
           <div className="flex items-center gap-3 overflow-hidden">
             {/* Botão voltar */}
@@ -298,7 +298,7 @@ export default function TeamDetail() {
         </div>
       </div>
 
-      <main className="flex-1 relative z-10">
+      <main className="flex-1">
         {/* Info do Time */}
         <section className="py-10 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
           <div className="container">
