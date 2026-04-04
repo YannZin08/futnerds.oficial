@@ -224,7 +224,7 @@ export default function TeamDetail() {
       {/* ── Header Sticky (idêntico ao de Times) ── */}
       <div className="border-b border-border bg-card sticky top-16 z-10">
         <div className="container py-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 overflow-hidden">
             {/* Botão voltar */}
             <Button
               variant="ghost"
@@ -237,7 +237,7 @@ export default function TeamDetail() {
             </Button>
 
             {/* Título + breadcrumb */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 overflow-hidden">
               <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
                 <Trophy className="w-6 h-6 text-primary" />
                 {isLoading ? (
@@ -274,7 +274,7 @@ export default function TeamDetail() {
             </div>
 
             {/* ── Busca de jogadores no elenco ── */}
-            <div ref={searchRef} className="relative w-64 ml-auto">
+            <div ref={searchRef} className="relative shrink-0 w-56 sm:w-64">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
