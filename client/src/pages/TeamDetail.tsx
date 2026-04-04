@@ -1,23 +1,22 @@
 import { useParams, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
+import { useState, useRef, useEffect, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
-  ArrowLeft,
+  ChevronLeft,
   Users,
   Trophy,
   Wallet,
   Building2,
   Star,
-  Zap,
-  Target,
-  TrendingUp,
-  Shield,
-  Dumbbell,
-  Swords,
   Globe,
   MapPin,
+  Swords,
+  Search,
+  X,
 } from "lucide-react";
 
 // Tradução das posições para português
@@ -128,8 +127,23 @@ function PlayerMiniCard({ player }: { player: any }) {
 
 export default function TeamDetail() {
   const params = useParams<{ id: string }>();
-  const [, setLocation] = useLocation();
+  const [, navigate] = useLocation();
   const teamId = parseInt(params.id ?? "0", 10);
+
+  // Busca de jogadores no elenco
+  const [playerSearch, setPlayerSearch] = useState("");
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Fecha dropdown ao clicar fora
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        // apenas fecha se clicar fora
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const { data: team, isLoading: teamLoading } = trpc.teams.byId.useQuery(
     { id: teamId },
@@ -143,6 +157,14 @@ export default function TeamDetail() {
 
   const isLoading = teamLoading || (!!team && playersLoading);
 
+  // Filtra jogadores pelo nome digitado
+  const filteredPlayers = useMemo(() => {
+    if (!teamPlayers) return [];
+    const q = playerSearch.trim().toLowerCase();
+    if (!q) return teamPlayers;
+    return teamPlayers.filter((p: any) => p.name.toLowerCase().includes(q));
+  }, [teamPlayers, playerSearch]);
+
   if (!teamId) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
@@ -150,8 +172,8 @@ export default function TeamDetail() {
         <main className="flex-1 pt-20 flex items-center justify-center">
           <div className="text-center">
             <p className="text-muted-foreground">Time não encontrado.</p>
-            <Button onClick={() => setLocation("/times")} className="mt-4">
-              <ArrowLeft className="h-4 w-4 mr-2" />
+            <Button onClick={() => navigate("/times")} className="mt-4">
+              <ChevronLeft className="h-4 w-4 mr-2" />
               Voltar para Times
             </Button>
           </div>
@@ -161,15 +183,13 @@ export default function TeamDetail() {
     );
   }
 
-  // Agrupa jogadores por posição
+  // Agrupa jogadores filtrados por posição
   const positionGroups: Record<string, any[]> = {};
   const positionOrder = ["GOL", "ZAG", "LD", "LE", "VOL", "MEI", "MC", "PNT", "ATA"];
-  if (teamPlayers) {
-    for (const p of teamPlayers) {
-      const pos = positionPtMap[p.position] ?? p.position;
-      if (!positionGroups[pos]) positionGroups[pos] = [];
-      positionGroups[pos].push(p);
-    }
+  for (const p of filteredPlayers) {
+    const pos = positionPtMap[p.position] ?? p.position;
+    if (!positionGroups[pos]) positionGroups[pos] = [];
+    positionGroups[pos].push(p);
   }
 
   const sortedGroups = Object.entries(positionGroups).sort(([a], [b]) => {
@@ -200,18 +220,88 @@ export default function TeamDetail() {
         }}
       />
       <Navbar />
-      <main className="flex-1 pt-20 relative z-10">
-        {/* Header do Time */}
+
+      {/* ── Header Sticky (idêntico ao de Times) ── */}
+      <div className="border-b border-border bg-card sticky top-16 z-10">
+        <div className="container py-4">
+          <div className="flex items-center gap-3">
+            {/* Botão voltar */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate("/times")}
+              className="shrink-0"
+              title="Voltar para Times"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
+
+            {/* Título + breadcrumb */}
+            <div className="flex-1 min-w-0">
+              <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                <Trophy className="w-6 h-6 text-primary" />
+                {isLoading ? (
+                  <span className="h-6 w-40 bg-muted rounded animate-pulse inline-block" />
+                ) : team ? (
+                  <span className="flex items-center gap-2">
+                    {team.logoUrl && (
+                      <img src={team.logoUrl} alt={team.name} className="w-7 h-7 object-contain" />
+                    )}
+                    {team.name}
+                  </span>
+                ) : "Time"}
+              </h1>
+              {/* Breadcrumb */}
+              <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
+                <button onClick={() => navigate("/times")} className="hover:text-primary transition-colors">
+                  Times
+                </button>
+                {team?.leagueName && (
+                  <>
+                    <span>/</span>
+                    <button onClick={() => navigate("/times")} className="hover:text-primary transition-colors">
+                      {team.leagueName}
+                    </button>
+                  </>
+                )}
+                {team?.name && (
+                  <>
+                    <span>/</span>
+                    <span className="text-foreground">{team.name}</span>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* ── Busca de jogadores no elenco ── */}
+            <div ref={searchRef} className="relative w-64 ml-auto">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar jogador no elenco..."
+                  value={playerSearch}
+                  onChange={(e) => setPlayerSearch(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Escape") setPlayerSearch(""); }}
+                  className="pl-10 pr-8 bg-secondary border-border"
+                />
+                {playerSearch && (
+                  <button
+                    onClick={() => setPlayerSearch("")}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <main className="flex-1 relative z-10">
+        {/* Info do Time */}
         <section className="py-10 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
           <div className="container">
-            <button
-              onClick={() => setLocation("/times")}
-              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6 text-sm"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Voltar para Times
-            </button>
-
             {isLoading ? (
               <div className="flex items-center gap-6 animate-pulse">
                 <div className="w-24 h-24 rounded-xl bg-muted flex-shrink-0" />
@@ -241,7 +331,7 @@ export default function TeamDetail() {
 
                 {/* Info do time */}
                 <div className="flex-1">
-                  <h1 className="text-3xl md:text-4xl font-black mb-1">{team.name}</h1>
+                  <h2 className="text-3xl md:text-4xl font-black mb-1">{team.name}</h2>
                   <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                     {team.leagueName && (
                       <div className="flex items-center gap-1.5">
@@ -330,8 +420,8 @@ export default function TeamDetail() {
             ) : (
               <div className="text-center py-8">
                 <p className="text-muted-foreground">Time não encontrado.</p>
-                <Button onClick={() => setLocation("/times")} className="mt-4">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
+                <Button onClick={() => navigate("/times")} className="mt-4">
+                  <ChevronLeft className="h-4 w-4 mr-2" />
                   Voltar para Times
                 </Button>
               </div>
@@ -341,6 +431,22 @@ export default function TeamDetail() {
 
         {/* Jogadores do Time */}
         <div className="container py-10">
+          {/* Aviso de filtro ativo */}
+          {playerSearch.trim() && (
+            <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
+              <Search className="h-4 w-4" />
+              <span>
+                Mostrando <strong className="text-foreground">{filteredPlayers.length}</strong> jogador{filteredPlayers.length !== 1 ? 'es' : ''} para "{playerSearch}"
+              </span>
+              <button
+                onClick={() => setPlayerSearch("")}
+                className="ml-1 text-primary hover:underline"
+              >
+                Limpar
+              </button>
+            </div>
+          )}
+
           {playersLoading ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {[...Array(11)].map((_, i) => (
@@ -353,7 +459,7 @@ export default function TeamDetail() {
                 </div>
               ))}
             </div>
-          ) : teamPlayers && teamPlayers.length > 0 ? (
+          ) : filteredPlayers.length > 0 ? (
             <div className="space-y-8">
               {sortedGroups.map(([posGroup, groupPlayers]) => (
                 <div key={posGroup}>
@@ -371,6 +477,14 @@ export default function TeamDetail() {
                   </div>
                 </div>
               ))}
+            </div>
+          ) : teamPlayers && teamPlayers.length > 0 ? (
+            <div className="text-center py-16">
+              <Search className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+              <p className="text-muted-foreground">Nenhum jogador encontrado para "{playerSearch}".</p>
+              <button onClick={() => setPlayerSearch("")} className="mt-2 text-sm text-primary hover:underline">
+                Limpar busca
+              </button>
             </div>
           ) : team ? (
             <div className="text-center py-16">
