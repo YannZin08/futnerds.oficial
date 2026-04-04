@@ -1,4 +1,4 @@
-import { eq, desc, and, sql, count } from "drizzle-orm";
+import { eq, desc, and, sql, count, like } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertUser, users, news, players, userFavoritePlayers, InsertNews, InsertPlayer } from "../drizzle/schema";
 import { ENV } from './_core/env';
@@ -254,6 +254,31 @@ export async function getLeaguesByCountry(countryId: number) {
 }
 
 // ─── Teams ───────────────────────────────────────────────────────────────────
+
+export async function searchTeams(query: string, limit = 8) {
+  const db = await getDb();
+  if (!db) return [];
+  const { teams, leagues, countries } = await import("../drizzle/schema");
+  const results = await db
+    .select({
+      id: teams.id,
+      name: teams.name,
+      shortName: teams.shortName,
+      logoUrl: teams.logoUrl,
+      stadiumName: teams.stadiumName,
+      budget: teams.budget,
+      prestige: teams.prestige,
+      leagueName: leagues.name,
+      countryName: countries.name,
+    })
+    .from(teams)
+    .innerJoin(leagues, eq(teams.leagueId, leagues.id))
+    .innerJoin(countries, eq(teams.countryId, countries.id))
+    .where(like(teams.name, `%${query}%`))
+    .orderBy(teams.name)
+    .limit(limit);
+  return results;
+}
 
 export async function getTeamsByLeague(leagueId: number) {
   const db = await getDb();

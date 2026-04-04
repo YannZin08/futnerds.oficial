@@ -20,6 +20,7 @@ import {
   getTeamByName,
   getPlayersByTeam,
   importTeamDetails,
+  searchTeams,
 } from "./db";
 
 export const appRouter = router({
@@ -100,6 +101,12 @@ export const appRouter = router({
   }),
 
   teams: router({
+    search: publicProcedure
+      .input(z.object({ query: z.string().min(2).max(64) }))
+      .query(async ({ input }) => {
+        return await searchTeams(input.query, 8);
+      }),
+
     byLeague: publicProcedure
       .input(z.object({ leagueId: z.number() }))
       .query(async ({ input }) => {
