@@ -103,7 +103,7 @@ export default function Times() {
     <div className="min-h-screen bg-background">
       <Navbar />
       {/* Header */}
-      <div className="border-b border-border bg-card">
+      <div className="border-b border-border bg-card sticky top-16 z-10">
         <div className="container py-4">
           <div className="flex items-center gap-3">
             <Button
@@ -165,7 +165,7 @@ export default function Times() {
 
       <div className="container py-8">
         {/* ── Busca Global ── */}
-        <div ref={searchRef} className="relative w-full max-w-sm mb-6">
+        <div ref={searchRef} className={`relative w-full max-w-sm mb-6 mt-4 ${view === "teams" ? "hidden" : ""}`}>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
@@ -323,13 +323,13 @@ export default function Times() {
           <>
 
             {loadingTeams ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="h-36 rounded-xl bg-muted animate-pulse" />
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
                 {teams?.map((team) => (
                   <Card
                     key={team.id}
