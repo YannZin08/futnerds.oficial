@@ -103,9 +103,9 @@ export default function Times() {
     <div className="min-h-screen bg-background">
       <Navbar />
       {/* Header */}
-      <div className="border-b border-border bg-card sticky top-16 z-10">
+      <div className="border-b border-border bg-card">
         <div className="container py-4">
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
@@ -160,76 +160,76 @@ export default function Times() {
             </div>
           </div>
 
-          {/* ── Busca Global ── */}
-          <div ref={searchRef} className="relative w-full max-w-sm ml-auto">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Buscar time diretamente..."
-                value={searchQuery}
-                onChange={(e) => { setSearchQuery(e.target.value); setShowDropdown(true); }}
-                onFocus={() => { if (searchQuery.length >= 2) setShowDropdown(true); }}
-                onKeyDown={(e) => { if (e.key === "Escape") { setShowDropdown(false); setSearchQuery(""); } }}
-                className="pl-10 pr-8 bg-secondary border-border"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => { setSearchQuery(""); setShowDropdown(false); }}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              )}
-            </div>
-            {/* Dropdown de resultados */}
-            {showDropdown && debouncedQuery.length >= 2 && (
-              <div className="absolute top-full mt-1 left-0 right-0 z-50 bg-card border border-border rounded-xl shadow-xl overflow-hidden">
-                {searchLoading ? (
-                  <div className="px-4 py-3 text-sm text-muted-foreground">Buscando...</div>
-                ) : searchResults && searchResults.length > 0 ? (
-                  <ul>
-                    {searchResults.map((team) => (
-                      <li key={team.id}>
-                        <button
-                          onClick={() => {
-                            setShowDropdown(false);
-                            setSearchQuery("");
-                            navigate(`/times/${team.id}`);
-                          }}
-                          className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary transition-colors text-left"
-                        >
-                          {team.logoUrl ? (
-                            <img src={team.logoUrl} alt={team.name} className="w-8 h-8 object-contain shrink-0" />
-                          ) : (
-                            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                              <Trophy className="w-4 h-4 text-primary" />
-                            </div>
-                          )}
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-foreground truncate">{team.name}</p>
-                            <p className="text-xs text-muted-foreground truncate">{team.leagueName} · {team.countryName}</p>
-                          </div>
-                          {team.prestige != null && (
-                            <div className="flex gap-0.5 shrink-0">
-                              {Array.from({ length: 5 }).map((_, i) => (
-                                <Star key={i} className={`w-2.5 h-2.5 ${i < Math.round(team.prestige! / 2) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/30"}`} />
-                              ))}
-                            </div>
-                          )}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <div className="px-4 py-3 text-sm text-muted-foreground">Nenhum time encontrado para "{debouncedQuery}"</div>
-                )}
-              </div>
-            )}
-          </div>
         </div>
       </div>
 
-      <div className="container py-8 pt-10">
+      <div className="container py-8">
+        {/* ── Busca Global ── */}
+        <div ref={searchRef} className="relative w-full max-w-sm mb-6">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Buscar time diretamente..."
+              value={searchQuery}
+              onChange={(e) => { setSearchQuery(e.target.value); setShowDropdown(true); }}
+              onFocus={() => { if (searchQuery.length >= 2) setShowDropdown(true); }}
+              onKeyDown={(e) => { if (e.key === "Escape") { setShowDropdown(false); setSearchQuery(""); } }}
+              className="pl-10 pr-8 bg-secondary border-border"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => { setSearchQuery(""); setShowDropdown(false); }}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+          {/* Dropdown de resultados */}
+          {showDropdown && debouncedQuery.length >= 2 && (
+            <div className="absolute top-full mt-1 left-0 right-0 z-50 bg-card border border-border rounded-xl shadow-xl overflow-hidden">
+              {searchLoading ? (
+                <div className="px-4 py-3 text-sm text-muted-foreground">Buscando...</div>
+              ) : searchResults && searchResults.length > 0 ? (
+                <ul>
+                  {searchResults.map((team) => (
+                    <li key={team.id}>
+                      <button
+                        onClick={() => {
+                          setShowDropdown(false);
+                          setSearchQuery("");
+                          navigate(`/times/${team.id}`);
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary transition-colors text-left"
+                      >
+                        {team.logoUrl ? (
+                          <img src={team.logoUrl} alt={team.name} className="w-8 h-8 object-contain shrink-0" />
+                        ) : (
+                          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                            <Trophy className="w-4 h-4 text-primary" />
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-foreground truncate">{team.name}</p>
+                          <p className="text-xs text-muted-foreground truncate">{team.leagueName} · {team.countryName}</p>
+                        </div>
+                        {team.prestige != null && (
+                          <div className="flex gap-0.5 shrink-0">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                              <Star key={i} className={`w-2.5 h-2.5 ${i < Math.round(team.prestige! / 2) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/30"}`} />
+                            ))}
+                          </div>
+                        )}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="px-4 py-3 text-sm text-muted-foreground">Nenhum time encontrado para "{debouncedQuery}"</div>
+              )}
+            </div>
+          )}
+        </div>
 
         {/* ── COUNTRIES VIEW ── */}
         {view === "countries" && (
