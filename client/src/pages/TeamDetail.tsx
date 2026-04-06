@@ -311,124 +311,125 @@ export default function TeamDetail() {
                 </div>
               </div>
             ) : team ? (
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                {/* Logo + Descrição lado a lado */}
-                <div className="flex flex-col gap-3 flex-shrink-0">
-                  {/* Logo do time */}
-                  <div className="w-24 h-24 flex-shrink-0 rounded-xl bg-white/5 border border-border/50 flex items-center justify-center p-2 overflow-hidden">
-                    {team.logoUrl ? (
-                      <img
-                        src={team.logoUrl}
-                        alt={team.name}
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).style.display = 'none';
-                          (e.currentTarget.parentElement as HTMLElement).innerHTML = '<div class="text-3xl font-black text-muted-foreground">' + (team.name?.charAt(0) ?? '?') + '</div>';
-                        }}
-                      />
+              <div className="flex flex-col gap-5">
+                {/* Linha superior: card (logo+desc) à esquerda + nome/liga à direita */}
+                <div className="flex flex-col md:flex-row items-start gap-6">
+
+                  {/* Card: logo + descrição */}
+                  <div className="flex-shrink-0 flex items-start gap-4 rounded-xl border border-border/50 bg-white/3 p-4 w-full md:w-auto md:max-w-sm">
+                    {/* Logo */}
+                    <div className="w-20 h-20 flex-shrink-0 rounded-lg bg-white/5 border border-border/40 flex items-center justify-center p-2 overflow-hidden">
+                      {team.logoUrl ? (
+                        <img
+                          src={team.logoUrl}
+                          alt={team.name}
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).style.display = 'none';
+                            (e.currentTarget.parentElement as HTMLElement).innerHTML = '<div class="text-3xl font-black text-muted-foreground">' + (team.name?.charAt(0) ?? '?') + '</div>';
+                          }}
+                        />
+                      ) : (
+                        <span className="text-3xl font-black text-muted-foreground">{team.name?.charAt(0) ?? '?'}</span>
+                      )}
+                    </div>
+                    {/* Descrição */}
+                    {(team as any).description ? (
+                      <p className="text-xs text-muted-foreground leading-relaxed flex-1">
+                        {(team as any).description}
+                      </p>
                     ) : (
-                      <span className="text-3xl font-black text-muted-foreground">{team.name?.charAt(0) ?? '?'}</span>
+                      <p className="text-xs text-muted-foreground italic flex-1">Sem descrição disponível.</p>
                     )}
+                  </div>
+
+                  {/* Nome + Liga + Estádio */}
+                  <div className="flex flex-col justify-center flex-1">
+                    <h2 className="text-3xl md:text-4xl font-black mb-2">{team.name}</h2>
+                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                      {team.leagueName && (
+                        <div className="flex items-center gap-1.5">
+                          {team.leagueLogoUrl && (
+                            <img src={team.leagueLogoUrl} alt={team.leagueName} className="w-5 h-5 object-contain" />
+                          )}
+                          <span>{team.leagueName}</span>
+                        </div>
+                      )}
+                      {team.stadiumName && (
+                        <div className="flex items-center gap-1.5">
+                          <Building2 className="h-4 w-4" />
+                          <span>{team.stadiumName}</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-                {/* Descrição ao lado da logo */}
-                {(team as any).description && (
-                  <div className="hidden md:flex flex-col justify-center w-64 xl:w-80 flex-shrink-0">
-                    <div className="rounded-xl border border-border/40 bg-white/3 p-3 h-24 overflow-y-auto">
-                      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-5">
-                        {(team as any).description}
-                      </p>
+                {/* Stats rápidas — fora do card, abaixo */}
+                <div className="flex flex-wrap gap-3">
+                  {team.budget != null && (
+                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                      <Wallet className="h-4 w-4 text-green-400" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Orçamento</p>
+                        <p className="text-sm font-bold text-green-400">{formatBudget(team.budget)}</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-
-                {/* Info do time */}
-                <div className="flex-1">
-                  <h2 className="text-3xl md:text-4xl font-black mb-1">{team.name}</h2>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                    {team.leagueName && (
-                      <div className="flex items-center gap-1.5">
-                        {team.leagueLogoUrl && (
-                          <img src={team.leagueLogoUrl} alt={team.leagueName} className="w-5 h-5 object-contain" />
-                        )}
-                        <span>{team.leagueName}</span>
+                  )}
+                  {avgOverall != null && (
+                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                      <Trophy className="h-4 w-4 text-yellow-400" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Overall Médio</p>
+                        <p className="text-sm font-bold text-yellow-400">{avgOverall}</p>
                       </div>
-                    )}
-                    {team.stadiumName && (
-                      <div className="flex items-center gap-1.5">
-                        <Building2 className="h-4 w-4" />
-                        <span>{team.stadiumName}</span>
+                    </div>
+                  )}
+                  {teamPlayers && (
+                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                      <Users className="h-4 w-4 text-blue-400" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Jogadores</p>
+                        <p className="text-sm font-bold text-blue-400">{teamPlayers.length}</p>
                       </div>
-                    )}
-                  </div>
-
-                  {/* Stats rápidas */}
-                  <div className="flex flex-wrap gap-4 mt-4">
-                    {team.budget != null && (
-                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
-                        <Wallet className="h-4 w-4 text-green-400" />
-                        <div>
-                          <p className="text-xs text-muted-foreground">Orçamento</p>
-                          <p className="text-sm font-bold text-green-400">{formatBudget(team.budget)}</p>
-                        </div>
+                    </div>
+                  )}
+                  {bestPlayer && (
+                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                      <Star className="h-4 w-4 text-primary" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Melhor Jogador</p>
+                        <p className="text-sm font-bold text-primary">{bestPlayer.name} ({bestPlayer.overall})</p>
                       </div>
-                    )}
-                    {avgOverall != null && (
-                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
-                        <Trophy className="h-4 w-4 text-yellow-400" />
-                        <div>
-                          <p className="text-xs text-muted-foreground">Overall Médio</p>
-                          <p className="text-sm font-bold text-yellow-400">{avgOverall}</p>
-                        </div>
+                    </div>
+                  )}
+                  {(team as any).rivalTeam && (
+                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                      <Swords className="h-4 w-4 text-red-400" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Rival</p>
+                        <p className="text-sm font-bold text-red-400">{(team as any).rivalTeam}</p>
                       </div>
-                    )}
-                    {teamPlayers && (
-                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
-                        <Users className="h-4 w-4 text-blue-400" />
-                        <div>
-                          <p className="text-xs text-muted-foreground">Jogadores</p>
-                          <p className="text-sm font-bold text-blue-400">{teamPlayers.length}</p>
-                        </div>
+                    </div>
+                  )}
+                  {(team as any).prestige != null && (
+                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                      <Globe className="h-4 w-4 text-purple-400" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Prestígio Internacional</p>
+                        <p className="text-sm font-bold text-purple-400">{(team as any).prestige}/10</p>
                       </div>
-                    )}
-                    {bestPlayer && (
-                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
-                        <Star className="h-4 w-4 text-primary" />
-                        <div>
-                          <p className="text-xs text-muted-foreground">Melhor Jogador</p>
-                          <p className="text-sm font-bold text-primary">{bestPlayer.name} ({bestPlayer.overall})</p>
-                        </div>
+                    </div>
+                  )}
+                  {(team as any).localPrestige != null && (
+                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                      <MapPin className="h-4 w-4 text-orange-400" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Prestígio Local</p>
+                        <p className="text-sm font-bold text-orange-400">{(team as any).localPrestige}/10</p>
                       </div>
-                    )}
-                    {(team as any).rivalTeam && (
-                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
-                        <Swords className="h-4 w-4 text-red-400" />
-                        <div>
-                          <p className="text-xs text-muted-foreground">Rival</p>
-                          <p className="text-sm font-bold text-red-400">{(team as any).rivalTeam}</p>
-                        </div>
-                      </div>
-                    )}
-                    {(team as any).prestige != null && (
-                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
-                        <Globe className="h-4 w-4 text-purple-400" />
-                        <div>
-                          <p className="text-xs text-muted-foreground">Prestígio Internacional</p>
-                          <p className="text-sm font-bold text-purple-400">{(team as any).prestige}/10</p>
-                        </div>
-                      </div>
-                    )}
-                    {(team as any).localPrestige != null && (
-                      <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
-                        <MapPin className="h-4 w-4 text-orange-400" />
-                        <div>
-                          <p className="text-xs text-muted-foreground">Prestígio Local</p>
-                          <p className="text-sm font-bold text-orange-400">{(team as any).localPrestige}/10</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ) : (
