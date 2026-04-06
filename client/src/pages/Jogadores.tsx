@@ -385,6 +385,18 @@ export default function Jogadores() {
     setCurrentPage(1);
   };
 
+  // Toggle de ordenação: clique no mesmo campo inverte a direção
+  const handleSortToggle = (field: "overall" | "potential" | "price") => {
+    const descKey = `${field}_desc` as typeof sortBy;
+    const ascKey  = `${field}_asc`  as typeof sortBy;
+    if (sortBy === descKey) {
+      setSortBy(ascKey);
+    } else {
+      setSortBy(descKey);
+    }
+    setCurrentPage(1);
+  };
+
   const activeFiltersCount = [filterLeague, filterNationality].filter(Boolean).length;
 
   const clearAdvancedFilters = () => {
@@ -536,22 +548,23 @@ export default function Jogadores() {
               ))}
             </div>
 
-            {/* Linha 3: chips de ordenação rápida */}
+            {/* Linha 3: botões de ordenação toggle */}
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-xs text-muted-foreground font-medium mr-1">Ordenar:</span>
               {([
-                { value: "overall_desc",    label: "Overall",    icon: ArrowDown },
-                { value: "overall_asc",     label: "Overall",    icon: ArrowUp },
-                { value: "potential_desc",  label: "Potencial",  icon: ArrowDown },
-                { value: "potential_asc",   label: "Potencial",  icon: ArrowUp },
-                { value: "price_desc",      label: "Valor",      icon: ArrowDown },
-                { value: "price_asc",       label: "Valor",      icon: ArrowUp },
-              ] as { value: typeof sortBy; label: string; icon: any }[]).map(({ value, label, icon: Icon }) => (
+                { field: "overall"   as const, label: "Overall"  },
+                { field: "potential" as const, label: "Potencial" },
+                { field: "price"     as const, label: "Valor"     },
+              ]).map(({ field, label }) => {
+                const isActive = sortBy === `${field}_desc` || sortBy === `${field}_asc`;
+                const isDesc   = sortBy === `${field}_desc`;
+                const Icon     = !isActive ? ArrowUpDown : isDesc ? ArrowDown : ArrowUp;
+                return (
                 <button
-                  key={value}
-                  onClick={() => handleSortChange(value)}
-                  className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
-                    sortBy === value
+                  key={field}
+                  onClick={() => handleSortToggle(field)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+                    isActive
                       ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/30"
                       : "bg-secondary text-muted-foreground border-border hover:text-foreground hover:border-primary/40"
                   }`}
@@ -559,7 +572,8 @@ export default function Jogadores() {
                   <Icon className="h-3 w-3" />
                   {label}
                 </button>
-              ))}
+                );
+              })}
             </div>
           </div>
 
