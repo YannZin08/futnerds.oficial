@@ -311,68 +311,63 @@ export default function TeamDetail() {
                 </div>
               </div>
             ) : team ? (
-              <div className="flex flex-col gap-5">
-                {/* Linha superior: card (logo+desc) à esquerda + nome/liga à direita */}
-                <div className="flex flex-col md:flex-row items-start gap-6">
+              <div className="rounded-xl border border-border/40 bg-black p-5 w-full flex flex-col gap-4">
 
-                  {/* Card: logo à esquerda + (nome/liga/estádio + descrição) à direita */}
-                  <div className="flex-shrink-0 flex items-stretch gap-5 rounded-xl border border-border/40 bg-black p-5 w-full">
-                    {/* Logo centralizada à esquerda */}
-                    <div className="flex-shrink-0 flex items-center justify-center w-24">
-                      <div className="w-20 h-20 rounded-lg bg-white/5 border border-border/30 flex items-center justify-center p-2 overflow-hidden">
-                        {team.logoUrl ? (
-                          <img
-                            src={team.logoUrl}
-                            alt={team.name}
-                            className="w-full h-full object-contain"
-                            onError={(e) => {
-                              (e.currentTarget as HTMLImageElement).style.display = 'none';
-                              (e.currentTarget.parentElement as HTMLElement).innerHTML = '<div class="text-3xl font-black text-muted-foreground">' + (team.name?.charAt(0) ?? '?') + '</div>';
-                            }}
-                          />
-                        ) : (
-                          <span className="text-3xl font-black text-muted-foreground">{team.name?.charAt(0) ?? '?'}</span>
-                        )}
-                      </div>
-                    </div>
+                {/* Linha superior: logo + (nome/liga/estádio/descrição) */}
+                <div className="flex items-start gap-5">
+                  {/* Logo sem fundo cinza */}
+                  <div className="flex-shrink-0 flex items-center justify-center w-20 h-20">
+                    {team.logoUrl ? (
+                      <img
+                        src={team.logoUrl}
+                        alt={team.name}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).style.display = 'none';
+                          (e.currentTarget.parentElement as HTMLElement).innerHTML = '<div class="text-3xl font-black text-muted-foreground">' + (team.name?.charAt(0) ?? '?') + '</div>';
+                        }}
+                      />
+                    ) : (
+                      <span className="text-3xl font-black text-muted-foreground">{team.name?.charAt(0) ?? '?'}</span>
+                    )}
+                  </div>
 
-                    {/* Lado direito: nome + liga/estádio + descrição */}
-                    <div className="flex flex-col gap-2 flex-1 min-w-0">
-                      {/* Nome grande */}
-                      <h2 className="text-3xl md:text-4xl font-black leading-tight">{team.name}</h2>
-                      {/* Liga e estádio */}
-                      <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                        {team.leagueName && (
-                          <div className="flex items-center gap-1.5">
-                            {team.leagueLogoUrl && (
-                              <img src={team.leagueLogoUrl} alt={team.leagueName} className="w-5 h-5 object-contain" />
-                            )}
-                            <span>{team.leagueName}</span>
-                          </div>
-                        )}
-                        {team.stadiumName && (
-                          <div className="flex items-center gap-1.5">
-                            <Building2 className="h-4 w-4" />
-                            <span>{team.stadiumName}</span>
-                          </div>
-                        )}
-                      </div>
-                      {/* Descrição abaixo */}
-                      {(team as any).description ? (
-                        <p className="text-xs text-muted-foreground leading-relaxed mt-1">
-                          {(team as any).description}
-                        </p>
-                      ) : (
-                        <p className="text-xs text-muted-foreground italic mt-1">Sem descrição disponível.</p>
+                  {/* Nome + liga/estádio + descrição */}
+                  <div className="flex flex-col gap-1.5 flex-1 min-w-0">
+                    <h2 className="text-3xl md:text-4xl font-black leading-tight">{team.name}</h2>
+                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                      {team.leagueName && (
+                        <div className="flex items-center gap-1.5">
+                          {team.leagueLogoUrl && (
+                            <img src={team.leagueLogoUrl} alt={team.leagueName} className="w-5 h-5 object-contain" />
+                          )}
+                          <span>{team.leagueName}</span>
+                        </div>
+                      )}
+                      {team.stadiumName && (
+                        <div className="flex items-center gap-1.5">
+                          <Building2 className="h-4 w-4" />
+                          <span>{team.stadiumName}</span>
+                        </div>
                       )}
                     </div>
+                    {(team as any).description ? (
+                      <p className="text-xs text-muted-foreground leading-relaxed mt-1">
+                        {(team as any).description}
+                      </p>
+                    ) : (
+                      <p className="text-xs text-muted-foreground italic mt-1">Sem descrição disponível.</p>
+                    )}
                   </div>
                 </div>
 
-                {/* Stats rápidas — fora do card, abaixo */}
+                {/* Divisor */}
+                <div className="border-t border-border/30" />
+
+                {/* Stats dentro do card */}
                 <div className="flex flex-wrap gap-3">
                   {team.budget != null && (
-                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Wallet className="h-4 w-4 text-green-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Orçamento</p>
@@ -381,7 +376,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {avgOverall != null && (
-                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Trophy className="h-4 w-4 text-yellow-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Overall Médio</p>
@@ -390,7 +385,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {teamPlayers && (
-                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Users className="h-4 w-4 text-blue-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Jogadores</p>
@@ -399,7 +394,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {bestPlayer && (
-                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Star className="h-4 w-4 text-primary" />
                       <div>
                         <p className="text-xs text-muted-foreground">Melhor Jogador</p>
@@ -408,7 +403,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {(team as any).rivalTeam && (
-                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Swords className="h-4 w-4 text-red-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Rival</p>
@@ -417,7 +412,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {(team as any).prestige != null && (
-                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Globe className="h-4 w-4 text-purple-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Prestígio Internacional</p>
@@ -426,7 +421,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {(team as any).localPrestige != null && (
-                    <div className="flex items-center gap-2 bg-secondary/60 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <MapPin className="h-4 w-4 text-orange-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Prestígio Local</p>
