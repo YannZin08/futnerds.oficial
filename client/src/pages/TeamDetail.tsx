@@ -312,7 +312,7 @@ export default function TeamDetail() {
 
       <main className="flex-1">
         {/* Info do Time */}
-        <section className="py-10 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
+        <section className="py-10 border-b border-border/50" style={{ background: "oklch(0.10 0.01 240)" }}>
           <div className="container">
             {isLoading ? (
               <div className="flex items-center gap-6 animate-pulse">
@@ -323,7 +323,7 @@ export default function TeamDetail() {
                 </div>
               </div>
             ) : team ? (
-              <div className="rounded-xl border border-border/40 p-5 w-full flex flex-col gap-4 bg-card">
+              <div className="rounded-xl border border-border p-5 w-full flex flex-col gap-4" style={{ backgroundColor: 'oklch(0.18 0.015 240)' }}>
 
                 {/* Linha superior: logo + (nome/liga/estádio/descrição) */}
                 <div className="flex items-start gap-5">
