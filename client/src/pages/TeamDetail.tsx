@@ -316,7 +316,7 @@ export default function TeamDetail() {
                 {/* Linha superior: logo + (nome/liga/estádio/descrição) */}
                 <div className="flex items-start gap-5">
                   {/* Logo sem fundo cinza */}
-                  <div className="flex-shrink-0 flex items-center justify-center w-20 h-20">
+                  <div className="flex-shrink-0 flex items-center justify-center w-28 h-28">
                     {team.logoUrl ? (
                       <img
                         src={team.logoUrl}
@@ -334,8 +334,8 @@ export default function TeamDetail() {
 
                   {/* Nome + liga/estádio + descrição */}
                   <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-                    <h2 className="text-3xl md:text-4xl font-black leading-tight">{team.name}</h2>
-                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                    <h2 className="text-4xl md:text-5xl font-black leading-tight">{team.name}</h2>
+                    <div className="flex flex-wrap items-center gap-3 text-base text-muted-foreground">
                       {team.leagueName && (
                         <div className="flex items-center gap-1.5">
                           {team.leagueLogoUrl && (
@@ -352,11 +352,11 @@ export default function TeamDetail() {
                       )}
                     </div>
                     {(team as any).description ? (
-                      <p className="text-xs text-muted-foreground leading-relaxed mt-1">
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-1">
                         {(team as any).description}
                       </p>
                     ) : (
-                      <p className="text-xs text-muted-foreground italic mt-1">Sem descrição disponível.</p>
+                      <p className="text-sm text-muted-foreground italic mt-1">Sem descrição disponível.</p>
                     )}
                   </div>
                 </div>
@@ -370,8 +370,8 @@ export default function TeamDetail() {
                     <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Wallet className="h-4 w-4 text-green-400" />
                       <div>
-                        <p className="text-xs text-muted-foreground">Orçamento</p>
-                        <p className="text-sm font-bold text-green-400">{formatBudget(team.budget)}</p>
+                        <p className="text-sm text-muted-foreground">Orçamento</p>
+                        <p className="text-base font-bold text-green-400">{formatBudget(team.budget)}</p>
                       </div>
                     </div>
                   )}
@@ -379,8 +379,8 @@ export default function TeamDetail() {
                     <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Trophy className="h-4 w-4 text-yellow-400" />
                       <div>
-                        <p className="text-xs text-muted-foreground">Overall Médio</p>
-                        <p className="text-sm font-bold text-yellow-400">{avgOverall}</p>
+                        <p className="text-sm text-muted-foreground">Overall Médio</p>
+                        <p className="text-base font-bold text-yellow-400">{avgOverall}</p>
                       </div>
                     </div>
                   )}
@@ -388,8 +388,8 @@ export default function TeamDetail() {
                     <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Users className="h-4 w-4 text-blue-400" />
                       <div>
-                        <p className="text-xs text-muted-foreground">Jogadores</p>
-                        <p className="text-sm font-bold text-blue-400">{teamPlayers.length}</p>
+                        <p className="text-sm text-muted-foreground">Jogadores</p>
+                        <p className="text-base font-bold text-blue-400">{teamPlayers.length}</p>
                       </div>
                     </div>
                   )}
@@ -397,8 +397,8 @@ export default function TeamDetail() {
                     <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Star className="h-4 w-4 text-primary" />
                       <div>
-                        <p className="text-xs text-muted-foreground">Melhor Jogador</p>
-                        <p className="text-sm font-bold text-primary">{bestPlayer.name} ({bestPlayer.overall})</p>
+                        <p className="text-sm text-muted-foreground">Melhor Jogador</p>
+                        <p className="text-base font-bold text-primary">{bestPlayer.name} ({bestPlayer.overall})</p>
                       </div>
                     </div>
                   )}
@@ -406,8 +406,8 @@ export default function TeamDetail() {
                     <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Swords className="h-4 w-4 text-red-400" />
                       <div>
-                        <p className="text-xs text-muted-foreground">Rival</p>
-                        <p className="text-sm font-bold text-red-400">{(team as any).rivalTeam}</p>
+                        <p className="text-sm text-muted-foreground">Rival</p>
+                        <p className="text-base font-bold text-red-400">{(team as any).rivalTeam}</p>
                       </div>
                     </div>
                   )}
@@ -415,8 +415,8 @@ export default function TeamDetail() {
                     <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <Globe className="h-4 w-4 text-purple-400" />
                       <div>
-                        <p className="text-xs text-muted-foreground">Prestígio Internacional</p>
-                        <p className="text-sm font-bold text-purple-400">{(team as any).prestige}/10</p>
+                        <p className="text-sm text-muted-foreground">Prestígio Internacional</p>
+                        <p className="text-base font-bold text-purple-400">{(team as any).prestige}/10</p>
                       </div>
                     </div>
                   )}
@@ -424,8 +424,8 @@ export default function TeamDetail() {
                     <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
                       <MapPin className="h-4 w-4 text-orange-400" />
                       <div>
-                        <p className="text-xs text-muted-foreground">Prestígio Local</p>
-                        <p className="text-sm font-bold text-orange-400">{(team as any).localPrestige}/10</p>
+                        <p className="text-sm text-muted-foreground">Prestígio Local</p>
+                        <p className="text-base font-bold text-orange-400">{(team as any).localPrestige}/10</p>
                       </div>
                     </div>
                   )}
