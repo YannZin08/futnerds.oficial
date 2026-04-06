@@ -323,7 +323,7 @@ export default function TeamDetail() {
                 </div>
               </div>
             ) : team ? (
-              <div className="rounded-xl border border-border/40 bg-black p-5 w-full flex flex-col gap-4">
+              <div className="rounded-xl border border-border/40 p-5 w-full flex flex-col gap-4" style={{ backgroundColor: '#0a0a0a' }}>
 
                 {/* Linha superior: logo + (nome/liga/estádio/descrição) */}
                 <div className="flex items-start gap-5">
