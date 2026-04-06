@@ -312,22 +312,36 @@ export default function TeamDetail() {
               </div>
             ) : team ? (
               <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                {/* Logo do time */}
-                <div className="w-24 h-24 flex-shrink-0 rounded-xl bg-white/5 border border-border/50 flex items-center justify-center p-2 overflow-hidden">
-                  {team.logoUrl ? (
-                    <img
-                      src={team.logoUrl}
-                      alt={team.name}
-                      className="w-full h-full object-contain"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).style.display = 'none';
-                        (e.currentTarget.parentElement as HTMLElement).innerHTML = '<div class="text-3xl font-black text-muted-foreground">' + (team.name?.charAt(0) ?? '?') + '</div>';
-                      }}
-                    />
-                  ) : (
-                    <span className="text-3xl font-black text-muted-foreground">{team.name?.charAt(0) ?? '?'}</span>
-                  )}
+                {/* Logo + Descrição lado a lado */}
+                <div className="flex flex-col gap-3 flex-shrink-0">
+                  {/* Logo do time */}
+                  <div className="w-24 h-24 flex-shrink-0 rounded-xl bg-white/5 border border-border/50 flex items-center justify-center p-2 overflow-hidden">
+                    {team.logoUrl ? (
+                      <img
+                        src={team.logoUrl}
+                        alt={team.name}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).style.display = 'none';
+                          (e.currentTarget.parentElement as HTMLElement).innerHTML = '<div class="text-3xl font-black text-muted-foreground">' + (team.name?.charAt(0) ?? '?') + '</div>';
+                        }}
+                      />
+                    ) : (
+                      <span className="text-3xl font-black text-muted-foreground">{team.name?.charAt(0) ?? '?'}</span>
+                    )}
+                  </div>
                 </div>
+
+                {/* Descrição ao lado da logo */}
+                {(team as any).description && (
+                  <div className="hidden md:flex flex-col justify-center w-64 xl:w-80 flex-shrink-0">
+                    <div className="rounded-xl border border-border/40 bg-white/3 p-3 h-24 overflow-y-auto">
+                      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-5">
+                        {(team as any).description}
+                      </p>
+                    </div>
+                  </div>
+                )}
 
                 {/* Info do time */}
                 <div className="flex-1">

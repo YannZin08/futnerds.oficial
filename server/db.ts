@@ -308,6 +308,7 @@ export async function getTeamById(id: number) {
       leagueLogoUrl: leagues.logoUrl,
       localPrestige: teams.localPrestige,
       rivalTeam: teams.rivalTeam,
+      description: teams.description,
     })
     .from(teams)
     .leftJoin(leagues, eq(teams.leagueId, leagues.id))

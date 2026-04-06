@@ -129,6 +129,7 @@ export const teams = mysqlTable("teams", {
   prestige: int("prestige"), // 1-10 (prestígio internacional)
   localPrestige: int("localPrestige"), // 1-10 (prestígio local)
   rivalTeam: varchar("rivalTeam", { length: 128 }), // nome do time rival
+  description: text("description"), // breve descrição do clube
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
