@@ -172,9 +172,9 @@ export default function TeamDetail() {
         <main className="flex-1 pt-20 flex items-center justify-center">
           <div className="text-center">
             <p className="text-muted-foreground">Time não encontrado.</p>
-            <Button onClick={() => navigate("/times")} className="mt-4">
+            <Button onClick={() => window.history.back()} className="mt-4">
               <ChevronLeft className="h-4 w-4 mr-2" />
-              Voltar para Times
+              Voltar
             </Button>
           </div>
         </main>
@@ -229,9 +229,9 @@ export default function TeamDetail() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => navigate("/times")}
+              onClick={() => window.history.back()}
               className="shrink-0"
-              title="Voltar para Times"
+              title="Voltar"
             >
               <ChevronLeft className="w-5 h-5" />
             </Button>
@@ -253,13 +253,13 @@ export default function TeamDetail() {
               </h1>
               {/* Breadcrumb */}
               <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-                <button onClick={() => navigate("/times")} className="hover:text-primary transition-colors">
+                <button onClick={() => window.history.back()} className="hover:text-primary transition-colors">
                   Times
                 </button>
                 {team?.leagueName && (
                   <>
                     <span>/</span>
-                    <button onClick={() => navigate("/times")} className="hover:text-primary transition-colors">
+                    <button onClick={() => window.history.back()} className="hover:text-primary transition-colors">
                       {team.leagueName}
                     </button>
                   </>
@@ -434,9 +434,9 @@ export default function TeamDetail() {
             ) : (
               <div className="text-center py-8">
                 <p className="text-muted-foreground">Time não encontrado.</p>
-                <Button onClick={() => navigate("/times")} className="mt-4">
+                <Button onClick={() => window.history.back()} className="mt-4">
                   <ChevronLeft className="h-4 w-4 mr-2" />
-                  Voltar para Times
+                  Voltar
                 </Button>
               </div>
             )}
