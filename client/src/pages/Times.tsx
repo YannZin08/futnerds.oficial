@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, Trophy, MapPin, Wallet, Star, Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useLocation } from "wouter";
+import { useLocation, useSearch } from "wouter";
 
 // Country flag emojis map
 const countryFlags: Record<string, string> = {
@@ -47,6 +47,46 @@ export default function Times() {
   const [selectedCountry, setSelectedCountry] = useState<{ id: number; name: string } | null>(null);
   const [selectedLeague, setSelectedLeague] = useState<{ id: number; name: string; division: number; logoUrl?: string | null } | null>(null);
   const [, navigate] = useLocation();
+  const search = useSearch();
+
+  // Restaurar estado ao voltar de um time (via query params)
+  const { data: allLeagues } = trpc.leagues.byCountry.useQuery(
+    { countryId: 0 },
+    { enabled: false }
+  );
+  const restoreLeagueId = useMemo(() => {
+    const params = new URLSearchParams(search);
+    const lid = params.get("leagueId");
+    return lid ? parseInt(lid) : null;
+  }, [search]);
+  const restoreCountryId = useMemo(() => {
+    const params = new URLSearchParams(search);
+    const cid = params.get("countryId");
+    return cid ? parseInt(cid) : null;
+  }, [search]);
+
+  const { data: restoreCountries } = trpc.countries.list.useQuery(
+    undefined,
+    { enabled: restoreCountryId !== null && view === "countries" }
+  );
+  const { data: restoreLeagues } = trpc.leagues.byCountry.useQuery(
+    { countryId: restoreCountryId ?? 0 },
+    { enabled: restoreCountryId !== null && view === "countries" }
+  );
+
+  useEffect(() => {
+    if (restoreCountryId && restoreLeagueId && restoreCountries && restoreLeagues && view === "countries") {
+      const country = restoreCountries.find(c => c.id === restoreCountryId);
+      const league = restoreLeagues.find(l => l.id === restoreLeagueId);
+      if (country && league) {
+        setSelectedCountry(country);
+        setSelectedLeague(league);
+        setView("teams");
+        // Limpar os query params da URL sem reload
+        window.history.replaceState({}, "", window.location.pathname);
+      }
+    }
+  }, [restoreCountryId, restoreLeagueId, restoreCountries, restoreLeagues, view]);
 
   // ── Busca global de times ──
   const [searchQuery, setSearchQuery] = useState("");
@@ -332,7 +372,7 @@ export default function Times() {
                 {teams?.map((team) => (
                   <Card
                     key={team.id}
-                    onClick={() => navigate(`/times/${team.id}`)}
+                    onClick={() => navigate(`/times/${team.id}?leagueId=${selectedLeague?.id ?? 0}&countryId=${selectedCountry?.id ?? 0}`)}
                     className="group border-border/50 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-200 cursor-pointer hover:scale-[1.01]"
                   >
                     <CardContent className="p-5">

@@ -1,4 +1,4 @@
-import { useParams, useLocation } from "wouter";
+import { useParams, useLocation, useSearch } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useState, useRef, useEffect, useMemo } from "react";
 import Navbar from "@/components/Navbar";
@@ -128,6 +128,18 @@ function PlayerMiniCard({ player }: { player: any }) {
 export default function TeamDetail() {
   const params = useParams<{ id: string }>();
   const [, navigate] = useLocation();
+  const search = useSearch();
+
+  // Ler leagueId e countryId da URL para restaurar o estado ao voltar
+  const backUrl = useMemo(() => {
+    const p = new URLSearchParams(search);
+    const leagueId = p.get("leagueId");
+    const countryId = p.get("countryId");
+    if (leagueId && countryId) {
+      return `/times?leagueId=${leagueId}&countryId=${countryId}`;
+    }
+    return "/times";
+  }, [search]);
   const teamId = parseInt(params.id ?? "0", 10);
 
   // Busca de jogadores no elenco
@@ -172,7 +184,7 @@ export default function TeamDetail() {
         <main className="flex-1 pt-20 flex items-center justify-center">
           <div className="text-center">
             <p className="text-muted-foreground">Time não encontrado.</p>
-            <Button onClick={() => window.history.back()} className="mt-4">
+            <Button onClick={() => navigate(backUrl)} className="mt-4">
               <ChevronLeft className="h-4 w-4 mr-2" />
               Voltar
             </Button>
@@ -229,7 +241,7 @@ export default function TeamDetail() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => window.history.back()}
+              onClick={() => navigate(backUrl)}
               className="shrink-0"
               title="Voltar"
             >
@@ -253,13 +265,13 @@ export default function TeamDetail() {
               </h1>
               {/* Breadcrumb */}
               <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-                <button onClick={() => window.history.back()} className="hover:text-primary transition-colors">
+                <button onClick={() => navigate(backUrl)} className="hover:text-primary transition-colors">
                   Times
                 </button>
                 {team?.leagueName && (
                   <>
                     <span>/</span>
-                    <button onClick={() => window.history.back()} className="hover:text-primary transition-colors">
+                    <button onClick={() => navigate(backUrl)} className="hover:text-primary transition-colors">
                       {team.leagueName}
                     </button>
                   </>
@@ -434,7 +446,7 @@ export default function TeamDetail() {
             ) : (
               <div className="text-center py-8">
                 <p className="text-muted-foreground">Time não encontrado.</p>
-                <Button onClick={() => window.history.back()} className="mt-4">
+                <Button onClick={() => navigate(backUrl)} className="mt-4">
                   <ChevronLeft className="h-4 w-4 mr-2" />
                   Voltar
                 </Button>
