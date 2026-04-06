@@ -316,7 +316,7 @@ export default function TeamDetail() {
                 {/* Linha superior: logo + (nome/liga/estádio/descrição) */}
                 <div className="flex items-start gap-5">
                   {/* Logo sem fundo cinza */}
-                  <div className="flex-shrink-0 flex items-center justify-center w-24 h-24">
+                  <div className="flex-shrink-0 flex items-center justify-center w-20 h-20">
                     {team.logoUrl ? (
                       <img
                         src={team.logoUrl}
