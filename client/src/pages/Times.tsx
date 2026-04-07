@@ -140,7 +140,15 @@ export default function Times() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-background overflow-hidden">
+    <div className="h-screen flex flex-col bg-background overflow-hidden relative">
+      {/* Grid quadriculado de fundo */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: `linear-gradient(rgba(34,197,94,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.12) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
+      />
       <Navbar />
       {/* Header */}
       <div className="border-b border-border bg-background shrink-0 z-20">
