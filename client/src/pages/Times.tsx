@@ -261,7 +261,7 @@ export default function Times() {
         </div>
       </div>
 
-      <div className="container py-6 sm:py-8">
+      <div className="container pt-8 pb-8 sm:pt-10 sm:pb-10">
         {/* ── COUNTRIES VIEW ── */}
         {view === "countries" && (
           <>
