@@ -310,7 +310,7 @@ export default function TeamDetail() {
         </div>
       </div>
 
-      <main className="flex-1 pt-36" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
+      <main className="flex-1 pt-44" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
         {/* Info do Time */}
         <section className="py-10 border-b border-border/50" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
           <div className="container">

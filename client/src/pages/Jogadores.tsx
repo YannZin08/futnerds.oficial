@@ -457,7 +457,7 @@ export default function Jogadores() {
       </div>
 
       <main className="flex-1 relative z-10">
-        <div className="container pt-36 pb-8">
+        <div className="container pt-44 pb-8">
           {/* Filters */}
           <div className="flex flex-col gap-4 mb-8">
             {/* Linha 1: busca + botão filtros */}
