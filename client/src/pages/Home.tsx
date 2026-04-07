@@ -180,15 +180,15 @@ export default function Home() {
                 <Link key={team.teamId} href={`/times/${team.teamId}`}>
                   <div className="fut-card fut-card-hover p-4 text-center cursor-pointer group">
                     <div className="w-14 h-14 mx-auto mb-3 flex items-center justify-center">
-                      {team.logoUrl ? (
-                        <img src={team.logoUrl} alt={team.name} className="w-full h-full object-contain" />
+                      {team.teamLogoUrl ? (
+                        <img src={team.teamLogoUrl} alt={team.teamName} className="w-full h-full object-contain" />
                       ) : (
                         <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                          <span className="text-lg font-black text-primary">{team.name?.charAt(0)}</span>
+                          <span className="text-lg font-black text-primary">{team.teamName?.charAt(0)}</span>
                         </div>
                       )}
                     </div>
-                    <p className="text-xs font-bold truncate group-hover:text-primary transition-colors">{team.name}</p>
+                    <p className="text-xs font-bold truncate group-hover:text-primary transition-colors">{team.teamName}</p>
                     {team.leagueName && (
                       <p className="text-[10px] text-muted-foreground truncate mt-0.5">{team.leagueName}</p>
                     )}
@@ -216,11 +216,25 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {topPlayers.map((player: any) => (
                 <div key={player.id} className="fut-card fut-card-hover p-5 text-center">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/20 border-2 border-primary/40 mb-3 mx-auto">
-                    <span className="text-xl font-black text-primary"
-                      style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-                      {player.overall}
-                    </span>
+                  {/* Foto do jogador */}
+                  <div className="relative w-20 h-20 mx-auto mb-3">
+                    {player.imageUrl ? (
+                      <img
+                        src={player.imageUrl}
+                        alt={player.name}
+                        className="w-full h-full object-cover rounded-full border-2 border-primary/40"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden'); }}
+                      />
+                    ) : null}
+                    <div className={`${player.imageUrl ? 'hidden' : ''} absolute inset-0 flex items-center justify-center rounded-full bg-primary/20 border-2 border-primary/40`}>
+                      <span className="text-xl font-black text-primary" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</span>
+                    </div>
+                    {/* Badge OVR sobre a foto */}
+                    {player.imageUrl && (
+                      <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-primary flex items-center justify-center border-2 border-background">
+                        <span className="text-[10px] font-black text-primary-foreground">{player.overall}</span>
+                      </div>
+                    )}
                   </div>
                   <h4 className="font-bold text-sm mb-1 truncate">{player.name}</h4>
                   <div className="flex items-center justify-center gap-2 mb-2">
