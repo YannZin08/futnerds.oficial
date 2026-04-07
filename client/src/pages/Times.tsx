@@ -140,10 +140,10 @@ export default function Times() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="h-screen flex flex-col bg-background overflow-hidden">
       <Navbar />
       {/* Header */}
-      <div className="border-b border-border bg-background sticky top-16 z-20">
+      <div className="border-b border-border bg-background shrink-0 z-20">
         <div className="container py-4">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-3">
@@ -261,6 +261,7 @@ export default function Times() {
         </div>
       </div>
 
+      <div className="flex-1 overflow-y-auto">
       <div className="container pt-8 pb-8 sm:pt-10 sm:pb-10">
         {/* ── COUNTRIES VIEW ── */}
         {view === "countries" && (
@@ -408,6 +409,7 @@ export default function Times() {
             )}
           </>
         )}
+      </div>
       </div>
     </div>
   );
