@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import {
   User, Edit3, Save, X, Lock, ArrowRight, Heart, Star,
-  Trophy, Users, Calendar, Shield, Zap
+  Trophy, Users, Calendar, Shield, Zap, Camera
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -28,6 +28,9 @@ export default function Perfil() {
   const { user, isAuthenticated, loading } = useAuth();
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({ username: "", bio: "", favoriteTeam: "" });
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const avatarInputRef = useRef<HTMLInputElement>(null);
 
   const { data: profile } = trpc.user.profile.useQuery(undefined, { enabled: isAuthenticated });
   const { data: favoriteTeams } = trpc.teams.favorites.useQuery(undefined, { enabled: isAuthenticated });
@@ -35,6 +38,35 @@ export default function Perfil() {
   const utils = trpc.useUtils();
   const removeFavTeam = trpc.teams.removeFavorite.useMutation({ onSuccess: () => utils.teams.favorites.invalidate() });
   const removeFavPlayer = trpc.players.removeFavorite.useMutation({ onSuccess: () => utils.players.favorites.invalidate() });
+
+  const uploadAvatar = trpc.user.uploadAvatar.useMutation({
+    onSuccess: (data) => {
+      setAvatarPreview(data.url);
+      utils.user.profile.invalidate();
+      toast.success("Foto de perfil atualizada!");
+      setUploadingAvatar(false);
+    },
+    onError: () => {
+      toast.error("Erro ao atualizar foto de perfil");
+      setUploadingAvatar(false);
+    },
+  });
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Imagem muito grande. Máximo 5MB.");
+      return;
+    }
+    setUploadingAvatar(true);
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const base64 = ev.target?.result as string;
+      uploadAvatar.mutate({ base64, mimeType: file.type });
+    };
+    reader.readAsDataURL(file);
+  };
 
   const updateProfile = trpc.user.updateProfile.useMutation({
     onSuccess: () => {
@@ -119,13 +151,29 @@ export default function Perfil() {
           {/* Avatar flutuando sobre o banner */}
           <div className="container">
             <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-12 sm:-mt-16 pb-4 sm:pb-6">
-              <div className="relative">
+              <div className="relative group cursor-pointer" onClick={() => avatarInputRef.current?.click()}>
+                <input
+                  ref={avatarInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleAvatarChange}
+                />
                 <Avatar className="h-24 w-24 sm:h-32 sm:w-32 border-4 border-background ring-2 ring-primary/40 shadow-xl">
-                  <AvatarImage src={user?.avatar ?? undefined} />
+                  <AvatarImage src={avatarPreview ?? profile?.avatar ?? user?.avatar ?? undefined} />
                   <AvatarFallback className="bg-primary/20 text-primary text-3xl sm:text-4xl font-black">
                     {user?.name?.charAt(0).toUpperCase() ?? "U"}
                   </AvatarFallback>
                 </Avatar>
+                {/* Overlay de câmera ao hover */}
+                <div className={`absolute inset-0 rounded-full flex items-center justify-center transition-opacity ${
+                  uploadingAvatar ? "bg-black/60 opacity-100" : "bg-black/50 opacity-0 group-hover:opacity-100"
+                }`}>
+                  {uploadingAvatar
+                    ? <div className="h-6 w-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    : <Camera className="h-7 w-7 text-white" />
+                  }
+                </div>
                 {/* Badge indicator */}
                 <div className={`absolute -bottom-1 -right-1 rounded-full border p-1.5 ${badge.bg}`}>
                   <BadgeIcon className={`h-3.5 w-3.5 ${badge.color}`} />

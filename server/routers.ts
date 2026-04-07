@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { storagePut } from "./storage";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
@@ -196,6 +197,21 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         await updateUserProfile(ctx.user.id, input);
         return { success: true };
+      }),
+    uploadAvatar: protectedProcedure
+      .input(z.object({
+        base64: z.string(), // data:image/...;base64,...
+        mimeType: z.string().default("image/jpeg"),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        // Strip data URL prefix if present
+        const base64Data = input.base64.replace(/^data:[^;]+;base64,/, "");
+        const buffer = Buffer.from(base64Data, "base64");
+        const ext = input.mimeType.split("/")[1] ?? "jpg";
+        const key = `avatars/${ctx.user.id}-${Date.now()}.${ext}`;
+        const { url } = await storagePut(key, buffer, input.mimeType);
+        await updateUserProfile(ctx.user.id, { avatar: url });
+        return { url };
       }),
   }),
 });
