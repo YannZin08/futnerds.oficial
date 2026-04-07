@@ -145,7 +145,7 @@ export default function Times() {
       {/* Header Fixo */}
       <div className="border-b border-border bg-card fixed top-16 left-0 right-0 z-40">
         <div className="container py-4">
-          <div className="flex items-center gap-3 overflow-hidden">
+          <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
