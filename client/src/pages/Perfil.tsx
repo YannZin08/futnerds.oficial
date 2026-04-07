@@ -334,11 +334,11 @@ export default function Perfil() {
                       const leagueName = team.leagueName;
                       const prestige = team.prestige;
                       return (
-                        <div key={team.teamId} className="relative">
+                        <div key={team.teamId} className="relative group">
                           {/* Botão remover — fora do Link, sempre visível */}
                           <button
                             onClick={() => removeFavTeam.mutate({ teamId: team.teamId })}
-                            className="absolute top-1.5 right-1.5 z-10 bg-background/90 rounded-full p-1 text-muted-foreground hover:text-red-400 hover:bg-red-400/10 border border-border/60 transition-colors"
+                            className="absolute top-1.5 right-1.5 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 rounded-full p-1 text-muted-foreground hover:text-red-400 hover:bg-red-400/10 border border-border/60"
                             title="Remover favorito"
                           >
                             <X className="h-3 w-3" />
