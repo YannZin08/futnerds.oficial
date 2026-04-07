@@ -233,7 +233,7 @@ export default function TeamDetail() {
       />
       <Navbar />
 
-      {/* ── Header Sticky ── */}
+      {/* ── Header Sticky (idêntico ao de Times) ── */}
       <div className="border-b border-border bg-card sticky top-16 z-40">
         <div className="container py-4">
           <div className="flex items-center gap-3 overflow-hidden">
@@ -523,6 +523,7 @@ export default function TeamDetail() {
           ) : null}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

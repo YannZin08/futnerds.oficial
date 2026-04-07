@@ -140,18 +140,10 @@ export default function Times() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-background overflow-hidden relative">
-      {/* Grid quadriculado de fundo */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage: `linear-gradient(rgba(34,197,94,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.12) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
-      />
+    <div className="min-h-screen bg-background">
       <Navbar />
       {/* Header */}
-      <div className="border-b border-border bg-background shrink-0 z-20">
+      <div className="border-b border-border bg-card sticky top-16 z-10">
         <div className="container py-4">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-3">
@@ -269,12 +261,13 @@ export default function Times() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
-      <div className="container pt-8 pb-8 sm:pt-10 sm:pb-10">
+      <div className="container py-6 sm:py-8">
         {/* ── COUNTRIES VIEW ── */}
         {view === "countries" && (
           <>
-
+            <p className="text-muted-foreground mb-6">
+              Selecione um país para explorar as ligas e times disponíveis para o modo carreira.
+            </p>
             {loadingCountries ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {Array.from({ length: 8 }).map((_, i) => (
@@ -314,7 +307,9 @@ export default function Times() {
         {/* ── LEAGUES VIEW ── */}
         {view === "leagues" && (
           <>
-
+            <p className="text-muted-foreground mb-6">
+              Escolha uma liga para ver os times disponíveis.
+            </p>
             {loadingLeagues ? (
               <div className="flex flex-col gap-3">
                 {Array.from({ length: 2 }).map((_, i) => (
@@ -417,7 +412,6 @@ export default function Times() {
             )}
           </>
         )}
-      </div>
       </div>
     </div>
   );
