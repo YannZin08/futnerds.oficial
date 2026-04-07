@@ -108,14 +108,14 @@ function PlayerMiniCard({ player }: { player: any }) {
       </div>
 
       {/* Card Body */}
-      <div className="p-3 space-y-2">
+      <div className="p-3 space-y-2" style={{backgroundColor: 'oklch(0.15 0.01 240)'}}>
         {/* Overall / Potential */}
         <div className="grid grid-cols-2 gap-2 text-center">
-          <div className="bg-secondary rounded-lg py-1.5">
+          <div className="rounded-lg py-1.5" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
             <p className="text-base font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
             <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Overall</p>
           </div>
-          <div className="bg-secondary rounded-lg py-1.5">
+          <div className="rounded-lg py-1.5" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
             <p className="text-base font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
             <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Potencial</p>
           </div>
@@ -310,9 +310,9 @@ export default function TeamDetail() {
         </div>
       </div>
 
-      <main className="flex-1">
+      <main className="flex-1" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
         {/* Info do Time */}
-        <section className="py-10 border-b border-border/50">
+        <section className="py-10 border-b border-border/50" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
           <div className="container">
             {isLoading ? (
               <div className="flex items-center gap-6 animate-pulse">
@@ -323,7 +323,7 @@ export default function TeamDetail() {
                 </div>
               </div>
             ) : team ? (
-              <div className="fut-card p-5 w-full flex flex-col gap-4">
+              <div className="fut-card p-5 w-full flex flex-col gap-4" style={{backgroundColor: 'oklch(0.15 0.01 240)', backgroundImage: 'none', background: 'oklch(0.15 0.01 240)'}}>
 
                 {/* Linha superior: logo + (nome/liga/estádio/descrição) */}
                 <div className="flex items-start gap-5">
@@ -379,7 +379,7 @@ export default function TeamDetail() {
                 {/* Stats dentro do card */}
                 <div className="flex flex-wrap gap-3">
                   {team.budget != null && (
-                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
                       <Wallet className="h-4 w-4 text-green-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Orçamento</p>
@@ -388,7 +388,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {avgOverall != null && (
-                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
                       <Trophy className="h-4 w-4 text-yellow-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Overall Médio</p>
@@ -397,7 +397,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {teamPlayers && (
-                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
                       <Users className="h-4 w-4 text-blue-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Jogadores</p>
@@ -406,7 +406,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {bestPlayer && (
-                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
                       <Star className="h-4 w-4 text-primary" />
                       <div>
                         <p className="text-xs text-muted-foreground">Melhor Jogador</p>
@@ -415,7 +415,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {(team as any).rivalTeam && (
-                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
                       <Swords className="h-4 w-4 text-red-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Rival</p>
@@ -424,7 +424,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {(team as any).prestige != null && (
-                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
                       <Globe className="h-4 w-4 text-purple-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Prestígio Internacional</p>
@@ -433,7 +433,7 @@ export default function TeamDetail() {
                     </div>
                   )}
                   {(team as any).localPrestige != null && (
-                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
                       <MapPin className="h-4 w-4 text-orange-400" />
                       <div>
                         <p className="text-xs text-muted-foreground">Prestígio Local</p>
@@ -456,7 +456,7 @@ export default function TeamDetail() {
         </section>
 
         {/* Jogadores do Time */}
-        <div className="container py-10">
+        <div className="container py-10" style={{position: 'relative', zIndex: 2}}>
           {/* Aviso de filtro ativo */}
           {playerSearch.trim() && (
             <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
