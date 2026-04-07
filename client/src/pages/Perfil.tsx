@@ -279,32 +279,54 @@ export default function Perfil() {
                 </div>
                 {favoriteTeams && favoriteTeams.length > 0 ? (
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {favoriteTeams.map((team: any) => (
-                      <div key={team.teamId} className="relative group">
-                        <Link href={`/times/${team.teamId}`}>
-                          <div className="fut-card fut-card-hover p-3 text-center cursor-pointer transition-all">
-                            <div className="w-12 h-12 mx-auto mb-2 flex items-center justify-center">
-                              {team.logoUrl ? (
-                                <img src={team.logoUrl} alt={team.name} className="w-full h-full object-contain" />
-                              ) : (
-                                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                                  <span className="text-sm font-black text-primary">{team.name?.charAt(0)}</span>
+                    {favoriteTeams.map((team: any) => {
+                      const logoUrl = team.teamLogoUrl ?? team.logoUrl;
+                      const teamName = team.teamName ?? team.name;
+                      const leagueLogo = team.leagueLogoUrl;
+                      const leagueName = team.leagueName;
+                      const prestige = team.prestige;
+                      return (
+                        <div key={team.teamId} className="relative group">
+                          <Link href={`/times/${team.teamId}`}>
+                            <div className="fut-card fut-card-hover p-3 text-center cursor-pointer transition-all">
+                              {/* Logo do time */}
+                              <div className="w-14 h-14 mx-auto mb-2 flex items-center justify-center">
+                                {logoUrl ? (
+                                  <img src={logoUrl} alt={teamName} className="w-full h-full object-contain" />
+                                ) : (
+                                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <span className="text-base font-black text-primary">{teamName?.charAt(0)}</span>
+                                  </div>
+                                )}
+                              </div>
+                              <p className="text-xs font-bold truncate">{teamName}</p>
+                              {/* Liga com logo */}
+                              {leagueName && (
+                                <div className="flex items-center justify-center gap-1 mt-1">
+                                  {leagueLogo && <img src={leagueLogo} alt={leagueName} className="w-3.5 h-3.5 object-contain" />}
+                                  <p className="text-[10px] text-muted-foreground truncate">{leagueName}</p>
+                                </div>
+                              )}
+                              {/* Prestígio */}
+                              {prestige != null && (
+                                <div className="flex items-center justify-center gap-0.5 mt-1">
+                                  {Array.from({ length: 5 }).map((_, i) => (
+                                    <span key={i} className={`text-[10px] ${i < prestige ? 'text-yellow-400' : 'text-muted-foreground/30'}`}>★</span>
+                                  ))}
                                 </div>
                               )}
                             </div>
-                            <p className="text-xs font-bold truncate">{team.name}</p>
-                            {team.leagueName && <p className="text-[10px] text-muted-foreground truncate mt-0.5">{team.leagueName}</p>}
-                          </div>
-                        </Link>
-                        <button
-                          onClick={() => removeFavTeam.mutate({ teamId: team.teamId })}
-                          className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 rounded-full p-1 hover:text-red-400 border border-border/50"
-                          title="Remover favorito"
-                        >
-                          <X className="h-2.5 w-2.5" />
-                        </button>
-                      </div>
-                    ))}
+                          </Link>
+                          <button
+                            onClick={() => removeFavTeam.mutate({ teamId: team.teamId })}
+                            className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 rounded-full p-1 hover:text-red-400 border border-border/50"
+                            title="Remover favorito"
+                          >
+                            <X className="h-2.5 w-2.5" />
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
                 ) : (
                   <div className="text-center py-8 text-muted-foreground">
@@ -329,32 +351,57 @@ export default function Perfil() {
                 </div>
                 {favoritePlayers && favoritePlayers.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {favoritePlayers.map((player: any) => (
-                      <div key={player.playerId} className="relative group flex items-center gap-3 rounded-xl border border-border/50 bg-card/50 p-3 hover:border-primary/30 transition-colors">
-                        <div className="w-11 h-11 rounded-full bg-primary/10 flex-shrink-0 overflow-hidden flex items-center justify-center border border-border/50">
-                          {player.imageUrl ? (
-                            <img src={player.imageUrl} alt={player.name} className="w-full h-full object-cover object-top" />
-                          ) : (
-                            <User className="h-5 w-5 text-primary/60" />
-                          )}
+                    {favoritePlayers.map((fav: any) => {
+                      const p = fav.player || fav;
+                      const overall = p.overall ?? fav.overall;
+                      const name = p.name ?? fav.name;
+                      const position = p.position ?? fav.position;
+                      const club = p.club ?? fav.club;
+                      const clubLogoUrl = p.clubLogoUrl ?? fav.clubLogoUrl;
+                      const imageUrl = p.imageUrl ?? fav.imageUrl;
+                      const nationality = p.nationality ?? fav.nationality;
+                      const age = p.age ?? fav.age;
+                      const playerId = fav.playerId ?? p.id;
+                      return (
+                        <div key={playerId} className="relative group flex items-center gap-3 rounded-xl border border-border/50 bg-card/50 p-3 hover:border-primary/30 transition-colors">
+                          {/* Foto do jogador */}
+                          <div className="w-14 h-14 rounded-lg bg-primary/10 flex-shrink-0 overflow-hidden flex items-center justify-center border border-border/50">
+                            {imageUrl ? (
+                              <img src={imageUrl} alt={name} className="w-full h-full object-cover object-top" />
+                            ) : (
+                              <User className="h-6 w-6 text-primary/60" />
+                            )}
+                          </div>
+                          {/* Info */}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-bold truncate">{name}</p>
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              {clubLogoUrl && (
+                                <img src={clubLogoUrl} alt={club} className="w-4 h-4 object-contain flex-shrink-0" />
+                              )}
+                              <p className="text-xs text-muted-foreground truncate">{club}</p>
+                            </div>
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary/15 text-primary">{position}</span>
+                              {nationality && <span className="text-[10px] text-muted-foreground">{nationality}</span>}
+                              {age && <span className="text-[10px] text-muted-foreground">{age} anos</span>}
+                            </div>
+                          </div>
+                          {/* Overall */}
+                          <div className="text-right shrink-0 mr-5">
+                            <p className="text-xl font-black text-primary leading-none">{overall}</p>
+                            <p className="text-[10px] text-muted-foreground mt-0.5">OVR</p>
+                          </div>
+                          <button
+                            onClick={() => removeFavPlayer.mutate({ playerId })}
+                            className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 rounded-full p-1 hover:text-red-400 border border-border/50"
+                            title="Remover favorito"
+                          >
+                            <X className="h-2.5 w-2.5" />
+                          </button>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold truncate">{player.name}</p>
-                          <p className="text-xs text-muted-foreground truncate">{player.club} · {player.position}</p>
-                        </div>
-                        <div className="text-right shrink-0 mr-4">
-                          <p className="text-base font-black text-primary">{player.overall}</p>
-                          <p className="text-[10px] text-muted-foreground">OVR</p>
-                        </div>
-                        <button
-                          onClick={() => removeFavPlayer.mutate({ playerId: player.playerId })}
-                          className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 rounded-full p-1 hover:text-red-400 border border-border/50"
-                          title="Remover favorito"
-                        >
-                          <X className="h-2.5 w-2.5" />
-                        </button>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 ) : (
                   <div className="text-center py-8 text-muted-foreground">
