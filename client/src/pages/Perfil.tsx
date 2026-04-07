@@ -8,10 +8,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
-import { User, Edit3, Save, X, Lock, ArrowRight, Heart, Star } from "lucide-react";
+import {
+  User, Edit3, Save, X, Lock, ArrowRight, Heart, Star,
+  Trophy, Users, Calendar, Shield, Zap
+} from "lucide-react";
 import { Link } from "wouter";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/logo-futnerds_8f14a724.png";
+
+function getBadge(favoriteTeamsCount: number, favoritePlayersCount: number) {
+  const total = favoriteTeamsCount + favoritePlayersCount;
+  if (total >= 20) return { label: "Técnico Elite", color: "text-yellow-400", bg: "bg-yellow-400/10 border-yellow-400/30", icon: Trophy };
+  if (total >= 10) return { label: "Analista", color: "text-blue-400", bg: "bg-blue-400/10 border-blue-400/30", icon: Zap };
+  if (total >= 3) return { label: "Scout", color: "text-primary", bg: "bg-primary/10 border-primary/30", icon: Shield };
+  return { label: "Nerd Iniciante", color: "text-muted-foreground", bg: "bg-muted/20 border-border", icon: Users };
+}
 
 export default function Perfil() {
   const { user, isAuthenticated, loading } = useAuth();
@@ -81,123 +92,71 @@ export default function Perfil() {
     );
   }
 
+  const teamsCount = favoriteTeams?.length ?? 0;
+  const playersCount = favoritePlayers?.length ?? 0;
+  const badge = getBadge(teamsCount, playersCount);
+  const BadgeIcon = badge.icon;
+  const memberSince = profile?.createdAt
+    ? new Date(profile.createdAt).toLocaleDateString("pt-BR", { month: "long", year: "numeric" })
+    : null;
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
-      <main className="flex-1 pt-20">
-        <section className="py-8 sm:py-12 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
+      <main className="flex-1 pt-16">
+
+        {/* Banner + Avatar Hero */}
+        <div className="relative">
+          {/* Banner */}
+          <div
+            className="h-36 sm:h-48 w-full"
+            style={{
+              background: "linear-gradient(135deg, oklch(0.18 0.06 140) 0%, oklch(0.12 0.03 240) 50%, oklch(0.10 0.01 240) 100%)",
+              backgroundImage: `linear-gradient(135deg, oklch(0.18 0.06 140) 0%, oklch(0.12 0.03 240) 60%, oklch(0.10 0.01 240) 100%), repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px)`,
+            }}
+          />
+
+          {/* Avatar flutuando sobre o banner */}
           <div className="container">
-            <div className="flex items-center gap-3 mb-2">
-              <User className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
-              <h1 className="text-2xl sm:text-4xl font-black">Meu Perfil</h1>
-            </div>
-            <p className="text-muted-foreground text-sm sm:text-base">Gerencie suas informações e preferências</p>
-          </div>
-        </section>
-
-        <div className="container py-10">
-          <div className="max-w-2xl mx-auto space-y-8">
-
-            {/* Times Favoritos */}
-            {favoriteTeams && favoriteTeams.length > 0 && (
-              <div className="fut-card p-4 sm:p-6">
-                <h3 className="text-lg font-black mb-4 flex items-center gap-2">
-                  <Heart className="h-5 w-5 text-red-500 fill-red-500" />
-                  Times Favoritos
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {favoriteTeams.map((team: any) => (
-                    <div key={team.teamId} className="relative group">
-                      <Link href={`/times/${team.teamId}`}>
-                        <div className="fut-card fut-card-hover p-3 text-center cursor-pointer">
-                          <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
-                            {team.logoUrl ? (
-                              <img src={team.logoUrl} alt={team.name} className="w-full h-full object-contain" />
-                            ) : (
-                              <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center">
-                                <span className="text-sm font-black text-primary">{team.name?.charAt(0)}</span>
-                              </div>
-                            )}
-                          </div>
-                          <p className="text-xs font-bold truncate">{team.name}</p>
-                          {team.leagueName && <p className="text-[10px] text-muted-foreground truncate">{team.leagueName}</p>}
-                        </div>
-                      </Link>
-                      <button
-                        onClick={() => removeFavTeam.mutate({ teamId: team.teamId })}
-                        className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 rounded-full p-0.5 hover:text-red-400"
-                        title="Remover favorito"
-                      >
-                        <X className="h-3 w-3" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Jogadores Favoritos */}
-            {favoritePlayers && favoritePlayers.length > 0 && (
-              <div className="fut-card p-4 sm:p-6">
-                <h3 className="text-lg font-black mb-4 flex items-center gap-2">
-                  <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" />
-                  Jogadores Favoritos
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {favoritePlayers.map((player: any) => (
-                    <div key={player.playerId} className="relative group flex items-center gap-3 fut-card p-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 flex-shrink-0 overflow-hidden flex items-center justify-center">
-                        {player.imageUrl ? (
-                          <img src={player.imageUrl} alt={player.name} className="w-full h-full object-cover object-top" />
-                        ) : (
-                          <User className="h-5 w-5 text-primary" />
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold truncate">{player.name}</p>
-                        <p className="text-xs text-muted-foreground truncate">{player.club} · {player.position}</p>
-                      </div>
-                      <div className="text-right shrink-0">
-                        <p className="text-sm font-black text-primary">{player.overall}</p>
-                        <p className="text-[10px] text-muted-foreground">OVR</p>
-                      </div>
-                      <button
-                        onClick={() => removeFavPlayer.mutate({ playerId: player.playerId })}
-                        className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 rounded-full p-0.5 hover:text-red-400"
-                        title="Remover favorito"
-                      >
-                        <X className="h-3 w-3" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="fut-card p-4 sm:p-8">
-              {/* Avatar + Name */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-border/50">
-                <Avatar className="h-16 w-16 sm:h-20 sm:w-20 border-2 border-primary/40 self-start sm:self-auto">
+            <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-12 sm:-mt-16 pb-4 sm:pb-6">
+              <div className="relative">
+                <Avatar className="h-24 w-24 sm:h-32 sm:w-32 border-4 border-background ring-2 ring-primary/40 shadow-xl">
                   <AvatarImage src={user?.avatar ?? undefined} />
-                  <AvatarFallback className="bg-primary/20 text-primary text-2xl font-black">
+                  <AvatarFallback className="bg-primary/20 text-primary text-3xl sm:text-4xl font-black">
                     {user?.name?.charAt(0).toUpperCase() ?? "U"}
                   </AvatarFallback>
                 </Avatar>
-                <div className="flex-1 min-w-0">
-                  <h2 className="text-xl sm:text-2xl font-black">{user?.name ?? "Usuário"}</h2>
-                  <p className="text-muted-foreground text-sm">{user?.email}</p>
-                  <div className="flex items-center gap-2 mt-2">
-                    <img src={LOGO_URL} alt="" className="h-4 w-4 object-contain" />
-                    <span className="text-xs text-primary font-semibold">Membro FUTNERDS</span>
-                  </div>
+                {/* Badge indicator */}
+                <div className={`absolute -bottom-1 -right-1 rounded-full border p-1.5 ${badge.bg}`}>
+                  <BadgeIcon className={`h-3.5 w-3.5 ${badge.color}`} />
                 </div>
-                <div className="sm:ml-auto self-start">
+              </div>
+
+              <div className="flex-1 min-w-0 pb-1">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div>
+                    <h1 className="text-2xl sm:text-3xl font-black leading-tight">
+                      {profile?.username || user?.name || "Usuário"}
+                    </h1>
+                    <div className="flex flex-wrap items-center gap-2 mt-1">
+                      <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full border ${badge.bg} ${badge.color}`}>
+                        <BadgeIcon className="h-3 w-3" />
+                        {badge.label}
+                      </span>
+                      {memberSince && (
+                        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                          <Calendar className="h-3 w-3" />
+                          Membro desde {memberSince}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                   {!editing ? (
-                    <Button variant="outline" size="sm" onClick={startEditing}>
-                      <Edit3 className="h-4 w-4 mr-2" /> Editar
+                    <Button variant="outline" size="sm" onClick={startEditing} className="self-start sm:self-auto">
+                      <Edit3 className="h-4 w-4 mr-2" /> Editar Perfil
                     </Button>
                   ) : (
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 self-start sm:self-auto">
                       <Button size="sm" onClick={handleSave} disabled={updateProfile.isPending}
                         className="bg-primary text-primary-foreground">
                         <Save className="h-4 w-4 mr-2" /> Salvar
@@ -209,67 +168,203 @@ export default function Perfil() {
                   )}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
-              {/* Profile Fields */}
-              <div className="space-y-6">
-                <div>
-                  <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider block mb-2">
-                    Nome de usuário
-                  </label>
-                  {editing ? (
-                    <Input
-                      value={form.username}
-                      onChange={(e) => setForm({ ...form, username: e.target.value })}
-                      placeholder="Seu username"
-                      className="bg-secondary border-border"
-                    />
-                  ) : (
-                    <p className="text-foreground">{profile?.username || <span className="text-muted-foreground italic">Não definido</span>}</p>
-                  )}
-                </div>
+        {/* Main Content */}
+        <div className="container py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                <div>
-                  <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider block mb-2">
-                    Bio
-                  </label>
-                  {editing ? (
-                    <Input
-                      value={form.bio}
-                      onChange={(e) => setForm({ ...form, bio: e.target.value })}
-                      placeholder="Fale um pouco sobre você..."
-                      className="bg-secondary border-border"
-                    />
-                  ) : (
-                    <p className="text-foreground">{profile?.bio || <span className="text-muted-foreground italic">Não definido</span>}</p>
-                  )}
-                </div>
+            {/* Coluna esquerda: Info do perfil */}
+            <div className="lg:col-span-1 space-y-4">
+              <div className="fut-card p-5">
+                <h3 className="text-sm font-black uppercase tracking-wider text-muted-foreground mb-4 flex items-center gap-2">
+                  <User className="h-4 w-4" /> Informações
+                </h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5">
+                      Nome de usuário
+                    </label>
+                    {editing ? (
+                      <Input
+                        value={form.username}
+                        onChange={(e) => setForm({ ...form, username: e.target.value })}
+                        placeholder="Seu username"
+                        className="bg-secondary border-border h-9 text-sm"
+                      />
+                    ) : (
+                      <p className="text-sm text-foreground">{profile?.username || <span className="text-muted-foreground italic text-xs">Não definido</span>}</p>
+                    )}
+                  </div>
 
-                <div>
-                  <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider block mb-2">
-                    Time favorito
-                  </label>
-                  {editing ? (
-                    <Input
-                      value={form.favoriteTeam}
-                      onChange={(e) => setForm({ ...form, favoriteTeam: e.target.value })}
-                      placeholder="Ex: Real Madrid, Barcelona..."
-                      className="bg-secondary border-border"
-                    />
-                  ) : (
-                    <p className="text-foreground">{profile?.favoriteTeam || <span className="text-muted-foreground italic">Não definido</span>}</p>
-                  )}
-                </div>
+                  <div>
+                    <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5">
+                      Bio
+                    </label>
+                    {editing ? (
+                      <Input
+                        value={form.bio}
+                        onChange={(e) => setForm({ ...form, bio: e.target.value })}
+                        placeholder="Fale um pouco sobre você..."
+                        className="bg-secondary border-border h-9 text-sm"
+                      />
+                    ) : (
+                      <p className="text-sm text-foreground">{profile?.bio || <span className="text-muted-foreground italic text-xs">Não definido</span>}</p>
+                    )}
+                  </div>
 
-                <div className="pt-4 border-t border-border/50">
-                  <label className="text-sm font-semibold text-muted-foreground uppercase tracking-wider block mb-2">
-                    Membro desde
-                  </label>
-                  <p className="text-foreground">
-                    {profile?.createdAt
-                      ? new Date(profile.createdAt).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })
-                      : "—"}
-                  </p>
+                  <div>
+                    <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5">
+                      Time favorito
+                    </label>
+                    {editing ? (
+                      <Input
+                        value={form.favoriteTeam}
+                        onChange={(e) => setForm({ ...form, favoriteTeam: e.target.value })}
+                        placeholder="Ex: Real Madrid, Barcelona..."
+                        className="bg-secondary border-border h-9 text-sm"
+                      />
+                    ) : (
+                      <p className="text-sm text-foreground">{profile?.favoriteTeam || <span className="text-muted-foreground italic text-xs">Não definido</span>}</p>
+                    )}
+                  </div>
+
+                  <div className="pt-3 border-t border-border/50">
+                    <p className="text-xs text-muted-foreground">
+                      <span className="font-semibold">Email:</span> {user?.email}
+                    </p>
+                  </div>
                 </div>
+              </div>
+
+              {/* Badge card */}
+              <div className={`fut-card p-5 border ${badge.bg}`}>
+                <h3 className="text-sm font-black uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-2">
+                  <Trophy className="h-4 w-4" /> Conquista
+                </h3>
+                <div className="flex items-center gap-3">
+                  <div className={`p-3 rounded-xl border ${badge.bg}`}>
+                    <BadgeIcon className={`h-6 w-6 ${badge.color}`} />
+                  </div>
+                  <div>
+                    <p className={`font-black text-base ${badge.color}`}>{badge.label}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {teamsCount + playersCount < 3
+                        ? `Favorite ${3 - (teamsCount + playersCount)} item(s) para evoluir`
+                        : teamsCount + playersCount < 10
+                        ? `Favorite ${10 - (teamsCount + playersCount)} item(s) para evoluir`
+                        : teamsCount + playersCount < 20
+                        ? `Favorite ${20 - (teamsCount + playersCount)} item(s) para evoluir`
+                        : "Nível máximo atingido!"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Coluna direita: Favoritos */}
+            <div className="lg:col-span-2 space-y-6">
+
+              {/* Times Favoritos */}
+              <div className="fut-card p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-black uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+                    <Heart className="h-4 w-4 text-red-500 fill-red-500" /> Times Favoritos
+                  </h3>
+                  <Button variant="ghost" size="sm" asChild className="text-xs h-7">
+                    <Link href="/times">Explorar <ArrowRight className="ml-1 h-3 w-3" /></Link>
+                  </Button>
+                </div>
+                {favoriteTeams && favoriteTeams.length > 0 ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {favoriteTeams.map((team: any) => (
+                      <div key={team.teamId} className="relative group">
+                        <Link href={`/times/${team.teamId}`}>
+                          <div className="fut-card fut-card-hover p-3 text-center cursor-pointer transition-all">
+                            <div className="w-12 h-12 mx-auto mb-2 flex items-center justify-center">
+                              {team.logoUrl ? (
+                                <img src={team.logoUrl} alt={team.name} className="w-full h-full object-contain" />
+                              ) : (
+                                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                                  <span className="text-sm font-black text-primary">{team.name?.charAt(0)}</span>
+                                </div>
+                              )}
+                            </div>
+                            <p className="text-xs font-bold truncate">{team.name}</p>
+                            {team.leagueName && <p className="text-[10px] text-muted-foreground truncate mt-0.5">{team.leagueName}</p>}
+                          </div>
+                        </Link>
+                        <button
+                          onClick={() => removeFavTeam.mutate({ teamId: team.teamId })}
+                          className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 rounded-full p-1 hover:text-red-400 border border-border/50"
+                          title="Remover favorito"
+                        >
+                          <X className="h-2.5 w-2.5" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <Heart className="h-8 w-8 mx-auto mb-2 opacity-30" />
+                    <p className="text-sm">Nenhum time favoritado ainda</p>
+                    <Button variant="ghost" size="sm" asChild className="mt-2 text-primary text-xs">
+                      <Link href="/times">Explorar times</Link>
+                    </Button>
+                  </div>
+                )}
+              </div>
+
+              {/* Jogadores Favoritos */}
+              <div className="fut-card p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-black uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+                    <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" /> Jogadores Favoritos
+                  </h3>
+                  <Button variant="ghost" size="sm" asChild className="text-xs h-7">
+                    <Link href="/jogadores">Explorar <ArrowRight className="ml-1 h-3 w-3" /></Link>
+                  </Button>
+                </div>
+                {favoritePlayers && favoritePlayers.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {favoritePlayers.map((player: any) => (
+                      <div key={player.playerId} className="relative group flex items-center gap-3 rounded-xl border border-border/50 bg-card/50 p-3 hover:border-primary/30 transition-colors">
+                        <div className="w-11 h-11 rounded-full bg-primary/10 flex-shrink-0 overflow-hidden flex items-center justify-center border border-border/50">
+                          {player.imageUrl ? (
+                            <img src={player.imageUrl} alt={player.name} className="w-full h-full object-cover object-top" />
+                          ) : (
+                            <User className="h-5 w-5 text-primary/60" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold truncate">{player.name}</p>
+                          <p className="text-xs text-muted-foreground truncate">{player.club} · {player.position}</p>
+                        </div>
+                        <div className="text-right shrink-0 mr-4">
+                          <p className="text-base font-black text-primary">{player.overall}</p>
+                          <p className="text-[10px] text-muted-foreground">OVR</p>
+                        </div>
+                        <button
+                          onClick={() => removeFavPlayer.mutate({ playerId: player.playerId })}
+                          className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 rounded-full p-1 hover:text-red-400 border border-border/50"
+                          title="Remover favorito"
+                        >
+                          <X className="h-2.5 w-2.5" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <Star className="h-8 w-8 mx-auto mb-2 opacity-30" />
+                    <p className="text-sm">Nenhum jogador favoritado ainda</p>
+                    <Button variant="ghost" size="sm" asChild className="mt-2 text-primary text-xs">
+                      <Link href="/jogadores">Explorar jogadores</Link>
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
