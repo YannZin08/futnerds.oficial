@@ -135,3 +135,13 @@ export const teams = mysqlTable("teams", {
 
 export type Team = typeof teams.$inferSelect;
 export type InsertTeam = typeof teams.$inferInsert;
+
+// Times favoritos dos usuários
+export const userFavoriteTeams = mysqlTable("userFavoriteTeams", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  teamId: int("teamId").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type UserFavoriteTeam = typeof userFavoriteTeams.$inferSelect;

@@ -11,6 +11,7 @@ import {
   Trophy,
   Users,
   BarChart3,
+  Heart,
 } from "lucide-react";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/logo-futnerds_8f14a724.png";
@@ -50,6 +51,7 @@ const features = [
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
+  const { data: favoriteTeams } = trpc.teams.favorites.useQuery(undefined, { enabled: isAuthenticated });
   const { data: topPlayers } = trpc.players.list.useQuery({ limit: 4, sortBy: "overall" });
   const { data: playerCount } = trpc.players.count.useQuery();
   const totalPlayers = playerCount ?? 657;
@@ -156,6 +158,47 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Times Favoritos */}
+      {isAuthenticated && favoriteTeams && favoriteTeams.length > 0 && (
+        <section className="py-16">
+          <div className="container">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-black mb-1 flex items-center gap-2">
+                  <Heart className="h-6 w-6 text-red-500 fill-red-500" />
+                  Meus Times
+                </h2>
+                <p className="text-muted-foreground text-sm">Seus times favoritos com acesso rápido</p>
+              </div>
+              <Button variant="outline" asChild className="self-start sm:self-auto">
+                <Link href="/times">Ver todos <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+              {favoriteTeams.map((team: any) => (
+                <Link key={team.teamId} href={`/times/${team.teamId}`}>
+                  <div className="fut-card fut-card-hover p-4 text-center cursor-pointer group">
+                    <div className="w-14 h-14 mx-auto mb-3 flex items-center justify-center">
+                      {team.logoUrl ? (
+                        <img src={team.logoUrl} alt={team.name} className="w-full h-full object-contain" />
+                      ) : (
+                        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                          <span className="text-lg font-black text-primary">{team.name?.charAt(0)}</span>
+                        </div>
+                      )}
+                    </div>
+                    <p className="text-xs font-bold truncate group-hover:text-primary transition-colors">{team.name}</p>
+                    {team.leagueName && (
+                      <p className="text-[10px] text-muted-foreground truncate mt-0.5">{team.leagueName}</p>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Top Players Preview */}
       {topPlayers && topPlayers.length > 0 && (

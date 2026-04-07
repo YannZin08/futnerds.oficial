@@ -21,6 +21,11 @@ import {
   getPlayersByTeam,
   importTeamDetails,
   searchTeams,
+  getUserFavoriteTeams,
+  addFavoriteTeam,
+  removeFavoriteTeam,
+  isTeamFavorited,
+  isPlayerFavorited,
 } from "./db";
 
 export const appRouter = router({
@@ -123,6 +128,31 @@ export const appRouter = router({
       .input(z.object({ name: z.string() }))
       .query(async ({ input }) => {
         return await getTeamByName(input.name);
+      }),
+
+    favorites: protectedProcedure
+      .query(async ({ ctx }) => {
+        return await getUserFavoriteTeams(ctx.user.id);
+      }),
+
+    addFavorite: protectedProcedure
+      .input(z.object({ teamId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await addFavoriteTeam(ctx.user.id, input.teamId);
+        return { success: true };
+      }),
+
+    removeFavorite: protectedProcedure
+      .input(z.object({ teamId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await removeFavoriteTeam(ctx.user.id, input.teamId);
+        return { success: true };
+      }),
+
+    isFavorited: protectedProcedure
+      .input(z.object({ teamId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        return await isTeamFavorited(ctx.user.id, input.teamId);
       }),
 
     importDetails: protectedProcedure

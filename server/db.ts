@@ -1,6 +1,6 @@
 import { eq, desc, and, sql, count, like } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, news, players, userFavoritePlayers, InsertNews, InsertPlayer } from "../drizzle/schema";
+import { InsertUser, users, news, players, userFavoritePlayers, userFavoriteTeams, InsertNews, InsertPlayer } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -365,6 +365,62 @@ export async function getTeamByName(name: string) {
     .where(sql`LOWER(${teams.name}) = LOWER(${name})`)
     .limit(1);
   return result[0] ?? null;
+}
+
+// ─── Favorite Teams ─────────────────────────────────────────────────────────
+
+export async function getUserFavoriteTeams(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  const { teams, leagues } = await import("../drizzle/schema");
+  return await db.select({
+    id: userFavoriteTeams.id,
+    teamId: userFavoriteTeams.teamId,
+    createdAt: userFavoriteTeams.createdAt,
+    teamName: teams.name,
+    teamLogoUrl: teams.logoUrl,
+    leagueName: leagues.name,
+    leagueLogoUrl: leagues.logoUrl,
+    prestige: teams.prestige,
+  })
+    .from(userFavoriteTeams)
+    .innerJoin(teams, eq(userFavoriteTeams.teamId, teams.id))
+    .leftJoin(leagues, eq(teams.leagueId, leagues.id))
+    .where(eq(userFavoriteTeams.userId, userId))
+    .orderBy(desc(userFavoriteTeams.createdAt));
+}
+
+export async function addFavoriteTeam(userId: number, teamId: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(userFavoriteTeams).values({ userId, teamId }).onDuplicateKeyUpdate({ set: { userId } });
+}
+
+export async function removeFavoriteTeam(userId: number, teamId: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.delete(userFavoriteTeams)
+    .where(and(eq(userFavoriteTeams.userId, userId), eq(userFavoriteTeams.teamId, teamId)));
+}
+
+export async function isTeamFavorited(userId: number, teamId: number): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+  const result = await db.select({ id: userFavoriteTeams.id })
+    .from(userFavoriteTeams)
+    .where(and(eq(userFavoriteTeams.userId, userId), eq(userFavoriteTeams.teamId, teamId)))
+    .limit(1);
+  return result.length > 0;
+}
+
+export async function isPlayerFavorited(userId: number, playerId: number): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+  const result = await db.select({ id: userFavoritePlayers.id })
+    .from(userFavoritePlayers)
+    .where(and(eq(userFavoritePlayers.userId, userId), eq(userFavoritePlayers.playerId, playerId)))
+    .limit(1);
+  return result.length > 0;
 }
 
 export async function getPlayersByTeam(teamName: string) {

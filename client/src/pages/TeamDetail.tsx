@@ -17,7 +17,10 @@ import {
   Swords,
   Search,
   X,
+  Heart,
 } from "lucide-react";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { toast } from "sonner";
 
 // Tradução das posições para português
 const positionPtMap: Record<string, string> = {
@@ -157,6 +160,20 @@ export default function TeamDetail() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const { isAuthenticated } = useAuth();
+
+  // Favorito
+  const { data: isFav, refetch: refetchFav } = trpc.teams.isFavorited.useQuery(
+    { teamId },
+    { enabled: isAuthenticated && !!teamId }
+  );
+  const addFav = trpc.teams.addFavorite.useMutation({
+    onSuccess: () => { refetchFav(); toast.success("Time adicionado aos favoritos!"); },
+  });
+  const removeFav = trpc.teams.removeFavorite.useMutation({
+    onSuccess: () => { refetchFav(); toast.success("Time removido dos favoritos."); },
+  });
+
   const { data: team, isLoading: teamLoading } = trpc.teams.byId.useQuery(
     { id: teamId },
     { enabled: !!teamId }
@@ -284,6 +301,20 @@ export default function TeamDetail() {
                 )}
               </div>
             </div>
+
+            {/* Botão Favorito */}
+            {isAuthenticated && team && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="shrink-0"
+                title={isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+                onClick={() => isFav ? removeFav.mutate({ teamId }) : addFav.mutate({ teamId })}
+                disabled={addFav.isPending || removeFav.isPending}
+              >
+                <Heart className={`w-5 h-5 transition-colors ${isFav ? 'fill-red-500 text-red-500' : 'text-muted-foreground hover:text-red-400'}`} />
+              </Button>
+            )}
 
             {/* ── Busca de jogadores no elenco ── */}
             <div ref={searchRef} className="relative shrink-0 w-36 sm:w-56 md:w-64">
