@@ -222,7 +222,7 @@ export default function TeamDetail() {
     : null;
 
   return (
-    <div className="min-h-screen flex flex-col bg-background pt-16">
+    <div className="min-h-screen flex flex-col bg-background">
       {/* Grid quadriculado de fundo */}
       <div
         className="pointer-events-none fixed inset-0 z-0"
@@ -310,7 +310,7 @@ export default function TeamDetail() {
         </div>
       </div>
 
-      <main className="flex-1 pt-16" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
+      <main className="flex-1 pt-36" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
         {/* Info do Time */}
         <section className="py-10 border-b border-border/50" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
           <div className="container">
