@@ -366,11 +366,11 @@ export default function Perfil() {
                             </div>
                           </Link>
                           <button
-                            onClick={() => removeFavTeam.mutate({ teamId: team.teamId })}
-                            className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 rounded-full p-1 hover:text-red-400 border border-border/50"
+                            onClick={(e) => { e.preventDefault(); removeFavTeam.mutate({ teamId: team.teamId }); }}
+                            className="absolute top-1.5 right-1.5 transition-opacity bg-background/80 rounded-full p-1 text-muted-foreground hover:text-red-400 hover:bg-red-400/10 border border-border/50"
                             title="Remover favorito"
                           >
-                            <X className="h-2.5 w-2.5" />
+                            <X className="h-3 w-3" />
                           </button>
                         </div>
                       );
