@@ -265,9 +265,7 @@ export default function Times() {
         {/* ── COUNTRIES VIEW ── */}
         {view === "countries" && (
           <>
-            <p className="text-muted-foreground mb-6">
-              Selecione um país para explorar as ligas e times disponíveis para o modo carreira.
-            </p>
+
             {loadingCountries ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {Array.from({ length: 8 }).map((_, i) => (
@@ -307,9 +305,7 @@ export default function Times() {
         {/* ── LEAGUES VIEW ── */}
         {view === "leagues" && (
           <>
-            <p className="text-muted-foreground mb-6">
-              Escolha uma liga para ver os times disponíveis.
-            </p>
+
             {loadingLeagues ? (
               <div className="flex flex-col gap-3">
                 {Array.from({ length: 2 }).map((_, i) => (
