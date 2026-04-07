@@ -441,8 +441,8 @@ export default function Jogadores() {
       />
       <Navbar />
 
-      {/* ── Header Sticky ── */}
-      <div className="border-b border-border bg-card sticky top-16 z-40">
+      {/* ── Header Fixo ── */}
+      <div className="border-b border-border bg-card fixed top-16 left-0 right-0 z-40">
         <div className="container py-4">
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="flex-1 min-w-0 overflow-hidden">
@@ -456,8 +456,8 @@ export default function Jogadores() {
         </div>
       </div>
 
-      <main className="flex-1 pt-4 relative z-10">
-        <div className="container py-6">
+      <main className="flex-1 relative z-10">
+        <div className="container pt-32 pb-8">
           {/* Filters */}
           <div className="flex flex-col gap-4 mb-8">
             {/* Linha 1: busca + botão filtros */}

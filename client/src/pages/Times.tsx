@@ -142,8 +142,8 @@ export default function Times() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      {/* Header */}
-      <div className="border-b border-border bg-card sticky top-16 z-40">
+      {/* Header Fixo */}
+      <div className="border-b border-border bg-card fixed top-16 left-0 right-0 z-40">
         <div className="container py-4">
           <div className="flex items-center gap-3 overflow-hidden">
             <Button
@@ -259,7 +259,7 @@ export default function Times() {
         </div>
       </div>
 
-      <div className="container py-6 sm:py-8">
+      <div className="container pt-32 pb-8">
         {/* ── COUNTRIES VIEW ── */}
         {view === "countries" && (
           <>

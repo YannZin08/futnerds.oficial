@@ -233,8 +233,8 @@ export default function TeamDetail() {
       />
       <Navbar />
 
-      {/* ── Header Sticky (idêntico ao de Times) ── */}
-      <div className="border-b border-border bg-card sticky top-16 z-40">
+      {/* ── Header Fixo ── */}
+      <div className="border-b border-border bg-card fixed top-16 left-0 right-0 z-40">
         <div className="container py-4">
           <div className="flex items-center gap-3 overflow-hidden">
             {/* Botão voltar */}
@@ -310,7 +310,7 @@ export default function TeamDetail() {
         </div>
       </div>
 
-      <main className="flex-1" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
+      <main className="flex-1 pt-16" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
         {/* Info do Time */}
         <section className="py-10 border-b border-border/50" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
           <div className="container">
