@@ -440,21 +440,24 @@ export default function Jogadores() {
         }}
       />
       <Navbar />
-      <main className="flex-1 pt-20 relative z-10">
-        {/* Header */}
-        <section className="py-8 sm:py-12 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
-          <div className="container">
-            <div className="flex items-center gap-3 mb-2">
-              <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
-              <h1 className="text-2xl sm:text-4xl font-black">Análise de Jogadores</h1>
-            </div>
-            <p className="text-muted-foreground text-sm sm:text-lg">
-              Estatísticas detalhadas de promessas para seu modo carreira.
-            </p>
-          </div>
-        </section>
 
-        <div className="container py-10">
+      {/* ── Header Sticky ── */}
+      <div className="border-b border-border bg-card sticky top-16 z-40">
+        <div className="container py-4">
+          <div className="flex items-center gap-3 overflow-hidden">
+            <div className="flex-1 min-w-0 overflow-hidden">
+              <h1 className="text-base sm:text-2xl font-bold text-foreground flex items-center gap-2">
+                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-primary shrink-0" />
+                <span className="truncate">Análise de Jogadores</span>
+              </h1>
+              <p className="hidden sm:block text-xs text-muted-foreground mt-0.5">Estatísticas detalhadas de promessas para seu modo carreira.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <main className="flex-1 pt-4 relative z-10">
+        <div className="container py-6">
           {/* Filters */}
           <div className="flex flex-col gap-4 mb-8">
             {/* Linha 1: busca + botão filtros */}

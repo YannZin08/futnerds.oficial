@@ -143,10 +143,9 @@ export default function Times() {
     <div className="min-h-screen bg-background">
       <Navbar />
       {/* Header */}
-      <div className="border-b border-border bg-card sticky top-16 z-10">
+      <div className="border-b border-border bg-card sticky top-16 z-40">
         <div className="container py-4">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 overflow-hidden">
             <Button
               variant="ghost"
               size="icon"
@@ -190,9 +189,8 @@ export default function Times() {
                 )}
               </div>
             </div>
-            </div>
             {/* ── Busca Global no Header ── */}
-            <div ref={searchRef} className="relative w-full sm:w-64 sm:ml-auto">
+            <div ref={searchRef} className="relative shrink-0 w-36 sm:w-56 md:w-64">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
