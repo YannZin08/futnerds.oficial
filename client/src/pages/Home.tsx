@@ -83,18 +83,18 @@ export default function Home() {
             </div>
 
             {/* Logo + Title */}
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <img src={LOGO_URL} alt="FUTNERDS" className="h-20 w-20 object-contain" />
-              <h1 className="text-6xl md:text-7xl font-black tracking-tight"
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <img src={LOGO_URL} alt="FUTNERDS" className="h-14 w-14 sm:h-20 sm:w-20 object-contain" />
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight"
                 style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                 FUT<span className="text-primary">NERDS</span>
               </h1>
             </div>
 
-            <p className="text-xl md:text-2xl text-muted-foreground mb-4 font-light">
+            <p className="text-base sm:text-xl md:text-2xl text-muted-foreground mb-4 font-light">
               Análises e estratégias para
             </p>
-            <p className="text-xl md:text-2xl font-semibold text-foreground mb-10">
+            <p className="text-base sm:text-xl md:text-2xl font-semibold text-foreground mb-10">
               elevar seu jogo ao próximo nível
             </p>
 
@@ -140,7 +140,7 @@ export default function Home() {
       <section className="py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-black mb-3">Tudo que você precisa</h2>
+            <h2 className="text-3xl sm:text-4xl font-black mb-3">Tudo que você precisa</h2>
             <p className="text-muted-foreground text-lg">Uma plataforma completa para a comunidade FIFA</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -161,15 +161,15 @@ export default function Home() {
       {topPlayers && topPlayers.length > 0 && (
         <section className="py-20" style={{ background: "oklch(0.12 0.01 240)" }}>
           <div className="container">
-            <div className="flex items-center justify-between mb-10">
-              <div>
-                <h2 className="text-4xl font-black mb-1">Top Jogadores</h2>
-                <p className="text-muted-foreground">Os overais mais altos do modo Carreira até 23 anos</p>
-              </div>
-              <Button variant="outline" asChild>
-                <Link href="/jogadores">Ver todos <ArrowRight className="ml-2 h-4 w-4" /></Link>
-              </Button>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-black mb-1">Top Jogadores</h2>
+              <p className="text-muted-foreground text-sm sm:text-base">Os overais mais altos do modo Carreira até 23 anos</p>
             </div>
+            <Button variant="outline" asChild className="self-start sm:self-auto">
+              <Link href="/jogadores">Ver todos <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            </Button>
+          </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {topPlayers.map((player: any) => (
                 <div key={player.id} className="fut-card fut-card-hover p-5 text-center">
@@ -201,7 +201,7 @@ export default function Home() {
           <div className="container relative text-center">
             <div className="max-w-2xl mx-auto">
               <img src={LOGO_URL} alt="FUTNERDS" className="h-16 w-16 mx-auto mb-6 object-contain" />
-              <h2 className="text-4xl font-black mb-4">Pronto para entrar no jogo?</h2>
+              <h2 className="text-3xl sm:text-4xl font-black mb-4">Pronto para entrar no jogo?</h2>
               <p className="text-muted-foreground text-lg mb-8">
                 Junte-se à comunidade FUTNERDS e tenha acesso a análises detalhadas, jogadores favoritos e muito mais.
               </p>

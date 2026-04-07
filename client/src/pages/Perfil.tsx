@@ -80,36 +80,36 @@ export default function Perfil() {
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       <main className="flex-1 pt-20">
-        <section className="py-12 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
+        <section className="py-8 sm:py-12 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
           <div className="container">
             <div className="flex items-center gap-3 mb-2">
-              <User className="h-8 w-8 text-primary" />
-              <h1 className="text-4xl font-black">Meu Perfil</h1>
+              <User className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+              <h1 className="text-2xl sm:text-4xl font-black">Meu Perfil</h1>
             </div>
-            <p className="text-muted-foreground">Gerencie suas informações e preferências</p>
+            <p className="text-muted-foreground text-sm sm:text-base">Gerencie suas informações e preferências</p>
           </div>
         </section>
 
         <div className="container py-10">
           <div className="max-w-2xl mx-auto">
-            <div className="fut-card p-8">
+            <div className="fut-card p-4 sm:p-8">
               {/* Avatar + Name */}
-              <div className="flex items-center gap-5 mb-8 pb-8 border-b border-border/50">
-                <Avatar className="h-20 w-20 border-2 border-primary/40">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-border/50">
+                <Avatar className="h-16 w-16 sm:h-20 sm:w-20 border-2 border-primary/40 self-start sm:self-auto">
                   <AvatarImage src={user?.avatar ?? undefined} />
                   <AvatarFallback className="bg-primary/20 text-primary text-2xl font-black">
                     {user?.name?.charAt(0).toUpperCase() ?? "U"}
                   </AvatarFallback>
                 </Avatar>
-                <div>
-                  <h2 className="text-2xl font-black">{user?.name ?? "Usuário"}</h2>
+                <div className="flex-1 min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-black">{user?.name ?? "Usuário"}</h2>
                   <p className="text-muted-foreground text-sm">{user?.email}</p>
                   <div className="flex items-center gap-2 mt-2">
                     <img src={LOGO_URL} alt="" className="h-4 w-4 object-contain" />
                     <span className="text-xs text-primary font-semibold">Membro FUTNERDS</span>
                   </div>
                 </div>
-                <div className="ml-auto">
+                <div className="sm:ml-auto self-start">
                   {!editing ? (
                     <Button variant="outline" size="sm" onClick={startEditing}>
                       <Edit3 className="h-4 w-4 mr-2" /> Editar

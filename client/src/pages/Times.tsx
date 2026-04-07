@@ -145,7 +145,8 @@ export default function Times() {
       {/* Header */}
       <div className="border-b border-border bg-card sticky top-16 z-10">
         <div className="container py-4">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
@@ -162,30 +163,21 @@ export default function Times() {
               <ChevronLeft className="w-5 h-5" />
             </Button>
             <div className="flex-1 min-w-0">
-              <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                <Trophy className="w-6 h-6 text-primary" />
+              <h1 className="text-lg sm:text-2xl font-bold text-foreground flex items-center gap-2">
+                <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-primary shrink-0" />
+                <span className="truncate">
                 {view === "countries" && "Escolha um País"}
-                {view === "leagues" && (
-                  <span>
-                    {countryFlags[selectedCountry?.name ?? ""] ?? ""} {selectedCountry?.name}
-                  </span>
-                )}
-                {view === "teams" && (
-                  <span className="flex items-center gap-2">
-                    {selectedLeague?.logoUrl ? (
-                      <img src={selectedLeague.logoUrl} alt={selectedLeague.name} className="w-7 h-7 object-contain" />
-                    ) : null}
-                    {selectedLeague?.name}
-                  </span>
-                )}
+                {view === "leagues" && `${countryFlags[selectedCountry?.name ?? ""] ?? ""} ${selectedCountry?.name}`}
+                {view === "teams" && selectedLeague?.name}
+                </span>
               </h1>
               {/* Breadcrumb */}
-              <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-                <button onClick={goToCountries} className="hover:text-primary transition-colors">Países</button>
+              <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5 overflow-hidden">
+                <button onClick={goToCountries} className="hover:text-primary transition-colors shrink-0">Países</button>
                 {selectedCountry && (
                   <>
                     <span>/</span>
-                    <button onClick={() => setView("leagues")} className="hover:text-primary transition-colors">
+                    <button onClick={() => setView("leagues")} className="hover:text-primary transition-colors truncate max-w-[80px]">
                       {selectedCountry.name}
                     </button>
                   </>
@@ -193,13 +185,14 @@ export default function Times() {
                 {selectedLeague && (
                   <>
                     <span>/</span>
-                    <span className="text-foreground">{selectedLeague.name}</span>
+                    <span className="text-foreground truncate max-w-[80px]">{selectedLeague.name}</span>
                   </>
                 )}
               </div>
             </div>
+            </div>
             {/* ── Busca Global no Header ── */}
-            <div ref={searchRef} className="relative w-64 ml-auto">
+            <div ref={searchRef} className="relative w-full sm:w-64 sm:ml-auto">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -268,8 +261,7 @@ export default function Times() {
         </div>
       </div>
 
-      <div className="container py-8">
-
+      <div className="container py-6 sm:py-8">
         {/* ── COUNTRIES VIEW ── */}
         {view === "countries" && (
           <>

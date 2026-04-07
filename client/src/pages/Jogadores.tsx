@@ -100,7 +100,7 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
   return (
     <div className="fut-card fut-card-hover overflow-hidden">
       {/* Card Header */}
-      <div className={`bg-gradient-to-br ${gradientClass} p-4 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
+      <div className={`bg-gradient-to-br ${gradientClass} p-3 sm:p-4 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
         {/* Canto superior direito: todas as posições lado a lado */}
         <div className="absolute top-2 right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
           <span className="text-xs font-bold text-white bg-black/25 px-1.5 py-0.5 rounded whitespace-nowrap">
@@ -113,8 +113,8 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
           ))}
         </div>
         {/* Foto + nome */}
-        <div className="flex items-end gap-3">
-          <div className="w-14 h-14 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
+        <div className="flex items-end gap-2 sm:gap-3">
+          <div className="w-10 h-10 sm:w-14 sm:h-14 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
             {player.imageUrl ? (
               <img
                 src={player.imageUrl}
@@ -129,8 +129,8 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
               <Users className="h-7 w-7 text-white/60" />
             )}
           </div>
-          <div className="min-w-0 flex-1 pr-14">
-            <h3 className={`font-black text-base leading-tight truncate ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>{player.name}</h3>
+          <div className="min-w-0 flex-1 pr-10 sm:pr-14">
+            <h3 className={`font-black text-sm sm:text-base leading-tight truncate ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>{player.name}</h3>
             <p className="text-white/70 text-xs truncate">
               {player.nationality}{player.age ? ` · ${player.age} anos` : ''}
             </p>
@@ -139,7 +139,7 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
       </div>
 
       {/* Card Body */}
-      <div className="p-4 space-y-3">
+      <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
         <div className="flex items-center justify-between text-xs gap-2">
           {/* Logo do clube clicável */}
           <div className="flex items-center gap-1.5 min-w-0">
@@ -442,13 +442,13 @@ export default function Jogadores() {
       <Navbar />
       <main className="flex-1 pt-20 relative z-10">
         {/* Header */}
-        <section className="py-12 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
+        <section className="py-8 sm:py-12 border-b border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
           <div className="container">
             <div className="flex items-center gap-3 mb-2">
-              <Users className="h-8 w-8 text-primary" />
-              <h1 className="text-4xl font-black">Análise de Jogadores</h1>
+              <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+              <h1 className="text-2xl sm:text-4xl font-black">Análise de Jogadores</h1>
             </div>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-sm sm:text-lg">
               Estatísticas detalhadas de promessas para seu modo carreira.
             </p>
           </div>
@@ -594,7 +594,7 @@ export default function Jogadores() {
 
           {/* Players Grid */}
           {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="fut-card animate-pulse">
                   <div className="h-24 bg-muted rounded-t-xl" />
@@ -612,7 +612,7 @@ export default function Jogadores() {
             </div>
           ) : filteredPlayers.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {paginatedPlayers.map((player: any) => (
                   <PlayerCard
                     key={player.id}

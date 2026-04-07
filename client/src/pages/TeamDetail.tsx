@@ -250,8 +250,8 @@ export default function TeamDetail() {
 
             {/* Título + breadcrumb */}
             <div className="flex-1 min-w-0 overflow-hidden">
-              <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                <Trophy className="w-6 h-6 text-primary" />
+              <h1 className="text-base sm:text-2xl font-bold text-foreground flex items-center gap-2">
+                <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-primary shrink-0" />
                 {isLoading ? (
                   <span className="h-6 w-40 bg-muted rounded animate-pulse inline-block" />
                 ) : team ? (
@@ -263,8 +263,8 @@ export default function TeamDetail() {
                   </span>
                 ) : "Time"}
               </h1>
-              {/* Breadcrumb */}
-              <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
+              {/* Breadcrumb - esconde no mobile para economizar espaço */}
+              <div className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
                 <button onClick={() => navigate(backUrl)} className="hover:text-primary transition-colors">
                   Times
                 </button>
@@ -286,7 +286,7 @@ export default function TeamDetail() {
             </div>
 
             {/* ── Busca de jogadores no elenco ── */}
-            <div ref={searchRef} className="relative shrink-0 w-56 sm:w-64">
+            <div ref={searchRef} className="relative shrink-0 w-36 sm:w-56 md:w-64">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -326,9 +326,9 @@ export default function TeamDetail() {
               <div className="fut-card p-5 w-full flex flex-col gap-4" style={{backgroundColor: 'oklch(0.15 0.01 240)', backgroundImage: 'none', background: 'oklch(0.15 0.01 240)'}}>
 
                 {/* Linha superior: logo + (nome/liga/estádio/descrição) */}
-                <div className="flex items-start gap-5">
+                <div className="flex items-start gap-3 sm:gap-5">
                   {/* Logo sem fundo cinza */}
-                  <div className="flex-shrink-0 flex items-center justify-center w-20 h-20">
+                  <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20">
                     {team.logoUrl ? (
                       <img
                         src={team.logoUrl}
@@ -346,7 +346,7 @@ export default function TeamDetail() {
 
                   {/* Nome + liga/estádio + descrição */}
                   <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-                    <h2 className="text-3xl md:text-4xl font-black leading-tight">{team.name}</h2>
+                    <h2 className="text-xl sm:text-3xl md:text-4xl font-black leading-tight">{team.name}</h2>
                     <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                       {team.leagueName && (
                         <div className="flex items-center gap-1.5">
@@ -377,7 +377,7 @@ export default function TeamDetail() {
                 <div className="border-t border-border/30" />
 
                 {/* Stats dentro do card */}
-                <div className="flex flex-wrap gap-3">
+                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
                   {team.budget != null && (
                     <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
                       <Wallet className="h-4 w-4 text-green-400" />
