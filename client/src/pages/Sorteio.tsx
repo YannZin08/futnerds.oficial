@@ -28,6 +28,7 @@ function getDifficultyLabel(prestige: number | null | undefined): { label: strin
 
 export default function Sorteio() {
   const { isAuthenticated } = useAuth();
+  const [, navigate] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<TeamItem[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -213,8 +214,6 @@ export default function Sorteio() {
       </div>
     );
   }
-
-  const [, navigate] = useLocation();
 
   return (
     <div className="min-h-screen py-10">
