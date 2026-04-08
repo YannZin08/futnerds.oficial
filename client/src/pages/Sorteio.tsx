@@ -37,6 +37,7 @@ export default function Sorteio() {
   const [result, setResult] = useState<TeamItem | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [confetti, setConfetti] = useState(false);
+  const [loadingTheme, setLoadingTheme] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const spinIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const utils = trpc.useUtils();
@@ -110,6 +111,36 @@ export default function Sorteio() {
       removeItem.mutate({ teamId });
     }
   }, [isAuthenticated, removeItem]);
+
+  const addThematicList = useCallback(async (label: string, teamNames: string[]) => {
+    setLoadingTheme(label);
+    try {
+      const results = await Promise.all(
+        teamNames.map((name) =>
+          utils.teams.search.fetch({ query: name })
+        )
+      );
+      results.forEach((teams, i) => {
+        if (teams && teams.length > 0) {
+          const t = teams[0] as any;
+          const item: TeamItem = {
+            teamId: t.id,
+            teamName: t.name,
+            teamLogoUrl: t.logoUrl,
+            leagueName: t.leagueName,
+            countryName: t.countryName,
+            budget: t.budget,
+            prestige: t.prestige,
+          };
+          addTeam(item);
+        }
+      });
+    } catch (e) {
+      console.error('Erro ao carregar lista temática', e);
+    } finally {
+      setLoadingTheme(null);
+    }
+  }, [utils, addTeam]);
 
   const startSpin = useCallback(() => {
     if (localList.length < 2 || isSpinning) return;
@@ -446,14 +477,11 @@ export default function Sorteio() {
                 ].map((theme) => (
                   <button
                     key={theme.label}
-                    className="w-full text-left text-xs px-3 py-2 rounded-md bg-accent/50 hover:bg-accent transition-colors"
-                    onClick={() => {
-                      theme.teams.forEach((name) => {
-                        const found = searchResults.find((t) => t.teamName?.toLowerCase().includes(name.toLowerCase()));
-                        if (found) addTeam(found);
-                      });
-                    }}
+                    disabled={loadingTheme === theme.label}
+                    className="w-full text-left text-xs px-3 py-2 rounded-md bg-accent/50 hover:bg-accent transition-colors disabled:opacity-60 disabled:cursor-wait flex items-center gap-2"
+                    onClick={() => addThematicList(theme.label, theme.teams)}
                   >
+                    {loadingTheme === theme.label && <Loader2 className="h-3 w-3 animate-spin flex-shrink-0" />}
                     {theme.label}
                   </button>
                 ))}
