@@ -145,3 +145,21 @@ export const userFavoriteTeams = mysqlTable("userFavoriteTeams", {
 });
 
 export type UserFavoriteTeam = typeof userFavoriteTeams.$inferSelect;
+
+// Lista de times para sorteio (por usuário)
+export const spinListItems = mysqlTable("spinListItems", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  teamId: int("teamId").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type SpinListItem = typeof spinListItems.$inferSelect;
+
+// Histórico de sorteios
+export const spinHistory = mysqlTable("spinHistory", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  teamId: int("teamId").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type SpinHistory = typeof spinHistory.$inferSelect;

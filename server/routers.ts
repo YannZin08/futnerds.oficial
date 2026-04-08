@@ -27,6 +27,11 @@ import {
   removeFavoriteTeam,
   isTeamFavorited,
   isPlayerFavorited,
+  getSpinList,
+  addSpinListItem,
+  removeSpinListItem,
+  addSpinHistory,
+  getSpinHistory,
 } from "./db";
 
 export const appRouter = router({
@@ -214,6 +219,34 @@ export const appRouter = router({
         return { url };
       }),
   }),
+  // ─── Sorteio de Times ────────────────────────────────────────────────────────
+  spin: router({
+    getList: protectedProcedure
+      .query(async ({ ctx }) => {
+        return await getSpinList(ctx.user.id);
+      }),
+    addItem: protectedProcedure
+      .input(z.object({ teamId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await addSpinListItem(ctx.user.id, input.teamId);
+        return { success: true };
+      }),
+    removeItem: protectedProcedure
+      .input(z.object({ teamId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await removeSpinListItem(ctx.user.id, input.teamId);
+        return { success: true };
+      }),
+    recordResult: protectedProcedure
+      .input(z.object({ teamId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await addSpinHistory(ctx.user.id, input.teamId);
+        return { success: true };
+      }),
+    getHistory: protectedProcedure
+      .query(async ({ ctx }) => {
+        return await getSpinHistory(ctx.user.id);
+      }),
+  }),
 });
-
 export type AppRouter = typeof appRouter;

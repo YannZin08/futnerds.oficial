@@ -158,3 +158,11 @@
 - [ ] Exibir logo do clube nos cards de jogadores
 - [ ] Criar página individual do time (/times/:id)
 - [ ] Ao clicar na logo do clube no card do jogador, redirecionar para a página do time
+
+## Sorteio de Time Aleatório
+- [ ] Criar tabelas `spin_lists` e `spin_history` no schema
+- [ ] Implementar procedures tRPC: getSpinList, saveSpinList, addSpinHistory, getSpinHistory
+- [ ] Criar página `/sorteio` com busca de times, lista de candidatos e animação de sorteio
+- [ ] Exibir resultado com logo, nome, liga, país e dificuldade do time sorteado
+- [ ] Histórico dos últimos 5 sorteios
+- [ ] Registrar rota /sorteio no App.tsx e adicionar ao menu de navegação

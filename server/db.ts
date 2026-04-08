@@ -1,6 +1,6 @@
 import { eq, desc, and, sql, count, like } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, news, players, userFavoritePlayers, userFavoriteTeams, InsertNews, InsertPlayer } from "../drizzle/schema";
+import { InsertUser, users, news, players, userFavoritePlayers, userFavoriteTeams, InsertNews, InsertPlayer, spinListItems, spinHistory } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -429,4 +429,74 @@ export async function getPlayersByTeam(teamName: string) {
   return await db.select().from(players)
     .where(sql`LOWER(${players.club}) = LOWER(${teamName})`)
     .orderBy(desc(players.overall));
+}
+
+// ─── Sorteio de Times ────────────────────────────────────────────────────────
+export async function getSpinList(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  const { teams, leagues, countries } = await import("../drizzle/schema");
+  return await db.select({
+    id: spinListItems.id,
+    teamId: spinListItems.teamId,
+    teamName: teams.name,
+    teamLogoUrl: teams.logoUrl,
+    leagueName: leagues.name,
+    countryName: countries.name,
+    budget: teams.budget,
+    prestige: teams.prestige,
+  })
+    .from(spinListItems)
+    .innerJoin(teams, eq(spinListItems.teamId, teams.id))
+    .leftJoin(leagues, eq(teams.leagueId, leagues.id))
+    .leftJoin(countries, eq(teams.countryId, countries.id))
+    .where(eq(spinListItems.userId, userId))
+    .orderBy(spinListItems.createdAt);
+}
+
+export async function addSpinListItem(userId: number, teamId: number) {
+  const db = await getDb();
+  if (!db) return;
+  // Evitar duplicatas
+  const existing = await db.select({ id: spinListItems.id })
+    .from(spinListItems)
+    .where(and(eq(spinListItems.userId, userId), eq(spinListItems.teamId, teamId)))
+    .limit(1);
+  if (existing.length > 0) return;
+  await db.insert(spinListItems).values({ userId, teamId });
+}
+
+export async function removeSpinListItem(userId: number, teamId: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.delete(spinListItems)
+    .where(and(eq(spinListItems.userId, userId), eq(spinListItems.teamId, teamId)));
+}
+
+export async function addSpinHistory(userId: number, teamId: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(spinHistory).values({ userId, teamId });
+}
+
+export async function getSpinHistory(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  const { teams, leagues, countries } = await import("../drizzle/schema");
+  return await db.select({
+    id: spinHistory.id,
+    teamId: spinHistory.teamId,
+    teamName: teams.name,
+    teamLogoUrl: teams.logoUrl,
+    leagueName: leagues.name,
+    countryName: countries.name,
+    createdAt: spinHistory.createdAt,
+  })
+    .from(spinHistory)
+    .innerJoin(teams, eq(spinHistory.teamId, teams.id))
+    .leftJoin(leagues, eq(teams.leagueId, leagues.id))
+    .leftJoin(countries, eq(teams.countryId, countries.id))
+    .where(eq(spinHistory.userId, userId))
+    .orderBy(desc(spinHistory.createdAt))
+    .limit(5);
 }
