@@ -208,9 +208,11 @@ export default function Sorteio() {
       <div className="container max-w-4xl">
         {/* Header */}
         <div className="mb-8 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 border-2 border-primary/40 mb-4">
-            <Dices className="h-8 w-8 text-primary" />
-          </div>
+          <img
+            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/logo-futnerds_8f14a724.png"
+            alt="FUTNERDS"
+            className="w-20 h-20 object-contain mx-auto mb-4"
+          />
           <h1 className="text-3xl sm:text-4xl font-black mb-2">Sorteio de Time</h1>
           <p className="text-muted-foreground">Monte sua lista e deixe o destino escolher seu próximo modo carreira</p>
         </div>
