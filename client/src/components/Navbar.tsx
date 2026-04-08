@@ -19,6 +19,7 @@ const navLinks = [
   { href: "/", label: "Início" },
   { href: "/jogadores", label: "Jogadores" },
   { href: "/times", label: "Times" },
+  { href: "/sorteio", label: "Sorteio" },
 ];
 
 export default function Navbar() {

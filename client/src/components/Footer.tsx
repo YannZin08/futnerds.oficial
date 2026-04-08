@@ -30,6 +30,7 @@ export default function Footer() {
                 { href: "/", label: "Início" },
                 { href: "/jogadores", label: "Jogadores" },
                 { href: "/times", label: "Times" },
+                { href: "/sorteio", label: "Sorteio" },
                 { href: "/perfil", label: "Meu Perfil" },
               ].map((link) => (
                 <li key={link.href}>
