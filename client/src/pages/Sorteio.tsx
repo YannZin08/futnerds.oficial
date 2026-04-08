@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Shuffle, Plus, X, Trophy, Clock, Search, Loader2, Dices } from "lucide-react";
+import { Shuffle, Plus, X, Trophy, Clock, Search, Loader2, Dices, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 type TeamItem = {
   id?: number;
@@ -214,6 +214,8 @@ export default function Sorteio() {
     );
   }
 
+  const [, navigate] = useLocation();
+
   return (
     <div className="min-h-screen py-10">
       {/* Confetti */}
@@ -237,6 +239,16 @@ export default function Sorteio() {
       )}
 
       <div className="container max-w-4xl">
+        {/* Botão Voltar */}
+        <div className="mb-6">
+          <button
+            onClick={() => navigate(-1 as any)}
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+          >
+            <ChevronLeft className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" />
+            Voltar
+          </button>
+        </div>
         {/* Header */}
         <div className="mb-8 text-center">
           <img
