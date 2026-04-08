@@ -597,7 +597,7 @@ export default function Jogadores() {
 
           {/* Players Grid */}
           {isLoading ? (
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="fut-card animate-pulse">
                   <div className="h-24 bg-muted rounded-t-xl" />
@@ -615,7 +615,7 @@ export default function Jogadores() {
             </div>
           ) : filteredPlayers.length > 0 ? (
             <>
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {paginatedPlayers.map((player: any) => (
                   <PlayerCard
                     key={player.id}
