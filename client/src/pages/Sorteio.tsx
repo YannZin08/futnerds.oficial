@@ -240,13 +240,13 @@ export default function Sorteio() {
       <div className="container max-w-4xl">
         {/* Botão Voltar */}
         <div className="mb-6">
-          <button
-            onClick={() => navigate(-1 as any)}
+          <Link
+            href="/"
             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
           >
             <ChevronLeft className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" />
-            Voltar
-          </button>
+            Voltar ao Início
+          </Link>
         </div>
         {/* Header */}
         <div className="mb-8 text-center">
