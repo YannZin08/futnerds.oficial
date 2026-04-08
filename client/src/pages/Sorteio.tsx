@@ -219,7 +219,7 @@ export default function Sorteio() {
           {/* Coluna principal: busca + lista */}
           <div className="lg:col-span-2 space-y-4">
             {/* Campo de busca */}
-            <div className="fut-card p-4">
+            <div className="fut-card p-4 overflow-visible" style={{ position: 'relative', zIndex: 20 }}>
               <h2 className="font-bold mb-3 flex items-center gap-2">
                 <Plus className="h-4 w-4 text-primary" />
                 Adicionar Time
