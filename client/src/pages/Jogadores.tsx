@@ -85,7 +85,13 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
       let alts: string[] = player.altPositions.startsWith('[')
         ? JSON.parse(player.altPositions)
         : player.altPositions.split(',').map((s: string) => s.trim()).filter(Boolean);
-      return alts.filter((p: string) => p !== player.position);
+      // Deduplica e remove a posição principal
+      const seen = new Set<string>();
+      return alts.filter((p: string) => {
+        if (p === player.position || seen.has(p)) return false;
+        seen.add(p);
+        return true;
+      });
     } catch { return []; }
   };
   const altPositions = getAltPositions();
