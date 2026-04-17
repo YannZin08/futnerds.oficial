@@ -34,10 +34,13 @@ function PrestigeStars({ value }: { value: number }) {
   );
 }
 
-// Budget formatter
-function formatBudget(millions: number) {
-  if (millions >= 1000) return `€${(millions / 1000).toFixed(1)}B`;
-  return `€${millions}M`;
+// Budget formatter — banco armazena em unidades (ex: 1700000 = €1.7M)
+function formatBudget(value: number | null | undefined): string {
+  if (!value) return "—";
+  const m = value / 1_000_000;
+  if (m >= 1000) return `€${(m / 1000).toFixed(1)}B`;
+  const rounded = parseFloat(m.toFixed(1));
+  return `€${rounded}M`;
 }
 
 type View = "countries" | "leagues" | "teams";

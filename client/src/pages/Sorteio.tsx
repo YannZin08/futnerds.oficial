@@ -418,7 +418,9 @@ export default function Sorteio() {
                 <p className="text-xs text-muted-foreground mb-3">{result.countryName}</p>
                 {result.budget && (
                   <p className="text-xs text-muted-foreground mb-1">
-                    Orçamento: <span className="text-foreground font-semibold">€{result.budget}M</span>
+                    Orçamento: <span className="text-foreground font-semibold">
+                      {(() => { const m = result.budget! / 1_000_000; return m >= 1000 ? `€${(m/1000).toFixed(1)}B` : `€${parseFloat(m.toFixed(1))}M`; })()}
+                    </span>
                   </p>
                 )}
                 {result.prestige !== undefined && (

@@ -44,13 +44,13 @@ function getCardGradient(overall: number): { gradient: string; isDiamond: boolea
   return { gradient: "from-orange-800 to-orange-500", isDiamond: false };
 }
 
+// Budget formatter — banco armazena em unidades (ex: 1700000 = €1.7M)
 function formatBudget(budget: number | null | undefined): string {
   if (!budget) return "—";
-  if (budget >= 1000) {
-    const b = budget / 1000;
-    return `€${Number.isInteger(b) ? b : b.toFixed(1)}B`;
-  }
-  return `€${budget}M`;
+  const m = budget / 1_000_000;
+  if (m >= 1000) return `€${(m / 1000).toFixed(1)}B`;
+  const rounded = parseFloat(m.toFixed(1));
+  return `€${rounded}M`;
 }
 
 function PlayerMiniCard({ player }: { player: any }) {
