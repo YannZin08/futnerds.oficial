@@ -34,12 +34,11 @@ function PrestigeStars({ value }: { value: number }) {
   );
 }
 
-// Budget formatter — banco armazena em unidades (ex: 1700000 = €1.7M)
+// Budget formatter — banco armazena em milhões (ex: 176 = €176M, 1.7 = €1.7M)
 function formatBudget(value: number | null | undefined): string {
   if (!value) return "—";
-  const m = value / 1_000_000;
-  if (m >= 1000) return `€${(m / 1000).toFixed(1)}B`;
-  const rounded = parseFloat(m.toFixed(1));
+  if (value >= 1000) return `€${(value / 1000).toFixed(1)}B`;
+  const rounded = parseFloat(value.toFixed(1));
   return `€${rounded}M`;
 }
 
