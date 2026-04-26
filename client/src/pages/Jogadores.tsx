@@ -558,21 +558,17 @@ export default function Jogadores() {
 
       {/* ── Header Fixo ── */}
       <div className="border-b border-border bg-card fixed top-16 left-0 right-0 z-40">
-        <div className="container py-4">
-          <div className="flex items-center gap-3 overflow-hidden">
-            <div className="flex-1 min-w-0 overflow-hidden">
-              <h1 className="text-base sm:text-2xl font-bold text-foreground flex items-center gap-2">
-                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-primary shrink-0" />
-                <span className="truncate">Análise de Jogadores</span>
-              </h1>
-              <p className="hidden sm:block text-xs text-muted-foreground mt-0.5">Estatísticas detalhadas de promessas para seu modo carreira.</p>
-            </div>
+        <div className="container py-3">
+          <div className="flex items-center gap-2">
+            <Users className="w-5 h-5 text-primary shrink-0" />
+            <h1 className="text-base sm:text-xl font-bold text-foreground truncate">Análise de Jogadores</h1>
+            <p className="hidden sm:block text-xs text-muted-foreground ml-1">— Estatísticas para seu modo carreira</p>
           </div>
         </div>
       </div>
 
       <main className="flex-1 relative z-10">
-        <div className="container pt-44 pb-8">
+        <div className="container pt-32 sm:pt-36 pb-8">
           {/* Filters */}
           <div className="flex flex-col gap-4 mb-8">
             {/* Linha 1: busca + botão filtros */}
@@ -743,12 +739,12 @@ export default function Jogadores() {
             </div>
 
             {/* Linha 2: posições */}
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-1.5 flex-wrap">
               {positions.map((pos) => (
                 <button
                   key={pos}
                   onClick={() => handlePositionChange(pos)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                  className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
                     selectedPosition === pos
                       ? "bg-primary text-primary-foreground"
                       : "bg-secondary text-muted-foreground hover:text-foreground"
@@ -760,8 +756,8 @@ export default function Jogadores() {
             </div>
 
             {/* Linha 3: botões de ordenação toggle */}
-            <div className="flex flex-wrap gap-2 items-center">
-              <span className="text-xs text-muted-foreground font-medium mr-1">Ordenar:</span>
+            <div className="flex flex-wrap gap-1.5 items-center">
+              <span className="text-xs text-muted-foreground font-medium">Ordenar:</span>
               {([
                 { field: "overall"   as const, label: "Overall"   },
                 { field: "potential" as const, label: "Potencial"  },
@@ -868,7 +864,7 @@ export default function Jogadores() {
 
           {/* Players Grid */}
           {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="fut-card animate-pulse">
                   <div className="h-24 bg-muted rounded-t-xl" />
@@ -886,7 +882,7 @@ export default function Jogadores() {
             </div>
           ) : filteredPlayers.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
                 {paginatedPlayers.map((player: any) => (
                   <PlayerCard
                     key={player.id}

@@ -251,53 +251,37 @@ export default function TeamDetail() {
 
       {/* ── Header Fixo ── */}
       <div className="border-b border-border bg-card fixed top-16 left-0 right-0 z-40">
-        <div className="container py-4">
-          <div className="flex items-center gap-3 overflow-hidden">
-            {/* Botão voltar */}
+        <div className="container py-2.5">
+          {/* Linha 1: voltar + nome do time + favorito */}
+          <div className="flex items-center gap-2 mb-2">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => navigate(backUrl)}
-              className="shrink-0"
+              className="shrink-0 h-8 w-8"
               title="Voltar"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4" />
             </Button>
 
-            {/* Título + breadcrumb */}
-            <div className="flex-1 min-w-0 overflow-hidden">
-              <h1 className="text-base sm:text-2xl font-bold text-foreground flex items-center gap-2">
-                <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-primary shrink-0" />
+            <div className="flex-1 min-w-0">
+              <h1 className="text-base sm:text-xl font-bold text-foreground flex items-center gap-2 truncate">
                 {isLoading ? (
-                  <span className="h-6 w-40 bg-muted rounded animate-pulse inline-block" />
+                  <span className="h-5 w-32 bg-muted rounded animate-pulse inline-block" />
                 ) : team ? (
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-2 truncate">
                     {team.logoUrl && (
-                      <img src={team.logoUrl} alt={team.name} className="w-7 h-7 object-contain" />
+                      <img src={team.logoUrl} alt={team.name} className="w-6 h-6 object-contain shrink-0" />
                     )}
-                    {team.name}
+                    <span className="truncate">{team.name}</span>
                   </span>
                 ) : "Time"}
               </h1>
-              {/* Breadcrumb - esconde no mobile para economizar espaço */}
+              {/* Breadcrumb - esconde no mobile */}
               <div className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-                <button onClick={() => navigate(backUrl)} className="hover:text-primary transition-colors">
-                  Times
-                </button>
-                {team?.leagueName && (
-                  <>
-                    <span>/</span>
-                    <button onClick={() => navigate(backUrl)} className="hover:text-primary transition-colors">
-                      {team.leagueName}
-                    </button>
-                  </>
-                )}
-                {team?.name && (
-                  <>
-                    <span>/</span>
-                    <span className="text-foreground">{team.name}</span>
-                  </>
-                )}
+                <button onClick={() => navigate(backUrl)} className="hover:text-primary transition-colors">Times</button>
+                {team?.leagueName && (<><span>/</span><button onClick={() => navigate(backUrl)} className="hover:text-primary transition-colors">{team.leagueName}</button></>)}
+                {team?.name && (<><span>/</span><span className="text-foreground">{team.name}</span></>)}
               </div>
             </div>
 
@@ -306,41 +290,41 @@ export default function TeamDetail() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="shrink-0"
+                className="shrink-0 h-8 w-8"
                 title={isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
                 onClick={() => isFav ? removeFav.mutate({ teamId }) : addFav.mutate({ teamId })}
                 disabled={addFav.isPending || removeFav.isPending}
               >
-                <Heart className={`w-5 h-5 transition-colors ${isFav ? 'fill-red-500 text-red-500' : 'text-muted-foreground hover:text-red-400'}`} />
+                <Heart className={`w-4 h-4 transition-colors ${isFav ? 'fill-red-500 text-red-500' : 'text-muted-foreground hover:text-red-400'}`} />
               </Button>
             )}
+          </div>
 
-            {/* ── Busca de jogadores no elenco ── */}
-            <div ref={searchRef} className="relative shrink-0 w-36 sm:w-56 md:w-64">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Buscar jogador no elenco..."
-                  value={playerSearch}
-                  onChange={(e) => setPlayerSearch(e.target.value)}
-                  onKeyDown={(e) => { if (e.key === "Escape") setPlayerSearch(""); }}
-                  className="pl-10 pr-8 bg-secondary border-border"
-                />
-                {playerSearch && (
-                  <button
-                    onClick={() => setPlayerSearch("")}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                )}
-              </div>
+          {/* Linha 2: busca (largura total no mobile) */}
+          <div ref={searchRef} className="relative w-full">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Buscar jogador no elenco..."
+                value={playerSearch}
+                onChange={(e) => setPlayerSearch(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Escape") setPlayerSearch(""); }}
+                className="pl-10 pr-8 bg-secondary border-border"
+              />
+              {playerSearch && (
+                <button
+                  onClick={() => setPlayerSearch("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      <main className="flex-1 pt-44" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
+      <main className="flex-1 pt-40 sm:pt-44" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
         {/* Info do Time */}
         <section className="py-10 border-b border-border/50" style={{position: 'relative', zIndex: 2, backgroundColor: 'oklch(0.10 0.01 240)'}}>
           <div className="container">
