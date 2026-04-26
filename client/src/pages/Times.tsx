@@ -142,60 +142,61 @@ export default function Times() {
   }
 
   return (
-    <>
     <div className="min-h-screen bg-background">
       <Navbar />
       {/* Header Fixo */}
       <div className="border-b border-border bg-card fixed top-16 left-0 right-0 z-40">
         <div className="container py-3">
-          {/* Linha 1: voltar + título */}
-          <div className="flex items-center gap-2 mb-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={
-                view === "countries"
-                  ? () => navigate("/")
-                  : view === "leagues"
-                  ? goToCountries
-                  : () => setView("leagues")
-              }
-              className="shrink-0 h-8 w-8"
-              title="Voltar"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
-            <div className="flex-1 min-w-0">
-              <h1 className="text-base sm:text-xl font-bold text-foreground flex items-center gap-1.5 truncate">
-                <Trophy className="w-4 h-4 text-primary shrink-0" />
-                <span className="truncate">
-                {view === "countries" && "Escolha um País"}
-                {view === "leagues" && `${countryFlags[selectedCountry?.name ?? ""] ?? ""} ${selectedCountry?.name}`}
-                {view === "teams" && selectedLeague?.name}
-                </span>
-              </h1>
-              {/* Breadcrumb - esconde no mobile */}
-              <div className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground mt-0.5 overflow-hidden">
-                <button onClick={goToCountries} className="hover:text-primary transition-colors shrink-0">Países</button>
-                {selectedCountry && (
-                  <>
-                    <span>/</span>
-                    <button onClick={() => setView("leagues")} className="hover:text-primary transition-colors truncate max-w-[80px]">
-                      {selectedCountry.name}
-                    </button>
-                  </>
-                )}
-                {selectedLeague && (
-                  <>
-                    <span>/</span>
-                    <span className="text-foreground truncate max-w-[80px]">{selectedLeague.name}</span>
-                  </>
-                )}
+          {/* Header: uma linha no desktop, duas no mobile */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+            {/* Esquerda: botão voltar + título */}
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={
+                  view === "countries"
+                    ? () => navigate("/")
+                    : view === "leagues"
+                    ? goToCountries
+                    : () => setView("leagues")
+                }
+                className="shrink-0 h-8 w-8"
+                title="Voltar"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              <div className="min-w-0 flex-1">
+                <h1 className="text-base sm:text-xl font-bold text-foreground flex items-center gap-1.5 truncate">
+                  <Trophy className="w-4 h-4 text-primary shrink-0" />
+                  <span className="truncate">
+                  {view === "countries" && "Escolha um País"}
+                  {view === "leagues" && `${countryFlags[selectedCountry?.name ?? ""] ?? ""} ${selectedCountry?.name}`}
+                  {view === "teams" && selectedLeague?.name}
+                  </span>
+                </h1>
+                {/* Breadcrumb - esconde no mobile */}
+                <div className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground mt-0.5 overflow-hidden">
+                  <button onClick={goToCountries} className="hover:text-primary transition-colors shrink-0">Países</button>
+                  {selectedCountry && (
+                    <>
+                      <span>/</span>
+                      <button onClick={() => setView("leagues")} className="hover:text-primary transition-colors truncate max-w-[80px]">
+                        {selectedCountry.name}
+                      </button>
+                    </>
+                  )}
+                  {selectedLeague && (
+                    <>
+                      <span>/</span>
+                      <span className="text-foreground truncate max-w-[80px]">{selectedLeague.name}</span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-          {/* Linha 2: busca (largura total no mobile) */}
-          <div ref={searchRef} className="relative w-full">
+            {/* Direita: busca */}
+            <div ref={searchRef} className="relative w-full sm:w-64 md:w-80 lg:w-96 shrink-0">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -260,10 +261,11 @@ export default function Times() {
                 </div>
               )}
             </div>
+          </div>
         </div>
       </div>
 
-      <div className="container pt-36 sm:pt-40 pb-8">
+      <div className="container pt-32 sm:pt-28 pb-8">
         {/* ── COUNTRIES VIEW ── */}
         {view === "countries" && (
           <>
@@ -416,6 +418,5 @@ export default function Times() {
         )}
       </div>
     </div>
-    </>
   );
 }
