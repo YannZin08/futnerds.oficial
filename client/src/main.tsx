@@ -8,6 +8,22 @@ import App from "./App";
 import { getLoginUrl } from "./const";
 import "./index.css";
 
+// Suppress non-critical ResizeObserver loop error (from Radix UI Slider/Sheet)
+// This is a benign browser notification, not a real error
+const _origOnError = window.onerror;
+window.onerror = (message, ...args) => {
+  if (typeof message === 'string' && message.includes('ResizeObserver loop')) {
+    return true; // suppress
+  }
+  return _origOnError ? _origOnError.call(window, message, ...args) : false;
+};
+window.addEventListener('error', (e) => {
+  if (e.message && e.message.includes('ResizeObserver loop')) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+  }
+}, true);
+
 const queryClient = new QueryClient();
 
 const redirectToLoginIfUnauthorized = (error: unknown) => {
