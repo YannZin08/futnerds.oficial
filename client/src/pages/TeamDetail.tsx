@@ -529,43 +529,34 @@ export default function TeamDetail() {
           )}
 
           {playersLoading ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <div className="rounded-xl overflow-hidden border border-border/50" style={{backgroundColor: 'oklch(0.13 0.01 240)'}}>
               {[...Array(11)].map((_, i) => (
-                <div key={i} className="fut-card animate-pulse">
-                  <div className="h-20 bg-muted rounded-t-xl" />
-                  <div className="p-3 space-y-2">
-                    <div className="h-3 bg-muted rounded w-3/4" />
-                    <div className="h-3 bg-muted rounded w-1/2" />
+                <div key={i} className="flex items-center gap-3 px-3 py-3 border-b border-border/30 animate-pulse">
+                  <div className="w-10 h-10 rounded-full bg-secondary flex-shrink-0" />
+                  <div className="flex-1 space-y-1.5">
+                    <div className="h-3 bg-secondary rounded w-2/5" />
+                    <div className="h-2.5 bg-secondary/60 rounded w-1/4" />
                   </div>
+                  <div className="w-9 h-9 rounded-lg bg-secondary flex-shrink-0" />
+                  <div className="w-9 h-9 rounded-lg bg-secondary flex-shrink-0" />
+                  <div className="w-14 h-4 rounded bg-secondary flex-shrink-0 hidden sm:block" />
                 </div>
               ))}
             </div>
           ) : filteredPlayers.length > 0 ? (
-            <div className="space-y-8">
-              {sortedGroups.map(([posGroup, groupPlayers]) => (
-                <div key={posGroup}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <h2 className="text-lg font-black text-primary">{posGroup}</h2>
-                    <span className="text-xs text-muted-foreground bg-secondary px-2 py-0.5 rounded-full">
-                      {groupPlayers.length} jogador{groupPlayers.length !== 1 ? 'es' : ''}
-                    </span>
-                    <div className="flex-1 h-px bg-border/50" />
-                  </div>
-                  <div className="rounded-xl overflow-hidden border border-border/50" style={{backgroundColor: 'oklch(0.13 0.01 240)'}}>
-                      {/* Cabeçalho da tabela */}
-                      <div className="hidden sm:flex items-center gap-3 px-3 py-2 bg-secondary/50 border-b border-border/50">
-                        <div className="w-11 flex-shrink-0" />
-                        <div className="flex-1 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Jogador</div>
-                        <div className="w-24 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Posições</div>
-                        <div className="w-9 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">OVR</div>
-                        <div className="w-9 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">POT</div>
-                        <div className="w-16 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Valor</div>
-                      </div>
-                      {groupPlayers.map((player: any) => (
-                        <PlayerRow key={player.id} player={player} />
-                      ))}
-                    </div>
-                </div>
+            <div className="rounded-xl overflow-hidden border border-border/50" style={{backgroundColor: 'oklch(0.13 0.01 240)'}}>
+              {/* Cabeçalho */}
+              <div className="hidden sm:flex items-center gap-3 px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)'}}>
+                <div className="w-10 flex-shrink-0" />
+                <div className="flex-1 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Nome</div>
+                <div className="w-28 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Posições</div>
+                <div className="w-9 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">OVR</div>
+                <div className="w-9 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">POT</div>
+                <div className="w-16 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Valor</div>
+              </div>
+              {/* Linhas */}
+              {filteredPlayers.map((player: any) => (
+                <PlayerRow key={player.id} player={player} />
               ))}
             </div>
           ) : teamPlayers && teamPlayers.length > 0 ? (
