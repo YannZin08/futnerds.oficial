@@ -103,9 +103,11 @@ function PlayerRow({ player }: { player: any }) {
   const positions = getAllPositions();
 
   return (
-    <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 hover:bg-white/5 transition-colors border-b border-border/30 last:border-0 group">
+    <div className="grid items-center border-b border-border/30 last:border-0 hover:bg-white/5 transition-colors px-3 py-2.5"
+      style={{ gridTemplateColumns: '44px 1fr 140px 52px 52px 72px' }}>
+
       {/* Foto */}
-      <div className="w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
+      <div className="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
         {player.imageUrl ? (
           <img
             src={player.imageUrl}
@@ -123,45 +125,43 @@ function PlayerRow({ player }: { player: any }) {
       </div>
 
       {/* Nome + Nacionalidade */}
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 pl-2">
         <p className="font-bold text-sm text-foreground truncate leading-tight">{player.name}</p>
-        <div className="flex items-center gap-1.5 mt-0.5">
+        <div className="flex items-center gap-1 mt-0.5">
           {player.nationality && (
-            <span className="text-[11px] text-muted-foreground truncate max-w-[100px]">{player.nationality}</span>
+            <span className="text-[11px] text-muted-foreground truncate">{player.nationality}</span>
           )}
           {player.age && (
-            <span className="text-[11px] text-muted-foreground/60">· {player.age}a</span>
+            <span className="text-[11px] text-muted-foreground/50">· {player.age}a</span>
           )}
-        </div>
-        {/* Posições — visível só no mobile */}
-        <div className="flex flex-wrap gap-0.5 mt-1 sm:hidden">
-          {positions.map((pos: string) => (
-            <span key={pos} className="text-[9px] font-bold text-primary bg-primary/15 px-1 py-0.5 rounded">{pos}</span>
-          ))}
         </div>
       </div>
 
-      {/* Posições — visível só no desktop */}
-      <div className="hidden sm:flex items-center gap-1 flex-shrink-0">
+      {/* Posições */}
+      <div className="flex items-center justify-center gap-1 flex-wrap">
         {positions.map((pos: string) => (
-          <span key={pos} className="text-[10px] font-bold text-primary bg-primary/15 px-1.5 py-0.5 rounded">{pos}</span>
+          <span key={pos} className="text-[10px] font-bold text-primary bg-primary/15 px-1.5 py-0.5 rounded whitespace-nowrap">{pos}</span>
         ))}
       </div>
 
       {/* OVR */}
-      <div className={`flex-shrink-0 w-9 h-9 rounded-lg flex flex-col items-center justify-center ${getOvrBg(ovr)}`}>
-        <span className={`text-sm font-black leading-none ${getOvrColor(ovr)}`} style={{ fontFamily: "'Rajdhani', sans-serif" }}>{ovr}</span>
-        <span className="text-[7px] text-muted-foreground uppercase tracking-wide">OVR</span>
+      <div className="flex justify-center">
+        <div className={`w-10 h-10 rounded-full flex flex-col items-center justify-center ${getOvrBg(ovr)}`}>
+          <span className={`text-sm font-black leading-none ${getOvrColor(ovr)}`} style={{ fontFamily: "'Rajdhani', sans-serif" }}>{ovr}</span>
+          <span className="text-[7px] text-muted-foreground uppercase tracking-wide">OVR</span>
+        </div>
       </div>
 
       {/* POT */}
-      <div className="flex-shrink-0 w-9 h-9 rounded-lg flex flex-col items-center justify-center bg-blue-500/10 border border-blue-500/20">
-        <span className="text-sm font-black leading-none text-blue-400" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{pot ?? '—'}</span>
-        <span className="text-[7px] text-muted-foreground uppercase tracking-wide">POT</span>
+      <div className="flex justify-center">
+        <div className="w-10 h-10 rounded-full flex flex-col items-center justify-center bg-blue-500/10 border border-blue-500/20">
+          <span className="text-sm font-black leading-none text-blue-400" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{pot ?? '—'}</span>
+          <span className="text-[7px] text-muted-foreground uppercase tracking-wide">POT</span>
+        </div>
       </div>
 
       {/* Valor */}
-      <div className="flex-shrink-0 text-right hidden xs:block">
+      <div className="text-right">
         <span className="text-sm font-bold text-primary">{formatPrice(player.price)}</span>
       </div>
     </div>
@@ -546,13 +546,13 @@ export default function TeamDetail() {
           ) : filteredPlayers.length > 0 ? (
             <div className="rounded-xl overflow-hidden border border-border/50" style={{backgroundColor: 'oklch(0.13 0.01 240)'}}>
               {/* Cabeçalho */}
-              <div className="hidden sm:flex items-center gap-3 px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)'}}>
-                <div className="w-10 flex-shrink-0" />
-                <div className="flex-1 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Nome</div>
-                <div className="w-28 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Posições</div>
-                <div className="w-9 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">OVR</div>
-                <div className="w-9 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">POT</div>
-                <div className="w-16 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Valor</div>
+              <div className="grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 140px 52px 52px 72px'}}>
+                <div />
+                <div className="pl-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Nome</div>
+                <div className="text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Posições</div>
+                <div className="text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">OVR</div>
+                <div className="text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">POT</div>
+                <div className="text-right text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Valor</div>
               </div>
               {/* Linhas */}
               {filteredPlayers.map((player: any) => (
