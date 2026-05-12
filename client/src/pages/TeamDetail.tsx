@@ -220,13 +220,37 @@ export default function TeamDetail() {
 
   const isLoading = teamLoading || (!!team && playersLoading);
 
-  // Filtra jogadores pelo nome digitado
+  // Ordenação da tabela
+  const [sortCol, setSortCol] = useState<'ovr' | 'pot' | 'price' | 'position' | null>('ovr');
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
+
+  const handleSort = (col: 'ovr' | 'pot' | 'price' | 'position') => {
+    if (sortCol === col) {
+      setSortDir(d => d === 'desc' ? 'asc' : 'desc');
+    } else {
+      setSortCol(col);
+      setSortDir('desc');
+    }
+  };
+
+  // Filtra e ordena jogadores
   const filteredPlayers = useMemo(() => {
     if (!teamPlayers) return [];
     const q = playerSearch.trim().toLowerCase();
-    if (!q) return teamPlayers;
-    return teamPlayers.filter((p: any) => p.name.toLowerCase().includes(q));
-  }, [teamPlayers, playerSearch]);
+    let list = q ? teamPlayers.filter((p: any) => p.name.toLowerCase().includes(q)) : [...teamPlayers];
+    if (sortCol) {
+      list = [...list].sort((a: any, b: any) => {
+        let va: any, vb: any;
+        if (sortCol === 'ovr') { va = Number(a.overall); vb = Number(b.overall); }
+        else if (sortCol === 'pot') { va = Number(a.potential ?? 0); vb = Number(b.potential ?? 0); }
+        else if (sortCol === 'price') { va = Number(a.price ?? 0); vb = Number(b.price ?? 0); }
+        else if (sortCol === 'position') { va = (positionPtMap[a.position] ?? a.position ?? ''); vb = (positionPtMap[b.position] ?? b.position ?? ''); }
+        if (typeof va === 'string') return sortDir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+        return sortDir === 'asc' ? va - vb : vb - va;
+      });
+    }
+    return list;
+  }, [teamPlayers, playerSearch, sortCol, sortDir]);
 
   if (!teamId) {
     return (
@@ -540,14 +564,31 @@ export default function TeamDetail() {
           ) : filteredPlayers.length > 0 ? (
             <div className="rounded-xl overflow-hidden border border-border/50" style={{backgroundColor: 'oklch(0.13 0.01 240)'}}>
               {/* Cabeçalho */}
-              <div className="grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 140px 52px 52px 72px'}}>
-                <div />
-                <div className="pl-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Nome</div>
-                <div className="text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Posições</div>
-                <div className="text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">OVR</div>
-                <div className="text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">POT</div>
-                <div className="text-right text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Valor</div>
-              </div>
+              {(() => {
+                const SortIcon = ({ col }: { col: 'ovr' | 'pot' | 'price' | 'position' }) => (
+                  <span className="ml-0.5 inline-block">
+                    {sortCol === col ? (sortDir === 'desc' ? ' ▼' : ' ▲') : ' ▽'}
+                  </span>
+                );
+                return (
+                  <div className="grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 140px 52px 52px 72px'}}>
+                    <div />
+                    <div className="pl-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Nome</div>
+                    <button onClick={() => handleSort('position')} className={`text-center text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${sortCol === 'position' ? 'text-primary' : 'text-muted-foreground'}`}>
+                      Posições<SortIcon col="position" />
+                    </button>
+                    <button onClick={() => handleSort('ovr')} className={`text-center text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${sortCol === 'ovr' ? 'text-primary' : 'text-muted-foreground'}`}>
+                      OVR<SortIcon col="ovr" />
+                    </button>
+                    <button onClick={() => handleSort('pot')} className={`text-center text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${sortCol === 'pot' ? 'text-primary' : 'text-muted-foreground'}`}>
+                      POT<SortIcon col="pot" />
+                    </button>
+                    <button onClick={() => handleSort('price')} className={`text-right text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${sortCol === 'price' ? 'text-primary' : 'text-muted-foreground'}`}>
+                      Valor<SortIcon col="price" />
+                    </button>
+                  </div>
+                );
+              })()}
               {/* Linhas */}
               {filteredPlayers.map((player: any) => (
                 <PlayerRow key={player.id} player={player} />
