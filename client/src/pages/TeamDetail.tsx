@@ -145,19 +145,15 @@ function PlayerRow({ player }: { player: any }) {
       </div>
 
       {/* OVR */}
-      <div className="flex justify-center">
-        <div className={`w-10 h-10 rounded-full flex flex-col items-center justify-center ${getOvrBg(ovr)}`}>
-          <span className={`text-sm font-black leading-none ${getOvrColor(ovr)}`} style={{ fontFamily: "'Rajdhani', sans-serif" }}>{ovr}</span>
-          <span className="text-[7px] text-muted-foreground uppercase tracking-wide">OVR</span>
-        </div>
+      <div className="flex flex-col items-center justify-center">
+        <span className={`text-base font-black leading-none ${getOvrColor(ovr)}`} style={{ fontFamily: "'Rajdhani', sans-serif" }}>{ovr}</span>
+        <span className="text-[7px] text-muted-foreground uppercase tracking-wide mt-0.5">OVR</span>
       </div>
 
       {/* POT */}
-      <div className="flex justify-center">
-        <div className="w-10 h-10 rounded-full flex flex-col items-center justify-center bg-blue-500/10 border border-blue-500/20">
-          <span className="text-sm font-black leading-none text-blue-400" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{pot ?? '—'}</span>
-          <span className="text-[7px] text-muted-foreground uppercase tracking-wide">POT</span>
-        </div>
+      <div className="flex flex-col items-center justify-center">
+        <span className="text-base font-black leading-none text-blue-400" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{pot ?? '—'}</span>
+        <span className="text-[7px] text-muted-foreground uppercase tracking-wide mt-0.5">POT</span>
       </div>
 
       {/* Valor */}
