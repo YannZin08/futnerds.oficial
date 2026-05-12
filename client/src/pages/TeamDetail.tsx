@@ -145,15 +145,13 @@ function PlayerRow({ player }: { player: any }) {
       </div>
 
       {/* OVR */}
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex items-center justify-center">
         <span className={`text-base font-black leading-none ${getOvrColor(ovr)}`} style={{ fontFamily: "'Rajdhani', sans-serif" }}>{ovr}</span>
-        <span className="text-[7px] text-muted-foreground uppercase tracking-wide mt-0.5">OVR</span>
       </div>
 
       {/* POT */}
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex items-center justify-center">
         <span className="text-base font-black leading-none text-blue-400" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{pot ?? '—'}</span>
-        <span className="text-[7px] text-muted-foreground uppercase tracking-wide mt-0.5">POT</span>
       </div>
 
       {/* Valor */}
