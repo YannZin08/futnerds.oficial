@@ -221,15 +221,15 @@ export default function TeamDetail() {
   const isLoading = teamLoading || (!!team && playersLoading);
 
   // Ordenação da tabela
-  const [sortCol, setSortCol] = useState<'ovr' | 'pot' | 'price' | 'position' | null>('ovr');
+  const [sortCol, setSortCol] = useState<'ovr' | 'pot' | 'price' | 'position' | 'name' | null>('ovr');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
 
-  const handleSort = (col: 'ovr' | 'pot' | 'price' | 'position') => {
+  const handleSort = (col: 'ovr' | 'pot' | 'price' | 'position' | 'name') => {
     if (sortCol === col) {
       setSortDir(d => d === 'desc' ? 'asc' : 'desc');
     } else {
       setSortCol(col);
-      setSortDir('desc');
+      setSortDir(col === 'name' ? 'asc' : 'desc');
     }
   };
 
@@ -245,6 +245,7 @@ export default function TeamDetail() {
         else if (sortCol === 'pot') { va = Number(a.potential ?? 0); vb = Number(b.potential ?? 0); }
         else if (sortCol === 'price') { va = Number(a.price ?? 0); vb = Number(b.price ?? 0); }
         else if (sortCol === 'position') { va = (positionPtMap[a.position] ?? a.position ?? ''); vb = (positionPtMap[b.position] ?? b.position ?? ''); }
+        else if (sortCol === 'name') { va = a.name ?? ''; vb = b.name ?? ''; }
         if (typeof va === 'string') return sortDir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
         return sortDir === 'asc' ? va - vb : vb - va;
       });
@@ -565,7 +566,7 @@ export default function TeamDetail() {
             <div className="rounded-xl overflow-hidden border border-border/50" style={{backgroundColor: 'oklch(0.13 0.01 240)'}}>
               {/* Cabeçalho */}
               {(() => {
-                const SortIcon = ({ col }: { col: 'ovr' | 'pot' | 'price' | 'position' }) => (
+                const SortIcon = ({ col }: { col: 'ovr' | 'pot' | 'price' | 'position' | 'name' }) => (
                   <span className="ml-0.5 inline-block">
                     {sortCol === col ? (sortDir === 'desc' ? ' ▼' : ' ▲') : ' ▽'}
                   </span>
@@ -573,7 +574,9 @@ export default function TeamDetail() {
                 return (
                   <div className="grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 140px 52px 52px 72px'}}>
                     <div />
-                    <div className="pl-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Nome</div>
+                    <button onClick={() => handleSort('name')} className={`pl-2 text-left text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${sortCol === 'name' ? 'text-primary' : 'text-muted-foreground'}`}>
+                      Nome<SortIcon col="name" />
+                    </button>
                     <button onClick={() => handleSort('position')} className={`text-center text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${sortCol === 'position' ? 'text-primary' : 'text-muted-foreground'}`}>
                       Posições<SortIcon col="position" />
                     </button>
