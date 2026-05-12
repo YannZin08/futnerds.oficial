@@ -104,7 +104,7 @@ function PlayerRow({ player }: { player: any }) {
 
   return (
     <div className="grid items-center border-b border-border/30 last:border-0 hover:bg-white/5 transition-colors px-3 py-2.5"
-      style={{ gridTemplateColumns: '44px 1fr 140px 40px 52px 52px 72px' }}>
+      style={{ gridTemplateColumns: '44px 1fr 180px 40px 52px 52px 72px' }}>
 
       {/* Foto */}
       <div className="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
@@ -573,7 +573,7 @@ export default function TeamDetail() {
                   </span>
                 );
                 return (
-                  <div className="grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 140px 40px 52px 52px 72px'}}>
+                  <div className="grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 180px 40px 52px 52px 72px'}}>
                     <div />
                     <button onClick={() => handleSort('name')} className={`pl-2 text-left text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${sortCol === 'name' ? 'text-primary' : 'text-muted-foreground'}`}>
                       Nome<SortIcon col="name" />
