@@ -104,7 +104,7 @@ function PlayerRow({ player }: { player: any }) {
 
   return (
     <div className="grid items-center border-b border-border/30 last:border-0 hover:bg-white/5 transition-colors px-3 py-2.5"
-      style={{ gridTemplateColumns: '44px 1fr 180px 40px 52px 52px 72px' }}>
+      style={{ gridTemplateColumns: '44px 1fr 50px 200px 52px 52px 80px' }}>
 
       {/* Foto */}
       <div className="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
@@ -132,15 +132,15 @@ function PlayerRow({ player }: { player: any }) {
         )}
       </div>
 
-      {/* Idade */}
+      {/* Idade — coluna estreita ao lado do nome */}
       <div className="flex items-center justify-center">
         <span className="text-sm font-semibold text-muted-foreground">{player.age ?? '—'}</span>
       </div>
 
       {/* Posições */}
-      <div className="flex items-center justify-center gap-1 flex-wrap">
+      <div className="flex items-center justify-center gap-1 flex-nowrap overflow-hidden">
         {positions.map((pos: string) => (
-          <span key={pos} className="text-[10px] font-bold text-primary bg-primary/15 px-1.5 py-0.5 rounded whitespace-nowrap">{pos}</span>
+          <span key={pos} className="text-[10px] font-bold text-primary bg-primary/15 px-1.5 py-0.5 rounded whitespace-nowrap flex-shrink-0">{pos}</span>
         ))}
       </div>
 
@@ -573,7 +573,7 @@ export default function TeamDetail() {
                   </span>
                 );
                 return (
-                  <div className="grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 180px 40px 52px 52px 72px'}}>
+                  <div className="grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 50px 200px 52px 52px 80px'}}>
                     <div />
                     <button onClick={() => handleSort('name')} className={`pl-2 text-left text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${sortCol === 'name' ? 'text-primary' : 'text-muted-foreground'}`}>
                       Nome<SortIcon col="name" />
