@@ -52,76 +52,117 @@ function formatBudget(budget: number | null | undefined): string {
   return `€${rounded}M`;
 }
 
-function PlayerMiniCard({ player }: { player: any }) {
-  const { gradient, isDiamond } = getCardGradient(Number(player.overall));
+function formatPrice(price: number | null | undefined): string {
+  if (!price) return '—';
+  if (price >= 1_000_000) {
+    const m = price / 1_000_000;
+    return `€${Number.isInteger(m) ? m : m.toFixed(1)}M`;
+  }
+  if (price >= 1_000) {
+    const k = price / 1_000;
+    return `€${Number.isInteger(k) ? k : k.toFixed(0)}K`;
+  }
+  return `€${price}`;
+}
 
-  const getAltPositions = () => {
+function getOvrColor(ovr: number): string {
+  if (ovr >= 90) return 'text-purple-400';
+  if (ovr >= 85) return 'text-yellow-400';
+  if (ovr >= 80) return 'text-yellow-300';
+  if (ovr >= 75) return 'text-green-400';
+  if (ovr >= 70) return 'text-green-300';
+  return 'text-muted-foreground';
+}
+
+function getOvrBg(ovr: number): string {
+  if (ovr >= 90) return 'bg-purple-500/20 border border-purple-500/40';
+  if (ovr >= 85) return 'bg-yellow-500/20 border border-yellow-500/40';
+  if (ovr >= 80) return 'bg-yellow-500/10 border border-yellow-500/30';
+  if (ovr >= 75) return 'bg-primary/20 border border-primary/40';
+  if (ovr >= 70) return 'bg-primary/10 border border-primary/20';
+  return 'bg-secondary border border-border';
+}
+
+function PlayerRow({ player }: { player: any }) {
+  const ovr = Number(player.overall);
+  const pot = player.potential ? Number(player.potential) : null;
+
+  const getAllPositions = () => {
     try {
-      if (!player.altPositions) return [];
+      const main = positionPtMap[player.position] ?? player.position;
+      if (!player.altPositions) return [main];
       let alts: string[] = player.altPositions.startsWith('[')
         ? JSON.parse(player.altPositions)
         : player.altPositions.split(',').map((s: string) => s.trim()).filter(Boolean);
-      return alts.filter((p: string) => p !== player.position).slice(0, 2);
-    } catch { return []; }
+      const altPt = alts
+        .map((p: string) => positionPtMap[p] ?? p)
+        .filter((p: string) => p !== main);
+      return [main, ...altPt.slice(0, 3)];
+    } catch { return [positionPtMap[player.position] ?? player.position]; }
   };
-  const altPositions = getAltPositions();
+  const positions = getAllPositions();
 
   return (
-    <div className="fut-card fut-card-hover overflow-hidden">
-      {/* Card Header */}
-      <div className={`bg-gradient-to-br ${gradient} p-1.5 sm:p-3 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
-        {/* Posições */}
-        <div className="absolute top-1 right-1 sm:top-2 sm:right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
-          <span className="text-[8px] sm:text-xs font-bold text-white bg-black/25 px-0.5 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
-            {positionPtMap[player.position] ?? player.position}
-          </span>
-          {altPositions.map((pos: string) => (
-            <span key={pos} className="text-[8px] sm:text-xs font-bold text-white/80 bg-black/20 px-0.5 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
-              {positionPtMap[pos] ?? pos}
-            </span>
-          ))}
+    <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 hover:bg-white/5 transition-colors border-b border-border/30 last:border-0 group">
+      {/* Foto */}
+      <div className="w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
+        {player.imageUrl ? (
+          <img
+            src={player.imageUrl}
+            alt={player.name}
+            className="w-full h-full object-cover object-top"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).style.display = 'none';
+              (e.currentTarget.parentElement as HTMLElement).innerHTML =
+                '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
+            }}
+          />
+        ) : (
+          <Users className="h-5 w-5 text-muted-foreground" />
+        )}
+      </div>
+
+      {/* Nome + Nacionalidade */}
+      <div className="min-w-0 flex-1">
+        <p className="font-bold text-sm text-foreground truncate leading-tight">{player.name}</p>
+        <div className="flex items-center gap-1.5 mt-0.5">
+          {player.nationality && (
+            <span className="text-[11px] text-muted-foreground truncate max-w-[100px]">{player.nationality}</span>
+          )}
+          {player.age && (
+            <span className="text-[11px] text-muted-foreground/60">· {player.age}a</span>
+          )}
         </div>
-        {/* Foto + nome */}
-        <div className="flex items-end gap-1 sm:gap-2">
-          <div className="w-7 h-7 sm:w-12 sm:h-12 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
-            {player.imageUrl ? (
-              <img
-                src={player.imageUrl}
-                alt={player.name}
-                className="w-full h-full object-cover object-top"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.display = 'none';
-                  (e.currentTarget.parentElement as HTMLElement).innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
-                }}
-              />
-            ) : (
-              <Users className="h-4 w-4 sm:h-6 sm:w-6 text-white/60" />
-            )}
-          </div>
-          <div className="min-w-0 flex-1 pr-6 sm:pr-10">
-            <h3 className={`font-black text-[10px] sm:text-sm leading-tight break-words ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>
-              {player.name}
-            </h3>
-            <p className="text-white/70 text-[8px] sm:text-xs truncate">
-              {player.nationality}{player.age ? ` · ${player.age}a` : ''}
-            </p>
-          </div>
+        {/* Posições — visível só no mobile */}
+        <div className="flex flex-wrap gap-0.5 mt-1 sm:hidden">
+          {positions.map((pos: string) => (
+            <span key={pos} className="text-[9px] font-bold text-primary bg-primary/15 px-1 py-0.5 rounded">{pos}</span>
+          ))}
         </div>
       </div>
 
-      {/* Card Body */}
-      <div className="p-1.5 sm:p-3 space-y-1 sm:space-y-2" style={{backgroundColor: 'oklch(0.15 0.01 240)'}}>
-        {/* Overall / Potential */}
-        <div className="grid grid-cols-2 gap-0.5 sm:gap-2 text-center">
-          <div className="rounded py-0.5 sm:py-1.5" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
-            <p className="text-sm sm:text-base font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
-            <p className="text-[7px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">OVR</p>
-          </div>
-          <div className="rounded py-0.5 sm:py-1.5" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
-            <p className="text-sm sm:text-base font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
-            <p className="text-[7px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">POT</p>
-          </div>
-        </div>
+      {/* Posições — visível só no desktop */}
+      <div className="hidden sm:flex items-center gap-1 flex-shrink-0">
+        {positions.map((pos: string) => (
+          <span key={pos} className="text-[10px] font-bold text-primary bg-primary/15 px-1.5 py-0.5 rounded">{pos}</span>
+        ))}
+      </div>
+
+      {/* OVR */}
+      <div className={`flex-shrink-0 w-9 h-9 rounded-lg flex flex-col items-center justify-center ${getOvrBg(ovr)}`}>
+        <span className={`text-sm font-black leading-none ${getOvrColor(ovr)}`} style={{ fontFamily: "'Rajdhani', sans-serif" }}>{ovr}</span>
+        <span className="text-[7px] text-muted-foreground uppercase tracking-wide">OVR</span>
+      </div>
+
+      {/* POT */}
+      <div className="flex-shrink-0 w-9 h-9 rounded-lg flex flex-col items-center justify-center bg-blue-500/10 border border-blue-500/20">
+        <span className="text-sm font-black leading-none text-blue-400" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{pot ?? '—'}</span>
+        <span className="text-[7px] text-muted-foreground uppercase tracking-wide">POT</span>
+      </div>
+
+      {/* Valor */}
+      <div className="flex-shrink-0 text-right hidden xs:block">
+        <span className="text-sm font-bold text-primary">{formatPrice(player.price)}</span>
       </div>
     </div>
   );
@@ -510,11 +551,20 @@ export default function TeamDetail() {
                     </span>
                     <div className="flex-1 h-px bg-border/50" />
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                    {groupPlayers.map((player: any) => (
-                      <PlayerMiniCard key={player.id} player={player} />
-                    ))}
-                  </div>
+                  <div className="rounded-xl overflow-hidden border border-border/50" style={{backgroundColor: 'oklch(0.13 0.01 240)'}}>
+                      {/* Cabeçalho da tabela */}
+                      <div className="hidden sm:flex items-center gap-3 px-3 py-2 bg-secondary/50 border-b border-border/50">
+                        <div className="w-11 flex-shrink-0" />
+                        <div className="flex-1 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Jogador</div>
+                        <div className="w-24 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Posições</div>
+                        <div className="w-9 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">OVR</div>
+                        <div className="w-9 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider">POT</div>
+                        <div className="w-16 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Valor</div>
+                      </div>
+                      {groupPlayers.map((player: any) => (
+                        <PlayerRow key={player.id} player={player} />
+                      ))}
+                    </div>
                 </div>
               ))}
             </div>
