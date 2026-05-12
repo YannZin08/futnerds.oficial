@@ -132,7 +132,7 @@ function PlayerRow({ player }: { player: any }) {
             <span className="text-[11px] text-muted-foreground truncate">{player.nationality}</span>
           )}
           {player.age && (
-            <span className="text-[11px] text-muted-foreground/50">· {player.age}a</span>
+            <span className="text-[11px] text-muted-foreground/50">· {player.age} anos</span>
           )}
         </div>
       </div>
