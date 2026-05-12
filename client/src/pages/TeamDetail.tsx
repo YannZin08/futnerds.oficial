@@ -69,21 +69,21 @@ function PlayerMiniCard({ player }: { player: any }) {
   return (
     <div className="fut-card fut-card-hover overflow-hidden">
       {/* Card Header */}
-      <div className={`bg-gradient-to-br ${gradient} p-3 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
+      <div className={`bg-gradient-to-br ${gradient} p-1.5 sm:p-3 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
         {/* Posições */}
-        <div className="absolute top-2 right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
-          <span className="text-xs font-bold text-white bg-black/25 px-1.5 py-0.5 rounded whitespace-nowrap">
+        <div className="absolute top-1 right-1 sm:top-2 sm:right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
+          <span className="text-[8px] sm:text-xs font-bold text-white bg-black/25 px-0.5 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
             {positionPtMap[player.position] ?? player.position}
           </span>
           {altPositions.map((pos: string) => (
-            <span key={pos} className="text-xs font-bold text-white/80 bg-black/20 px-1.5 py-0.5 rounded whitespace-nowrap">
+            <span key={pos} className="text-[8px] sm:text-xs font-bold text-white/80 bg-black/20 px-0.5 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
               {positionPtMap[pos] ?? pos}
             </span>
           ))}
         </div>
         {/* Foto + nome */}
-        <div className="flex items-end gap-2">
-          <div className="w-12 h-12 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
+        <div className="flex items-end gap-1 sm:gap-2">
+          <div className="w-7 h-7 sm:w-12 sm:h-12 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
             {player.imageUrl ? (
               <img
                 src={player.imageUrl}
@@ -95,31 +95,31 @@ function PlayerMiniCard({ player }: { player: any }) {
                 }}
               />
             ) : (
-              <Users className="h-6 w-6 text-white/60" />
+              <Users className="h-4 w-4 sm:h-6 sm:w-6 text-white/60" />
             )}
           </div>
-          <div className="min-w-0 flex-1 pr-10">
-            <h3 className={`font-black text-sm leading-tight truncate ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>
+          <div className="min-w-0 flex-1 pr-6 sm:pr-10">
+            <h3 className={`font-black text-[10px] sm:text-sm leading-tight break-words ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>
               {player.name}
             </h3>
-            <p className="text-white/70 text-xs truncate">
-              {player.nationality}{player.age ? ` · ${player.age} anos` : ''}
+            <p className="text-white/70 text-[8px] sm:text-xs truncate">
+              {player.nationality}{player.age ? ` · ${player.age}a` : ''}
             </p>
           </div>
         </div>
       </div>
 
       {/* Card Body */}
-      <div className="p-3 space-y-2" style={{backgroundColor: 'oklch(0.15 0.01 240)'}}>
+      <div className="p-1.5 sm:p-3 space-y-1 sm:space-y-2" style={{backgroundColor: 'oklch(0.15 0.01 240)'}}>
         {/* Overall / Potential */}
-        <div className="grid grid-cols-2 gap-2 text-center">
-          <div className="rounded-lg py-1.5" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
-            <p className="text-base font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Overall</p>
+        <div className="grid grid-cols-2 gap-0.5 sm:gap-2 text-center">
+          <div className="rounded py-0.5 sm:py-1.5" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
+            <p className="text-sm sm:text-base font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
+            <p className="text-[7px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">OVR</p>
           </div>
-          <div className="rounded-lg py-1.5" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
-            <p className="text-base font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Potencial</p>
+          <div className="rounded py-0.5 sm:py-1.5" style={{backgroundColor: 'oklch(0.20 0.01 240)'}}>
+            <p className="text-sm sm:text-base font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
+            <p className="text-[7px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">POT</p>
           </div>
         </div>
       </div>

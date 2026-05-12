@@ -99,21 +99,21 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
   return (
     <div className="fut-card fut-card-hover overflow-hidden">
       {/* Card Header */}
-      <div className={`bg-gradient-to-br ${gradientClass} p-2 sm:p-4 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
+      <div className={`bg-gradient-to-br ${gradientClass} p-1.5 sm:p-4 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
         {/* Position badges — compactos no mobile */}
-        <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
-          <span className="text-[9px] sm:text-xs font-bold text-white bg-black/25 px-1 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
+        <div className="absolute top-1 right-1 sm:top-2 sm:right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
+          <span className="text-[8px] sm:text-xs font-bold text-white bg-black/25 px-0.5 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
             {positionPtMap[player.position] ?? player.position}
           </span>
           {altPositions.map((pos: string) => (
-            <span key={pos} className="text-[9px] sm:text-xs font-bold text-white/80 bg-black/20 px-1 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
+            <span key={pos} className="text-[8px] sm:text-xs font-bold text-white/80 bg-black/20 px-0.5 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
               {positionPtMap[pos] ?? pos}
             </span>
           ))}
         </div>
-        <div className="flex items-end gap-1.5 sm:gap-3">
+        <div className="flex items-end gap-1 sm:gap-3">
           {/* Foto — menor no mobile */}
-          <div className="w-8 h-8 sm:w-14 sm:h-14 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
+          <div className="w-7 h-7 sm:w-14 sm:h-14 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
             {player.imageUrl ? (
               <img
                 src={player.imageUrl}
@@ -129,9 +129,9 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
             )}
           </div>
           {/* Nome e info — sem truncar no mobile, quebra linha se necessário */}
-          <div className="min-w-0 flex-1 pr-8 sm:pr-14">
-            <h3 className={`font-black text-[11px] sm:text-base leading-tight break-words ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>{player.name}</h3>
-            <p className="text-white/70 text-[9px] sm:text-xs truncate">
+          <div className="min-w-0 flex-1 pr-6 sm:pr-14">
+            <h3 className={`font-black text-[10px] sm:text-base leading-tight break-words ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>{player.name}</h3>
+            <p className="text-white/70 text-[8px] sm:text-xs truncate">
               {player.nationality}{player.age ? ` · ${player.age}a` : ''}
             </p>
           </div>
@@ -139,16 +139,16 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
       </div>
 
       {/* Card Body */}
-      <div className="p-2 sm:p-4 space-y-1.5 sm:space-y-3">
+      <div className="p-1.5 sm:p-4 space-y-1 sm:space-y-3">
         {/* Clube + Liga */}
-        <div className="flex items-center justify-between text-[10px] sm:text-xs gap-1">
+        <div className="flex items-center justify-between text-[9px] sm:text-xs gap-1">
           <div className="flex items-center gap-1 min-w-0">
             {player.clubLogoUrl ? (
               <button
                 onClick={() => {
                   if (player.teamId) setLocation(`/times/${player.teamId}`);
                 }}
-                className={`w-4 h-4 sm:w-6 sm:h-6 flex-shrink-0 rounded bg-white/5 flex items-center justify-center overflow-hidden transition-transform ${
+                className={`w-3.5 h-3.5 sm:w-6 sm:h-6 flex-shrink-0 rounded bg-white/5 flex items-center justify-center overflow-hidden transition-transform ${
                   player.teamId ? 'hover:scale-110 cursor-pointer' : 'cursor-default'
                 }`}
                 title={player.teamId ? `Ver ${player.club}` : player.club}
@@ -167,22 +167,22 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
         </div>
 
         {/* Overall + Potencial */}
-        <div className="grid grid-cols-2 gap-1 sm:gap-2 text-center">
-          <div className="bg-secondary rounded-lg py-1 sm:py-1.5">
-            <p className="text-base sm:text-lg font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
-            <p className="text-[8px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">OVR</p>
+        <div className="grid grid-cols-2 gap-0.5 sm:gap-2 text-center">
+          <div className="bg-secondary rounded py-0.5 sm:py-1.5">
+            <p className="text-sm sm:text-lg font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
+            <p className="text-[7px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">OVR</p>
           </div>
-          <div className="bg-secondary rounded-lg py-1 sm:py-1.5">
-            <p className="text-base sm:text-lg font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
-            <p className="text-[8px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">POT</p>
+          <div className="bg-secondary rounded py-0.5 sm:py-1.5">
+            <p className="text-sm sm:text-lg font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
+            <p className="text-[7px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">POT</p>
           </div>
         </div>
 
         {/* Preço + Favorito */}
-        <div className="flex items-center justify-between pt-1.5 sm:pt-2 border-t border-border/50">
+        <div className="flex items-center justify-between pt-1 sm:pt-2 border-t border-border/50">
           <div>
-            <span className="text-[9px] sm:text-xs text-muted-foreground">Preço</span>
-            <p className="text-xs sm:text-sm font-bold text-primary">
+            <span className="text-[8px] sm:text-xs text-muted-foreground">Preço</span>
+            <p className="text-[10px] sm:text-sm font-bold text-primary">
               {player.price ? (() => {
                 if (player.price >= 1000000) {
                   const m = player.price / 1000000;
