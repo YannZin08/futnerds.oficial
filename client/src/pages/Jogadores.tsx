@@ -99,19 +99,21 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
   return (
     <div className="fut-card fut-card-hover overflow-hidden">
       {/* Card Header */}
-      <div className={`bg-gradient-to-br ${gradientClass} p-3 sm:p-4 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
-        <div className="absolute top-2 right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
-          <span className="text-xs font-bold text-white bg-black/25 px-1.5 py-0.5 rounded whitespace-nowrap">
+      <div className={`bg-gradient-to-br ${gradientClass} p-2 sm:p-4 relative${isDiamond ? ' shadow-[0_0_18px_2px_rgba(139,92,246,0.45)]' : ''}`}>
+        {/* Position badges — compactos no mobile */}
+        <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 flex flex-row flex-wrap justify-end gap-0.5 max-w-[55%]">
+          <span className="text-[9px] sm:text-xs font-bold text-white bg-black/25 px-1 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
             {positionPtMap[player.position] ?? player.position}
           </span>
           {altPositions.map((pos: string) => (
-            <span key={pos} className="text-xs font-bold text-white/80 bg-black/20 px-1.5 py-0.5 rounded whitespace-nowrap">
+            <span key={pos} className="text-[9px] sm:text-xs font-bold text-white/80 bg-black/20 px-1 sm:px-1.5 py-0.5 rounded whitespace-nowrap">
               {positionPtMap[pos] ?? pos}
             </span>
           ))}
         </div>
-        <div className="flex items-end gap-2 sm:gap-3">
-          <div className="w-10 h-10 sm:w-14 sm:h-14 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
+        <div className="flex items-end gap-1.5 sm:gap-3">
+          {/* Foto — menor no mobile */}
+          <div className="w-8 h-8 sm:w-14 sm:h-14 flex-shrink-0 rounded-full bg-black/20 flex items-center justify-center overflow-hidden">
             {player.imageUrl ? (
               <img
                 src={player.imageUrl}
@@ -119,32 +121,34 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
                 className="w-full h-full object-cover object-top"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).style.display = 'none';
-                  (e.currentTarget.parentElement as HTMLElement).innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+                  (e.currentTarget.parentElement as HTMLElement).innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
                 }}
               />
             ) : (
-              <Users className="h-7 w-7 text-white/60" />
+              <Users className="h-5 w-5 sm:h-7 sm:w-7 text-white/60" />
             )}
           </div>
-          <div className="min-w-0 flex-1 pr-10 sm:pr-14">
-            <h3 className={`font-black text-sm sm:text-base leading-tight truncate ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>{player.name}</h3>
-            <p className="text-white/70 text-xs truncate">
-              {player.nationality}{player.age ? ` · ${player.age} anos` : ''}
+          {/* Nome e info — sem truncar no mobile, quebra linha se necessário */}
+          <div className="min-w-0 flex-1 pr-8 sm:pr-14">
+            <h3 className={`font-black text-[11px] sm:text-base leading-tight break-words ${isDiamond ? 'text-white drop-shadow-[0_1px_4px_rgba(139,92,246,0.8)]' : 'text-white'}`}>{player.name}</h3>
+            <p className="text-white/70 text-[9px] sm:text-xs truncate">
+              {player.nationality}{player.age ? ` · ${player.age}a` : ''}
             </p>
           </div>
         </div>
       </div>
 
       {/* Card Body */}
-      <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
-        <div className="flex items-center justify-between text-xs gap-2">
-          <div className="flex items-center gap-1.5 min-w-0">
+      <div className="p-2 sm:p-4 space-y-1.5 sm:space-y-3">
+        {/* Clube + Liga */}
+        <div className="flex items-center justify-between text-[10px] sm:text-xs gap-1">
+          <div className="flex items-center gap-1 min-w-0">
             {player.clubLogoUrl ? (
               <button
                 onClick={() => {
                   if (player.teamId) setLocation(`/times/${player.teamId}`);
                 }}
-                className={`w-6 h-6 flex-shrink-0 rounded bg-white/5 flex items-center justify-center overflow-hidden transition-transform ${
+                className={`w-4 h-4 sm:w-6 sm:h-6 flex-shrink-0 rounded bg-white/5 flex items-center justify-center overflow-hidden transition-transform ${
                   player.teamId ? 'hover:scale-110 cursor-pointer' : 'cursor-default'
                 }`}
                 title={player.teamId ? `Ver ${player.club}` : player.club}
@@ -159,24 +163,26 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
             ) : null}
             <span className="text-muted-foreground truncate">{player.club}</span>
           </div>
-          <span className="text-muted-foreground flex-shrink-0">{player.league}</span>
+          <span className="text-muted-foreground flex-shrink-0 hidden xs:inline">{player.league}</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 text-center">
-          <div className="bg-secondary rounded-lg py-1.5">
-            <p className="text-lg font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Overall</p>
+        {/* Overall + Potencial */}
+        <div className="grid grid-cols-2 gap-1 sm:gap-2 text-center">
+          <div className="bg-secondary rounded-lg py-1 sm:py-1.5">
+            <p className="text-base sm:text-lg font-black text-primary leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</p>
+            <p className="text-[8px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">OVR</p>
           </div>
-          <div className="bg-secondary rounded-lg py-1.5">
-            <p className="text-lg font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Potencial</p>
+          <div className="bg-secondary rounded-lg py-1 sm:py-1.5">
+            <p className="text-base sm:text-lg font-black text-blue-400 leading-none" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.potential ?? '—'}</p>
+            <p className="text-[8px] sm:text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">POT</p>
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2 border-t border-border/50">
+        {/* Preço + Favorito */}
+        <div className="flex items-center justify-between pt-1.5 sm:pt-2 border-t border-border/50">
           <div>
-            <span className="text-xs text-muted-foreground">Preço</span>
-            <p className="text-sm font-bold text-primary">
+            <span className="text-[9px] sm:text-xs text-muted-foreground">Preço</span>
+            <p className="text-xs sm:text-sm font-bold text-primary">
               {player.price ? (() => {
                 if (player.price >= 1000000) {
                   const m = player.price / 1000000;
@@ -191,7 +197,7 @@ function PlayerCard({ player, onFavorite, isFav }: { player: any; onFavorite?: (
           {onFavorite && (
             <button
               onClick={onFavorite}
-              className={`p-2 rounded-lg transition-colors ${
+              className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
                 isFav ? "text-yellow-400 bg-yellow-400/10" : "text-muted-foreground hover:text-yellow-400 hover:bg-yellow-400/10"
               }`}
             >
