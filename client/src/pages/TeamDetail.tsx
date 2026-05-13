@@ -102,63 +102,90 @@ function PlayerRow({ player }: { player: any }) {
   };
   const positions = getAllPositions();
 
-  return (
-    <div className="grid items-center border-b border-border/30 last:border-0 hover:bg-white/5 transition-colors px-3 py-2.5"
-      style={{ gridTemplateColumns: '44px 1fr 50px 200px 52px 52px 80px' }}>
-
-      {/* Foto */}
-      <div className="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
-        {player.imageUrl ? (
-          <img
-            src={player.imageUrl}
-            alt={player.name}
-            className="w-full h-full object-cover object-top"
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).style.display = 'none';
-              (e.currentTarget.parentElement as HTMLElement).innerHTML =
-                '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
-            }}
-          />
-        ) : (
-          <Users className="h-5 w-5 text-muted-foreground" />
-        )}
-      </div>
-
-      {/* Nome + Nacionalidade */}
-      <div className="min-w-0 pl-2">
-        <p className="font-bold text-sm text-foreground truncate leading-tight">{player.name}</p>
-        {player.nationality && (
-          <span className="text-[11px] text-muted-foreground truncate block mt-0.5">{player.nationality}</span>
-        )}
-      </div>
-
-      {/* Idade — coluna estreita ao lado do nome */}
-      <div className="flex items-center justify-center">
-        <span className="text-sm font-semibold text-muted-foreground">{player.age ?? '—'}</span>
-      </div>
-
-      {/* Posições */}
-      <div className="flex items-center justify-center gap-1 flex-nowrap overflow-hidden">
-        {positions.map((pos: string) => (
-          <span key={pos} className="text-[10px] font-bold text-primary bg-primary/15 px-1.5 py-0.5 rounded whitespace-nowrap flex-shrink-0">{pos}</span>
-        ))}
-      </div>
-
-      {/* OVR */}
-      <div className="flex items-center justify-center">
-        <span className={`text-base font-black leading-none ${getOvrColor(ovr)}`} style={{ fontFamily: "'Rajdhani', sans-serif" }}>{ovr}</span>
-      </div>
-
-      {/* POT */}
-      <div className="flex items-center justify-center">
-        <span className="text-base font-black leading-none text-blue-400" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{pot ?? '—'}</span>
-      </div>
-
-      {/* Valor */}
-      <div className="text-right">
-        <span className="text-sm font-bold text-primary">{formatPrice(player.price)}</span>
-      </div>
+  const photoEl = (
+    <div className="w-9 h-9 flex-shrink-0 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
+      {player.imageUrl ? (
+        <img
+          src={player.imageUrl}
+          alt={player.name}
+          className="w-full h-full object-cover object-top"
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).style.display = 'none';
+            (e.currentTarget.parentElement as HTMLElement).innerHTML =
+              '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
+          }}
+        />
+      ) : (
+        <Users className="h-5 w-5 text-muted-foreground" />
+      )}
     </div>
+  );
+
+  return (
+    <>
+      {/* DESKTOP */}
+      <div className="hidden md:grid items-center border-b border-border/30 last:border-0 hover:bg-white/5 transition-colors px-3 py-2.5"
+        style={{ gridTemplateColumns: '44px 1fr 50px 200px 52px 52px 80px' }}>
+        <div className="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
+          {player.imageUrl ? (
+            <img src={player.imageUrl} alt={player.name} className="w-full h-full object-cover object-top"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = 'none';
+                (e.currentTarget.parentElement as HTMLElement).innerHTML =
+                  '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
+              }}
+            />
+          ) : <Users className="h-5 w-5 text-muted-foreground" />}
+        </div>
+        <div className="min-w-0 pl-2">
+          <p className="font-bold text-sm text-foreground truncate leading-tight">{player.name}</p>
+          {player.nationality && <span className="text-[11px] text-muted-foreground truncate block mt-0.5">{player.nationality}</span>}
+        </div>
+        <div className="flex items-center justify-center">
+          <span className="text-sm font-semibold text-muted-foreground">{player.age ?? '—'}</span>
+        </div>
+        <div className="flex items-center justify-center gap-1 flex-nowrap overflow-hidden">
+          {positions.map((pos: string) => (
+            <span key={pos} className="text-[10px] font-bold text-primary bg-primary/15 px-1.5 py-0.5 rounded whitespace-nowrap flex-shrink-0">{pos}</span>
+          ))}
+        </div>
+        <div className="flex items-center justify-center">
+          <span className={`text-base font-black leading-none ${getOvrColor(ovr)}`} style={{ fontFamily: "'Rajdhani', sans-serif" }}>{ovr}</span>
+        </div>
+        <div className="flex items-center justify-center">
+          <span className="text-base font-black leading-none text-blue-400" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{pot ?? '—'}</span>
+        </div>
+        <div className="text-right">
+          <span className="text-sm font-bold text-primary">{formatPrice(player.price)}</span>
+        </div>
+      </div>
+
+      {/* MOBILE */}
+      <div className="flex md:hidden items-center border-b border-border/30 last:border-0 hover:bg-white/5 transition-colors px-3 py-2.5 gap-2">
+        {photoEl}
+        {/* Nome + Nacionalidade + Posições */}
+        <div className="flex-1 min-w-0">
+          <p className="font-bold text-sm text-foreground truncate leading-tight">{player.name}</p>
+          <div className="flex items-center gap-1 mt-0.5 flex-wrap">
+            {player.nationality && <span className="text-[10px] text-muted-foreground">{player.nationality}</span>}
+            {player.age && <span className="text-[10px] text-muted-foreground/60">· {player.age}a</span>}
+          </div>
+          <div className="flex items-center gap-1 mt-1 flex-wrap">
+            {positions.map((pos: string) => (
+              <span key={pos} className="text-[9px] font-bold text-primary bg-primary/15 px-1 py-0.5 rounded whitespace-nowrap">{pos}</span>
+            ))}
+          </div>
+        </div>
+        {/* OVR + POT + Valor */}
+        <div className="flex flex-col items-end gap-0.5 flex-shrink-0">
+          <div className="flex items-center gap-2">
+            <span className={`text-sm font-black ${getOvrColor(ovr)}`} style={{ fontFamily: "'Rajdhani', sans-serif" }}>{ovr}</span>
+            <span className="text-sm font-black text-blue-400" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{pot ?? '—'}</span>
+          </div>
+          <span className="text-xs font-bold text-primary">{formatPrice(player.price)}</span>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -573,7 +600,7 @@ export default function TeamDetail() {
                   </span>
                 );
                 return (
-                  <div className="grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 50px 200px 52px 52px 80px'}}>
+                  <div className="hidden md:grid items-center px-3 py-2.5 border-b border-border/50" style={{backgroundColor: 'oklch(0.17 0.01 240)', gridTemplateColumns: '44px 1fr 50px 200px 52px 52px 80px'}}>
                     <div />
                     <button onClick={() => handleSort('name')} className={`pl-2 text-left text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${sortCol === 'name' ? 'text-primary' : 'text-muted-foreground'}`}>
                       Nome<SortIcon col="name" />
