@@ -409,6 +409,37 @@ export default function TeamDetail() {
               )}
             </div>
           </div>
+
+          {/* Filtros de ordenação — apenas mobile */}
+          <div className="flex md:hidden items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none mt-1">
+            <span className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider flex-shrink-0 pr-1">Ordenar:</span>
+            {([
+              { col: 'ovr', label: 'OVR' },
+              { col: 'pot', label: 'POT' },
+              { col: 'name', label: 'Nome' },
+              { col: 'age', label: 'Idade' },
+              { col: 'position', label: 'Pos.' },
+              { col: 'price', label: 'Valor' },
+            ] as { col: 'ovr' | 'pot' | 'price' | 'position' | 'name' | 'age'; label: string }[]).map(({ col, label }) => {
+              const isActive = sortCol === col;
+              return (
+                <button
+                  key={col}
+                  onClick={() => handleSort(col)}
+                  className={`flex-shrink-0 flex items-center gap-0.5 px-2.5 py-1 rounded-full text-[11px] font-bold border transition-colors ${
+                    isActive
+                      ? 'bg-primary/20 border-primary text-primary'
+                      : 'bg-secondary border-border/50 text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {label}
+                  {isActive && (
+                    <span className="text-[10px] leading-none">{sortDir === 'desc' ? '▼' : '▲'}</span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
