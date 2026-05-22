@@ -20,6 +20,7 @@ const navLinks = [
   { href: "/jogadores", label: "Jogadores" },
   { href: "/times", label: "Times" },
   { href: "/sorteio", label: "Sorteio" },
+  { href: "/monte-elenco", label: "Monte Elenco" },
 ];
 
 export default function Navbar() {

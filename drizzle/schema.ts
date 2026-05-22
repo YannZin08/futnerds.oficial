@@ -155,6 +155,32 @@ export const spinListItems = mysqlTable("spinListItems", {
 });
 export type SpinListItem = typeof spinListItems.$inferSelect;
 
+// Monte seu Elenco — elencos criados pelos usuários
+export const squads = mysqlTable("squads", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  teamId: int("teamId").notNull(),
+  teamName: varchar("teamName", { length: 128 }).notNull(),
+  teamLogoUrl: text("teamLogoUrl"),
+  shareToken: varchar("shareToken", { length: 64 }).unique(), // token público para compartilhamento
+  title: varchar("title", { length: 128 }), // título personalizado opcional
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Squad = typeof squads.$inferSelect;
+export type InsertSquad = typeof squads.$inferInsert;
+
+// Jogadores de um elenco
+export const squadPlayers = mysqlTable("squadPlayers", {
+  id: int("id").autoincrement().primaryKey(),
+  squadId: int("squadId").notNull(),
+  playerId: int("playerId").notNull(),
+  slot: mysqlEnum("slot", ["starter", "bench"]).default("starter").notNull(),
+  order: int("order").default(0).notNull(), // ordem dentro do slot
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type SquadPlayer = typeof squadPlayers.$inferSelect;
+
 // Histórico de sorteios
 export const spinHistory = mysqlTable("spinHistory", {
   id: int("id").autoincrement().primaryKey(),

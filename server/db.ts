@@ -1,6 +1,6 @@
 import { eq, desc, and, sql, count, like } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, news, players, userFavoritePlayers, userFavoriteTeams, InsertNews, InsertPlayer, spinListItems, spinHistory } from "../drizzle/schema";
+import { InsertUser, users, news, players, userFavoritePlayers, userFavoriteTeams, InsertNews, InsertPlayer, spinListItems, spinHistory, squads, squadPlayers } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -471,6 +471,174 @@ export async function removeSpinListItem(userId: number, teamId: number) {
   if (!db) return;
   await db.delete(spinListItems)
     .where(and(eq(spinListItems.userId, userId), eq(spinListItems.teamId, teamId)));
+}
+
+// ─── Monte seu Elenco ────────────────────────────────────────────────────────
+
+export async function getOrCreateSquad(userId: number, teamId: number) {
+  const db = await getDb();
+  if (!db) throw new Error('DB unavailable');
+  const { teams, leagues } = await import('../drizzle/schema');
+
+  // Buscar squad existente para esse usuário + time
+  const existing = await db.select().from(squads)
+    .where(and(eq(squads.userId, userId), eq(squads.teamId, teamId)))
+    .limit(1);
+
+  if (existing.length > 0) return existing[0];
+
+  // Buscar dados do time
+  const teamRow = await db.select({ name: teams.name, logoUrl: teams.logoUrl })
+    .from(teams).where(eq(teams.id, teamId)).limit(1);
+  if (!teamRow.length) throw new Error('Time não encontrado');
+
+  // Criar squad
+  const result = await db.insert(squads).values({
+    userId,
+    teamId,
+    teamName: teamRow[0].name,
+    teamLogoUrl: teamRow[0].logoUrl ?? null,
+  });
+  const squadId = (result as any).insertId as number;
+
+  // Popular com jogadores atuais do time (starters = top 11 por OVR, resto = bench)
+  const teamPlayers = await db.select({ id: players.id, overall: players.overall })
+    .from(players)
+    .where(eq(players.club, teamRow[0].name))
+    .orderBy(desc(players.overall));
+
+  if (teamPlayers.length > 0) {
+    const values = teamPlayers.map((p, idx) => ({
+      squadId,
+      playerId: p.id,
+      slot: (idx < 11 ? 'starter' : 'bench') as 'starter' | 'bench',
+      order: idx,
+    }));
+    await db.insert(squadPlayers).values(values);
+  }
+
+  const created = await db.select().from(squads).where(eq(squads.id, squadId)).limit(1);
+  return created[0];
+}
+
+export async function getSquadWithPlayers(squadId: number) {
+  const db = await getDb();
+  if (!db) return null;
+
+  const squad = await db.select().from(squads).where(eq(squads.id, squadId)).limit(1);
+  if (!squad.length) return null;
+
+  const members = await db.select({
+    id: squadPlayers.id,
+    squadId: squadPlayers.squadId,
+    playerId: squadPlayers.playerId,
+    slot: squadPlayers.slot,
+    order: squadPlayers.order,
+    name: players.name,
+    position: players.position,
+    altPositions: players.altPositions,
+    overall: players.overall,
+    potential: players.potential,
+    age: players.age,
+    nationality: players.nationality,
+    imageUrl: players.imageUrl,
+    clubLogoUrl: players.clubLogoUrl,
+    cardType: players.cardType,
+    price: players.price,
+  })
+    .from(squadPlayers)
+    .innerJoin(players, eq(squadPlayers.playerId, players.id))
+    .where(eq(squadPlayers.squadId, squadId))
+    .orderBy(squadPlayers.order);
+
+  return { ...squad[0], members };
+}
+
+export async function getSquadByToken(shareToken: string) {
+  const db = await getDb();
+  if (!db) return null;
+
+  const squad = await db.select().from(squads).where(eq(squads.shareToken, shareToken)).limit(1);
+  if (!squad.length) return null;
+
+  return await getSquadWithPlayers(squad[0].id);
+}
+
+export async function getUserSquads(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select({
+    id: squads.id,
+    teamId: squads.teamId,
+    teamName: squads.teamName,
+    teamLogoUrl: squads.teamLogoUrl,
+    title: squads.title,
+    shareToken: squads.shareToken,
+    updatedAt: squads.updatedAt,
+  })
+    .from(squads)
+    .where(eq(squads.userId, userId))
+    .orderBy(desc(squads.updatedAt));
+}
+
+export async function addPlayerToSquad(squadId: number, playerId: number, slot: 'starter' | 'bench') {
+  const db = await getDb();
+  if (!db) return;
+
+  // Evitar duplicata
+  const existing = await db.select({ id: squadPlayers.id })
+    .from(squadPlayers)
+    .where(and(eq(squadPlayers.squadId, squadId), eq(squadPlayers.playerId, playerId)))
+    .limit(1);
+  if (existing.length > 0) return;
+
+  // Calcular próxima ordem
+  const maxOrder = await db.select({ maxOrd: sql<number>`MAX(\`order\`)` })
+    .from(squadPlayers)
+    .where(and(eq(squadPlayers.squadId, squadId), eq(squadPlayers.slot, slot)));
+  const nextOrder = (maxOrder[0]?.maxOrd ?? -1) + 1;
+
+  await db.insert(squadPlayers).values({ squadId, playerId, slot, order: nextOrder });
+  await db.update(squads).set({ updatedAt: new Date() }).where(eq(squads.id, squadId));
+}
+
+export async function removePlayerFromSquad(squadId: number, playerId: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.delete(squadPlayers)
+    .where(and(eq(squadPlayers.squadId, squadId), eq(squadPlayers.playerId, playerId)));
+  await db.update(squads).set({ updatedAt: new Date() }).where(eq(squads.id, squadId));
+}
+
+export async function movePlayerSlot(squadId: number, playerId: number, slot: 'starter' | 'bench') {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(squadPlayers)
+    .set({ slot })
+    .where(and(eq(squadPlayers.squadId, squadId), eq(squadPlayers.playerId, playerId)));
+  await db.update(squads).set({ updatedAt: new Date() }).where(eq(squads.id, squadId));
+}
+
+export async function generateShareToken(squadId: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const token = Math.random().toString(36).slice(2) + Date.now().toString(36);
+  await db.update(squads).set({ shareToken: token }).where(eq(squads.id, squadId));
+  return token;
+}
+
+export async function deleteSquad(userId: number, squadId: number) {
+  const db = await getDb();
+  if (!db) return;
+  // Verificar ownership
+  const squad = await db.select({ id: squads.id })
+    .from(squads)
+    .where(and(eq(squads.id, squadId), eq(squads.userId, userId)))
+    .limit(1);
+  if (!squad.length) throw new Error('Elenco não encontrado ou sem permissão');
+  await db.delete(squadPlayers).where(eq(squadPlayers.squadId, squadId));
+  await db.delete(squads).where(eq(squads.id, squadId));
 }
 
 export async function addSpinHistory(userId: number, teamId: number) {

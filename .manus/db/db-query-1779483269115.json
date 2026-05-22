@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE `squadPlayers` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`squadId` int NOT NULL,\n\t`playerId` int NOT NULL,\n\t`slot` enum('starter','bench') NOT NULL DEFAULT 'starter',\n\t`order` int NOT NULL DEFAULT 0,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\tCONSTRAINT `squadPlayers_id` PRIMARY KEY(`id`)\n);\n\nCREATE TABLE `squads` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`userId` int NOT NULL,\n\t`teamId` int NOT NULL,\n\t`teamName` varchar(128) NOT NULL,\n\t`teamLogoUrl` text,\n\t`shareToken` varchar(64),\n\t`title` varchar(128),\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `squads_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `squads_shareToken_unique` UNIQUE(`shareToken`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute CREATE TABLE `squadPlayers` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`squadId` int NOT NULL,\n\t`playerId` int NOT NULL,\n\t`slot` enum('starter','bench') NOT NULL DEFAULT 'starter',\n\t`order` int NOT NULL DEFAULT 0,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\tCONSTRAINT `squadPlayers_id` PRIMARY KEY(`id`)\n);\n\nCREATE TABLE `squads` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`userId` int NOT NULL,\n\t`teamId` int NOT NULL,\n\t`teamName` varchar(128) NOT NULL,\n\t`teamLogoUrl` text,\n\t`shareToken` varchar(64),\n\t`title` varchar(128),\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `squads_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `squads_shareToken_unique` UNIQUE(`shareToken`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 432
+}

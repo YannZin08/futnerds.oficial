@@ -32,6 +32,15 @@ import {
   removeSpinListItem,
   addSpinHistory,
   getSpinHistory,
+  getOrCreateSquad,
+  getSquadWithPlayers,
+  getSquadByToken,
+  getUserSquads,
+  addPlayerToSquad,
+  removePlayerFromSquad,
+  movePlayerSlot,
+  generateShareToken,
+  deleteSquad,
 } from "./db";
 
 export const appRouter = router({
@@ -246,6 +255,94 @@ export const appRouter = router({
     getHistory: protectedProcedure
       .query(async ({ ctx }) => {
         return await getSpinHistory(ctx.user.id);
+      }),
+  }),
+  // ─── Monte seu Elenco ──────────────────────────────────────────────────────────────────────────────────────
+  squads: router({
+    // Buscar ou criar elenco para um time (protegido)
+    getOrCreate: protectedProcedure
+      .input(z.object({ teamId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        return await getOrCreateSquad(ctx.user.id, input.teamId);
+      }),
+
+    // Buscar elenco com jogadores (protegido)
+    getWithPlayers: protectedProcedure
+      .input(z.object({ squadId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        const squad = await getSquadWithPlayers(input.squadId);
+        if (!squad || squad.userId !== ctx.user.id) throw new Error('Elenco não encontrado');
+        return squad;
+      }),
+
+    // Listar elencos do usuário
+    mySquads: protectedProcedure
+      .query(async ({ ctx }) => {
+        return await getUserSquads(ctx.user.id);
+      }),
+
+    // Adicionar jogador
+    addPlayer: protectedProcedure
+      .input(z.object({
+        squadId: z.number(),
+        playerId: z.number(),
+        slot: z.enum(['starter', 'bench']),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        // Verificar ownership
+        const squad = await getSquadWithPlayers(input.squadId);
+        if (!squad || squad.userId !== ctx.user.id) throw new Error('Sem permissão');
+        await addPlayerToSquad(input.squadId, input.playerId, input.slot);
+        return { success: true };
+      }),
+
+    // Remover jogador
+    removePlayer: protectedProcedure
+      .input(z.object({ squadId: z.number(), playerId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        const squad = await getSquadWithPlayers(input.squadId);
+        if (!squad || squad.userId !== ctx.user.id) throw new Error('Sem permissão');
+        await removePlayerFromSquad(input.squadId, input.playerId);
+        return { success: true };
+      }),
+
+    // Mover jogador entre titular/reserva
+    movePlayer: protectedProcedure
+      .input(z.object({
+        squadId: z.number(),
+        playerId: z.number(),
+        slot: z.enum(['starter', 'bench']),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const squad = await getSquadWithPlayers(input.squadId);
+        if (!squad || squad.userId !== ctx.user.id) throw new Error('Sem permissão');
+        await movePlayerSlot(input.squadId, input.playerId, input.slot);
+        return { success: true };
+      }),
+
+    // Gerar link de compartilhamento
+    share: protectedProcedure
+      .input(z.object({ squadId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        const squad = await getSquadWithPlayers(input.squadId);
+        if (!squad || squad.userId !== ctx.user.id) throw new Error('Sem permissão');
+        const token = await generateShareToken(input.squadId);
+        return { token };
+      }),
+
+    // Visualizar elenco compartilhado (público)
+    byToken: publicProcedure
+      .input(z.object({ token: z.string() }))
+      .query(async ({ input }) => {
+        return await getSquadByToken(input.token);
+      }),
+
+    // Deletar elenco
+    delete: protectedProcedure
+      .input(z.object({ squadId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await deleteSquad(ctx.user.id, input.squadId);
+        return { success: true };
       }),
   }),
 });

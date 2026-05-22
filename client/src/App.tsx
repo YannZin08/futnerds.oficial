@@ -10,6 +10,8 @@ import Perfil from "./pages/Perfil";
 import Times from "./pages/Times";
 import TeamDetail from "./pages/TeamDetail";
 import Sorteio from "./pages/Sorteio";
+import MonteElenco from "./pages/MonteElenco";
+import ElencoPublico from "./pages/ElencoPublico";
 
 function Router() {
   return (
@@ -20,6 +22,8 @@ function Router() {
       <Route path="/times" component={Times} />
       <Route path="/times/:id" component={TeamDetail} />
       <Route path="/sorteio" component={Sorteio} />
+      <Route path="/monte-elenco" component={MonteElenco} />
+      <Route path="/elenco/:token" component={ElencoPublico} />
       <Route path="/noticias"><Redirect to="/" /></Route>
       <Route path="/dashboard"><Redirect to="/" /></Route>
       <Route path="/404" component={NotFound} />

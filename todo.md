@@ -166,3 +166,11 @@
 - [ ] Exibir resultado com logo, nome, liga, país e dificuldade do time sorteado
 - [ ] Histórico dos últimos 5 sorteios
 - [ ] Registrar rota /sorteio no App.tsx e adicionar ao menu de navegação
+
+## Monte seu Elenco (2026-05-22)
+- [x] Criar tabelas `squads` e `squadPlayers` no schema e migrar banco
+- [x] Implementar helpers de DB: getOrCreateSquad, getSquadWithPlayers, addPlayerToSquad, removePlayerFromSquad, movePlayerSlot, generateShareToken, deleteSquad, getUserSquads, getSquadByToken
+- [x] Criar procedures tRPC: squads.getOrCreate, getWithPlayers, mySquads, addPlayer, removePlayer, movePlayer, share, byToken, delete
+- [x] Criar página /monte-elenco com seleção de time, grade titulares/reservas, busca de jogadores
+- [x] Criar página pública /elenco/:token para visualização do elenco compartilhado
+- [x] Registrar rotas no App.tsx e adicionar "Monte Elenco" ao menu de navegação
