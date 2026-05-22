@@ -372,10 +372,19 @@ export default function MonteElenco() {
       {/* Header */}
       <div className="border-b border-zinc-800 bg-zinc-950">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-4">
-          {squadId && (
+          {squadId ? (
             <button
               onClick={() => setSquadId(null)}
               className="p-2 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
+              title="Voltar para meus elencos"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+          ) : (
+            <button
+              onClick={() => window.history.back()}
+              className="p-2 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
+              title="Voltar"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
