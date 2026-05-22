@@ -497,13 +497,14 @@ export async function getOrCreateSquad(userId: number, teamId: number) {
       .where(sql`LOWER(${players.club}) = LOWER(${teamRow[0].name})`)
       .orderBy(desc(players.overall));
     if (teamPlayers.length > 0) {
-      const values = teamPlayers.map((p, idx) => ({
-        squadId: sqId,
-        playerId: p.id,
-        slot: (idx < 11 ? 'starter' : 'bench') as 'starter' | 'bench',
-        order: idx,
-      }));
-      await db!.insert(squadPlayers).values(values);
+      // Inserir um por um para evitar bug do Drizzle em batch inserts com MySQL2
+      for (let idx = 0; idx < teamPlayers.length; idx++) {
+        const p = teamPlayers[idx];
+        const slotVal = idx < 11 ? 'starter' : 'bench';
+        await db!.execute(
+          sql`INSERT INTO \`squadPlayers\` (\`squadId\`, \`playerId\`, \`slot\`, \`order\`) VALUES (${sqId}, ${p.id}, ${slotVal}, ${idx})`
+        );
+      }
     }
   }
 

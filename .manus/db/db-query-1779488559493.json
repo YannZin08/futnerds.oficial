@@ -1,0 +1,16 @@
+{
+  "query": "-- Remover entradas de squadPlayers onde squadId = 0 (bug do batch insert)\nDELETE FROM squadPlayers WHERE squadId = 0 OR squadId IS NULL;\n\n-- Ver squads existentes para diagnóstico\nSELECT s.id, s.teamName, s.userId, COUNT(sp.id) as playerCount\nFROM squads s\nLEFT JOIN squadPlayers sp ON sp.squadId = s.id\nGROUP BY s.id, s.teamName, s.userId;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Remover entradas de squadPlayers onde squadId = 0 (bug do batch insert)\nDELETE FROM squadPlayers WHERE squadId = 0 OR squadId IS NULL;\n\n-- Ver squads existentes para diagnóstico\nSELECT s.id, s.teamName, s.userId, COUNT(sp.id) as playerCount\nFROM squads s\nLEFT JOIN squadPlayers sp ON sp.squadId = s.id\nGROUP BY s.id, s.teamName, s.userId;",
+  "rows": [
+    {
+      "id": "3",
+      "teamName": "Genoa",
+      "userId": "1",
+      "playerCount": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tteamName\tuserId\tplayerCount\n3\tGenoa\t1\t0\n",
+  "stderr": "",
+  "execution_time_ms": 295
+}
