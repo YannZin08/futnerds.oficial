@@ -493,34 +493,34 @@ export async function getOrCreateSquad(userId: number, teamId: number) {
 
   // Função auxiliar para popular jogadores no squad
   async function populateSquadPlayers(sqId: number) {
-    const teamPlayers = await db!.select()
-      .from(players)
-      .where(sql`LOWER(${players.club}) = LOWER(${teamRow[0].name})`)
-      .orderBy(desc(players.overall));
-    if (teamPlayers.length > 0) {
-      // Usar mysql2 raw para garantir interpolação correta dos valores
-      // Parsear a DATABASE_URL manualmente para incluir SSL corretamente
-      const dbUrl = new URL(process.env.DATABASE_URL!);
-      const conn = await mysql.createConnection({
-        host: dbUrl.hostname,
-        port: parseInt(dbUrl.port || '4000'),
-        user: decodeURIComponent(dbUrl.username),
-        password: decodeURIComponent(dbUrl.password),
-        database: dbUrl.pathname.replace('/', ''),
-        ssl: { rejectUnauthorized: true },
-      });
-      try {
-        for (let idx = 0; idx < teamPlayers.length; idx++) {
-          const p = teamPlayers[idx];
-          const slotVal = idx < 11 ? 'starter' : 'bench';
-          await conn.execute(
-            'INSERT INTO `squadPlayers` (`squadId`, `playerId`, `slot`, `order`) VALUES (?, ?, ?, ?)',
-            [sqId, p.id, slotVal, idx]
-          );
-        }
-      } finally {
-        await conn.end();
+    // Usar mysql2 raw completamente para evitar problemas de mapeamento do Drizzle
+    const dbUrl = new URL(process.env.DATABASE_URL!);
+    const conn = await mysql.createConnection({
+      host: dbUrl.hostname,
+      port: parseInt(dbUrl.port || '4000'),
+      user: decodeURIComponent(dbUrl.username),
+      password: decodeURIComponent(dbUrl.password),
+      database: dbUrl.pathname.replace('/', ''),
+      ssl: { rejectUnauthorized: true },
+    });
+    try {
+      const [teamPlayers] = await conn.execute(
+        'SELECT id, overall FROM players WHERE LOWER(club) = LOWER(?) ORDER BY overall DESC',
+        [teamRow[0].name]
+      ) as any[];
+      const numSquadId = Number(sqId);
+      for (let idx = 0; idx < teamPlayers.length; idx++) {
+        const p = teamPlayers[idx];
+        const numPlayerId = Number(p.id);
+        if (!numSquadId || !numPlayerId) continue;
+        const slotVal = idx < 11 ? 'starter' : 'bench';
+        await conn.execute(
+          'INSERT INTO `squadPlayers` (`squadId`, `playerId`, `slot`, `order`) VALUES (?, ?, ?, ?)',
+          [numSquadId, numPlayerId, slotVal, idx]
+        );
       }
+    } finally {
+      await conn.end();
     }
   }
 
