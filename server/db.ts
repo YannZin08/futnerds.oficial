@@ -1,5 +1,6 @@
 import { eq, desc, and, sql, count, like } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
 import { InsertUser, users, news, players, userFavoritePlayers, userFavoriteTeams, InsertNews, InsertPlayer, spinListItems, spinHistory, squads, squadPlayers } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -497,13 +498,19 @@ export async function getOrCreateSquad(userId: number, teamId: number) {
       .where(sql`LOWER(${players.club}) = LOWER(${teamRow[0].name})`)
       .orderBy(desc(players.overall));
     if (teamPlayers.length > 0) {
-      // Inserir um por um para evitar bug do Drizzle em batch inserts com MySQL2
-      for (let idx = 0; idx < teamPlayers.length; idx++) {
-        const p = teamPlayers[idx];
-        const slotVal = idx < 11 ? 'starter' : 'bench';
-        await db!.execute(
-          sql`INSERT INTO \`squadPlayers\` (\`squadId\`, \`playerId\`, \`slot\`, \`order\`) VALUES (${sqId}, ${p.id}, ${slotVal}, ${idx})`
-        );
+      // Usar mysql2 raw para garantir interpolação correta dos valores
+      const conn = await mysql.createConnection(process.env.DATABASE_URL!);
+      try {
+        for (let idx = 0; idx < teamPlayers.length; idx++) {
+          const p = teamPlayers[idx];
+          const slotVal = idx < 11 ? 'starter' : 'bench';
+          await conn.execute(
+            'INSERT INTO `squadPlayers` (`squadId`, `playerId`, `slot`, `order`) VALUES (?, ?, ?, ?)',
+            [sqId, p.id, slotVal, idx]
+          );
+        }
+      } finally {
+        await conn.end();
       }
     }
   }
