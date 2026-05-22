@@ -499,7 +499,16 @@ export async function getOrCreateSquad(userId: number, teamId: number) {
       .orderBy(desc(players.overall));
     if (teamPlayers.length > 0) {
       // Usar mysql2 raw para garantir interpolação correta dos valores
-      const conn = await mysql.createConnection(process.env.DATABASE_URL!);
+      // Parsear a DATABASE_URL manualmente para incluir SSL corretamente
+      const dbUrl = new URL(process.env.DATABASE_URL!);
+      const conn = await mysql.createConnection({
+        host: dbUrl.hostname,
+        port: parseInt(dbUrl.port || '4000'),
+        user: decodeURIComponent(dbUrl.username),
+        password: decodeURIComponent(dbUrl.password),
+        database: dbUrl.pathname.replace('/', ''),
+        ssl: { rejectUnauthorized: true },
+      });
       try {
         for (let idx = 0; idx < teamPlayers.length; idx++) {
           const p = teamPlayers[idx];

@@ -1,0 +1,12 @@
+{
+  "query": "-- Squads existentes\nSELECT id, teamName, userId FROM squads;\n\n-- Verificar se há jogadores com club = teamName de algum squad\nSELECT t.name as teamName, COUNT(p.id) as playerCount\nFROM teams t\nLEFT JOIN players p ON LOWER(p.club) = LOWER(t.name)\nWHERE t.id IN (SELECT DISTINCT teamId FROM squads)\nGROUP BY t.id, t.name;\n\n-- Ver exemplos de nomes de clube nos jogadores vs times\nSELECT DISTINCT p.club FROM players LIMIT 10;\nSELECT name FROM teams LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute -- Squads existentes\nSELECT id, teamName, userId FROM squads;\n\n-- Verificar se há jogadores com club = teamName de algum squad\nSELECT t.name as teamName, COUNT(p.id) as playerCount\nFROM teams t\nLEFT JOIN players p ON LOWER(p.club) = LOWER(t.name)\nWHERE t.id IN (SELECT DISTINCT teamId FROM squads)\nGROUP BY t.id, t.name;\n\n-- Ver exemplos de nomes de clube nos jogadores vs times\nSELECT DISTINCT p.club FROM players LIMIT 10;\nSELECT name FROM teams LIMIT 10;",
+  "returncode": 1,
+  "logs": [
+    "id\tteamName\tuserId",
+    "30002\tGenoa\t1",
+    "teamName\tplayerCount",
+    "Genoa\t27",
+    "ERROR 1054 (42S22) at line 12: Unknown column 'p.club' in 'field list'"
+  ]
+}
