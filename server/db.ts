@@ -477,78 +477,86 @@ export async function removeSpinListItem(userId: number, teamId: number) {
 // ─── Monte seu Elenco ────────────────────────────────────────────────────────
 
 export async function getOrCreateSquad(userId: number, teamId: number) {
-  const db = await getDb();
-  if (!db) throw new Error('DB unavailable');
-  const { teams, leagues } = await import('../drizzle/schema');
-
-  // Buscar squad existente para esse usuário + time
-  const existing = await db.select().from(squads)
-    .where(and(eq(squads.userId, userId), eq(squads.teamId, teamId)))
-    .limit(1);
-
-  // Buscar dados do time
-  const teamRow = await db.select({ name: teams.name, logoUrl: teams.logoUrl })
-    .from(teams).where(eq(teams.id, teamId)).limit(1);
-  if (!teamRow.length) throw new Error('Time não encontrado');
-
-  // Função auxiliar para popular jogadores no squad
-  async function populateSquadPlayers(sqId: number) {
-    // Usar mysql2 raw completamente para evitar problemas de mapeamento do Drizzle
-    const dbUrl = new URL(process.env.DATABASE_URL!);
-    const conn = await mysql.createConnection({
-      host: dbUrl.hostname,
-      port: parseInt(dbUrl.port || '4000'),
-      user: decodeURIComponent(dbUrl.username),
-      password: decodeURIComponent(dbUrl.password),
-      database: dbUrl.pathname.replace('/', ''),
-      ssl: { rejectUnauthorized: true },
-    });
-    try {
-      const [teamPlayers] = await conn.execute(
-        'SELECT id, overall FROM players WHERE LOWER(club) = LOWER(?) ORDER BY overall DESC',
-        [teamRow[0].name]
-      ) as any[];
-      const numSquadId = Number(sqId);
-      for (let idx = 0; idx < teamPlayers.length; idx++) {
-        const p = teamPlayers[idx];
-        const numPlayerId = Number(p.id);
-        if (!numSquadId || !numPlayerId) continue;
-        const slotVal = idx < 11 ? 'starter' : 'bench';
-        await conn.execute(
-          'INSERT INTO `squadPlayers` (`squadId`, `playerId`, `slot`, `order`) VALUES (?, ?, ?, ?)',
-          [numSquadId, numPlayerId, slotVal, idx]
-        );
-      }
-    } finally {
-      await conn.end();
-    }
-  }
-
-  if (existing.length > 0) {
-    const sqId = existing[0].id;
-    // Verificar se o squad existente tem jogadores; se não, popular agora
-    const memberCount = await db.select({ c: count() }).from(squadPlayers)
-      .where(eq(squadPlayers.squadId, sqId));
-    if ((memberCount[0]?.c ?? 0) === 0) {
-      await populateSquadPlayers(sqId);
-    }
-    return existing[0];
-  }
-
-  // Criar squad novo
-  const result = await db.insert(squads).values({
-    userId,
-    teamId,
-    teamName: teamRow[0].name,
-    teamLogoUrl: teamRow[0].logoUrl ?? null,
+  // Usar mysql2 raw completamente para evitar problemas de mapeamento do Drizzle com BigInt/count
+  const dbUrl = new URL(process.env.DATABASE_URL!);
+  const conn = await mysql.createConnection({
+    host: dbUrl.hostname,
+    port: parseInt(dbUrl.port || '4000'),
+    user: decodeURIComponent(dbUrl.username),
+    password: decodeURIComponent(dbUrl.password),
+    database: dbUrl.pathname.replace('/', ''),
+    ssl: { rejectUnauthorized: true },
   });
-  const squadId = (result as any).insertId as number;
 
-  // Popular com jogadores atuais do time (starters = top 11 por OVR, resto = bench)
-  await populateSquadPlayers(squadId);
+  try {
+    // Buscar dados do time
+    const [teamRows] = await conn.execute(
+      'SELECT id, name, logoUrl FROM teams WHERE id = ? LIMIT 1',
+      [teamId]
+    ) as any[];
+    if (!teamRows.length) throw new Error('Time não encontrado');
+    const teamName = teamRows[0].name;
+    const teamLogoUrl = teamRows[0].logoUrl ?? null;
 
-  const created = await db.select().from(squads).where(eq(squads.id, squadId)).limit(1);
-  return created[0];
+    // Buscar squad existente
+    const [existingRows] = await conn.execute(
+      'SELECT * FROM squads WHERE userId = ? AND teamId = ? LIMIT 1',
+      [userId, teamId]
+    ) as any[];
+
+    let squadId: number;
+
+    if (existingRows.length > 0) {
+      squadId = Number(existingRows[0].id);
+      // Verificar se tem jogadores
+      const [countRows] = await conn.execute(
+        'SELECT COUNT(*) as c FROM squadPlayers WHERE squadId = ?',
+        [squadId]
+      ) as any[];
+      const playerCount = Number(countRows[0]?.c ?? 0);
+      if (playerCount === 0) {
+        // Popular com jogadores do time
+        await populateSquadPlayersRaw(conn, squadId, teamName);
+      }
+    } else {
+      // Criar squad novo
+      const now = new Date();
+      const shareToken = Math.random().toString(36).substring(2, 15);
+      const [insertResult] = await conn.execute(
+        'INSERT INTO squads (userId, teamId, teamName, teamLogoUrl, shareToken, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [userId, teamId, teamName, teamLogoUrl, shareToken, now, now]
+      ) as any[];
+      squadId = Number(insertResult.insertId);
+      // Popular com jogadores do time
+      await populateSquadPlayersRaw(conn, squadId, teamName);
+    }
+
+    // Buscar o squad atualizado
+    const [squadRows] = await conn.execute(
+      'SELECT * FROM squads WHERE id = ? LIMIT 1',
+      [squadId]
+    ) as any[];
+    return squadRows[0] ?? null;
+  } finally {
+    await conn.end();
+  }
+}
+
+async function populateSquadPlayersRaw(conn: any, squadId: number, teamName: string) {
+  const [teamPlayers] = await conn.execute(
+    'SELECT id FROM players WHERE LOWER(club) = LOWER(?) ORDER BY overall DESC',
+    [teamName]
+  ) as any[];
+  for (let idx = 0; idx < teamPlayers.length; idx++) {
+    const playerId = Number(teamPlayers[idx].id);
+    if (!playerId) continue;
+    const slotVal = idx < 11 ? 'starter' : 'bench';
+    const now = new Date();
+    await conn.execute(
+      'INSERT INTO squadPlayers (squadId, playerId, slot, `order`, createdAt) VALUES (?, ?, ?, ?, ?)',
+      [squadId, playerId, slotVal, idx, now]
+    );
+  }
 }
 
 export async function getSquadWithPlayers(squadId: number) {

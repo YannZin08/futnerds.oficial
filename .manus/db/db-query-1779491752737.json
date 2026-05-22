@@ -1,0 +1,24 @@
+{
+  "query": "\nSELECT s.id, s.userId, s.teamId, t.name as teamName, COUNT(sp.id) as playerCount\nFROM squads s\nLEFT JOIN teams t ON s.teamId = t.id\nLEFT JOIN squadPlayers sp ON sp.squadId = s.id\nGROUP BY s.id, s.userId, s.teamId, t.name;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 35VGbBGUduuhukx.298441852ba3 --database hhB4oykfDQM9yCvhQGaX3n --execute \nSELECT s.id, s.userId, s.teamId, t.name as teamName, COUNT(sp.id) as playerCount\nFROM squads s\nLEFT JOIN teams t ON s.teamId = t.id\nLEFT JOIN squadPlayers sp ON sp.squadId = s.id\nGROUP BY s.id, s.userId, s.teamId, t.name;\n",
+  "rows": [
+    {
+      "id": "90002",
+      "userId": "1",
+      "teamId": "60260",
+      "teamName": "AC Milan",
+      "playerCount": "0"
+    },
+    {
+      "id": "90001",
+      "userId": "1",
+      "teamId": "60276",
+      "teamName": "Genoa",
+      "playerCount": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\tteamId\tteamName\tplayerCount\n90002\t1\t60260\tAC Milan\t0\n90001\t1\t60276\tGenoa\t0\n",
+  "stderr": "",
+  "execution_time_ms": 280
+}
