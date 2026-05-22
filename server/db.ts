@@ -493,7 +493,7 @@ export async function getOrCreateSquad(userId: number, teamId: number) {
 
   // Função auxiliar para popular jogadores no squad
   async function populateSquadPlayers(sqId: number) {
-    const teamPlayers = await db!.select({ id: players.id, overall: players.overall })
+    const teamPlayers = await db!.select()
       .from(players)
       .where(sql`LOWER(${players.club}) = LOWER(${teamRow[0].name})`)
       .orderBy(desc(players.overall));
