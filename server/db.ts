@@ -485,14 +485,40 @@ export async function getOrCreateSquad(userId: number, teamId: number) {
     .where(and(eq(squads.userId, userId), eq(squads.teamId, teamId)))
     .limit(1);
 
-  if (existing.length > 0) return existing[0];
-
   // Buscar dados do time
   const teamRow = await db.select({ name: teams.name, logoUrl: teams.logoUrl })
     .from(teams).where(eq(teams.id, teamId)).limit(1);
   if (!teamRow.length) throw new Error('Time não encontrado');
 
-  // Criar squad
+  // Função auxiliar para popular jogadores no squad
+  async function populateSquadPlayers(sqId: number) {
+    const teamPlayers = await db!.select({ id: players.id, overall: players.overall })
+      .from(players)
+      .where(sql`LOWER(${players.club}) = LOWER(${teamRow[0].name})`)
+      .orderBy(desc(players.overall));
+    if (teamPlayers.length > 0) {
+      const values = teamPlayers.map((p, idx) => ({
+        squadId: sqId,
+        playerId: p.id,
+        slot: (idx < 11 ? 'starter' : 'bench') as 'starter' | 'bench',
+        order: idx,
+      }));
+      await db!.insert(squadPlayers).values(values);
+    }
+  }
+
+  if (existing.length > 0) {
+    const sqId = existing[0].id;
+    // Verificar se o squad existente tem jogadores; se não, popular agora
+    const memberCount = await db.select({ c: count() }).from(squadPlayers)
+      .where(eq(squadPlayers.squadId, sqId));
+    if ((memberCount[0]?.c ?? 0) === 0) {
+      await populateSquadPlayers(sqId);
+    }
+    return existing[0];
+  }
+
+  // Criar squad novo
   const result = await db.insert(squads).values({
     userId,
     teamId,
@@ -502,20 +528,7 @@ export async function getOrCreateSquad(userId: number, teamId: number) {
   const squadId = (result as any).insertId as number;
 
   // Popular com jogadores atuais do time (starters = top 11 por OVR, resto = bench)
-  const teamPlayers = await db.select({ id: players.id, overall: players.overall })
-    .from(players)
-    .where(eq(players.club, teamRow[0].name))
-    .orderBy(desc(players.overall));
-
-  if (teamPlayers.length > 0) {
-    const values = teamPlayers.map((p, idx) => ({
-      squadId,
-      playerId: p.id,
-      slot: (idx < 11 ? 'starter' : 'bench') as 'starter' | 'bench',
-      order: idx,
-    }));
-    await db.insert(squadPlayers).values(values);
-  }
+  await populateSquadPlayers(squadId);
 
   const created = await db.select().from(squads).where(eq(squads.id, squadId)).limit(1);
   return created[0];
