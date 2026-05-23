@@ -48,6 +48,29 @@ interface Squad {
   members: SquadMember[];
 }
 
+// ─── Avatar com fallback de iniciais ────────────────────────────────────────
+function PlayerAvatar({ name, imageUrl, className = "w-9 h-9" }: { name: string; imageUrl: string | null; className?: string }) {
+  const [imgError, setImgError] = useState(false);
+  const initials = name.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? '').join('');
+  const colors = ['bg-green-700','bg-blue-700','bg-purple-700','bg-red-700','bg-yellow-700','bg-pink-700','bg-indigo-700','bg-teal-700'];
+  const color = colors[(name.charCodeAt(0) ?? 0) % colors.length];
+  if (!imageUrl || imgError) {
+    return (
+      <div className={`${className} rounded-full flex-shrink-0 flex items-center justify-center ${color} text-white font-bold text-xs`}>
+        {initials}
+      </div>
+    );
+  }
+  return (
+    <img
+      src={imageUrl}
+      alt={name}
+      className={`${className} rounded-full object-cover bg-zinc-800 flex-shrink-0`}
+      onError={() => setImgError(true)}
+    />
+  );
+}
+
 // ─── Card de jogador no elenco ────────────────────────────────────────────────
 function PlayerCard({
   member,
@@ -58,19 +81,13 @@ function PlayerCard({
   onRemove: (playerId: number) => void;
   onMove: (playerId: number, slot: "starter" | "bench") => void;
 }) {
-  const FALLBACK = "https://cdn.sofifa.net/player_0.svg";
   const otherSlot = member.slot === "starter" ? "bench" : "starter";
   const otherLabel = member.slot === "starter" ? "Reserva" : "Titular";
 
   return (
     <div className="flex items-center gap-2 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 group hover:border-green-500/40 transition-colors">
       {/* Foto */}
-      <img
-        src={member.imageUrl || FALLBACK}
-        alt={member.name}
-        className="w-9 h-9 rounded-full object-cover bg-zinc-800 flex-shrink-0"
-        onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK; }}
-      />
+      <PlayerAvatar name={member.name} imageUrl={member.imageUrl} className="w-9 h-9" />
       {/* Info */}
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-white truncate">{member.name}</p>
@@ -195,8 +212,6 @@ function AddPlayerSearch({
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  const FALLBACK = "https://cdn.sofifa.net/player_0.svg";
-
   return (
     <div ref={ref} className="relative">
       <div className="flex gap-2 mb-2">
@@ -234,12 +249,7 @@ function AddPlayerSearch({
                 onClick={() => addPlayer.mutate({ squadId, playerId: p.id, slot })}
                 className={`w-full flex items-center gap-3 px-4 py-2.5 transition-colors text-left ${already ? "opacity-40 cursor-not-allowed" : "hover:bg-zinc-800"}`}
               >
-                <img
-                  src={p.imageUrl || FALLBACK}
-                  alt={p.name}
-                  className="w-8 h-8 rounded-full object-cover bg-zinc-800 flex-shrink-0"
-                  onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK; }}
-                />
+                <PlayerAvatar name={p.name} imageUrl={p.imageUrl} className="w-8 h-8" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white truncate">{p.name}</p>
                   <p className="text-xs text-zinc-500">{p.position} · {p.club}</p>
