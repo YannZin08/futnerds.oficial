@@ -36,6 +36,20 @@ interface SquadMember {
   nationality: string;
   imageUrl: string | null;
   cardType: string;
+  price: number | null;
+}
+
+function formatPrice(price: number | null | undefined): string {
+  if (!price) return '—';
+  if (price >= 1_000_000) {
+    const m = price / 1_000_000;
+    return `€${m % 1 === 0 ? m : m.toFixed(1)}M`;
+  }
+  if (price >= 1_000) {
+    const k = price / 1_000;
+    return `€${k % 1 === 0 ? k : k.toFixed(0)}K`;
+  }
+  return `€${price}`;
 }
 
 interface Squad {
@@ -96,8 +110,11 @@ function PlayerCard({
           {member.age && <span className="text-xs text-zinc-600">· {member.age} anos</span>}
         </div>
       </div>
-      {/* OVR */}
-      <span className="text-sm font-bold text-green-400 flex-shrink-0">{member.overall}</span>
+      {/* Valor + OVR */}
+      <div className="flex flex-col items-end flex-shrink-0 gap-0.5">
+        <span className="text-sm font-bold text-green-400">{member.overall}</span>
+        {member.price ? <span className="text-xs text-zinc-400">{formatPrice(member.price)}</span> : null}
+      </div>
       {/* Ações */}
       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
         <button
