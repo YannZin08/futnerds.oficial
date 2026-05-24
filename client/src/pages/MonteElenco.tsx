@@ -614,6 +614,20 @@ export default function MonteElenco() {
                         <p className="text-xs text-zinc-500">OVR Médio</p>
                       </div>
                     </div>
+                    {/* Valor total do elenco */}
+                    <div className="bg-zinc-800 rounded-lg p-3 text-center">
+                      <p className="text-xl font-bold text-yellow-400">
+                        {(() => {
+                          const total = squad.members.reduce((sum, m) => sum + (m.price ?? 0), 0);
+                          if (total === 0) return '—';
+                          if (total >= 1_000_000_000) return `€${(total / 1_000_000_000).toFixed(1)}B`;
+                          if (total >= 1_000_000) return `€${(total / 1_000_000).toFixed(0)}M`;
+                          if (total >= 1_000) return `€${(total / 1_000).toFixed(0)}K`;
+                          return `€${total}`;
+                        })()}
+                      </p>
+                      <p className="text-xs text-zinc-500">Valor Total do Elenco</p>
+                    </div>
                     {squad.shareToken && (
                       <div className="mt-2">
                         <p className="text-xs text-zinc-500 mb-1">Link público:</p>
