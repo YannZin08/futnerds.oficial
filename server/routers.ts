@@ -41,6 +41,8 @@ import {
   movePlayerSlot,
   generateShareToken,
   deleteSquad,
+  renameSquad,
+  resetSquad,
 } from "./db";
 
 export const appRouter = router({
@@ -342,6 +344,20 @@ export const appRouter = router({
       .input(z.object({ squadId: z.number() }))
       .mutation(async ({ ctx, input }) => {
         await deleteSquad(ctx.user.id, input.squadId);
+        return { success: true };
+      }),
+    // Renomear elenco (título personalizado)
+    rename: protectedProcedure
+      .input(z.object({ squadId: z.number(), title: z.string().min(1).max(128) }))
+      .mutation(async ({ ctx, input }) => {
+        await renameSquad(ctx.user.id, input.squadId, input.title);
+        return { success: true };
+      }),
+    // Resetar elenco para o elenco original do time
+    reset: protectedProcedure
+      .input(z.object({ squadId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await resetSquad(ctx.user.id, input.squadId);
         return { success: true };
       }),
   }),

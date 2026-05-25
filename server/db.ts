@@ -679,6 +679,47 @@ export async function deleteSquad(userId: number, squadId: number) {
   await db.delete(squads).where(eq(squads.id, squadId));
 }
 
+export async function renameSquad(userId: number, squadId: number, title: string) {
+  const db = await getDb();
+  if (!db) return;
+  const squad = await db.select({ id: squads.id, teamName: squads.teamName })
+    .from(squads)
+    .where(and(eq(squads.id, squadId), eq(squads.userId, userId)))
+    .limit(1);
+  if (!squad.length) throw new Error('Elenco não encontrado ou sem permissão');
+  await db.update(squads).set({ title }).where(eq(squads.id, squadId));
+}
+
+export async function resetSquad(userId: number, squadId: number) {
+  const db = await getDb();
+  if (!db) return;
+  const squad = await db.select({ id: squads.id, teamName: squads.teamName })
+    .from(squads)
+    .where(and(eq(squads.id, squadId), eq(squads.userId, userId)))
+    .limit(1);
+  if (!squad.length) throw new Error('Elenco não encontrado ou sem permissão');
+  // Deletar todos os jogadores atuais
+  await db.delete(squadPlayers).where(eq(squadPlayers.squadId, squadId));
+  // Recriar com os jogadores atuais do time
+  const teamName = squad[0].teamName;
+  const { ENV } = await import('./_core/env');
+  const mysql = await import('mysql2/promise');
+  const urlObj = new URL(ENV.databaseUrl);
+  const conn = await mysql.createConnection({
+    host: urlObj.hostname,
+    port: urlObj.port ? parseInt(urlObj.port) : 4000,
+    user: urlObj.username,
+    password: urlObj.password,
+    database: urlObj.pathname.slice(1),
+    ssl: { rejectUnauthorized: true },
+  });
+  try {
+    await populateSquadPlayersRaw(conn, squadId, teamName);
+  } finally {
+    await conn.end();
+  }
+}
+
 export async function addSpinHistory(userId: number, teamId: number) {
   const db = await getDb();
   if (!db) return;

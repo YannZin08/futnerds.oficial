@@ -19,6 +19,8 @@ import {
   Plus,
   X,
   Shield,
+  RotateCcw,
+  Pencil,
 } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -289,6 +291,9 @@ export default function MonteElenco() {
   const [, navigate] = useLocation();
   const [squadId, setSquadId] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
+  const [showTitleModal, setShowTitleModal] = useState(false);
+  const [titleInput, setTitleInput] = useState("");
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
   const utils = trpc.useUtils();
 
   // Buscar elenco atual
@@ -337,6 +342,23 @@ export default function MonteElenco() {
     onError: (e) => toast.error(e.message),
   });
 
+  const renameMutation = trpc.squads.rename.useMutation({
+    onSuccess: () => {
+      utils.squads.getWithPlayers.invalidate({ squadId: squadId! });
+      utils.squads.mySquads.invalidate();
+      setShowTitleModal(false);
+      toast.success("Título atualizado!");
+    },
+    onError: (e) => toast.error(e.message),
+  });
+  const resetMutation = trpc.squads.reset.useMutation({
+    onSuccess: () => {
+      utils.squads.getWithPlayers.invalidate({ squadId: squadId! });
+      setShowResetConfirm(false);
+      toast.success("Elenco resetado para o original do time!");
+    },
+    onError: (e) => toast.error(e.message),
+  });
   const deleteSquad = trpc.squads.delete.useMutation({
     onSuccess: () => {
       setSquadId(null);
@@ -432,12 +454,30 @@ export default function MonteElenco() {
               <Button
                 variant="outline"
                 size="sm"
+                onClick={() => { setTitleInput(squad.title ?? squad.teamName); setShowTitleModal(true); }}
+                className="border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-800 gap-2"
+              >
+                <Pencil className="w-4 h-4" />
+                <span className="hidden sm:inline">Renomear</span>
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowResetConfirm(true)}
+                className="border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-800 gap-2"
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span className="hidden sm:inline">Resetar</span>
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={handleShare}
                 disabled={shareMutation.isPending}
                 className="border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-800 gap-2"
               >
                 {copied ? <Check className="w-4 h-4 text-green-400" /> : <Share2 className="w-4 h-4" />}
-                {copied ? "Copiado!" : "Compartilhar"}
+                <span className="hidden sm:inline">{copied ? "Copiado!" : "Compartilhar"}</span>
               </Button>
               <Button
                 variant="outline"
@@ -451,6 +491,62 @@ export default function MonteElenco() {
           )}
         </div>
       </div>
+
+      {/* Modal: Renomear elenco */}
+      {showTitleModal && squad && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
+          <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 w-full max-w-sm space-y-4">
+            <h2 className="text-lg font-bold text-white">Renomear elenco</h2>
+            <Input
+              value={titleInput}
+              onChange={(e) => setTitleInput(e.target.value)}
+              placeholder="Nome do elenco..."
+              className="bg-zinc-800 border-zinc-700 text-white"
+              maxLength={128}
+              autoFocus
+              onKeyDown={(e) => { if (e.key === 'Enter' && titleInput.trim()) renameMutation.mutate({ squadId: squad.id, title: titleInput.trim() }); }}
+            />
+            <div className="flex gap-2 justify-end">
+              <Button variant="outline" size="sm" onClick={() => setShowTitleModal(false)} className="border-zinc-700 text-zinc-400">
+                Cancelar
+              </Button>
+              <Button
+                size="sm"
+                disabled={!titleInput.trim() || renameMutation.isPending}
+                onClick={() => renameMutation.mutate({ squadId: squad.id, title: titleInput.trim() })}
+                className="bg-green-600 hover:bg-green-500 text-white"
+              >
+                Salvar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Confirmar reset */}
+      {showResetConfirm && squad && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
+          <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 w-full max-w-sm space-y-4">
+            <h2 className="text-lg font-bold text-white">Resetar elenco?</h2>
+            <p className="text-sm text-zinc-400">
+              Isso vai remover todas as suas alterações e restaurar o elenco original do <span className="text-white font-medium">{squad.teamName}</span>. Esta ação não pode ser desfeita.
+            </p>
+            <div className="flex gap-2 justify-end">
+              <Button variant="outline" size="sm" onClick={() => setShowResetConfirm(false)} className="border-zinc-700 text-zinc-400">
+                Cancelar
+              </Button>
+              <Button
+                size="sm"
+                disabled={resetMutation.isPending}
+                onClick={() => resetMutation.mutate({ squadId: squad.id })}
+                className="bg-red-700 hover:bg-red-600 text-white"
+              >
+                {resetMutation.isPending ? 'Resetando...' : 'Resetar'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Seleção de time */}
