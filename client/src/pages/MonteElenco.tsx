@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
+import TacticalField from "@/components/TacticalField";
 import { getLoginUrl } from "@/const";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -615,8 +616,24 @@ export default function MonteElenco() {
               </div>
             ) : squad ? (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Coluna esquerda: titulares + reservas */}
+                {/* Coluna esquerda: campo tático + titulares + reservas */}
                 <div className="lg:col-span-2 space-y-6">
+                  {/* Campo tático */}
+                  {starters.length > 0 && (
+                    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4">
+                      <h3 className="font-semibold text-white mb-3 text-sm">Campo Tático</h3>
+                      <TacticalField
+                        players={starters.map((m) => ({
+                          id: m.id,
+                          name: m.name,
+                          position: m.position,
+                          overall: m.overall,
+                          imageUrl: m.imageUrl,
+                        }))}
+                        showFormationPicker
+                      />
+                    </div>
+                  )}
                   {/* Titulares */}
                   <div>
                     <div className="flex items-center justify-between mb-3">

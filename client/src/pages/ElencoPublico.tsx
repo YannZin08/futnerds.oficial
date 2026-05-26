@@ -3,6 +3,7 @@ import { trpc } from "@/lib/trpc";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Shield, Users, ArrowLeft } from "lucide-react";
+import TacticalField from "@/components/TacticalField";
 
 const FALLBACK = "https://cdn.sofifa.net/player_0.svg";
 
@@ -90,6 +91,22 @@ export default function ElencoPublico() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
+        {/* Campo tático */}
+        {starters.length > 0 && (
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4">
+            <h3 className="font-semibold text-white mb-3 text-sm">Campo Tático</h3>
+            <TacticalField
+              players={starters.map((m: any) => ({
+                id: m.id,
+                name: m.name,
+                position: m.position,
+                overall: m.overall,
+                imageUrl: m.imageUrl ?? null,
+              }))}
+              showFormationPicker={false}
+            />
+          </div>
+        )}
         {/* Titulares */}
         <div>
           <h2 className="font-semibold text-white flex items-center gap-2 mb-4">

@@ -1,0 +1,253 @@
+import { useState } from "react";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+export interface TacticalPlayer {
+  id: number;
+  name: string;
+  position: string;
+  overall: number;
+  imageUrl: string | null;
+}
+
+interface Props {
+  players: TacticalPlayer[];
+  /** Formação inicial, ex: "4-3-3". Se não fornecida, detecta automaticamente. */
+  formation?: string;
+  /** Se true, exibe seletor de formação */
+  showFormationPicker?: boolean;
+  className?: string;
+}
+
+// ─── Formações disponíveis ────────────────────────────────────────────────────
+const FORMATIONS: Record<string, { label: string; lines: number[] }> = {
+  "4-3-3":  { label: "4-3-3",  lines: [1, 4, 3, 3] },
+  "4-4-2":  { label: "4-4-2",  lines: [1, 4, 4, 2] },
+  "4-2-3-1":{ label: "4-2-3-1",lines: [1, 4, 2, 3, 1] },
+  "3-5-2":  { label: "3-5-2",  lines: [1, 3, 5, 2] },
+  "3-4-3":  { label: "3-4-3",  lines: [1, 3, 4, 3] },
+  "5-3-2":  { label: "5-3-2",  lines: [1, 5, 3, 2] },
+  "5-4-1":  { label: "5-4-1",  lines: [1, 5, 4, 1] },
+  "4-5-1":  { label: "4-5-1",  lines: [1, 4, 5, 1] },
+  "4-1-4-1":{ label: "4-1-4-1",lines: [1, 4, 1, 4, 1] },
+};
+
+// Detecta formação a partir das posições dos jogadores
+function detectFormation(players: TacticalPlayer[]): string {
+  const posMap: Record<string, number> = {};
+  for (const p of players) {
+    const pos = normalizePosition(p.position);
+    posMap[pos] = (posMap[pos] ?? 0) + 1;
+  }
+  const gk = posMap["GOL"] ?? 0;
+  const def = (posMap["ZAG"] ?? 0) + (posMap["LD"] ?? 0) + (posMap["LE"] ?? 0) + (posMap["LAT"] ?? 0);
+  const mid = (posMap["MEI"] ?? 0) + (posMap["VOL"] ?? 0) + (posMap["MC"] ?? 0) + (posMap["MO"] ?? 0) + (posMap["ME"] ?? 0) + (posMap["MD"] ?? 0);
+  const att = (posMap["ATA"] ?? 0) + (posMap["PE"] ?? 0) + (posMap["PD"] ?? 0) + (posMap["SA"] ?? 0);
+  if (gk === 1 && def === 4 && mid === 3 && att === 3) return "4-3-3";
+  if (gk === 1 && def === 4 && mid === 4 && att === 2) return "4-4-2";
+  if (gk === 1 && def === 3 && mid === 5 && att === 2) return "3-5-2";
+  if (gk === 1 && def === 3 && mid === 4 && att === 3) return "3-4-3";
+  if (gk === 1 && def === 5 && mid === 3 && att === 2) return "5-3-2";
+  return "4-3-3";
+}
+
+function normalizePosition(pos: string): string {
+  const p = pos.toUpperCase().trim();
+  if (p.includes("GOL") || p === "GK" || p === "GKP") return "GOL";
+  if (p === "ZAG" || p === "CB" || p === "DC") return "ZAG";
+  if (p === "LD" || p === "RB" || p === "DR") return "LD";
+  if (p === "LE" || p === "LB" || p === "DL") return "LE";
+  if (p === "LAT") return "LAT";
+  if (p === "VOL" || p === "CDM" || p === "DM") return "VOL";
+  if (p === "MC" || p === "CM" || p === "MF") return "MC";
+  if (p === "MEI" || p === "MED") return "MEI";
+  if (p === "MO" || p === "CAM" || p === "AM") return "MO";
+  if (p === "ME" || p === "LM" || p === "ML") return "ME";
+  if (p === "MD" || p === "RM" || p === "MR") return "MD";
+  if (p === "PE" || p === "LW" || p === "EL") return "PE";
+  if (p === "PD" || p === "RW" || p === "ER") return "PD";
+  if (p === "ATA" || p === "ST" || p === "CF" || p === "CA") return "ATA";
+  if (p === "SA" || p === "SS") return "SA";
+  return p;
+}
+
+// Ordena jogadores por linha (GOL → DEF → MID → ATK)
+function getPositionOrder(pos: string): number {
+  const p = normalizePosition(pos);
+  if (p === "GOL") return 0;
+  if (["ZAG","LD","LE","LAT"].includes(p)) return 1;
+  if (["VOL","MC","MEI","ME","MD"].includes(p)) return 2;
+  if (["MO","PE","PD","ATA","SA"].includes(p)) return 3;
+  return 2;
+}
+
+// Distribui os jogadores nas linhas da formação
+function assignPlayersToLines(players: TacticalPlayer[], lines: number[]): TacticalPlayer[][] {
+  const sorted = [...players].sort((a, b) => getPositionOrder(a.position) - getPositionOrder(b.position));
+  const result: TacticalPlayer[][] = [];
+  let idx = 0;
+  for (const count of lines) {
+    result.push(sorted.slice(idx, idx + count));
+    idx += count;
+  }
+  return result;
+}
+
+// ─── Avatar do jogador no campo ──────────────────────────────────────────────
+function FieldPlayerNode({ player, x, y }: { player: TacticalPlayer; x: number; y: number }) {
+  const [imgError, setImgError] = useState(false);
+  const initials = player.name.split(" ").filter(Boolean).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "").join("");
+  const colors = ["#16a34a","#2563eb","#9333ea","#dc2626","#d97706","#0891b2","#be185d"];
+  const colorIdx = player.name.charCodeAt(0) % colors.length;
+  const color = colors[colorIdx];
+
+  // Abreviação do nome: "João Silva" → "J. Silva"
+  const parts = player.name.trim().split(" ");
+  const shortName = parts.length > 1 ? `${parts[0][0]}. ${parts.slice(-1)[0]}` : player.name;
+
+  return (
+    <g transform={`translate(${x}, ${y})`} style={{ cursor: "default" }}>
+      {/* Sombra */}
+      <ellipse cx={0} cy={22} rx={16} ry={4} fill="rgba(0,0,0,0.35)" />
+      {/* Círculo do avatar */}
+      <circle cx={0} cy={0} r={18} fill={imgError || !player.imageUrl ? color : "transparent"} stroke="white" strokeWidth={2} />
+      {!imgError && player.imageUrl ? (
+        <>
+          <defs>
+            <clipPath id={`clip-${player.id}`}>
+              <circle cx={0} cy={0} r={17} />
+            </clipPath>
+          </defs>
+          <image
+            href={player.imageUrl}
+            x={-17} y={-17} width={34} height={34}
+            clipPath={`url(#clip-${player.id})`}
+            onError={() => setImgError(true)}
+          />
+          <circle cx={0} cy={0} r={18} fill="none" stroke="white" strokeWidth={2} />
+        </>
+      ) : (
+        <text x={0} y={5} textAnchor="middle" fontSize={11} fontWeight="bold" fill="white">{initials}</text>
+      )}
+      {/* Badge OVR */}
+      <rect x={-14} y={-30} width={28} height={13} rx={4} fill="#111827" opacity={0.9} />
+      <text x={0} y={-20} textAnchor="middle" fontSize={9} fontWeight="bold" fill="#4ade80">{player.overall}</text>
+      {/* Nome */}
+      <rect x={-28} y={22} width={56} height={13} rx={3} fill="rgba(0,0,0,0.65)" />
+      <text x={0} y={32} textAnchor="middle" fontSize={8} fill="white" fontWeight="500">{shortName}</text>
+    </g>
+  );
+}
+
+// ─── Campo SVG ────────────────────────────────────────────────────────────────
+function FootballPitch({ children }: { children: React.ReactNode }) {
+  return (
+    <svg viewBox="0 0 340 520" className="w-full h-full" style={{ maxHeight: "520px" }}>
+      {/* Gramado */}
+      <rect x={0} y={0} width={340} height={520} rx={8} fill="#2d6a2d" />
+      {/* Listras */}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <rect key={i} x={0} y={i * 52} width={340} height={26} fill={i % 2 === 0 ? "rgba(0,0,0,0.06)" : "transparent"} />
+      ))}
+      {/* Bordas do campo */}
+      <rect x={16} y={16} width={308} height={488} rx={4} fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+      {/* Linha do meio */}
+      <line x1={16} y1={260} x2={324} y2={260} stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+      {/* Círculo central */}
+      <circle cx={170} cy={260} r={50} fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+      <circle cx={170} cy={260} r={3} fill="rgba(255,255,255,0.8)" />
+      {/* Área grande (ataque) */}
+      <rect x={70} y={16} width={200} height={80} fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+      {/* Área pequena (ataque) */}
+      <rect x={120} y={16} width={100} height={36} fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+      {/* Pênalti (ataque) */}
+      <circle cx={170} cy={68} r={3} fill="rgba(255,255,255,0.8)" />
+      <path d="M 120 96 A 50 50 0 0 1 220 96" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+      {/* Área grande (defesa) */}
+      <rect x={70} y={424} width={200} height={80} fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+      {/* Área pequena (defesa) */}
+      <rect x={120} y={468} width={100} height={36} fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+      {/* Pênalti (defesa) */}
+      <circle cx={170} cy={452} r={3} fill="rgba(255,255,255,0.8)" />
+      <path d="M 120 424 A 50 50 0 0 0 220 424" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+      {/* Cantos */}
+      <path d="M 16 16 A 8 8 0 0 1 24 16" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={1.5} />
+      <path d="M 316 16 A 8 8 0 0 0 324 16" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={1.5} />
+      <path d="M 16 504 A 8 8 0 0 0 16 496" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={1.5} />
+      <path d="M 324 504 A 8 8 0 0 1 324 496" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={1.5} />
+      {children}
+    </svg>
+  );
+}
+
+// ─── Componente principal ─────────────────────────────────────────────────────
+export default function TacticalField({ players, formation, showFormationPicker = true, className = "" }: Props) {
+  const available = players.slice(0, 11);
+  const detectedFormation = formation ?? (available.length >= 11 ? detectFormation(available) : "4-3-3");
+  const [selectedFormation, setSelectedFormation] = useState(detectedFormation);
+
+  const formationData = FORMATIONS[selectedFormation] ?? FORMATIONS["4-3-3"];
+  const lines = assignPlayersToLines(available, formationData.lines);
+
+  // Calcula posições Y de cada linha (de cima para baixo: ataque → defesa → goleiro)
+  // Campo: y=16 (topo) a y=504 (fundo). Goleiro fica na parte de baixo.
+  const fieldTop = 40;
+  const fieldBottom = 490;
+  const fieldHeight = fieldBottom - fieldTop;
+  const numLines = lines.length;
+  const yPositions = lines.map((_, i) => {
+    // i=0 é goleiro (fundo), i=last é ataque (topo)
+    const reversed = numLines - 1 - i;
+    return fieldTop + (reversed / (numLines - 1)) * fieldHeight;
+  });
+
+  return (
+    <div className={`flex flex-col gap-3 ${className}`}>
+      {showFormationPicker && (
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-xs text-zinc-500 font-medium">Formação:</span>
+          {Object.keys(FORMATIONS).map((f) => (
+            <button
+              key={f}
+              onClick={() => setSelectedFormation(f)}
+              className={`text-xs px-2.5 py-1 rounded-full font-medium transition-colors ${
+                selectedFormation === f
+                  ? "bg-green-600 text-white"
+                  : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white"
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {available.length === 0 ? (
+        <div className="flex items-center justify-center h-64 border border-dashed border-zinc-700 rounded-xl text-zinc-600 text-sm">
+          Adicione titulares para ver o campo tático
+        </div>
+      ) : (
+        <div className="relative w-full rounded-xl overflow-hidden" style={{ aspectRatio: "340/520" }}>
+          <FootballPitch>
+            {lines.map((linePlayers, lineIdx) => {
+              const y = yPositions[lineIdx];
+              const count = linePlayers.length;
+              return linePlayers.map((player, pIdx) => {
+                const x = count === 1
+                  ? 170
+                  : 50 + (pIdx / (count - 1)) * 240;
+                return (
+                  <FieldPlayerNode
+                    key={player.id}
+                    player={player}
+                    x={x}
+                    y={y}
+                  />
+                );
+              });
+            })}
+          </FootballPitch>
+        </div>
+      )}
+    </div>
+  );
+}
