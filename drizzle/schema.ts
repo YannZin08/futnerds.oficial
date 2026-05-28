@@ -164,6 +164,7 @@ export const squads = mysqlTable("squads", {
   teamLogoUrl: text("teamLogoUrl"),
   shareToken: varchar("shareToken", { length: 64 }).unique(), // token público para compartilhamento
   title: varchar("title", { length: 128 }), // título personalizado opcional
+  formation: varchar("formation", { length: 16 }).default("4-3-3"), // formação tática
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });

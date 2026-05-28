@@ -1,0 +1,1 @@
+ALTER TABLE `squads` ADD `formation` varchar(16) DEFAULT '4-3-3';

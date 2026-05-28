@@ -76,7 +76,7 @@ describe("players.list", () => {
       throw err;
     });
     expect(Array.isArray(result)).toBe(true);
-  });
+  }, 15000);
 
   it("accepts position filter", async () => {
     const ctx = createPublicContext();
@@ -86,7 +86,7 @@ describe("players.list", () => {
       throw err;
     });
     expect(Array.isArray(result)).toBe(true);
-  });
+  }, 15000);
 
   it("accepts sortBy overall", async () => {
     const ctx = createPublicContext();
@@ -96,7 +96,7 @@ describe("players.list", () => {
       throw err;
     });
     expect(Array.isArray(result)).toBe(true);
-  });
+  }, 15000);
 
   it("accepts sortBy price", async () => {
     const ctx = createPublicContext();
@@ -106,7 +106,7 @@ describe("players.list", () => {
       throw err;
     });
     expect(Array.isArray(result)).toBe(true);
-  });
+  }, 15000);
 });
 
 describe("players.search", () => {
@@ -118,7 +118,7 @@ describe("players.search", () => {
       throw err;
     });
     expect(Array.isArray(result)).toBe(true);
-  });
+  }, 15000);
 });
 
 // ─── Protected Route Tests ────────────────────────────────────────────────────

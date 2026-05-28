@@ -360,6 +360,14 @@ export default function MonteElenco() {
     },
     onError: (e) => toast.error(e.message),
   });
+  const updateFormationMutation = trpc.squads.updateFormation.useMutation({
+    onError: (e) => toast.error(e.message),
+  });
+  const handleFormationChange = useCallback((f: string) => {
+    if (!squadId) return;
+    updateFormationMutation.mutate({ squadId, formation: f });
+  }, [squadId, updateFormationMutation]);
+
   const deleteSquad = trpc.squads.delete.useMutation({
     onSuccess: () => {
       setSquadId(null);
@@ -630,7 +638,10 @@ export default function MonteElenco() {
                           overall: m.overall,
                           imageUrl: m.imageUrl,
                         }))}
+                        formation={squad?.formation ?? "4-3-3"}
+                        onFormationChange={handleFormationChange}
                         showFormationPicker
+                        draggable
                       />
                     </div>
                   )}

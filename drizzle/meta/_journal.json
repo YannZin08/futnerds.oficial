@@ -78,6 +78,13 @@
       "when": 1779483258770,
       "tag": "0010_small_captain_america",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1779795566822,
+      "tag": "0011_wandering_jack_flag",
+      "breakpoints": true
     }
   ]
 }

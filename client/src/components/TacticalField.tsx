@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 export interface TacticalPlayer {
@@ -11,44 +11,29 @@ export interface TacticalPlayer {
 
 interface Props {
   players: TacticalPlayer[];
-  /** Formação inicial, ex: "4-3-3". Se não fornecida, detecta automaticamente. */
+  /** Formação controlada externamente, ex: "4-3-3" */
   formation?: string;
+  /** Callback quando usuário muda a formação */
+  onFormationChange?: (formation: string) => void;
   /** Se true, exibe seletor de formação */
   showFormationPicker?: boolean;
+  /** Se true, permite arrastar jogadores */
+  draggable?: boolean;
   className?: string;
 }
 
 // ─── Formações disponíveis ────────────────────────────────────────────────────
 const FORMATIONS: Record<string, { label: string; lines: number[] }> = {
-  "4-3-3":  { label: "4-3-3",  lines: [1, 4, 3, 3] },
-  "4-4-2":  { label: "4-4-2",  lines: [1, 4, 4, 2] },
-  "4-2-3-1":{ label: "4-2-3-1",lines: [1, 4, 2, 3, 1] },
-  "3-5-2":  { label: "3-5-2",  lines: [1, 3, 5, 2] },
-  "3-4-3":  { label: "3-4-3",  lines: [1, 3, 4, 3] },
-  "5-3-2":  { label: "5-3-2",  lines: [1, 5, 3, 2] },
-  "5-4-1":  { label: "5-4-1",  lines: [1, 5, 4, 1] },
-  "4-5-1":  { label: "4-5-1",  lines: [1, 4, 5, 1] },
-  "4-1-4-1":{ label: "4-1-4-1",lines: [1, 4, 1, 4, 1] },
+  "4-3-3":   { label: "4-3-3",   lines: [1, 4, 3, 3] },
+  "4-4-2":   { label: "4-4-2",   lines: [1, 4, 4, 2] },
+  "4-2-3-1": { label: "4-2-3-1", lines: [1, 4, 2, 3, 1] },
+  "3-5-2":   { label: "3-5-2",   lines: [1, 3, 5, 2] },
+  "3-4-3":   { label: "3-4-3",   lines: [1, 3, 4, 3] },
+  "5-3-2":   { label: "5-3-2",   lines: [1, 5, 3, 2] },
+  "5-4-1":   { label: "5-4-1",   lines: [1, 5, 4, 1] },
+  "4-5-1":   { label: "4-5-1",   lines: [1, 4, 5, 1] },
+  "4-1-4-1": { label: "4-1-4-1", lines: [1, 4, 1, 4, 1] },
 };
-
-// Detecta formação a partir das posições dos jogadores
-function detectFormation(players: TacticalPlayer[]): string {
-  const posMap: Record<string, number> = {};
-  for (const p of players) {
-    const pos = normalizePosition(p.position);
-    posMap[pos] = (posMap[pos] ?? 0) + 1;
-  }
-  const gk = posMap["GOL"] ?? 0;
-  const def = (posMap["ZAG"] ?? 0) + (posMap["LD"] ?? 0) + (posMap["LE"] ?? 0) + (posMap["LAT"] ?? 0);
-  const mid = (posMap["MEI"] ?? 0) + (posMap["VOL"] ?? 0) + (posMap["MC"] ?? 0) + (posMap["MO"] ?? 0) + (posMap["ME"] ?? 0) + (posMap["MD"] ?? 0);
-  const att = (posMap["ATA"] ?? 0) + (posMap["PE"] ?? 0) + (posMap["PD"] ?? 0) + (posMap["SA"] ?? 0);
-  if (gk === 1 && def === 4 && mid === 3 && att === 3) return "4-3-3";
-  if (gk === 1 && def === 4 && mid === 4 && att === 2) return "4-4-2";
-  if (gk === 1 && def === 3 && mid === 5 && att === 2) return "3-5-2";
-  if (gk === 1 && def === 3 && mid === 4 && att === 3) return "3-4-3";
-  if (gk === 1 && def === 5 && mid === 3 && att === 2) return "5-3-2";
-  return "4-3-3";
-}
 
 function normalizePosition(pos: string): string {
   const p = pos.toUpperCase().trim();
@@ -70,7 +55,6 @@ function normalizePosition(pos: string): string {
   return p;
 }
 
-// Ordena jogadores por linha (GOL → DEF → MID → ATK)
 function getPositionOrder(pos: string): number {
   const p = normalizePosition(pos);
   if (p === "GOL") return 0;
@@ -80,7 +64,6 @@ function getPositionOrder(pos: string): number {
   return 2;
 }
 
-// Distribui os jogadores nas linhas da formação
 function assignPlayersToLines(players: TacticalPlayer[], lines: number[]): TacticalPlayer[][] {
   const sorted = [...players].sort((a, b) => getPositionOrder(a.position) - getPositionOrder(b.position));
   const result: TacticalPlayer[][] = [];
@@ -93,23 +76,41 @@ function assignPlayersToLines(players: TacticalPlayer[], lines: number[]): Tacti
 }
 
 // ─── Avatar do jogador no campo ──────────────────────────────────────────────
-function FieldPlayerNode({ player, x, y }: { player: TacticalPlayer; x: number; y: number }) {
+function FieldPlayerNode({
+  player, x, y, isDragging, isDropTarget, draggable,
+  onDragStart, onDragEnd, onDrop,
+}: {
+  player: TacticalPlayer; x: number; y: number;
+  isDragging: boolean; isDropTarget: boolean; draggable: boolean;
+  onDragStart: (id: number) => void;
+  onDragEnd: () => void;
+  onDrop: (targetId: number) => void;
+}) {
   const [imgError, setImgError] = useState(false);
   const initials = player.name.split(" ").filter(Boolean).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "").join("");
   const colors = ["#16a34a","#2563eb","#9333ea","#dc2626","#d97706","#0891b2","#be185d"];
   const colorIdx = player.name.charCodeAt(0) % colors.length;
   const color = colors[colorIdx];
-
-  // Abreviação do nome: "João Silva" → "J. Silva"
   const parts = player.name.trim().split(" ");
   const shortName = parts.length > 1 ? `${parts[0][0]}. ${parts.slice(-1)[0]}` : player.name;
 
+  const opacity = isDragging ? 0.4 : 1;
+  const highlightStroke = isDropTarget ? "#facc15" : "white";
+  const highlightWidth = isDropTarget ? 3 : 2;
+
   return (
-    <g transform={`translate(${x}, ${y})`} style={{ cursor: "default" }}>
+    <g
+      transform={`translate(${x}, ${y})`}
+      style={{ cursor: draggable ? "grab" : "default", opacity }}
+      onMouseDown={draggable ? () => onDragStart(player.id) : undefined}
+      onMouseUp={draggable ? () => onDrop(player.id) : undefined}
+      onTouchStart={draggable ? () => onDragStart(player.id) : undefined}
+      onTouchEnd={draggable ? () => onDrop(player.id) : undefined}
+    >
       {/* Sombra */}
       <ellipse cx={0} cy={22} rx={16} ry={4} fill="rgba(0,0,0,0.35)" />
       {/* Círculo do avatar */}
-      <circle cx={0} cy={0} r={18} fill={imgError || !player.imageUrl ? color : "transparent"} stroke="white" strokeWidth={2} />
+      <circle cx={0} cy={0} r={18} fill={imgError || !player.imageUrl ? color : "transparent"} stroke={highlightStroke} strokeWidth={highlightWidth} />
       {!imgError && player.imageUrl ? (
         <>
           <defs>
@@ -123,7 +124,7 @@ function FieldPlayerNode({ player, x, y }: { player: TacticalPlayer; x: number; 
             clipPath={`url(#clip-${player.id})`}
             onError={() => setImgError(true)}
           />
-          <circle cx={0} cy={0} r={18} fill="none" stroke="white" strokeWidth={2} />
+          <circle cx={0} cy={0} r={18} fill="none" stroke={highlightStroke} strokeWidth={highlightWidth} />
         </>
       ) : (
         <text x={0} y={5} textAnchor="middle" fontSize={11} fontWeight="bold" fill="white">{initials}</text>
@@ -180,35 +181,89 @@ function FootballPitch({ children }: { children: React.ReactNode }) {
 }
 
 // ─── Componente principal ─────────────────────────────────────────────────────
-export default function TacticalField({ players, formation, showFormationPicker = true, className = "" }: Props) {
+export default function TacticalField({
+  players,
+  formation,
+  onFormationChange,
+  showFormationPicker = true,
+  draggable = false,
+  className = "",
+}: Props) {
   const available = players.slice(0, 11);
-  const detectedFormation = formation ?? (available.length >= 11 ? detectFormation(available) : "4-3-3");
-  const [selectedFormation, setSelectedFormation] = useState(detectedFormation);
+
+  // Formação: controlada externamente se `formation` prop fornecida, senão interna
+  const [internalFormation, setInternalFormation] = useState(formation ?? "4-3-3");
+  const selectedFormation = formation ?? internalFormation;
+
+  const handleFormationChange = useCallback((f: string) => {
+    setInternalFormation(f);
+    onFormationChange?.(f);
+  }, [onFormationChange]);
+
+  // Drag-and-drop: trocar posições entre dois jogadores
+  const [orderedPlayers, setOrderedPlayers] = useState<TacticalPlayer[]>(available);
+  const [draggingId, setDraggingId] = useState<number | null>(null);
+  const draggingIdRef = useRef<number | null>(null);
+
+  // Sincronizar quando players externos mudam
+  const prevPlayersRef = useRef<TacticalPlayer[]>(available);
+  if (JSON.stringify(prevPlayersRef.current.map(p => p.id)) !== JSON.stringify(available.map(p => p.id))) {
+    prevPlayersRef.current = available;
+    setOrderedPlayers(available);
+  }
+
+  const handleDragStart = useCallback((id: number) => {
+    setDraggingId(id);
+    draggingIdRef.current = id;
+  }, []);
+
+  const handleDragEnd = useCallback(() => {
+    setDraggingId(null);
+    draggingIdRef.current = null;
+  }, []);
+
+  const handleDrop = useCallback((targetId: number) => {
+    const fromId = draggingIdRef.current;
+    if (fromId === null || fromId === targetId) {
+      handleDragEnd();
+      return;
+    }
+    setOrderedPlayers(prev => {
+      const next = [...prev];
+      const fromIdx = next.findIndex(p => p.id === fromId);
+      const toIdx = next.findIndex(p => p.id === targetId);
+      if (fromIdx === -1 || toIdx === -1) return prev;
+      [next[fromIdx], next[toIdx]] = [next[toIdx], next[fromIdx]];
+      return next;
+    });
+    handleDragEnd();
+  }, [handleDragEnd]);
 
   const formationData = FORMATIONS[selectedFormation] ?? FORMATIONS["4-3-3"];
-  const lines = assignPlayersToLines(available, formationData.lines);
+  const lines = assignPlayersToLines(orderedPlayers, formationData.lines);
 
-  // Calcula posições Y de cada linha (de cima para baixo: ataque → defesa → goleiro)
-  // Campo: y=16 (topo) a y=504 (fundo). Goleiro fica na parte de baixo.
   const fieldTop = 40;
   const fieldBottom = 490;
   const fieldHeight = fieldBottom - fieldTop;
   const numLines = lines.length;
   const yPositions = lines.map((_, i) => {
-    // i=0 é goleiro (fundo), i=last é ataque (topo)
     const reversed = numLines - 1 - i;
     return fieldTop + (reversed / (numLines - 1)) * fieldHeight;
   });
 
   return (
-    <div className={`flex flex-col gap-3 ${className}`}>
+    <div
+      className={`flex flex-col gap-3 ${className}`}
+      onMouseUp={draggable ? handleDragEnd : undefined}
+      onMouseLeave={draggable ? handleDragEnd : undefined}
+    >
       {showFormationPicker && (
         <div className="flex items-center gap-2 flex-wrap">
           <span className="text-xs text-zinc-500 font-medium">Formação:</span>
           {Object.keys(FORMATIONS).map((f) => (
             <button
               key={f}
-              onClick={() => setSelectedFormation(f)}
+              onClick={() => handleFormationChange(f)}
               className={`text-xs px-2.5 py-1 rounded-full font-medium transition-colors ${
                 selectedFormation === f
                   ? "bg-green-600 text-white"
@@ -221,7 +276,13 @@ export default function TacticalField({ players, formation, showFormationPicker 
         </div>
       )}
 
-      {available.length === 0 ? (
+      {draggable && (
+        <p className="text-xs text-zinc-500 text-center">
+          Clique em um jogador e depois em outro para trocar as posições no campo
+        </p>
+      )}
+
+      {orderedPlayers.length === 0 ? (
         <div className="flex items-center justify-center h-64 border border-dashed border-zinc-700 rounded-xl text-zinc-600 text-sm">
           Adicione titulares para ver o campo tático
         </div>
@@ -241,6 +302,12 @@ export default function TacticalField({ players, formation, showFormationPicker 
                     player={player}
                     x={x}
                     y={y}
+                    isDragging={draggingId === player.id}
+                    isDropTarget={draggingId !== null && draggingId !== player.id}
+                    draggable={draggable}
+                    onDragStart={handleDragStart}
+                    onDragEnd={handleDragEnd}
+                    onDrop={handleDrop}
                   />
                 );
               });

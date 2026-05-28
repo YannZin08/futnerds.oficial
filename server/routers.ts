@@ -1,5 +1,8 @@
 import { z } from "zod";
 import { storagePut } from "./storage";
+import { getDb } from "./db";
+import { squads } from "../drizzle/schema";
+import { eq, and } from "drizzle-orm";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
@@ -358,6 +361,17 @@ export const appRouter = router({
       .input(z.object({ squadId: z.number() }))
       .mutation(async ({ ctx, input }) => {
         await resetSquad(ctx.user.id, input.squadId);
+        return { success: true };
+      }),
+    // Atualizar formação tática do elenco
+    updateFormation: protectedProcedure
+      .input(z.object({ squadId: z.number(), formation: z.string() }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new Error("DB unavailable");
+        await db.update(squads)
+          .set({ formation: input.formation })
+          .where(and(eq(squads.id, input.squadId), eq(squads.userId, ctx.user.id)));
         return { success: true };
       }),
   }),
