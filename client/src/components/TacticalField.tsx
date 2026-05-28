@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 export interface TacticalPlayer {
@@ -191,13 +191,22 @@ export default function TacticalField({
 }: Props) {
   const available = players.slice(0, 11);
 
-  // Formação: controlada externamente se `formation` prop fornecida, senão interna
-  const [internalFormation, setInternalFormation] = useState(formation ?? "4-3-3");
-  const selectedFormation = formation ?? internalFormation;
+  // Formação: estado local para resposta imediata na UI, sincronizado com prop externa
+  const [localFormation, setLocalFormation] = useState(formation ?? "4-3-3");
+
+  // Sincronizar quando a prop externa muda (ex: ao carregar squad do banco)
+  useEffect(() => {
+    if (formation && formation !== localFormation) {
+      setLocalFormation(formation);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formation]);
+
+  const selectedFormation = localFormation;
 
   const handleFormationChange = useCallback((f: string) => {
-    setInternalFormation(f);
-    onFormationChange?.(f);
+    setLocalFormation(f);  // atualiza UI imediatamente
+    onFormationChange?.(f);  // persiste no banco em background
   }, [onFormationChange]);
 
   // Drag-and-drop: trocar posições entre dois jogadores
