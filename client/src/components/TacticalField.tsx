@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
+import { ChevronDown, Check } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 export interface TacticalPlayer {
@@ -23,17 +24,57 @@ interface Props {
 }
 
 // ─── Formações disponíveis ────────────────────────────────────────────────────
+// lines: número de jogadores por linha, do GK (índice 0) ao ataque (último índice)
 const FORMATIONS: Record<string, { label: string; lines: number[] }> = {
-  "4-3-3":   { label: "4-3-3",   lines: [1, 4, 3, 3] },
-  "4-4-2":   { label: "4-4-2",   lines: [1, 4, 4, 2] },
-  "4-2-3-1": { label: "4-2-3-1", lines: [1, 4, 2, 3, 1] },
-  "3-5-2":   { label: "3-5-2",   lines: [1, 3, 5, 2] },
-  "3-4-3":   { label: "3-4-3",   lines: [1, 3, 4, 3] },
-  "5-3-2":   { label: "5-3-2",   lines: [1, 5, 3, 2] },
-  "5-4-1":   { label: "5-4-1",   lines: [1, 5, 4, 1] },
-  "4-5-1":   { label: "4-5-1",   lines: [1, 4, 5, 1] },
-  "4-1-4-1": { label: "4-1-4-1", lines: [1, 4, 1, 4, 1] },
+  // ── 3 defensores ──────────────────────────────────────────────────────────
+  "3-1-4-2":        { label: "3-1-4-2",        lines: [1, 3, 1, 4, 2] },
+  "3-4-1-2":        { label: "3-4-1-2",        lines: [1, 3, 4, 1, 2] },
+  "3-4-2-1":        { label: "3-4-2-1",        lines: [1, 3, 4, 2, 1] },
+  "3-4-3":          { label: "3-4-3",          lines: [1, 3, 4, 3] },
+  "3-4-3 Diamond":  { label: "3-4-3 Diamond",  lines: [1, 3, 4, 3] },
+  "3-4-3 Flat":     { label: "3-4-3 Flat",     lines: [1, 3, 4, 3] },
+  "3-5-1-1":        { label: "3-5-1-1",        lines: [1, 3, 5, 1, 1] },
+  "3-5-2":          { label: "3-5-2",          lines: [1, 3, 5, 2] },
+
+  // ── 4 defensores ──────────────────────────────────────────────────────────
+  "4-1-2-1-2 Narrow": { label: "4-1-2-1-2 Narrow", lines: [1, 4, 1, 2, 1, 2] },
+  "4-1-2-1-2 Wide":   { label: "4-1-2-1-2 Wide",   lines: [1, 4, 1, 2, 1, 2] },
+  "4-1-3-2":          { label: "4-1-3-2",           lines: [1, 4, 1, 3, 2] },
+  "4-1-4-1":          { label: "4-1-4-1",           lines: [1, 4, 1, 4, 1] },
+  "4-2-1-3":          { label: "4-2-1-3",           lines: [1, 4, 2, 1, 3] },
+  "4-2-2-2":          { label: "4-2-2-2",           lines: [1, 4, 2, 2, 2] },
+  "4-2-3-1 Narrow":   { label: "4-2-3-1 Narrow",   lines: [1, 4, 2, 3, 1] },
+  "4-2-3-1 Wide":     { label: "4-2-3-1 Wide",     lines: [1, 4, 2, 3, 1] },
+  "4-2-4":            { label: "4-2-4",             lines: [1, 4, 2, 4] },
+  "4-3-1-2":          { label: "4-3-1-2",           lines: [1, 4, 3, 1, 2] },
+  "4-3-2-1":          { label: "4-3-2-1",           lines: [1, 4, 3, 2, 1] },
+  "4-3-3 Flat":       { label: "4-3-3 Flat",       lines: [1, 4, 3, 3] },
+  "4-3-3 Holding":    { label: "4-3-3 Holding",    lines: [1, 4, 3, 3] },
+  "4-3-3 Defend":     { label: "4-3-3 Defend",     lines: [1, 4, 3, 3] },
+  "4-3-3 Attack":     { label: "4-3-3 Attack",     lines: [1, 4, 3, 3] },
+  "4-3-3 False 9":    { label: "4-3-3 False 9",    lines: [1, 4, 3, 3] },
+  "4-4-1-1 Attack":   { label: "4-4-1-1 Attack",   lines: [1, 4, 4, 1, 1] },
+  "4-4-1-1 Midfield": { label: "4-4-1-1 Midfield", lines: [1, 4, 4, 1, 1] },
+  "4-4-2 Flat":       { label: "4-4-2 Flat",       lines: [1, 4, 4, 2] },
+  "4-4-2 Holding":    { label: "4-4-2 Holding",    lines: [1, 4, 4, 2] },
+  "4-5-1 Attack":     { label: "4-5-1 Attack",     lines: [1, 4, 5, 1] },
+  "4-5-1 Flat":       { label: "4-5-1 Flat",       lines: [1, 4, 5, 1] },
+
+  // ── 5 defensores ──────────────────────────────────────────────────────────
+  "5-1-2-2":          { label: "5-1-2-2",           lines: [1, 5, 1, 2, 2] },
+  "5-2-1-2":          { label: "5-2-1-2",           lines: [1, 5, 2, 1, 2] },
+  "5-2-2-1":          { label: "5-2-2-1",           lines: [1, 5, 2, 2, 1] },
+  "5-2-3":            { label: "5-2-3",             lines: [1, 5, 2, 3] },
+  "5-3-2":            { label: "5-3-2",             lines: [1, 5, 3, 2] },
+  "5-4-1 Flat":       { label: "5-4-1 Flat",       lines: [1, 5, 4, 1] },
+  "5-4-1 Diamond":    { label: "5-4-1 Diamond",    lines: [1, 5, 4, 1] },
 };
+
+// Chave padrão
+const DEFAULT_FORMATION = "4-3-3 Flat";
+
+// Lista ordenada para o dropdown
+const FORMATION_KEYS = Object.keys(FORMATIONS);
 
 function normalizePosition(pos: string): string {
   const p = pos.toUpperCase().trim();
@@ -180,6 +221,70 @@ function FootballPitch({ children }: { children: React.ReactNode }) {
   );
 }
 
+// ─── Dropdown de formações ────────────────────────────────────────────────────
+function FormationDropdown({
+  selected,
+  onChange,
+}: {
+  selected: string;
+  onChange: (f: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Fechar ao clicar fora
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    if (open) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
+
+  const label = FORMATIONS[selected]?.label ?? "Selecione aqui";
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 text-sm font-medium text-white hover:bg-zinc-700 transition-colors min-w-[160px] justify-between"
+      >
+        <span>{label}</span>
+        <ChevronDown
+          size={14}
+          className={`text-zinc-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute left-0 top-full mt-1 z-50 bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl overflow-hidden"
+          style={{ minWidth: "200px", maxHeight: "320px", overflowY: "auto" }}
+        >
+          {FORMATION_KEYS.map((f) => (
+            <button
+              key={f}
+              onClick={() => {
+                onChange(f);
+                setOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-4 py-2 text-sm text-left transition-colors ${
+                selected === f
+                  ? "bg-green-700/40 text-green-300 font-semibold"
+                  : "text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              }`}
+            >
+              <span>{FORMATIONS[f].label}</span>
+              {selected === f && <Check size={13} className="text-green-400 flex-shrink-0" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Componente principal ─────────────────────────────────────────────────────
 export default function TacticalField({
   players,
@@ -192,12 +297,17 @@ export default function TacticalField({
   const available = players.slice(0, 11);
 
   // Formação: estado local para resposta imediata na UI, sincronizado com prop externa
-  const [localFormation, setLocalFormation] = useState(formation ?? "4-3-3");
+  const [localFormation, setLocalFormation] = useState(() => {
+    // Se a formação externa existe no mapa, usa ela; senão tenta o default
+    if (formation && FORMATIONS[formation]) return formation;
+    return DEFAULT_FORMATION;
+  });
 
   // Sincronizar quando a prop externa muda (ex: ao carregar squad do banco)
   useEffect(() => {
     if (formation && formation !== localFormation) {
-      setLocalFormation(formation);
+      // Aceita qualquer formação — inclusive as antigas com 9 opções
+      setLocalFormation(FORMATIONS[formation] ? formation : DEFAULT_FORMATION);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formation]);
@@ -205,8 +315,8 @@ export default function TacticalField({
   const selectedFormation = localFormation;
 
   const handleFormationChange = useCallback((f: string) => {
-    setLocalFormation(f);  // atualiza UI imediatamente
-    onFormationChange?.(f);  // persiste no banco em background
+    setLocalFormation(f);       // atualiza UI imediatamente
+    onFormationChange?.(f);     // persiste no banco em background
   }, [onFormationChange]);
 
   // Drag-and-drop: trocar posições entre dois jogadores
@@ -248,7 +358,7 @@ export default function TacticalField({
     handleDragEnd();
   }, [handleDragEnd]);
 
-  const formationData = FORMATIONS[selectedFormation] ?? FORMATIONS["4-3-3"];
+  const formationData = FORMATIONS[selectedFormation] ?? FORMATIONS[DEFAULT_FORMATION];
   const lines = assignPlayersToLines(orderedPlayers, formationData.lines);
 
   const fieldTop = 40;
@@ -267,21 +377,9 @@ export default function TacticalField({
       onMouseLeave={draggable ? handleDragEnd : undefined}
     >
       {showFormationPicker && (
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-3 flex-wrap">
           <span className="text-xs text-zinc-500 font-medium">Formação:</span>
-          {Object.keys(FORMATIONS).map((f) => (
-            <button
-              key={f}
-              onClick={() => handleFormationChange(f)}
-              className={`text-xs px-2.5 py-1 rounded-full font-medium transition-colors ${
-                selectedFormation === f
-                  ? "bg-green-600 text-white"
-                  : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
+          <FormationDropdown selected={selectedFormation} onChange={handleFormationChange} />
         </div>
       )}
 

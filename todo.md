@@ -174,3 +174,8 @@
 - [x] Criar página /monte-elenco com seleção de time, grade titulares/reservas, busca de jogadores
 - [x] Criar página pública /elenco/:token para visualização do elenco compartilhado
 - [x] Registrar rotas no App.tsx e adicionar "Monte Elenco" ao menu de navegação
+
+## TacticalField - 41 Formações com Dropdown (2026-05-29)
+- [x] Expandir TacticalField para suportar todas as 41 formações solicitadas
+- [x] Substituir pills de formação por dropdown com scroll vertical
+- [x] Dropdown exibe formação selecionada com checkmark e fecha ao clicar fora
