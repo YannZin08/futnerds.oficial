@@ -118,14 +118,12 @@ function assignPlayersToLines(players: TacticalPlayer[], lines: number[]): Tacti
 
 // ─── Avatar do jogador no campo ──────────────────────────────────────────────
 function FieldPlayerNode({
-  player, x, y, isDragging, isDropTarget, draggable,
-  onDragStart, onDragEnd, onDrop,
+  player, x, y, isSelected, isSwapTarget, interactive,
+  onClick,
 }: {
   player: TacticalPlayer; x: number; y: number;
-  isDragging: boolean; isDropTarget: boolean; draggable: boolean;
-  onDragStart: (id: number) => void;
-  onDragEnd: () => void;
-  onDrop: (targetId: number) => void;
+  isSelected: boolean; isSwapTarget: boolean; interactive: boolean;
+  onClick: (id: number) => void;
 }) {
   const [imgError, setImgError] = useState(false);
   const initials = player.name.split(" ").filter(Boolean).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "").join("");
@@ -135,23 +133,24 @@ function FieldPlayerNode({
   const parts = player.name.trim().split(" ");
   const shortName = parts.length > 1 ? `${parts[0][0]}. ${parts.slice(-1)[0]}` : player.name;
 
-  const opacity = isDragging ? 0.4 : 1;
-  const highlightStroke = isDropTarget ? "#facc15" : "white";
-  const highlightWidth = isDropTarget ? 3 : 2;
+  // Visual: selecionado = anel amarelo pulsante; alvo de troca = anel verde
+  const ringStroke = isSelected ? "#facc15" : isSwapTarget ? "#4ade80" : "white";
+  const ringWidth = isSelected || isSwapTarget ? 3 : 2;
 
   return (
     <g
       transform={`translate(${x}, ${y})`}
-      style={{ cursor: draggable ? "grab" : "default", opacity }}
-      onMouseDown={draggable ? () => onDragStart(player.id) : undefined}
-      onMouseUp={draggable ? () => onDrop(player.id) : undefined}
-      onTouchStart={draggable ? () => onDragStart(player.id) : undefined}
-      onTouchEnd={draggable ? () => onDrop(player.id) : undefined}
+      style={{ cursor: interactive ? "pointer" : "default" }}
+      onClick={interactive ? () => onClick(player.id) : undefined}
     >
       {/* Sombra */}
       <ellipse cx={0} cy={22} rx={16} ry={4} fill="rgba(0,0,0,0.35)" />
+      {/* Anel de seleção animado */}
+      {isSelected && (
+        <circle cx={0} cy={0} r={22} fill="none" stroke="#facc15" strokeWidth={2} strokeDasharray="4 3" opacity={0.8} />
+      )}
       {/* Círculo do avatar */}
-      <circle cx={0} cy={0} r={18} fill={imgError || !player.imageUrl ? color : "transparent"} stroke={highlightStroke} strokeWidth={highlightWidth} />
+      <circle cx={0} cy={0} r={18} fill={imgError || !player.imageUrl ? color : "transparent"} stroke={ringStroke} strokeWidth={ringWidth} />
       {!imgError && player.imageUrl ? (
         <>
           <defs>
@@ -165,7 +164,7 @@ function FieldPlayerNode({
             clipPath={`url(#clip-${player.id})`}
             onError={() => setImgError(true)}
           />
-          <circle cx={0} cy={0} r={18} fill="none" stroke={highlightStroke} strokeWidth={highlightWidth} />
+          <circle cx={0} cy={0} r={18} fill="none" stroke={ringStroke} strokeWidth={ringWidth} />
         </>
       ) : (
         <text x={0} y={5} textAnchor="middle" fontSize={11} fontWeight="bold" fill="white">{initials}</text>
@@ -319,44 +318,40 @@ export default function TacticalField({
     onFormationChange?.(f);     // persiste no banco em background
   }, [onFormationChange]);
 
-  // Drag-and-drop: trocar posições entre dois jogadores
+  // Seleção por clique: trocar posições entre dois jogadores
   const [orderedPlayers, setOrderedPlayers] = useState<TacticalPlayer[]>(available);
-  const [draggingId, setDraggingId] = useState<number | null>(null);
-  const draggingIdRef = useRef<number | null>(null);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   // Sincronizar quando players externos mudam
   const prevPlayersRef = useRef<TacticalPlayer[]>(available);
   if (JSON.stringify(prevPlayersRef.current.map(p => p.id)) !== JSON.stringify(available.map(p => p.id))) {
     prevPlayersRef.current = available;
     setOrderedPlayers(available);
+    setSelectedId(null);
   }
 
-  const handleDragStart = useCallback((id: number) => {
-    setDraggingId(id);
-    draggingIdRef.current = id;
-  }, []);
-
-  const handleDragEnd = useCallback(() => {
-    setDraggingId(null);
-    draggingIdRef.current = null;
-  }, []);
-
-  const handleDrop = useCallback((targetId: number) => {
-    const fromId = draggingIdRef.current;
-    if (fromId === null || fromId === targetId) {
-      handleDragEnd();
-      return;
-    }
-    setOrderedPlayers(prev => {
-      const next = [...prev];
-      const fromIdx = next.findIndex(p => p.id === fromId);
-      const toIdx = next.findIndex(p => p.id === targetId);
-      if (fromIdx === -1 || toIdx === -1) return prev;
-      [next[fromIdx], next[toIdx]] = [next[toIdx], next[fromIdx]];
-      return next;
+  const handlePlayerClick = useCallback((clickedId: number) => {
+    setSelectedId(prev => {
+      if (prev === null) {
+        // Primeiro clique: seleciona o jogador
+        return clickedId;
+      }
+      if (prev === clickedId) {
+        // Clicou no mesmo: deseleciona
+        return null;
+      }
+      // Segundo clique em jogador diferente: troca posições
+      setOrderedPlayers(players => {
+        const next = [...players];
+        const fromIdx = next.findIndex(p => p.id === prev);
+        const toIdx = next.findIndex(p => p.id === clickedId);
+        if (fromIdx === -1 || toIdx === -1) return players;
+        [next[fromIdx], next[toIdx]] = [next[toIdx], next[fromIdx]];
+        return next;
+      });
+      return null; // deseleciona após trocar
     });
-    handleDragEnd();
-  }, [handleDragEnd]);
+  }, []);
 
   const formationData = FORMATIONS[selectedFormation] ?? FORMATIONS[DEFAULT_FORMATION];
   const lines = assignPlayersToLines(orderedPlayers, formationData.lines);
@@ -371,11 +366,7 @@ export default function TacticalField({
   });
 
   return (
-    <div
-      className={`flex flex-col gap-3 ${className}`}
-      onMouseUp={draggable ? handleDragEnd : undefined}
-      onMouseLeave={draggable ? handleDragEnd : undefined}
-    >
+    <div className={`flex flex-col gap-3 ${className}`}>
       {showFormationPicker && (
         <div className="flex items-center gap-3 flex-wrap">
           <span className="text-xs text-zinc-500 font-medium">Formação:</span>
@@ -385,7 +376,9 @@ export default function TacticalField({
 
       {draggable && (
         <p className="text-xs text-zinc-500 text-center">
-          Clique em um jogador e depois em outro para trocar as posições no campo
+          {selectedId !== null
+            ? "Agora clique em outro jogador para trocar a posição"
+            : "Clique em um jogador para selecioná-lo"}
         </p>
       )}
 
@@ -409,12 +402,10 @@ export default function TacticalField({
                     player={player}
                     x={x}
                     y={y}
-                    isDragging={draggingId === player.id}
-                    isDropTarget={draggingId !== null && draggingId !== player.id}
-                    draggable={draggable}
-                    onDragStart={handleDragStart}
-                    onDragEnd={handleDragEnd}
-                    onDrop={handleDrop}
+                    isSelected={selectedId === player.id}
+                    isSwapTarget={selectedId !== null && selectedId !== player.id}
+                    interactive={draggable}
+                    onClick={handlePlayerClick}
                   />
                 );
               });
