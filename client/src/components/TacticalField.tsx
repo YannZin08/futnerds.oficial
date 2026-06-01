@@ -319,14 +319,18 @@ export default function TacticalField({
   }, [onFormationChange]);
 
   // Seleção por clique: trocar posições entre dois jogadores
-  const [orderedPlayers, setOrderedPlayers] = useState<TacticalPlayer[]>(available);
+  // orderedPlayers guarda a ordem MANUAL do usuário (não re-ordena por posição após troca)
+  const [orderedPlayers, setOrderedPlayers] = useState<TacticalPlayer[]>(() =>
+    [...available].sort((a, b) => getPositionOrder(a.position) - getPositionOrder(b.position))
+  );
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  // Sincronizar quando players externos mudam
+  // Sincronizar quando players externos mudam (add/remove jogador)
   const prevPlayersRef = useRef<TacticalPlayer[]>(available);
   if (JSON.stringify(prevPlayersRef.current.map(p => p.id)) !== JSON.stringify(available.map(p => p.id))) {
     prevPlayersRef.current = available;
-    setOrderedPlayers(available);
+    // Re-ordena por posição apenas quando a lista de jogadores muda (não quando o usuário troca)
+    setOrderedPlayers([...available].sort((a, b) => getPositionOrder(a.position) - getPositionOrder(b.position)));
     setSelectedId(null);
   }
 
@@ -354,7 +358,17 @@ export default function TacticalField({
   }, []);
 
   const formationData = FORMATIONS[selectedFormation] ?? FORMATIONS[DEFAULT_FORMATION];
-  const lines = assignPlayersToLines(orderedPlayers, formationData.lines);
+  // Distribui os jogadores nas linhas RESPEITANDO a ordem manual do usuário
+  // (sem re-ordenar por posição — isso permite colocar qualquer jogador em qualquer linha)
+  const lines = (() => {
+    const result: TacticalPlayer[][] = [];
+    let idx = 0;
+    for (const count of formationData.lines) {
+      result.push(orderedPlayers.slice(idx, idx + count));
+      idx += count;
+    }
+    return result;
+  })();
 
   const fieldTop = 40;
   const fieldBottom = 490;
