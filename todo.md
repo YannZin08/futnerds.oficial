@@ -179,3 +179,6 @@
 - [x] Expandir TacticalField para suportar todas as 41 formações solicitadas
 - [x] Substituir pills de formação por dropdown com scroll vertical
 - [x] Dropdown exibe formação selecionada com checkmark e fecha ao clicar fora
+
+## Globo Interativo na Tela de Ligas (2026-08-20)
+- [x] Substituir a tela de ligas por globo 3D interativo com seleção de países, busca, painel de ligas e layout responsivo inspirado na referência enviada
