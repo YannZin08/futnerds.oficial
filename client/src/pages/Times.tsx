@@ -1,421 +1,242 @@
-import { useState, useRef, useMemo, useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
+import InteractiveGlobe from "@/components/InteractiveGlobe";
 import { trpc } from "@/lib/trpc";
+import { getCountryFlag } from "@/lib/countryCoordinates";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, Trophy, MapPin, Wallet, Star, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Trophy, MapPin, Wallet, Star, Search, X, ArrowRight, Shuffle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useLocation, useSearch } from "wouter";
 
-// Country flag emojis map
 const countryFlags: Record<string, string> = {
-  "Espanha": "🇪🇸",
-  "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-  "Itália": "🇮🇹",
-  "Alemanha": "🇩🇪",
-  "França": "🇫🇷",
-  "Portugal": "🇵🇹",
+  Espanha: "🇪🇸",
+  Inglaterra: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+  Itália: "🇮🇹",
+  Alemanha: "🇩🇪",
+  França: "🇫🇷",
+  Portugal: "🇵🇹",
   "Arábia Saudita": "🇸🇦",
-  "Holanda": "🇳🇱",
+  Holanda: "🇳🇱",
+  Bélgica: "🇧🇪",
+  Turquia: "🇹🇷",
+  Escócia: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+  Argentina: "🇦🇷",
+  EUA: "🇺🇸",
 };
 
-// Prestige stars helper
 function PrestigeStars({ value }: { value: number }) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`w-3 h-3 ${i < Math.round(value / 2) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/30"}`}
-        />
+        <Star key={i} className={`h-3 w-3 ${i < Math.round(value / 2) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/30"}`} />
       ))}
     </div>
   );
 }
 
-// Budget formatter — banco armazena em milhões (ex: 176 = €176M, 1.7 = €1.7M)
 function formatBudget(value: number | null | undefined): string {
   if (!value) return "—";
   if (value >= 1000) return `€${(value / 1000).toFixed(1)}B`;
-  const rounded = parseFloat(value.toFixed(1));
-  return `€${rounded}M`;
+  return `€${parseFloat(value.toFixed(1))}M`;
 }
 
 type View = "countries" | "leagues" | "teams";
+type Country = { id: number; name: string };
+type League = { id: number; name: string; division: number; logoUrl?: string | null };
 
 export default function Times() {
   const [view, setView] = useState<View>("countries");
-  const [selectedCountry, setSelectedCountry] = useState<{ id: number; name: string } | null>(null);
-  const [selectedLeague, setSelectedLeague] = useState<{ id: number; name: string; division: number; logoUrl?: string | null } | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [selectedLeague, setSelectedLeague] = useState<League | null>(null);
+  const [countrySearch, setCountrySearch] = useState("");
+  const [teamSearch, setTeamSearch] = useState("");
+  const [showTeamDropdown, setShowTeamDropdown] = useState(false);
   const [, navigate] = useLocation();
   const search = useSearch();
+  const teamSearchRef = useRef<HTMLDivElement>(null);
 
-  // Restaurar estado ao voltar de um time (via query params)
-  const { data: allLeagues } = trpc.leagues.byCountry.useQuery(
-    { countryId: 0 },
-    { enabled: false }
+  const { data: countries, isLoading: loadingCountries } = trpc.countries.list.useQuery();
+  const { data: leagues, isLoading: loadingLeagues } = trpc.leagues.byCountry.useQuery(
+    { countryId: selectedCountry?.id ?? 0 },
+    { enabled: !!selectedCountry },
   );
-  const restoreLeagueId = useMemo(() => {
-    const params = new URLSearchParams(search);
-    const lid = params.get("leagueId");
-    return lid ? parseInt(lid) : null;
-  }, [search]);
-  const restoreCountryId = useMemo(() => {
-    const params = new URLSearchParams(search);
-    const cid = params.get("countryId");
-    return cid ? parseInt(cid) : null;
-  }, [search]);
+  const { data: teams, isLoading: loadingTeams } = trpc.teams.byLeague.useQuery(
+    { leagueId: selectedLeague?.id ?? 0 },
+    { enabled: !!selectedLeague },
+  );
 
-  const { data: restoreCountries } = trpc.countries.list.useQuery(
-    undefined,
-    { enabled: restoreCountryId !== null && view === "countries" }
-  );
+  const params = useMemo(() => new URLSearchParams(search), [search]);
+  const restoreLeagueId = params.get("leagueId") ? Number(params.get("leagueId")) : null;
+  const restoreCountryId = params.get("countryId") ? Number(params.get("countryId")) : null;
   const { data: restoreLeagues } = trpc.leagues.byCountry.useQuery(
     { countryId: restoreCountryId ?? 0 },
-    { enabled: restoreCountryId !== null && view === "countries" }
+    { enabled: restoreCountryId !== null && restoreLeagueId !== null },
   );
 
-  useEffect(() => {
-    if (restoreCountryId && restoreLeagueId && restoreCountries && restoreLeagues && view === "countries") {
-      const country = restoreCountries.find(c => c.id === restoreCountryId);
-      const league = restoreLeagues.find(l => l.id === restoreLeagueId);
-      if (country && league) {
-        setSelectedCountry(country);
-        setSelectedLeague(league);
-        setView("teams");
-        // Limpar os query params da URL sem reload
-        window.history.replaceState({}, "", window.location.pathname);
-      }
-    }
-  }, [restoreCountryId, restoreLeagueId, restoreCountries, restoreLeagues, view]);
-
-  // ── Busca global de times ──
-  const [searchQuery, setSearchQuery] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
-
-  const debouncedQuery = useMemo(() => searchQuery.trim(), [searchQuery]);
-
+  const trimmedTeamSearch = teamSearch.trim();
   const { data: searchResults, isFetching: searchLoading } = trpc.teams.search.useQuery(
-    { query: debouncedQuery },
-    { enabled: debouncedQuery.length >= 2 }
+    { query: trimmedTeamSearch },
+    { enabled: trimmedTeamSearch.length >= 2 },
   );
 
-  // Fecha dropdown ao clicar fora
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        setShowDropdown(false);
-      }
+    if (!countries?.length || selectedCountry) return;
+    const preferred = countries.find((country) => country.name === "Inglaterra") ?? countries[0];
+    setSelectedCountry({ id: preferred.id, name: preferred.name });
+  }, [countries, selectedCountry]);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (teamSearchRef.current && !teamSearchRef.current.contains(event.target as Node)) setShowTeamDropdown(false);
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const { data: countries, isLoading: loadingCountries } = trpc.countries.list.useQuery();
+  useEffect(() => {
+    if (!restoreCountryId || !restoreLeagueId || !countries || !restoreLeagues) return;
+    const country = countries.find((item) => item.id === restoreCountryId);
+    const league = restoreLeagues.find((item) => item.id === restoreLeagueId);
+    if (country && league) {
+      setSelectedCountry({ id: country.id, name: country.name });
+      setSelectedLeague({ id: league.id, name: league.name, division: league.division, logoUrl: league.logoUrl });
+      setView("teams");
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, [countries, restoreCountryId, restoreLeagueId, restoreLeagues]);
 
-  const { data: leagues, isLoading: loadingLeagues } = trpc.leagues.byCountry.useQuery(
-    { countryId: selectedCountry?.id ?? 0 },
-    { enabled: !!selectedCountry }
-  );
-  const { data: teams, isLoading: loadingTeams } = trpc.teams.byLeague.useQuery(
-    { leagueId: selectedLeague?.id ?? 0 },
-    { enabled: !!selectedLeague }
-  );
+  const filteredCountries = useMemo(() => {
+    const query = countrySearch.trim().toLocaleLowerCase("pt-BR");
+    const priority = ["Brasil", "Inglaterra", "Espanha", "Itália", "Alemanha"];
+    return (countries ?? [])
+      .filter((country) => !query || country.name.toLocaleLowerCase("pt-BR").includes(query))
+      .sort((a, b) => {
+        const priorityA = priority.indexOf(a.name);
+        const priorityB = priority.indexOf(b.name);
+        if (priorityA !== -1 || priorityB !== -1) return (priorityA === -1 ? 99 : priorityA) - (priorityB === -1 ? 99 : priorityB);
+        return a.name.localeCompare(b.name, "pt-BR");
+      });
+  }, [countries, countrySearch]);
+
+  function selectCountry(country: Country) {
+    setSelectedCountry(country);
+    setSelectedLeague(null);
+    setView("countries");
+  }
 
   function goToCountries() {
     setView("countries");
-    setSelectedCountry(null);
     setSelectedLeague(null);
   }
 
-  function goToLeagues(country: { id: number; name: string }) {
+  function goToLeagues(country: Country = selectedCountry as Country) {
+    if (!country) return;
     setSelectedCountry(country);
     setSelectedLeague(null);
     setView("leagues");
   }
 
-  function goToTeams(league: { id: number; name: string; division: number; logoUrl?: string | null }) {
+  function goToTeams(league: League) {
     setSelectedLeague(league);
     setView("teams");
   }
 
+  const selectedFlag = selectedCountry ? (countryFlags[selectedCountry.name] ?? getCountryFlag(selectedCountry.name)) : "🌍";
+
   return (
-    <>
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#020303] text-foreground">
       <Navbar />
-      {/* Header Fixo */}
-      <div className="border-b border-border bg-card fixed top-16 left-0 right-0 z-40">
-        <div className="container py-3">
-          {/* Linha 1: voltar + título */}
-          <div className="flex items-center gap-2 mb-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={
-                view === "countries"
-                  ? () => navigate("/")
-                  : view === "leagues"
-                  ? goToCountries
-                  : () => setView("leagues")
-              }
-              className="shrink-0 h-8 w-8"
-              title="Voltar"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
-            <div className="flex-1 min-w-0">
-              <h1 className="text-base sm:text-xl font-bold text-foreground flex items-center gap-1.5 truncate">
-                <Trophy className="w-4 h-4 text-primary shrink-0" />
-                <span className="truncate">
-                {view === "countries" && "Escolha um País"}
-                {view === "leagues" && `${countryFlags[selectedCountry?.name ?? ""] ?? ""} ${selectedCountry?.name}`}
-                {view === "teams" && selectedLeague?.name}
-                </span>
-              </h1>
-              {/* Breadcrumb - esconde no mobile */}
-              <div className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground mt-0.5 overflow-hidden">
-                <button onClick={goToCountries} className="hover:text-primary transition-colors shrink-0">Países</button>
-                {selectedCountry && (
-                  <>
-                    <span>/</span>
-                    <button onClick={() => setView("leagues")} className="hover:text-primary transition-colors truncate max-w-[80px]">
-                      {selectedCountry.name}
+
+      {view === "countries" ? (
+        <main className="min-h-[calc(100vh-4rem)] px-4 pb-5 pt-[104px] sm:px-8 sm:pt-[112px] lg:px-10 xl:px-12">
+          <div className="mx-auto max-w-[1500px]">
+            <div className="mb-5 flex items-end justify-between gap-6 px-1 sm:mb-7">
+              <div>
+                <h1 className="font-display text-3xl font-bold leading-none tracking-tight text-white sm:text-4xl lg:text-[46px]">Explore o futebol mundial</h1>
+                <p className="mt-2 text-sm text-white/55 sm:text-base">Passe o mouse sobre um país para descobrir suas ligas e times</p>
+              </div>
+              <div className="hidden w-[390px] lg:block">
+                <CountrySearch value={countrySearch} onChange={setCountrySearch} />
+              </div>
+            </div>
+
+            <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_390px] xl:gap-7">
+              <section className="relative min-w-0">
+                <div className="lg:hidden"><CountrySearch value={countrySearch} onChange={setCountrySearch} /></div>
+                {loadingCountries ? <div className="h-[440px] animate-pulse rounded-2xl bg-[#07100a] sm:h-[600px]" /> : <InteractiveGlobe countries={countries ?? []} selectedCountryId={selectedCountry?.id} onCountrySelect={selectCountry} />}
+              </section>
+
+              <aside className="rounded-[18px] border border-white/[0.13] border-t-2 border-t-primary/80 bg-[#0b0d0c] p-5 shadow-[0_0_35px_rgba(0,0,0,0.22)] sm:p-6">
+                <div className="mb-5 flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">País selecionado</p>
+                    <h2 className="mt-2 font-display text-4xl font-bold leading-none text-white sm:text-[44px]">{selectedCountry?.name ?? "Selecione"}</h2>
+                    <p className="mt-3 text-sm text-white/45">{loadingLeagues ? "Carregando ligas..." : `${leagues?.length ?? 0} ligas disponíveis`}</p>
+                  </div>
+                  <span className="text-3xl leading-none" aria-hidden="true">{selectedFlag}</span>
+                </div>
+
+                <div className="space-y-2">
+                  {(leagues ?? []).slice(0, 4).map((league) => (
+                    <button key={league.id} onClick={() => goToTeams(league)} className="group flex w-full items-center gap-3 rounded-xl border border-white/[0.08] bg-[#0f1210] px-3 py-3 text-left transition hover:border-primary/45 hover:bg-[#121914]">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-black/20">
+                        {league.logoUrl ? <img src={league.logoUrl} alt={league.name} className="h-8 w-8 object-contain" /> : <Trophy className="h-5 w-5 text-white/70" />}
+                      </span>
+                      <span className="min-w-0 flex-1"><span className="block truncate text-sm font-semibold text-white/85">{league.name}</span><span className="mt-0.5 block text-xs text-white/35">{league.division === 1 ? "1ª Divisão" : `${league.division}ª Divisão`}</span></span>
+                      <ChevronRight className="h-4 w-4 shrink-0 text-white/45 transition group-hover:text-primary" />
                     </button>
-                  </>
-                )}
-                {selectedLeague && (
-                  <>
-                    <span>/</span>
-                    <span className="text-foreground truncate max-w-[80px]">{selectedLeague.name}</span>
-                  </>
-                )}
+                  ))}
+                  {!loadingLeagues && !leagues?.length && <p className="rounded-xl border border-dashed border-white/10 p-4 text-sm text-white/40">Nenhuma liga cadastrada para este país.</p>}
+                </div>
+
+                <Button onClick={() => goToLeagues()} disabled={!selectedCountry} className="mt-5 h-12 w-full gap-2 rounded-lg bg-primary text-sm font-bold text-black hover:bg-primary/90">Ver times <ArrowRight className="h-4 w-4" /></Button>
+                <button type="button" onClick={() => { const random = countries?.[Math.floor(Math.random() * (countries.length || 1))]; if (random) selectCountry(random); }} className="mt-5 flex w-full items-center justify-center gap-2 text-sm font-semibold text-primary/85 transition hover:text-primary"><Shuffle className="h-4 w-4" /> Escolher país aleatório</button>
+              </aside>
+            </div>
+
+            <div className="mt-5 flex items-center gap-3 overflow-hidden rounded-2xl border border-white/[0.1] bg-[#0a0c0b] px-4 py-3 sm:mt-6 sm:px-5">
+              <button type="button" onClick={goToCountries} className="flex shrink-0 items-center gap-2 border-r border-white/10 pr-5 text-sm font-semibold text-white/80"><span>Todos os países</span><ChevronLeft className="h-4 w-4 rotate-90 text-white/55" /></button>
+              <div className="flex min-w-0 flex-1 gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {(filteredCountries.length ? filteredCountries : countries ?? []).map((country) => (
+                  <button key={country.id} onClick={() => selectCountry(country)} className={`flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${selectedCountry?.id === country.id ? "border-primary bg-primary/10 text-primary" : "border-white/[0.1] bg-[#101311] text-white/60 hover:border-primary/45 hover:text-white"}`}>
+                    <span className="text-base">{countryFlags[country.name] ?? getCountryFlag(country.name)}</span>{country.name}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-          {/* Linha 2: busca (largura total no mobile) */}
-          <div ref={searchRef} className="relative w-full">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Buscar time diretamente..."
-                  value={searchQuery}
-                  onChange={(e) => { setSearchQuery(e.target.value); setShowDropdown(true); }}
-                  onFocus={() => { if (searchQuery.length >= 2) setShowDropdown(true); }}
-                  onKeyDown={(e) => { if (e.key === "Escape") { setShowDropdown(false); setSearchQuery(""); } }}
-                  className="pl-10 pr-8 bg-secondary border-border"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => { setSearchQuery(""); setShowDropdown(false); }}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                )}
+        </main>
+      ) : (
+        <main className="min-h-[calc(100vh-4rem)] px-4 pb-10 pt-8 sm:px-8 lg:px-10 xl:px-12">
+          <div className="mx-auto max-w-[1500px]">
+            <div className="mb-6 flex flex-wrap items-center gap-3 border-b border-white/10 pb-5">
+              <Button variant="ghost" size="icon" onClick={view === "leagues" ? goToCountries : () => setView("leagues")} className="h-9 w-9"><ChevronLeft className="h-4 w-4" /></Button>
+              <div className="min-w-0 flex-1"><h1 className="truncate font-display text-3xl font-bold text-white">{view === "leagues" ? `${selectedFlag} ${selectedCountry?.name ?? "Ligas"}` : selectedLeague?.name}</h1><p className="mt-1 text-sm text-white/45"><button onClick={goToCountries} className="hover:text-primary">Países</button>{selectedCountry && ` / ${selectedCountry.name}`}{selectedLeague && ` / ${selectedLeague.name}`}</p></div>
+              <div ref={teamSearchRef} className="relative w-full sm:w-[310px]">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/35" />
+                <Input value={teamSearch} onChange={(event) => { setTeamSearch(event.target.value); setShowTeamDropdown(true); }} onFocus={() => teamSearch.length >= 2 && setShowTeamDropdown(true)} placeholder="Buscar time diretamente..." className="border-white/10 bg-[#0d100e] pl-10 text-white placeholder:text-white/30" />
+                {teamSearch && <button onClick={() => { setTeamSearch(""); setShowTeamDropdown(false); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/35 hover:text-white"><X className="h-4 w-4" /></button>}
+                {showTeamDropdown && trimmedTeamSearch.length >= 2 && <div className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-xl border border-white/10 bg-[#0c0f0d] shadow-2xl">{searchLoading ? <div className="p-4 text-sm text-white/45">Buscando...</div> : searchResults?.length ? searchResults.map((team) => <button key={team.id} onClick={() => { setShowTeamDropdown(false); setTeamSearch(""); navigate(`/times/${team.id}`); }} className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-white/5"><Trophy className="h-5 w-5 text-primary" /><span className="min-w-0 flex-1 truncate text-sm text-white">{team.name}</span></button>) : <div className="p-4 text-sm text-white/45">Nenhum time encontrado.</div>}</div>}
               </div>
-              {/* Dropdown de resultados */}
-              {showDropdown && debouncedQuery.length >= 2 && (
-                <div className="absolute top-full mt-1 left-0 right-0 z-50 bg-card border border-border rounded-xl shadow-xl overflow-hidden">
-                  {searchLoading ? (
-                    <div className="px-4 py-3 text-sm text-muted-foreground">Buscando...</div>
-                  ) : searchResults && searchResults.length > 0 ? (
-                    <ul>
-                      {searchResults.map((team) => (
-                        <li key={team.id}>
-                          <button
-                            onClick={() => {
-                              setShowDropdown(false);
-                              setSearchQuery("");
-                              navigate(`/times/${team.id}`);
-                            }}
-                            className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary transition-colors text-left"
-                          >
-                            {team.logoUrl ? (
-                              <img src={team.logoUrl} alt={team.name} className="w-8 h-8 object-contain shrink-0" />
-                            ) : (
-                              <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                                <Trophy className="w-4 h-4 text-primary" />
-                              </div>
-                            )}
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-semibold text-foreground truncate">{team.name}</p>
-                              <p className="text-xs text-muted-foreground truncate">{team.leagueName} · {team.countryName}</p>
-                            </div>
-                            {team.prestige != null && (
-                              <div className="flex gap-0.5 shrink-0">
-                                {Array.from({ length: 5 }).map((_, i) => (
-                                  <Star key={i} className={`w-2.5 h-2.5 ${i < Math.round(team.prestige! / 2) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/30"}`} />
-                                ))}
-                              </div>
-                            )}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="px-4 py-3 text-sm text-muted-foreground">Nenhum time encontrado para "{debouncedQuery}"</div>
-                  )}
-                </div>
-              )}
             </div>
-        </div>
-      </div>
 
-      <div className="container pt-44 sm:pt-48 pb-8">
-        {/* ── COUNTRIES VIEW ── */}
-        {view === "countries" && (
-          <>
-            <p className="text-muted-foreground mb-6">
-              Selecione um país para explorar as ligas e times disponíveis para o modo carreira.
-            </p>
-            {loadingCountries ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <div key={i} className="h-32 rounded-xl bg-muted animate-pulse" />
-                ))}
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {countries?.map((country) => (
-                  <button
-                    key={country.id}
-                    onClick={() => goToLeagues(country)}
-                    className="group relative overflow-hidden rounded-xl border border-border/50 bg-card hover:border-primary/50 hover:bg-card/80 transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/10 p-4 text-center"
-                  >
-                    {/* Placeholder for country image - will be replaced when user sends images */}
-                    {country.imageUrl ? (
-                      <img
-                        src={country.imageUrl}
-                        alt={country.name}
-                        className="w-full h-36 object-contain rounded-lg mb-3"
-                      />
-                    ) : (
-                      <div className="w-full h-36 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-3 group-hover:from-primary/30 transition-all">
-                        <span className="text-5xl">{countryFlags[country.name] ?? "🌍"}</span>
-                      </div>
-                    )}
-                    <span className="font-semibold text-foreground group-hover:text-primary transition-colors text-sm">
-                      {country.name}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </>
-        )}
+            {view === "leagues" && <section><p className="mb-5 text-white/50">Escolha uma liga para ver os times disponíveis.</p>{loadingLeagues ? <div className="space-y-3">{Array.from({ length: 3 }).map((_, index) => <div key={index} className="h-20 animate-pulse rounded-xl bg-[#0b100d]" />)}</div> : <div className="space-y-3">{leagues?.map((league) => <button key={league.id} onClick={() => goToTeams(league)} className="group flex w-full items-center justify-between rounded-xl border border-white/10 bg-[#0b0e0c] p-5 text-left hover:border-primary/45"><span className="flex items-center gap-4"><span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">{league.logoUrl ? <img src={league.logoUrl} alt={league.name} className="h-10 w-10 object-contain" /> : <Trophy className="h-6 w-6 text-primary" />}</span><span><span className="block font-bold text-white group-hover:text-primary">{league.name}</span><span className="text-xs text-white/40">{league.division === 1 ? "1ª Divisão" : `${league.division}ª Divisão`}</span></span></span><ChevronRight className="h-5 w-5 text-white/35 group-hover:text-primary" /></button>)}</div>}</section>}
 
-        {/* ── LEAGUES VIEW ── */}
-        {view === "leagues" && (
-          <>
-            <p className="text-muted-foreground mb-6">
-              Escolha uma liga para ver os times disponíveis.
-            </p>
-            {loadingLeagues ? (
-              <div className="flex flex-col gap-3">
-                {Array.from({ length: 2 }).map((_, i) => (
-                  <div key={i} className="h-20 rounded-xl bg-muted animate-pulse" />
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-col gap-3">
-                {leagues?.map((league) => (
-                  <button
-                    key={league.id}
-                    onClick={() => goToTeams(league)}
-                    className="group flex items-center justify-between rounded-xl border border-border/50 bg-card hover:border-primary/50 hover:bg-card/80 transition-all duration-200 hover:shadow-md hover:shadow-primary/10 p-5 text-left"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center shrink-0 group-hover:from-primary/30 transition-all overflow-hidden">
-                        {league.logoUrl ? (
-                          <img src={league.logoUrl} alt={league.name} className="w-10 h-10 object-contain" />
-                        ) : (
-                          <Trophy className="w-6 h-6 text-primary" />
-                        )}
-                      </div>
-                      <div>
-                        <p className="font-bold text-foreground group-hover:text-primary transition-colors">
-                          {league.name}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {league.division === 1 ? "1ª Divisão" : `${league.division}ª Divisão`}
-                        </p>
-                      </div>
-                    </div>
-                    <ChevronLeft className="w-5 h-5 text-muted-foreground rotate-180 group-hover:text-primary transition-colors" />
-                  </button>
-                ))}
-              </div>
-            )}
-          </>
-        )}
-
-        {/* ── TEAMS VIEW ── */}
-        {view === "teams" && (
-          <>
-
-            {loadingTeams ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div key={i} className="h-36 rounded-xl bg-muted animate-pulse" />
-                ))}
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-                {teams?.map((team) => (
-                  <Card
-                    key={team.id}
-                    onClick={() => navigate(`/times/${team.id}?leagueId=${selectedLeague?.id ?? 0}&countryId=${selectedCountry?.id ?? 0}`)}
-                    className="group border-border/50 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-200 cursor-pointer hover:scale-[1.01]"
-                  >
-                    <CardContent className="p-5">
-                      {/* Team header */}
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                          {team.logoUrl ? (
-                            <img src={team.logoUrl} alt={team.name} className="w-10 h-10 object-contain" />
-                          ) : (
-                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center shrink-0">
-                              <span className="text-lg font-bold text-primary">{team.shortName?.slice(0, 2)}</span>
-                            </div>
-                          )}
-                          <div className="min-w-0">
-                            <p className="font-bold text-foreground group-hover:text-primary transition-colors leading-tight truncate">
-                              {team.name}
-                            </p>
-                            <Badge variant="outline" className="text-xs mt-0.5 border-primary/30 text-primary">
-                              {team.shortName}
-                            </Badge>
-                          </div>
-                        </div>
-                        <PrestigeStars value={team.prestige ?? 5} />
-                      </div>
-
-                      {/* Stadium */}
-                      {team.stadiumName && (
-                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-2">
-                          <MapPin className="w-3 h-3 shrink-0" />
-                          <span className="truncate">{team.stadiumName}</span>
-                        </div>
-                      )}
-
-                      {/* Budget */}
-                      {team.budget != null && (
-                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                          <Wallet className="w-3 h-3 shrink-0" />
-                          <span>Orçamento: <span className="text-green-400 font-semibold">{formatBudget(team.budget)}</span></span>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </>
-        )}
-      </div>
+            {view === "teams" && <section>{loadingTeams ? <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{Array.from({ length: 6 }).map((_, index) => <div key={index} className="h-36 animate-pulse rounded-xl bg-[#0b100d]" />)}</div> : <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{teams?.map((team) => <Card key={team.id} onClick={() => navigate(`/times/${team.id}?leagueId=${selectedLeague?.id ?? 0}&countryId=${selectedCountry?.id ?? 0}`)} className="group cursor-pointer border-white/10 bg-[#0b0e0c] hover:border-primary/45"><CardContent className="p-5"><div className="mb-3 flex items-start justify-between"><div className="flex items-center gap-3">{team.logoUrl ? <img src={team.logoUrl} alt={team.name} className="h-10 w-10 object-contain" /> : <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10"><span className="font-bold text-primary">{team.shortName?.slice(0, 2)}</span></div>}<div className="min-w-0"><p className="truncate font-bold text-white group-hover:text-primary">{team.name}</p><Badge variant="outline" className="mt-0.5 border-primary/30 text-xs text-primary">{team.shortName}</Badge></div></div><PrestigeStars value={team.prestige ?? 5} /></div>{team.stadiumName && <div className="mb-2 flex items-center gap-1.5 text-xs text-white/45"><MapPin className="h-3 w-3" /><span className="truncate">{team.stadiumName}</span></div>}{team.budget != null && <div className="flex items-center gap-1.5 text-xs text-white/45"><Wallet className="h-3 w-3" /><span>Orçamento: <span className="font-semibold text-primary">{formatBudget(team.budget)}</span></span></div>}</CardContent></Card>)}</div>}</section>}
+          </div>
+        </main>
+      )}
     </div>
-    </>
+  );
+}
+
+function CountrySearch({ value, onChange }: { value: string; onChange: (value: string) => void }) {
+  return (
+    <div className="relative">
+      <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/35" />
+      <Input value={value} onChange={(event) => onChange(event.target.value)} placeholder="Buscar país..." className="h-11 rounded-full border-white/10 bg-[#111311] pl-11 text-white placeholder:text-white/35 focus:border-primary/60" />
+    </div>
   );
 }

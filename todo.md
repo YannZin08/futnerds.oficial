@@ -187,3 +187,15 @@
 - [ ] Preparar e integrar assets visuais sem alterar as demais funcionalidades
 - [ ] Validar a Home em desktop e mobile e preservar rotas existentes
 - [ ] Criar testes Vitest relacionados à nova Home e executar a suíte
+
+## Globo Interativo na Tela de Ligas (2026-08-20)
+- [x] Substituir a tela de ligas por globo 3D interativo com seleção de países, busca, painel de ligas e layout responsivo inspirado na referência enviada
+
+## Revisão Visual do Globo de Ligas (2026-08-20)
+- [x] Refazer a composição da tela de ligas para aproximar fielmente a referência: globo grande à esquerda, painel compacto à direita, faixa inferior de países, fundo preto e neon verde controlado
+- [x] Ajustar proporções, espaçamentos, tipografia e responsividade da nova composição
+
+## Validação Comparativa do Globo de Ligas (2026-08-20)
+- [x] Validar a composição da tela contra a referência em desktop, tablet e mobile
+- [x] Registrar evidências de proporções, painel, globo, fundo, neon, tipografia e faixa inferior
+- [x] Ajustar qualquer divergência encontrada antes do checkpoint final
