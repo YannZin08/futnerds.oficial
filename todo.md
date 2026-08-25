@@ -199,3 +199,9 @@
 - [x] Validar a composição da tela contra a referência em desktop, tablet e mobile
 - [x] Registrar evidências de proporções, painel, globo, fundo, neon, tipografia e faixa inferior
 - [x] Ajustar qualquer divergência encontrada antes do checkpoint final
+
+## Limpeza da Navbar oficial (2026-08-25)
+- [x] Remover Scouting, Modo Carreira e Rankings da Navbar desktop
+- [x] Remover Scouting, Modo Carreira e Rankings do menu mobile
+- [x] Validar que Início, Jogadores, Times, busca e autenticação continuam disponíveis
+- [x] Atualizar teste de regressão da Navbar e executar a suíte

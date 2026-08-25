@@ -20,10 +20,11 @@ const navbarSource = readFileSync(resolve(process.cwd(), "client/src/components/
     expect(homeSource).toContain('href="/times"');
   });
 
-  it("keeps future navbar options visibly disabled", () => {
-    expect(navbarSource).toContain('label: "Scouting"');
-    expect(navbarSource).toContain('label: "Modo Carreira"');
-    expect(navbarSource).toContain('label: "Rankings"');
-    expect(navbarSource).toContain("disabled: true");
+  it("removes unavailable options from the navbar", () => {
+    expect(navbarSource).not.toContain('label: "Scouting"');
+    expect(navbarSource).not.toContain('label: "Modo Carreira"');
+    expect(navbarSource).not.toContain('label: "Rankings"');
+    expect(navbarSource).toContain('label: "Jogadores"');
+    expect(navbarSource).toContain('label: "Times"');
   });
 });

@@ -25,9 +25,6 @@ const navLinks: NavLink[] = [
   { href: "/", label: "Início" },
   { href: "/jogadores", label: "Jogadores" },
   { href: "/times", label: "Times" },
-  { href: "#scouting", label: "Scouting", disabled: true },
-  { href: "#modo-carreira", label: "Modo Carreira", disabled: true },
-  { href: "#rankings", label: "Rankings", disabled: true },
 ];
 
 const desktopLinkClass = "px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200";
