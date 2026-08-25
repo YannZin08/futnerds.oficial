@@ -181,12 +181,12 @@
 - [x] Dropdown exibe formação selecionada com checkmark e fecha ao clicar fora
 
 ## Redesign da Home oficial baseado na referência visual (2026-08-25)
-- [ ] Atualizar a Home oficial com hero de estádio, painéis OVR e valor de transferência
-- [ ] Adicionar métricas, cards de exploração, seção Futebol do Mundo, desafios e CTA final
-- [ ] Atualizar a navbar oficial com os itens da referência, mantendo links futuros sem função
-- [ ] Preparar e integrar assets visuais sem alterar as demais funcionalidades
-- [ ] Validar a Home em desktop e mobile e preservar rotas existentes
-- [ ] Criar testes Vitest relacionados à nova Home e executar a suíte
+- [x] Atualizar a Home oficial com hero de estádio, painéis OVR e valor de transferência
+- [x] Adicionar métricas, cards de exploração, seção Futebol do Mundo, desafios e CTA final
+- [x] Atualizar a navbar oficial com os itens da referência, mantendo links futuros sem função
+- [x] Preparar e integrar assets visuais sem alterar as demais funcionalidades
+- [x] Validar a Home em desktop e mobile e preservar rotas existentes
+- [x] Criar testes Vitest relacionados à nova Home e executar a suíte
 
 ## Globo Interativo na Tela de Ligas (2026-08-20)
 - [x] Substituir a tela de ligas por globo 3D interativo com seleção de países, busca, painel de ligas e layout responsivo inspirado na referência enviada

@@ -7,270 +7,261 @@ import Footer from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
 import {
   ArrowRight,
-  Zap,
+  BarChart3,
+  Brain,
+  ChevronLeft,
+  ChevronRight,
+  Gamepad2,
+  Globe2,
+  Search,
+  ShieldCheck,
+  Sparkles,
   Trophy,
   Users,
-  BarChart3,
-  Heart,
+  Zap,
 } from "lucide-react";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663216916845/hhB4oykfDQM9yCvhQGaX3n/logo-futnerds_8f14a724.png";
+const HERO_IMAGE = "/manus-storage/hero-stadium_6d45b6d5.jpeg";
+const FIELD_IMAGE = "/manus-storage/field-night_4d5efd24.jpg";
+const TACTICS_IMAGE = "/manus-storage/tactics_946d4bf7.jpg";
+const WORLD_IMAGE = "/manus-storage/world-map_52843b5b.png";
 
-const features = [
+const exploreCards = [
   {
-    icon: BarChart3,
-    title: "Análise de Jogadores",
-    desc: "Estatísticas detalhadas e comparações para montar o time perfeito no modo carreira.",
-    color: "text-primary",
-    bg: "bg-primary/10",
-  },
-  {
-    icon: Trophy,
-    title: "Estratégias FUT",
-    desc: "Guias e dicas para dominar o modo carreira e escalar divisões.",
-    color: "text-orange-400",
-    bg: "bg-orange-400/10",
-  },
-  {
+    title: "JOGADORES",
+    description: "Busque, filtre e descubra os melhores talentos.",
+    image: FIELD_IMAGE,
     icon: Users,
-    title: "Comunidade Ativa",
-    desc: "Conecte-se com outros jogadores e compartilhe suas conquistas.",
-    color: "text-blue-400",
-    bg: "bg-blue-400/10",
+    href: "/jogadores",
   },
   {
-    icon: Zap,
-    title: "Atualizações Constantes",
-    desc: "Conteúdo sempre atualizado para acompanhar as mudanças do jogo.",
-    color: "text-yellow-400",
-    bg: "bg-yellow-400/10",
+    title: "TIMES",
+    description: "Dados completos de clubes do mundo todo.",
+    image: HERO_IMAGE,
+    icon: ShieldCheck,
+    href: "/times",
+  },
+  {
+    title: "SCOUTING",
+    description: "Encontre jovens promessas e boas oportunidades.",
+    image: TACTICS_IMAGE,
+    icon: Search,
+    disabled: true,
+  },
+  {
+    title: "MODO CARREIRA",
+    description: "Comece sua próxima história e conquiste tudo.",
+    image: FIELD_IMAGE,
+    icon: Trophy,
+    disabled: true,
   },
 ];
 
-// Stats são definidas dinamicamente abaixo
+const challenges = [
+  {
+    title: "RECONSTRUÇÃO",
+    description: "Pegue um gigante em crise e devolva a glória.",
+    image: HERO_IMAGE,
+    icon: ShieldCheck,
+    difficulty: 4,
+  },
+  {
+    title: "ROAD TO GLORY",
+    description: "Comece pequeno e leve seu time ao topo do mundo.",
+    image: FIELD_IMAGE,
+    icon: BarChart3,
+    difficulty: 4,
+  },
+  {
+    title: "JOVENS TALENTOS",
+    description: "Monte um elenco promissor e domine o futuro.",
+    image: TACTICS_IMAGE,
+    icon: Brain,
+    difficulty: 4,
+  },
+  {
+    title: "DESAFIO",
+    description: "Regras especiais para uma carreira ainda mais épica.",
+    image: HERO_IMAGE,
+    icon: Trophy,
+    difficulty: 4,
+  },
+];
+
+function DisabledAction({ children }: { children: React.ReactNode }) {
+  return (
+    <button type="button" disabled className="home-v2-disabled-action" aria-disabled="true">
+      {children}
+    </button>
+  );
+}
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
-  const { data: favoriteTeams } = trpc.teams.favorites.useQuery(undefined, { enabled: isAuthenticated });
-  const { data: topPlayers } = trpc.players.list.useQuery({ limit: 4, sortBy: "overall" });
   const { data: playerCount } = trpc.players.count.useQuery();
   const totalPlayers = playerCount ?? 657;
-
-  const stats = [
-    { label: "Jogadores Analisados", value: `${totalPlayers}+` },
-    { label: "Modos de Jogo", value: "4" },
-    { label: "Membros", value: "Crescendo" },
-    { label: "Atualizações", value: "Diárias" },
-  ];
+  const formattedPlayers = totalPlayers.toLocaleString("pt-BR");
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="home-v2-root min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        {/* Grid background */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.12]"
-          style={{
-            backgroundImage: "linear-gradient(oklch(0.65 0.20 145) 1px, transparent 1px), linear-gradient(90deg, oklch(0.65 0.20 145) 1px, transparent 1px)",
-            backgroundSize: "60px 60px"
-          }} />
+      <main>
+        <section className="home-v2-hero">
+          <div className="home-v2-hero-image" style={{ backgroundImage: `url(${HERO_IMAGE})` }} />
+          <div className="home-v2-hero-overlay" />
+          <div className="home-v2-hero-grid" />
 
-        <div className="container relative">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-8">
-              <Zap className="h-3.5 w-3.5" />
-              A comunidade FIFA mais completa do Brasil
-            </div>
-
-            {/* Logo + Title */}
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <img src={LOGO_URL} alt="FUTNERDS" className="h-14 w-14 sm:h-20 sm:w-20 object-contain" />
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight"
-                style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-                FUT<span className="text-primary">NERDS</span>
-              </h1>
-            </div>
-
-            <p className="text-base sm:text-xl md:text-2xl text-muted-foreground mb-4 font-light">
-              Análises e estratégias para
-            </p>
-            <p className="text-base sm:text-xl md:text-2xl font-semibold text-foreground mb-10">
-              elevar seu jogo ao próximo nível
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              {isAuthenticated ? (
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-12 text-base font-semibold" asChild>
-                  <Link href="/jogadores">
-                    Ver Jogadores <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-              ) : (
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-12 text-base font-semibold" asChild>
-                  <a href={getLoginUrl()}>
-                    Entrar na Comunidade <ArrowRight className="ml-2 h-5 w-5" />
-                  </a>
-                </Button>
-              )}
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Bar */}
-      <section className="py-8 border-y border-border/50" style={{ background: "oklch(0.12 0.01 240)" }}>
-        <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-3xl font-black text-primary mb-1"
-                  style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-                  {stat.value}
-                </div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
+          <div className="container home-v2-hero-inner">
+            <div className="home-v2-rating-panel" aria-label="Exemplo de avaliação de jogador">
+              <span className="home-v2-panel-kicker">WORLD CLASS</span>
+              <span className="home-v2-panel-label">OVR</span>
+              <strong>87</strong>
+              <span className="home-v2-panel-label">POT</span>
+              <strong className="home-v2-green-number">93</strong>
+              <div className="home-v2-rating-bars" aria-hidden="true">
+                {["h-2", "h-3", "h-4", "h-3", "h-5", "h-6"].map((height, index) => (
+                  <span key={index} className={height} />
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* Features */}
-      <section className="py-20">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-black mb-3">Tudo que você precisa</h2>
-            <p className="text-muted-foreground text-lg">Uma plataforma completa para a comunidade FIFA</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((f) => (
-              <div key={f.title} className="fut-card fut-card-hover p-6">
-                <div className={`inline-flex p-3 rounded-xl ${f.bg} mb-4`}>
-                  <f.icon className={`h-6 w-6 ${f.color}`} />
-                </div>
-                <h3 className="text-lg font-bold mb-2">{f.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+            <div className="home-v2-hero-content">
+              <div className="home-v2-badge"><Zap className="h-3.5 w-3.5" /> A comunidade FIFA mais completa do Brasil</div>
+              <div className="home-v2-brand-lockup">
+                <img src={LOGO_URL} alt="" />
+                <h1>FUT<span>NERDS</span></h1>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Times Favoritos */}
-      {isAuthenticated && favoriteTeams && favoriteTeams.length > 0 && (
-        <section className="py-16">
-          <div className="container">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-              <div>
-                <h2 className="text-2xl sm:text-3xl font-black mb-1 flex items-center gap-2">
-                  <Heart className="h-6 w-6 text-red-500 fill-red-500" />
-                  Meus Times
-                </h2>
-                <p className="text-muted-foreground text-sm">Seus times favoritos com acesso rápido</p>
-              </div>
-              <Button variant="outline" asChild className="self-start sm:self-auto">
-                <Link href="/times">Ver todos <ArrowRight className="ml-2 h-4 w-4" /></Link>
-              </Button>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-              {favoriteTeams.map((team: any) => (
-                <Link key={team.teamId} href={`/times/${team.teamId}`}>
-                  <div className="fut-card fut-card-hover p-4 text-center cursor-pointer group">
-                    <div className="w-14 h-14 mx-auto mb-3 flex items-center justify-center">
-                      {team.teamLogoUrl ? (
-                        <img src={team.teamLogoUrl} alt={team.teamName} className="w-full h-full object-contain" />
-                      ) : (
-                        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                          <span className="text-lg font-black text-primary">{team.teamName?.charAt(0)}</span>
-                        </div>
-                      )}
-                    </div>
-                    <p className="text-xs font-bold truncate group-hover:text-primary transition-colors">{team.teamName}</p>
-                    {team.leagueName && (
-                      <p className="text-[10px] text-muted-foreground truncate mt-0.5">{team.leagueName}</p>
-                    )}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Top Players Preview */}
-      {topPlayers && topPlayers.length > 0 && (
-        <section className="py-20" style={{ background: "oklch(0.12 0.01 240)" }}>
-          <div className="container">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-black mb-1">Top Jogadores</h2>
-              <p className="text-muted-foreground text-sm sm:text-base">Os overais mais altos do modo Carreira até 23 anos</p>
-            </div>
-            <Button variant="outline" asChild className="self-start sm:self-auto">
-              <Link href="/jogadores">Ver todos <ArrowRight className="ml-2 h-4 w-4" /></Link>
-            </Button>
-          </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {topPlayers.map((player: any) => (
-                <div key={player.id} className="fut-card fut-card-hover p-5 text-center">
-                  {/* Foto do jogador */}
-                  <div className="relative w-20 h-20 mx-auto mb-3">
-                    {player.imageUrl ? (
-                      <img
-                        src={player.imageUrl}
-                        alt={player.name}
-                        className="w-full h-full object-cover rounded-full border-2 border-primary/40"
-                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden'); }}
-                      />
-                    ) : null}
-                    <div className={`${player.imageUrl ? 'hidden' : ''} absolute inset-0 flex items-center justify-center rounded-full bg-primary/20 border-2 border-primary/40`}>
-                      <span className="text-xl font-black text-primary" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{player.overall}</span>
-                    </div>
-                    {/* Badge OVR sobre a foto */}
-                    {player.imageUrl && (
-                      <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-primary flex items-center justify-center border-2 border-background">
-                        <span className="text-[10px] font-black text-primary-foreground">{player.overall}</span>
-                      </div>
-                    )}
-                  </div>
-                  <h4 className="font-bold text-sm mb-1 truncate">{player.name}</h4>
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <span className="text-xs text-primary font-semibold">{player.position}</span>
-                    <span className="text-xs text-muted-foreground">·</span>
-                    <span className="text-xs text-muted-foreground truncate">{player.club}</span>
-                  </div>
-                  <div className="text-xs text-muted-foreground">{player.nationality}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* CTA Section */}
-      {!isAuthenticated && (
-        <section className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-50"
-            style={{ background: "radial-gradient(ellipse at center, oklch(0.25 0.08 145), transparent 70%)" }} />
-          <div className="container relative text-center">
-            <div className="max-w-2xl mx-auto">
-              <img src={LOGO_URL} alt="FUTNERDS" className="h-16 w-16 mx-auto mb-6 object-contain" />
-              <h2 className="text-3xl sm:text-4xl font-black mb-4">Pronto para entrar no jogo?</h2>
-              <p className="text-muted-foreground text-lg mb-8">
-                Junte-se à comunidade FUTNERDS e tenha acesso a análises detalhadas, jogadores favoritos e muito mais.
+              <p className="home-v2-hero-kicker">O universo do Modo Carreira</p>
+              <p className="home-v2-hero-copy">
+                Dados, análises e estratégias para<br />
+                <strong>elevar seu jogo ao <span>próximo nível.</span></strong>
               </p>
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-10 h-12 text-base font-semibold" asChild>
-                <a href={getLoginUrl()}>
-                  Criar Conta Grátis <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
+              <div className="home-v2-hero-actions">
+                <Button size="lg" className="home-v2-primary-button" asChild>
+                  <Link href="/jogadores">Explorar Jogadores <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                </Button>
+                <Button size="lg" variant="outline" className="home-v2-outline-button" asChild>
+                  <Link href="/times">Explorar Times <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="home-v2-market-panel" aria-label="Painel decorativo de valor de transferência">
+              <div className="home-v2-market-heading"><span>TRANSFER VALUE</span><span>↗</span></div>
+              <strong>€86.5M</strong>
+              <svg viewBox="0 0 190 62" preserveAspectRatio="none" aria-hidden="true">
+                <polyline points="0,53 20,44 37,48 54,32 70,39 89,23 106,31 122,17 140,26 158,8 190,15" fill="none" stroke="#21d45b" strokeWidth="2" />
+                <polyline points="0,62 20,53 37,57 54,41 70,48 89,32 106,40 122,26 140,35 158,17 190,24 190,62" fill="rgba(33,212,91,.14)" stroke="none" />
+              </svg>
+              <div className="home-v2-market-footer"><span>MARKET UPDATE</span><span>24.05.2024</span></div>
             </div>
           </div>
         </section>
-      )}
+
+        <section className="home-v2-metrics-wrap">
+          <div className="container">
+            <div className="home-v2-metrics">
+              <div className="home-v2-metric"><Users /><div><strong>{formattedPlayers}+</strong><span>JOGADORES ANALISADOS</span></div></div>
+              <div className="home-v2-metric"><ShieldCheck /><div><strong>734+</strong><span>TIMES</span></div></div>
+              <div className="home-v2-metric"><Gamepad2 /><div><strong>4</strong><span>MODOS DE JOGO</span></div></div>
+              <div className="home-v2-metric"><BarChart3 /><div><strong>CRESCENDO</strong><span>MEMBROS ATIVOS</span></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="home-v2-explore-section">
+          <div className="container">
+            <div className="home-v2-section-heading">
+              <h2>EXPLORE O UNIVERSO DO <span>FUTNERDS</span></h2>
+              <p>Tudo que você precisa para dominar o Modo Carreira</p>
+            </div>
+            <div className="home-v2-explore-track">
+              <button type="button" className="home-v2-carousel-arrow left" aria-label="Anterior"><ChevronLeft className="h-5 w-5" /></button>
+              <div className="home-v2-explore-grid">
+                {exploreCards.map((card) => {
+                  const Icon = card.icon;
+                  return (
+                    <article key={card.title} className="home-v2-explore-card" style={{ backgroundImage: `url(${card.image})` }}>
+                      <div className="home-v2-card-overlay" />
+                      <div className="home-v2-explore-card-content">
+                        <div className="home-v2-round-icon"><Icon className="h-4 w-4" /></div>
+                        <div className="flex-1" />
+                        <h3>{card.title}</h3>
+                        <p>{card.description}</p>
+                        {card.disabled ? <DisabledAction>Explorar <ArrowRight className="ml-1 h-3.5 w-3.5" /></DisabledAction> : <Link className="home-v2-card-link" href={card.href ?? "#"}>Explorar <ArrowRight className="ml-1 h-3.5 w-3.5" /></Link>}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+              <button type="button" className="home-v2-carousel-arrow right" aria-label="Próximo"><ChevronRight className="h-5 w-5" /></button>
+            </div>
+          </div>
+        </section>
+
+        <section className="home-v2-world-section">
+          <div className="home-v2-world-art"><img src={WORLD_IMAGE} alt="Mapa estilizado do mundo" /><div className="home-v2-world-dot" /></div>
+          <div className="container home-v2-world-inner">
+            <div className="home-v2-world-copy">
+              <span className="home-v2-eyebrow">EXPLORAR</span>
+              <h2>FUTEBOL DO <strong>MUNDO</strong></h2>
+              <p>Navegue por ligas, países e times<br />e descubra oportunidades únicas.</p>
+              <div className="home-v2-country-list">
+                {["🇬🇧 Inglaterra", "🇪🇸 Espanha", "🇮🇹 Itália", "🇩🇪 Alemanha", "🇫🇷 França", "🇧🇷 Brasil"].map((country) => <DisabledAction key={country}>{country}</DisabledAction>)}
+                <DisabledAction><Globe2 className="h-3.5 w-3.5" /> Ver todos os países <ArrowRight className="ml-1 h-3.5 w-3.5" /></DisabledAction>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="home-v2-challenges-section">
+          <div className="container">
+            <div className="home-v2-section-heading">
+              <span className="home-v2-eyebrow">SUA PRÓXIMA HISTÓRIA</span>
+              <h2>QUAL SERÁ SUA PRÓXIMA CARREIRA?</h2>
+              <p>Escolha o desafio perfeito para você e escreva sua história no futebol.</p>
+            </div>
+            <div className="home-v2-challenge-grid">
+              {challenges.map((challenge) => {
+                const Icon = challenge.icon;
+                return (
+                  <article key={challenge.title} className="home-v2-challenge-card" style={{ backgroundImage: `url(${challenge.image})` }}>
+                    <div className="home-v2-card-overlay" />
+                    <div className="home-v2-challenge-content">
+                      <Icon className="home-v2-challenge-icon h-7 w-7" />
+                      <h3>{challenge.title}</h3>
+                      <p>{challenge.description}</p>
+                      <div className="home-v2-challenge-footer"><span>DESAFIO</span><span className="home-v2-stars">{"★".repeat(challenge.difficulty)}<i>★</i></span></div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="home-v2-final-cta">
+          <div className="container home-v2-final-inner">
+            <div className="home-v2-final-copy">
+              <span className="home-v2-eyebrow">TUDO PARA VOCÊ</span>
+              <h2>DOMINAR O <strong>MODO CARREIRA</strong></h2>
+              <p>Dados atualizados, análises completas e uma comunidade apaixonada por FIFA e futebol.</p>
+              {isAuthenticated ? (
+                <Button className="home-v2-primary-button" asChild><Link href="/jogadores">Começar agora <ArrowRight className="ml-2 h-4 w-4" /></Link></Button>
+              ) : (
+                <Button className="home-v2-primary-button" asChild><a href={getLoginUrl()}>Começar agora <ArrowRight className="ml-2 h-4 w-4" /></a></Button>
+              )}
+            </div>
+            <div className="home-v2-dashboard-art" aria-hidden="true">
+              <div className="home-v2-dash-list"><span>PLAYERS DATABASE</span><b>J. Bellingham <i>91</i></b><b>V. Júnior <i>89</i></b><b>R. Dias <i>88</i></b></div>
+              <div className="home-v2-dash-player"><small>OVERALL</small><strong>91</strong><b>J. Bellingham</b><span>Real Madrid</span></div>
+              <div className="home-v2-dash-graph"><span>TRANSFER VALUE</span><strong>€86.5M</strong><svg viewBox="0 0 190 60"><polyline points="0,52 28,41 52,46 75,30 96,35 117,20 141,28 163,9 190,16" fill="none" stroke="#20d75a" strokeWidth="2" /></svg></div>
+            </div>
+          </div>
+        </section>
+      </main>
 
       <Footer />
     </div>
